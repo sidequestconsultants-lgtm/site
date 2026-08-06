@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Chakra_Petch, Space_Grotesk, Space_Mono } from "next/font/google";
 import Nav from "@/components/layout/Nav";
 import Footer from "@/components/layout/Footer";
+import BootScreen from "@/components/BootScreen";
 import "./globals.css";
 
 const chakraPetch = Chakra_Petch({
@@ -43,6 +44,7 @@ export default function RootLayout({
       className={`${chakraPetch.variable} ${spaceGrotesk.variable} ${spaceMono.variable}`}
     >
       <body className="flex min-h-screen flex-col bg-base text-ink font-body">
+        <BootScreen />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
