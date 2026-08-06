@@ -1,37 +1,78 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import RevealOnScroll from "@/components/RevealOnScroll";
+import CornerBracket from "@/components/brand/CornerBracket";
+import Container from "@/components/Container";
 
 const steps = [
-  { label: "Diagnose", detail: "The audit — map the grind, find the AI-shaped gaps." },
-  { label: "Build", detail: "The tools — bespoke software wired into your stack." },
-  { label: "Run", detail: "The retainer — AI-run social, creative, and paid, shipped weekly." },
+  { num: "01", tag: "Diagnose", detail: "The audit — map the grind, find the AI-shaped gaps." },
+  { num: "02", tag: "Build", detail: "The tools — bespoke software wired into your stack." },
+  { num: "03", tag: "Run", detail: "The retainer — AI-run social, creative, and paid, shipped weekly." },
 ];
 
 export default function Method() {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState(
+    () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+  );
+
+  useEffect(() => {
+    if (active) return;
+    const el = trackRef.current;
+    if (!el) return;
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(true);
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.35 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [active]);
+
   return (
-    <section id="method-preview" className="border-t border-hairline px-5 py-20 sm:px-8 sm:py-28">
-      <div className="mx-auto max-w-[1400px]">
-        <RevealOnScroll className="mb-14 max-w-xl">
+    <section id="method-preview" className="border-t border-hairline py-20 sm:py-28">
+      <Container>
+        <RevealOnScroll className="mb-6 sm:mb-8">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">
             The method.
           </h2>
         </RevealOnScroll>
 
-        <div className="flex flex-col gap-0 md:flex-row md:items-stretch md:gap-0">
-          {steps.map((step, i) => (
-            <RevealOnScroll
-              key={step.label}
-              delay={i * 0.1}
-              className="flex flex-1 items-start gap-5 border-b border-hairline py-8 md:flex-col md:items-start md:gap-6 md:border-b-0 md:border-r md:px-8 md:py-2 md:last:border-r-0 md:first:pl-0"
-            >
-              <span className="font-mono text-sm text-dim">0{i + 1}</span>
-              <div>
-                <div className="font-display text-xl font-bold uppercase text-ink">{step.label}</div>
-                <p className="mt-2 max-w-xs text-sm leading-relaxed text-muted">{step.detail}</p>
+        <div ref={trackRef} className={`method-track${active ? " is-active" : ""}`}>
+          <div className="method-line-h" aria-hidden="true">
+            <div className="fill" />
+          </div>
+          <div className="method-line-v" aria-hidden="true">
+            <div className="fill" />
+          </div>
+
+          <div className="method-steps-row">
+            {steps.map((step) => (
+              <div key={step.num} className="method-node">
+                <div className="method-node-badge">
+                  <CornerBracket className="absolute left-0 top-0 h-3 w-3" />
+                  <CornerBracket className="absolute right-0 top-0 h-3 w-3 rotate-90" />
+                  <CornerBracket className="absolute bottom-0 right-0 h-3 w-3 rotate-180" />
+                  <CornerBracket className="absolute bottom-0 left-0 h-3 w-3 -rotate-90" />
+                  {step.num}
+                  <span className="method-node-dot" />
+                </div>
+                <div>
+                  <div className="method-node-label">{step.tag}</div>
+                  <p className="mt-2 max-w-[220px] text-sm leading-relaxed text-muted">{step.detail}</p>
+                </div>
               </div>
-            </RevealOnScroll>
-          ))}
+            ))}
+          </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

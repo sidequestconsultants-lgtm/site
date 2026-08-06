@@ -67,11 +67,6 @@ body {
     transform: scale(1.05);
   }
 }
-@keyframes prism-spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
 @keyframes prism-shimmer {
   0%,
   100% {
@@ -92,10 +87,6 @@ body {
 }
 .prism-glow {
   animation: prism-pulse 5.6s ease-in-out infinite;
-}
-.prism-halo {
-  transform-origin: 200px 200px;
-  animation: prism-spin 70s linear infinite;
 }
 .prism-shimmer {
   animation: prism-shimmer 4.2s ease-in-out infinite;
@@ -159,10 +150,34 @@ body {
 .card-hover.accent-violet:hover {
   border-color: rgba(123, 108, 240, 0.4);
 }
+.founder-field {
+  opacity: 0.55;
+  transition: opacity 0.5s ease;
+}
+.card-hover:hover .founder-field {
+  opacity: 1;
+}
+.founder-frame {
+  transition: box-shadow 0.5s ease;
+}
+.card-hover:hover .founder-frame {
+  box-shadow: 0 0 0 1px rgba(123, 108, 240, 0.25) inset;
+}
 
 .field-mask {
   mask-image: radial-gradient(circle at 72% 26%, #000 0%, #000 22%, transparent 65%);
   -webkit-mask-image: radial-gradient(circle at 72% 26%, #000 0%, #000 22%, transparent 65%);
+}
+.field-mask-center {
+  mask-image: radial-gradient(ellipse at center, #000 0%, #000 35%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, #000 35%, transparent 72%);
+}
+.gradient-accent {
+  background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  filter: drop-shadow(0 0 18px rgba(123, 108, 240, 0.45));
 }
 
 .demo-once path {
@@ -177,5 +192,178 @@ body {
   .demo-once path {
     transition: none;
     stroke-dashoffset: 0;
+  }
+}
+
+/* method objective track */
+.method-track {
+  position: relative;
+  padding-top: 4px;
+}
+.method-line-h {
+  position: absolute;
+  left: 26px;
+  right: 26px;
+  top: 27px;
+  height: 1px;
+  background: var(--color-hairline);
+  display: none;
+  overflow: hidden;
+}
+.method-line-h .fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, var(--color-violet), var(--color-cyan));
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.method-track.is-active .method-line-h .fill {
+  transform: scaleX(1);
+}
+@media (min-width: 768px) {
+  .method-line-h {
+    display: block;
+  }
+}
+.method-line-v {
+  position: absolute;
+  left: 25px;
+  top: 4px;
+  bottom: 4px;
+  width: 1px;
+  background: var(--color-hairline);
+  overflow: hidden;
+}
+.method-line-v .fill {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, var(--color-violet), var(--color-cyan));
+  transform-origin: top;
+  transform: scaleY(0);
+  transition: transform 1.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.method-track.is-active .method-line-v .fill {
+  transform: scaleY(1);
+}
+@media (min-width: 768px) {
+  .method-line-v {
+    display: none;
+  }
+}
+
+.method-steps-row {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+@media (min-width: 768px) {
+  .method-steps-row {
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 24px;
+  }
+}
+.method-node {
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+}
+@media (min-width: 768px) {
+  .method-node {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    flex: 1;
+  }
+}
+.method-node-badge {
+  position: relative;
+  flex-shrink: 0;
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono-sq);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--color-dim);
+  transition:
+    color 0.6s ease,
+    filter 0.6s ease;
+}
+.method-node-badge svg path {
+  transition: stroke 0.6s ease;
+}
+.method-node-dot {
+  position: absolute;
+  top: -3px;
+  right: -3px;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-dim);
+  transform: scale(0.7);
+  transition:
+    background-color 0.5s ease,
+    box-shadow 0.5s ease,
+    transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+.method-node-label {
+  font-family: var(--font-mono-sq);
+  font-weight: 700;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-dim);
+  transition: color 0.6s ease;
+}
+.method-node:nth-child(1) .method-node-badge,
+.method-node:nth-child(1) .method-node-label {
+  transition-delay: 0.05s;
+}
+.method-node:nth-child(1) .method-node-dot {
+  transition-delay: 0.15s;
+}
+.method-node:nth-child(2) .method-node-badge,
+.method-node:nth-child(2) .method-node-label {
+  transition-delay: 0.55s;
+}
+.method-node:nth-child(2) .method-node-dot {
+  transition-delay: 0.65s;
+}
+.method-node:nth-child(3) .method-node-badge,
+.method-node:nth-child(3) .method-node-label {
+  transition-delay: 1.05s;
+}
+.method-node:nth-child(3) .method-node-dot {
+  transition-delay: 1.15s;
+}
+.method-track.is-active .method-node-badge {
+  color: var(--color-ink);
+  filter: drop-shadow(0 0 10px rgba(123, 108, 240, 0.4));
+}
+.method-track.is-active .method-node-badge svg path {
+  stroke: var(--color-violet);
+}
+.method-track.is-active .method-node-label {
+  color: var(--color-cyan);
+}
+.method-track.is-active .method-node-dot {
+  background: var(--color-violet);
+  box-shadow: 0 0 8px var(--color-violet);
+  transform: scale(1);
+}
+@media (prefers-reduced-motion: reduce) {
+  .method-line-h .fill,
+  .method-line-v .fill,
+  .method-node-badge,
+  .method-node-label,
+  .method-node-dot,
+  .method-node-badge svg path {
+    transition: none !important;
   }
 }

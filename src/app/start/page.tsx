@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Suspense } from "react";
 import PageHeader from "@/components/PageHeader";
 import IntakeForm from "@/components/IntakeForm";
+import Container from "@/components/Container";
 
 export const metadata: Metadata = {
   title: "Start a sidequest",
@@ -16,12 +17,14 @@ export default function StartPage() {
         title="Send the brief."
         lede="Tell us the grind. We'll route it to the right service and get back to you."
       />
-      <section className="px-5 pb-24 pt-6 sm:px-8 sm:pb-32">
-        <div className="mx-auto max-w-2xl">
-          <Suspense fallback={null}>
-            <IntakeForm />
-          </Suspense>
-        </div>
+      <section className="pb-24 pt-6 sm:pb-32">
+        <Container>
+          <div className="max-w-2xl">
+            <Suspense fallback={null}>
+              <IntakeForm />
+            </Suspense>
+          </div>
+        </Container>
       </section>
     </>
   );

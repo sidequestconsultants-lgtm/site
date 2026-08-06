@@ -2,6 +2,7 @@ import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import Button from "@/components/ui/Button";
 import Prism from "@/components/brand/Prism";
+import Container from "@/components/Container";
 import { services, type ServiceSlug } from "@/data/services";
 import { workItems } from "@/data/work";
 
@@ -17,8 +18,8 @@ export default function ServicePageTemplate({ slug }: { slug: ServiceSlug }) {
 
   return (
     <>
-      <section className="relative overflow-hidden px-5 pb-16 pt-10 sm:px-8 sm:pb-24 sm:pt-14">
-        <div className="mx-auto grid max-w-[1400px] items-center gap-12 md:grid-cols-2 md:gap-16">
+      <section className="relative overflow-hidden pb-[clamp(56px,7vw,80px)] pt-12">
+        <Container className="grid items-center gap-[clamp(32px,5vw,64px)] md:grid-cols-2">
           <div className="flex flex-col gap-6">
             <div className="font-mono text-xs tracking-[0.12em] text-violet">{s.eyebrow}</div>
             <h1 className="text-balance font-display text-[clamp(2rem,5vw,3.4rem)] font-bold uppercase leading-[1.08] text-ink">
@@ -29,14 +30,14 @@ export default function ServicePageTemplate({ slug }: { slug: ServiceSlug }) {
               <Button href="/start">Start a sidequest →</Button>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-sm md:ml-auto md:mr-0">
+          <div className="mx-auto w-full max-w-[380px] md:mx-0 md:ml-auto">
             <Prism />
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="border-t border-hairline px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="border-t border-hairline py-16 sm:py-24">
+        <Container>
           <RevealOnScroll className="mb-10">
             <span className="font-mono text-xs uppercase tracking-wide text-dim">Included</span>
           </RevealOnScroll>
@@ -52,11 +53,11 @@ export default function ServicePageTemplate({ slug }: { slug: ServiceSlug }) {
               </RevealOnScroll>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="border-t border-hairline px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="border-t border-hairline py-16 sm:py-24">
+        <Container>
           <RevealOnScroll className="mb-14">
             <span className="font-mono text-xs uppercase tracking-wide text-dim">How it works</span>
           </RevealOnScroll>
@@ -69,12 +70,12 @@ export default function ServicePageTemplate({ slug }: { slug: ServiceSlug }) {
               </RevealOnScroll>
             ))}
           </div>
-        </div>
+        </Container>
       </section>
 
       {samples.length > 0 && (
-        <section className="border-t border-hairline px-5 py-16 sm:px-8 sm:py-24">
-          <div className="mx-auto max-w-[1400px]">
+        <section className="border-t border-hairline py-16 sm:py-24">
+          <Container>
             <RevealOnScroll className="mb-10">
               <span className="font-mono text-xs uppercase tracking-wide text-dim">Samples</span>
             </RevealOnScroll>
@@ -89,12 +90,12 @@ export default function ServicePageTemplate({ slug }: { slug: ServiceSlug }) {
                 </RevealOnScroll>
               ))}
             </div>
-          </div>
+          </Container>
         </section>
       )}
 
-      <section className="border-t border-hairline px-5 py-16 sm:px-8 sm:py-24">
-        <div className="mx-auto max-w-[1400px]">
+      <section className="border-t border-hairline py-16 sm:py-24">
+        <Container>
           <RevealOnScroll className="mb-10">
             <span className="font-mono text-xs uppercase tracking-wide text-dim">Pairs with</span>
           </RevealOnScroll>
@@ -117,16 +118,18 @@ export default function ServicePageTemplate({ slug }: { slug: ServiceSlug }) {
               );
             })}
           </div>
-        </div>
+        </Container>
       </section>
 
-      <section className="border-t border-hairline px-5 py-20 sm:px-8 sm:py-28">
-        <RevealOnScroll className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-8">
-          <h2 className="text-balance font-display text-[clamp(1.8rem,3.6vw,2.8rem)] font-bold uppercase leading-tight text-ink">
-            Ready to start with {s.name.split(" / ")[0]}?
-          </h2>
-          <Button href={`/start?service=${s.slug}`}>Start a sidequest →</Button>
-        </RevealOnScroll>
+      <section className="border-t border-hairline py-20 sm:py-28">
+        <Container>
+          <RevealOnScroll className="flex flex-wrap items-center justify-between gap-8">
+            <h2 className="text-balance font-display text-[clamp(1.8rem,3.6vw,2.8rem)] font-bold uppercase leading-tight text-ink">
+              Ready to start with {s.name.split(" / ")[0]}?
+            </h2>
+            <Button href={`/start?service=${s.slug}`}>Start a sidequest →</Button>
+          </RevealOnScroll>
+        </Container>
       </section>
     </>
   );

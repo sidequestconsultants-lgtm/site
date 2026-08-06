@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import Prism from "@/components/brand/Prism";
 import Button from "@/components/ui/Button";
+import Container from "@/components/Container";
 import { serviceOrder, services, type ServiceSlug } from "@/data/services";
 
 const modeLabels: Record<ServiceSlug, string> = {
@@ -17,8 +18,8 @@ export default function Hero() {
   const active = services[mode];
 
   return (
-    <section className="relative overflow-hidden px-5 pb-20 pt-10 sm:px-8 sm:pb-28 sm:pt-14">
-      <div className="mx-auto flex max-w-[1400px] flex-col gap-14">
+    <section className="relative overflow-hidden pb-[clamp(64px,8vw,96px)] pt-12">
+      <Container className="flex flex-col gap-10">
         <div className="flex w-fit gap-1 rounded-full border border-hairline p-1" role="tablist" aria-label="Choose a service to preview">
           {serviceOrder.map((slug) => (
             <button
@@ -36,7 +37,7 @@ export default function Hero() {
           ))}
         </div>
 
-        <div className="grid items-center gap-12 md:grid-cols-2 md:gap-16">
+        <div className="grid items-center gap-[clamp(32px,5vw,64px)] md:grid-cols-2">
           <div className="order-2 flex flex-col gap-7 md:order-1">
             <div className="font-mono text-xs tracking-[0.12em] text-violet">{active.eyebrow}</div>
             <h1 className="text-balance font-display text-[clamp(2.2rem,6vw,4.2rem)] font-bold uppercase leading-[1.04] text-ink">
@@ -51,11 +52,11 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="order-1 mx-auto w-full max-w-md md:order-2 md:ml-auto md:mr-0">
+          <div className="order-1 mx-auto w-full max-w-[420px] md:order-2 md:mx-0 md:ml-auto">
             <Prism />
           </div>
         </div>
-      </div>
+      </Container>
     </section>
   );
 }

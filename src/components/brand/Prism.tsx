@@ -1,7 +1,7 @@
 import { generatePrism } from "@/lib/prism";
 
 export default function Prism({ className }: { className?: string }) {
-  const { facets, radialLines, crossLines, rings, outline, halo } = generatePrism();
+  const { facets, radialLines, crossLines, rings, outline } = generatePrism();
 
   return (
     <div className={["relative", className].filter(Boolean).join(" ")}>
@@ -64,18 +64,6 @@ export default function Prism({ className }: { className?: string }) {
           strokeOpacity={0.9}
           strokeLinejoin="round"
         />
-        <g className="prism-halo">
-          {halo.map((points, i) => (
-            <polygon
-              key={`halo-${i}`}
-              points={points}
-              fill="none"
-              stroke="#7B6CF0"
-              strokeWidth={0.6}
-              strokeOpacity={0.4}
-            />
-          ))}
-        </g>
       </svg>
     </div>
   );

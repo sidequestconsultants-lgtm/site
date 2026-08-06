@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import Reticle from "@/components/brand/Reticle";
 import Button from "@/components/ui/Button";
+import Container from "@/components/Container";
 
 const links = [
   { href: "/#services", label: "Services" },
@@ -30,7 +31,7 @@ export default function Nav() {
         scrolled ? "border-b border-hairline bg-base/85 backdrop-blur" : "border-b border-transparent bg-transparent",
       ].join(" ")}
     >
-      <div className="mx-auto flex max-w-[1400px] items-center justify-between gap-6 px-5 py-4 sm:px-8">
+      <Container className="flex items-center justify-between gap-6 py-4">
         <Link href="/" className="flex items-center gap-3">
           <Reticle className="h-7 w-7" />
           <span className="font-body text-sm font-medium uppercase tracking-[0.25em] text-ink">
@@ -65,10 +66,10 @@ export default function Nav() {
         >
           <span className="font-mono text-xs">{open ? "×" : "≡"}</span>
         </button>
-      </div>
+      </Container>
 
       {open && (
-        <nav className="flex flex-col gap-1 border-t border-hairline bg-base px-5 pb-6 pt-4 md:hidden">
+        <Container as="nav" className="flex flex-col gap-1 border-t border-hairline bg-base pb-6 pt-4 md:hidden">
           {links.map((l) => (
             <Link
               key={l.href}
@@ -82,7 +83,7 @@ export default function Nav() {
           <Button href="/start" className="mt-3 justify-center px-5 py-3 text-xs">
             Start a sidequest →
           </Button>
-        </nav>
+        </Container>
       )}
     </header>
   );

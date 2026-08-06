@@ -30,7 +30,6 @@ export interface PrismData {
   crossLines: PrismLine[];
   rings: PrismRing[];
   outline: string;
-  halo: string[];
 }
 
 const lerp = (a: Point, b: Point, t: number): Point => ({
@@ -109,18 +108,5 @@ export function generatePrism(): PrismData {
 
   const outline = `${apex.x},${apex.y} ${bl.x},${bl.y} ${br.x},${br.y}`;
 
-  const halo: string[] = [];
-  for (let i = 0; i < 3; i++) {
-    const ang = i * 2.094;
-    const Rr = 205;
-    const p1x = 200 + Math.cos(ang - 1.571) * Rr;
-    const p1y = 200 + Math.sin(ang - 1.571) * Rr;
-    const p2x = 200 + Math.cos(ang + 0.6 - 1.571) * Rr;
-    const p2y = 200 + Math.sin(ang + 0.6 - 1.571) * Rr;
-    const p3x = 200 + Math.cos(ang + 0.3 - 1.571) * (Rr - 16);
-    const p3y = 200 + Math.sin(ang + 0.3 - 1.571) * (Rr - 16);
-    halo.push(`${p1x},${p1y} ${p2x},${p2y} ${p3x},${p3y}`);
-  }
-
-  return { facets, radialLines, crossLines, rings, outline, halo };
+  return { facets, radialLines, crossLines, rings, outline };
 }
