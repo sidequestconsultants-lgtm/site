@@ -5,7 +5,7 @@ import TessellationField from "@/components/brand/TessellationField";
 
 export default function Manifesto() {
   return (
-    <section className="relative overflow-hidden border-t border-hairline py-[clamp(88px,12vw,140px)]">
+    <section data-quest="Services" className="section-rhythm relative overflow-hidden border-t border-hairline">
       <TessellationField
         className="field-mask-center pointer-events-none absolute inset-0 h-full w-full opacity-[0.05]"
         size={46}

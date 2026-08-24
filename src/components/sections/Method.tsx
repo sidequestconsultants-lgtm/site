@@ -6,9 +6,9 @@ import CornerBracket from "@/components/brand/CornerBracket";
 import Container from "@/components/Container";
 
 const steps = [
-  { num: "01", tag: "Diagnose", detail: "The audit — map the grind, find the AI-shaped gaps." },
-  { num: "02", tag: "Build", detail: "The tools — bespoke software wired into your stack." },
-  { num: "03", tag: "Run", detail: "The retainer — AI-run social, creative, and paid, shipped weekly." },
+  { num: "01", tag: "Diagnose", micro: "// audit", detail: "The audit — map the grind, find the AI-shaped gaps." },
+  { num: "02", tag: "Build", micro: "// build", detail: "The tools — bespoke software wired into your stack." },
+  { num: "03", tag: "Run", micro: "// ship", detail: "The retainer — AI-run social, creative, and paid, shipped weekly." },
 ];
 
 export default function Method() {
@@ -37,7 +37,7 @@ export default function Method() {
   }, [active]);
 
   return (
-    <section id="method-preview" className="border-t border-hairline py-20 sm:py-28">
+    <section id="method-preview" data-quest="Method" className="section-rhythm snap-start border-t border-hairline">
       <Container>
         <RevealOnScroll className="mb-6 sm:mb-8">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">
@@ -48,24 +48,27 @@ export default function Method() {
         <div ref={trackRef} className={`method-track${active ? " is-active" : ""}`}>
           <div className="method-line-h" aria-hidden="true">
             <div className="fill" />
+            <div className="rail-pulse" />
           </div>
           <div className="method-line-v" aria-hidden="true">
             <div className="fill" />
+            <div className="rail-pulse" />
           </div>
 
           <div className="method-steps-row">
             {steps.map((step) => (
               <div key={step.num} className="method-node">
                 <div className="method-node-badge">
-                  <CornerBracket className="absolute left-0 top-0 h-3 w-3" />
-                  <CornerBracket className="absolute right-0 top-0 h-3 w-3 rotate-90" />
-                  <CornerBracket className="absolute bottom-0 right-0 h-3 w-3 rotate-180" />
-                  <CornerBracket className="absolute bottom-0 left-0 h-3 w-3 -rotate-90" />
+                  <CornerBracket className="absolute left-0 top-0 h-4 w-4" />
+                  <CornerBracket className="absolute right-0 top-0 h-4 w-4 rotate-90" />
+                  <CornerBracket className="absolute bottom-0 right-0 h-4 w-4 rotate-180" />
+                  <CornerBracket className="absolute bottom-0 left-0 h-4 w-4 -rotate-90" />
                   {step.num}
                   <span className="method-node-dot" />
                 </div>
                 <div>
                   <div className="method-node-label">{step.tag}</div>
+                  <div className="method-node-micro mt-1">{step.micro}</div>
                   <p className="mt-2 max-w-[220px] text-sm leading-relaxed text-muted">{step.detail}</p>
                 </div>
               </div>

@@ -4,7 +4,7 @@ import Container from "@/components/Container";
 
 export default function CtaIntake() {
   return (
-    <section className="border-t border-hairline py-20 sm:py-28">
+    <section id="start" data-quest="Start" className="section-rhythm snap-start border-t border-hairline">
       <Container>
         <RevealOnScroll className="flex flex-wrap items-center justify-between gap-8">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.6vw,2.8rem)] font-bold uppercase leading-tight text-ink">

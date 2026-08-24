@@ -19,7 +19,7 @@ export default function Work() {
   const visible = filter === "All" ? workItems : workItems.filter((w) => w.category === filter);
 
   return (
-    <section id="work" className="border-t border-hairline py-20 sm:py-28">
+    <section id="work" data-quest="Work" className="section-rhythm snap-start border-t border-hairline">
       <Container>
         <RevealOnScroll className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">

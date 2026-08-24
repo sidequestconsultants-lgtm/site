@@ -1,3 +1,6 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import TessellationField from "@/components/brand/TessellationField";
@@ -33,8 +36,45 @@ function ServiceCard({ slug, delay }: { slug: ServiceSlug; delay: number }) {
 }
 
 export default function ServicesTriad() {
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const lineRef = useRef<SVGPolygonElement>(null);
+  const [drawn, setDrawn] = useState(false);
+
+  useEffect(() => {
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing a client-only capability check (matchMedia) into state; cannot be derived during render or SSR
+      setDrawn(true);
+      return;
+    }
+    const line = lineRef.current;
+    const el = wrapRef.current;
+    if (!line || !el) return;
+
+    const len = line.getTotalLength();
+    line.style.strokeDasharray = String(len);
+    line.style.strokeDashoffset = String(len);
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            io.unobserve(entry.target);
+            requestAnimationFrame(() => {
+              line.style.strokeDashoffset = "0";
+              setDrawn(true);
+            });
+          }
+        });
+      },
+      { threshold: 0.3 },
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, []);
+
   return (
-    <section id="services" className="border-t border-hairline py-20 sm:py-28">
+    <section id="services" data-quest="Services" className="section-rhythm snap-start border-t border-hairline">
       <Container>
         <RevealOnScroll className="mb-14 max-w-xl">
           <p className="text-[17px] leading-relaxed text-muted">
@@ -43,9 +83,9 @@ export default function ServicesTriad() {
           </p>
         </RevealOnScroll>
 
-        <div className="relative">
+        <div ref={wrapRef} className="relative mx-auto max-w-[940px]">
           <svg
-            className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-70"
+            className={`triad-bg pointer-events-none absolute inset-0 z-0 h-full w-full${drawn ? " is-drawn" : ""}`}
             viewBox="0 0 600 420"
             preserveAspectRatio="none"
             aria-hidden="true"
@@ -60,6 +100,7 @@ export default function ServicesTriad() {
               </filter>
             </defs>
             <polygon
+              className="triad-glow"
               points="300,10 30,410 570,410"
               fill="none"
               stroke="url(#triad-line-grad)"
@@ -68,16 +109,19 @@ export default function ServicesTriad() {
               filter="url(#triad-line-glow)"
             />
             <polygon
+              ref={lineRef}
+              className="triad-line"
               points="300,10 30,410 570,410"
               fill="none"
               stroke="url(#triad-line-grad)"
               strokeWidth="1"
-              strokeOpacity="0.5"
+              strokeOpacity="0.55"
+              strokeLinejoin="round"
             />
           </svg>
 
           <div className="relative z-10 flex flex-col items-center gap-6">
-            <div className="w-full max-w-[420px]">
+            <div className="w-full max-w-[440px]">
               <ServiceCard slug="strategy" delay={0} />
             </div>
             <div className="grid w-full gap-6 sm:grid-cols-2">
