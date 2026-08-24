@@ -30,7 +30,7 @@ export default function ServicePageTemplate({ slug }: { slug: ServiceSlug }) {
               <Button href="/start">Start a sidequest →</Button>
             </div>
           </div>
-          <div className="mx-auto w-full max-w-[380px] md:mx-0 md:ml-auto">
+          <div className="flex w-full justify-center md:justify-end">
             <Prism />
           </div>
         </Container>

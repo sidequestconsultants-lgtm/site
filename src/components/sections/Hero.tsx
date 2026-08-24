@@ -52,7 +52,7 @@ export default function Hero() {
             </div>
           </div>
 
-          <div className="order-1 mx-auto w-full max-w-[420px] md:order-2 md:mx-0 md:ml-auto">
+          <div className="order-1 flex w-full justify-center md:order-2 md:justify-end">
             <Prism />
           </div>
         </div>

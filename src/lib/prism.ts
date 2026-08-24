@@ -110,3 +110,24 @@ export function generatePrism(): PrismData {
 
   return { facets, radialLines, crossLines, rings, outline };
 }
+
+export interface PrismHaloShard {
+  points: string;
+}
+
+/** Rotating halo of 3 thin shard-triangles around the prism (the ".prism-halo" group). */
+export function generatePrismHalo(): PrismHaloShard[] {
+  const shards: PrismHaloShard[] = [];
+  const Rr = 205;
+  for (let i = 0; i < 3; i++) {
+    const ang = i * 2.094;
+    const p1x = 200 + Math.cos(ang - 1.571) * Rr;
+    const p1y = 200 + Math.sin(ang - 1.571) * Rr;
+    const p2x = 200 + Math.cos(ang + 0.6 - 1.571) * Rr;
+    const p2y = 200 + Math.sin(ang + 0.6 - 1.571) * Rr;
+    const p3x = 200 + Math.cos(ang + 0.3 - 1.571) * (Rr - 16);
+    const p3y = 200 + Math.sin(ang + 0.3 - 1.571) * (Rr - 16);
+    shards.push({ points: `${p1x},${p1y} ${p2x},${p2y} ${p3x},${p3y}` });
+  }
+  return shards;
+}

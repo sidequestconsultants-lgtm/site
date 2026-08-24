@@ -1,7 +1,6 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import CornerBracket from "@/components/brand/CornerBracket";
 
 const SIDE: Record<string, "left" | "right"> = {
   Home: "left",
@@ -25,7 +24,7 @@ const PROGRESS: Record<string, number> = {
 };
 const PROGRESS_TOTAL = 6;
 
-const LABEL_SWAP_MS = 260;
+const LABEL_SWAP_MS = 220;
 
 export default function QuestMarker() {
   const [active, setActive] = useState<string | null>(null);
@@ -107,30 +106,34 @@ export default function QuestMarker() {
           on .quest-marker actually animates the move instead of the whole
           element remounting at the new position. */}
       <div className={`quest-marker side-${side}${ready ? " is-ready" : ""}`}>
-        <div key={lockKey} className="quest-marker-frame quest-lock">
-          <CornerBracket className="corner tl" />
-          <CornerBracket className="corner tr" />
-          <CornerBracket className="corner br" />
-          <CornerBracket className="corner bl" />
-          <svg viewBox="0 0 100 100" className="quest-marker-chevron" aria-hidden="true">
-            <path
-              d="M42 36 L62 50 L42 64"
-              fill="none"
-              stroke="var(--color-violet)"
-              strokeWidth={10}
-              strokeLinecap="square"
-              strokeLinejoin="miter"
-            />
-          </svg>
-          <span className="quest-marker-dot" />
-          <span className="quest-marker-ring" />
+        <div className={`ql-marker ql-${side}`}>
+          {/* Re-keyed on every relock to replay the corner-draw + ping,
+              same trick as the outer marker avoids: this is an inner node,
+              so remounting it doesn't touch the position tween above. */}
+          <div key={lockKey} className="ql-reticle lock">
+            <span className="ql-corner tl" />
+            <span className="ql-corner tr" />
+            <span className="ql-corner bl" />
+            <span className="ql-corner br" />
+            <svg className="ql-chevron" viewBox="0 0 12 12" aria-hidden="true">
+              <path
+                d="M3 2 L9 6 L3 10"
+                fill="none"
+                stroke="#7B6CF0"
+                strokeWidth={2}
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span className="ql-ping go" />
+          </div>
+          <div className="ql-tag">
+            <span className={`ql-name${swapping ? " swap" : ""}`}>{displayLabel}</span>
+            <span className="ql-prog">
+              {String(progress).padStart(2, "0")} / {String(PROGRESS_TOTAL).padStart(2, "0")}
+            </span>
+          </div>
         </div>
-        <span className={`quest-marker-label${swapping ? " is-swapping" : ""}`}>
-          <span className="quest-marker-label-text">{displayLabel}</span>
-          <span className="quest-marker-progress">
-            {String(progress).padStart(2, "0")} / {String(PROGRESS_TOTAL).padStart(2, "0")}
-          </span>
-        </span>
       </div>
     </div>
   );
