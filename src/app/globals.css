@@ -533,7 +533,7 @@ body {
   opacity: 0;
   transform: translate(calc(50vw - 660px - 100%), -50%);
   transition:
-    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
     opacity 0.4s ease;
 }
 .quest-marker.side-left {
@@ -602,13 +602,11 @@ body {
   padding: 6px 12px;
   backdrop-filter: blur(3px);
   white-space: nowrap;
-  opacity: 0;
-  animation: quest-label-in 0.35s ease forwards;
+  opacity: 1;
+  transition: opacity 0.26s ease;
 }
-@keyframes quest-label-in {
-  to {
-    opacity: 1;
-  }
+.quest-marker-label.is-swapping {
+  opacity: 0;
 }
 .quest-lock .corner path {
   stroke-dasharray: 20;
@@ -661,12 +659,12 @@ body {
     transform: scale(1);
   }
   .quest-marker-label {
-    animation: none !important;
+    transition: none;
     opacity: 1;
   }
 }
 
-/* services triad — self-drawing background triangle */
+/* services triad — self-drawing background triangle + card assembly */
 .triad-bg .triad-glow {
   opacity: 0;
   transition: opacity 1s ease;
@@ -674,8 +672,27 @@ body {
 .triad-bg.is-drawn .triad-glow {
   opacity: 1;
 }
+/* pathLength=1 normalizes the polygon's length to 1 regardless of its actual
+   geometry, so the draw-in animation needs no JS getTotalLength() call and
+   stays correct across any card layout/breakpoint. */
 .triad-bg .triad-line {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
   transition: stroke-dashoffset 1.1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.triad-bg.is-drawn .triad-line {
+  stroke-dashoffset: 0;
+}
+.triad-card {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.triad-card.is-in {
+  opacity: 1;
+  transform: translateY(0);
 }
 @media (prefers-reduced-motion: reduce) {
   .triad-bg .triad-glow {
@@ -684,6 +701,12 @@ body {
   }
   .triad-bg .triad-line {
     transition: none;
+    stroke-dashoffset: 0;
+  }
+  .triad-card {
+    transition: none;
+    opacity: 1;
+    transform: none;
   }
 }
 

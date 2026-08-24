@@ -12,12 +12,17 @@ const SIDE: Record<string, "left" | "right"> = {
   Start: "right",
 };
 
+const LABEL_SWAP_MS = 260;
+
 export default function QuestMarker() {
   const [active, setActive] = useState<string | null>(null);
+  const [displayLabel, setDisplayLabel] = useState<string | null>(null);
+  const [swapping, setSwapping] = useState(false);
   const [ready, setReady] = useState(false);
   const [lockKey, setLockKey] = useState(0);
   const ratios = useRef<Map<Element, number>>(new Map());
   const lastLabel = useRef<string | null>(null);
+  const swapTimeout = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   useEffect(() => {
     const els = Array.from(document.querySelectorAll<HTMLElement>("[data-quest]"));
@@ -52,22 +57,50 @@ export default function QuestMarker() {
     return () => io.disconnect();
   }, []);
 
-  if (!active) return null;
+  // Crossfade the label text mid-move instead of snapping it, while the
+  // outer marker (below) tweens position via its own CSS transition.
+  useEffect(() => {
+    if (active === null) return;
+    if (displayLabel === null) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect -- first-ever lock-on has nothing to crossfade from; syncs the initial label into state
+      setDisplayLabel(active);
+      return;
+    }
+    if (active === displayLabel) return;
+
+    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (reduceMotion) {
+      setDisplayLabel(active);
+      return;
+    }
+    setSwapping(true);
+    swapTimeout.current = setTimeout(() => {
+      setDisplayLabel(active);
+      setSwapping(false);
+    }, LABEL_SWAP_MS);
+    return () => {
+      if (swapTimeout.current) clearTimeout(swapTimeout.current);
+    };
+  }, [active, displayLabel]);
+
+  if (!active || !displayLabel) return null;
   const side = SIDE[active] ?? "left";
 
   return (
     <div className="quest-marker-track" aria-hidden="true">
-      <div key={lockKey} className={`quest-marker quest-lock side-${side}${ready ? " is-ready" : ""}`}>
-        <div className="quest-marker-frame">
+      {/* This node is never re-keyed across section changes: only its
+          side-left/side-right class swaps, so the transform transition
+          on .quest-marker actually animates the move instead of the whole
+          element remounting at the new position. */}
+      <div className={`quest-marker side-${side}${ready ? " is-ready" : ""}`}>
+        <div key={lockKey} className="quest-marker-frame quest-lock">
           <CornerBracket className="corner tl" />
           <CornerBracket className="corner tr" />
           <CornerBracket className="corner br" />
           <CornerBracket className="corner bl" />
           <span className="quest-marker-dot" />
         </div>
-        <span key={active} className="quest-marker-label">
-          {active}
-        </span>
+        <span className={`quest-marker-label${swapping ? " is-swapping" : ""}`}>{displayLabel}</span>
       </div>
     </div>
   );

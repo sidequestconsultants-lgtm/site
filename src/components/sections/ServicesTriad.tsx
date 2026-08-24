@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import type { RefObject } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import TessellationField from "@/components/brand/TessellationField";
@@ -9,10 +10,20 @@ import { services, type ServiceSlug } from "@/data/services";
 
 const tagColorClass = { dim: "text-dim", cyan: "text-cyan", violet: "text-violet" } as const;
 
-function ServiceCard({ slug, delay }: { slug: ServiceSlug; delay: number }) {
+function ServiceCard({
+  slug,
+  cardRef,
+  armed,
+  delay,
+}: {
+  slug: ServiceSlug;
+  cardRef: RefObject<HTMLDivElement | null>;
+  armed: boolean;
+  delay: number;
+}) {
   const s = services[slug];
   return (
-    <RevealOnScroll delay={delay} className="h-full">
+    <div ref={cardRef} className={`triad-card h-full${armed ? " is-in" : ""}`} style={{ transitionDelay: `${delay}s` }}>
       <Link
         href={`/${slug}`}
         className={`card-hover accent-${s.accent} group relative flex h-full flex-col gap-5 overflow-hidden rounded-md border border-hairline bg-gradient-to-b from-surface to-[#0C0C16] p-8`}
@@ -31,29 +42,61 @@ function ServiceCard({ slug, delay }: { slug: ServiceSlug; delay: number }) {
           Explore <span className="text-violet">→</span>
         </span>
       </Link>
-    </RevealOnScroll>
+    </div>
   );
 }
 
+type Pt = { x: number; y: number };
+type Geometry = { w: number; h: number; apex: Pt; baseLeft: Pt; baseRight: Pt };
+
 export default function ServicesTriad() {
   const wrapRef = useRef<HTMLDivElement>(null);
-  const lineRef = useRef<SVGPolygonElement>(null);
+  const topRef = useRef<HTMLDivElement>(null);
+  const leftRef = useRef<HTMLDivElement>(null);
+  const rightRef = useRef<HTMLDivElement>(null);
+  const [geo, setGeo] = useState<Geometry | null>(null);
   const [drawn, setDrawn] = useState(false);
+  const [armed, setArmed] = useState(false);
+
+  // Measure the real card boxes (layout-only, transform-independent) so the
+  // triangle's apex/base points always land exactly on the card corners,
+  // regardless of viewport width or the cards' reveal-in translateY.
+  useEffect(() => {
+    const measure = () => {
+      const wrap = wrapRef.current;
+      const top = topRef.current;
+      const left = leftRef.current;
+      const right = rightRef.current;
+      if (!wrap || !top || !left || !right) return;
+      setGeo({
+        w: wrap.offsetWidth,
+        h: wrap.offsetHeight,
+        apex: { x: top.offsetLeft + top.offsetWidth / 2, y: top.offsetTop + top.offsetHeight },
+        baseLeft: { x: left.offsetLeft, y: left.offsetTop + left.offsetHeight },
+        baseRight: { x: right.offsetLeft + right.offsetWidth, y: right.offsetTop + right.offsetHeight },
+      });
+    };
+
+    measure();
+    const ro = new ResizeObserver(measure);
+    if (wrapRef.current) ro.observe(wrapRef.current);
+    window.addEventListener("resize", measure);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
 
   useEffect(() => {
     const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (reduceMotion) {
       // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing a client-only capability check (matchMedia) into state; cannot be derived during render or SSR
       setDrawn(true);
+      setArmed(true);
       return;
     }
-    const line = lineRef.current;
     const el = wrapRef.current;
-    if (!line || !el) return;
-
-    const len = line.getTotalLength();
-    line.style.strokeDasharray = String(len);
-    line.style.strokeDashoffset = String(len);
+    if (!el) return;
 
     const io = new IntersectionObserver(
       (entries) => {
@@ -61,13 +104,13 @@ export default function ServicesTriad() {
           if (entry.isIntersecting) {
             io.unobserve(entry.target);
             requestAnimationFrame(() => {
-              line.style.strokeDashoffset = "0";
               setDrawn(true);
+              setArmed(true);
             });
           }
         });
       },
-      { threshold: 0.3 },
+      { threshold: 0.25 },
     );
     io.observe(el);
     return () => io.disconnect();
@@ -84,49 +127,50 @@ export default function ServicesTriad() {
         </RevealOnScroll>
 
         <div ref={wrapRef} className="relative mx-auto max-w-[940px]">
-          <svg
-            className={`triad-bg pointer-events-none absolute inset-0 z-0 h-full w-full${drawn ? " is-drawn" : ""}`}
-            viewBox="0 0 600 420"
-            preserveAspectRatio="none"
-            aria-hidden="true"
-          >
-            <defs>
-              <linearGradient id="triad-line-grad" x1="0" y1="0" x2="1" y2="1">
-                <stop offset="0" stopColor="#7B6CF0" />
-                <stop offset="1" stopColor="#9DD3FF" />
-              </linearGradient>
-              <filter id="triad-line-glow" x="-50%" y="-50%" width="200%" height="200%">
-                <feGaussianBlur stdDeviation="4" />
-              </filter>
-            </defs>
-            <polygon
-              className="triad-glow"
-              points="300,10 30,410 570,410"
-              fill="none"
-              stroke="url(#triad-line-grad)"
-              strokeWidth="1.5"
-              strokeOpacity="0.4"
-              filter="url(#triad-line-glow)"
-            />
-            <polygon
-              ref={lineRef}
-              className="triad-line"
-              points="300,10 30,410 570,410"
-              fill="none"
-              stroke="url(#triad-line-grad)"
-              strokeWidth="1"
-              strokeOpacity="0.55"
-              strokeLinejoin="round"
-            />
-          </svg>
+          {geo && (
+            <svg
+              className={`triad-bg pointer-events-none absolute inset-0 z-0 h-full w-full${drawn ? " is-drawn" : ""}`}
+              viewBox={`0 0 ${geo.w} ${geo.h}`}
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="triad-line-grad" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stopColor="#7B6CF0" />
+                  <stop offset="1" stopColor="#9DD3FF" />
+                </linearGradient>
+                <filter id="triad-line-glow" x="-50%" y="-50%" width="200%" height="200%">
+                  <feGaussianBlur stdDeviation="4" />
+                </filter>
+              </defs>
+              <polygon
+                className="triad-glow"
+                points={`${geo.apex.x},${geo.apex.y} ${geo.baseLeft.x},${geo.baseLeft.y} ${geo.baseRight.x},${geo.baseRight.y}`}
+                fill="none"
+                stroke="url(#triad-line-grad)"
+                strokeWidth="1.5"
+                strokeOpacity="0.4"
+                filter="url(#triad-line-glow)"
+              />
+              <polygon
+                className="triad-line"
+                pathLength={1}
+                points={`${geo.apex.x},${geo.apex.y} ${geo.baseLeft.x},${geo.baseLeft.y} ${geo.baseRight.x},${geo.baseRight.y}`}
+                fill="none"
+                stroke="url(#triad-line-grad)"
+                strokeWidth="1"
+                strokeOpacity="0.55"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
 
           <div className="relative z-10 flex flex-col items-center gap-6">
             <div className="w-full max-w-[440px]">
-              <ServiceCard slug="strategy" delay={0} />
+              <ServiceCard slug="strategy" cardRef={topRef} armed={armed} delay={0} />
             </div>
             <div className="grid w-full gap-6 sm:grid-cols-2">
-              <ServiceCard slug="social" delay={0.08} />
-              <ServiceCard slug="software" delay={0.16} />
+              <ServiceCard slug="social" cardRef={leftRef} armed={armed} delay={0.15} />
+              <ServiceCard slug="software" cardRef={rightRef} armed={armed} delay={0.15} />
             </div>
           </div>
         </div>
