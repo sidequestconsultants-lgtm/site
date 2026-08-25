@@ -1,124 +1,168 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import type { RefObject } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
-import TessellationField from "@/components/brand/TessellationField";
 import Container from "@/components/Container";
-import { services, type ServiceSlug } from "@/data/services";
 
-const tagColorClass = { dim: "text-dim", cyan: "text-cyan", violet: "text-violet" } as const;
+type FragAlign = "c" | "r" | "l";
 
-function ServiceCard({
-  slug,
-  cardRef,
-  armed,
-  delay,
-}: {
-  slug: ServiceSlug;
-  cardRef: RefObject<HTMLDivElement | null>;
-  armed: boolean;
-  delay: number;
-}) {
-  const s = services[slug];
+// foreignObject content must declare the xhtml namespace on its root node;
+// "xmlns" isn't a typed prop on HTMLDivElement, so it's spread via a plainly
+// typed object to sidestep the excess-property check rather than "as any".
+const XHTML_NS: Record<string, string> = { xmlns: "http://www.w3.org/1999/xhtml" };
+
+type Fragment = {
+  key: string;
+  href: string;
+  fragClass: "f0" | "f1" | "f2";
+  driftClass: "d0" | "d1" | "d2";
+  popClass: "p0" | "p1" | "p2";
+  tag: string;
+  titleLines: [string, string];
+  align: FragAlign;
+  shapePoints: string;
+  edgePoints: string;
+  fo: { x: number; y: number; w: number; h: number };
+  copy: string;
+};
+
+// Exploded triangle fragments — geometry, copy, and positions lifted as-is
+// from the locked design (OG prism proportions, viewBox 600x480).
+const FRAGMENTS: Fragment[] = [
+  {
+    key: "strategy",
+    href: "/strategy",
+    fragClass: "f0",
+    driftClass: "d0",
+    popClass: "p0",
+    tag: "// diagnose",
+    titleLines: ["Strategy /", "Ops Audit"],
+    align: "c",
+    shapePoints: "300,30 200,232 300,288 400,232",
+    edgePoints: "200,232 300,30 400,232",
+    fo: { x: 176, y: 164, w: 248, h: 86 },
+    copy: "Maps the manual grind and designs the AI-augmented system that routes work into the other two.",
+  },
+  {
+    key: "social",
+    href: "/social",
+    fragClass: "f1",
+    driftClass: "d1",
+    popClass: "p1",
+    tag: "// run",
+    titleLines: ["AI Marketing /", "Retainers"],
+    align: "r",
+    shapePoints: "196,242 100,452 292,452 292,300",
+    edgePoints: "196,242 100,452 292,452",
+    fo: { x: 112, y: 342, w: 176, h: 86 },
+    copy: "AI-run comms, content, creative, and paid — a full team's output, run lean.",
+  },
+  {
+    key: "software",
+    href: "/software",
+    fragClass: "f2",
+    driftClass: "d2",
+    popClass: "p2",
+    tag: "// build",
+    titleLines: ["Custom AI /", "Software"],
+    align: "l",
+    shapePoints: "404,242 500,452 308,452 308,300",
+    edgePoints: "404,242 500,452 308,452",
+    fo: { x: 312, y: 342, w: 176, h: 86 },
+    copy: "Bespoke AI software for the manual gaps no off-the-shelf product fills.",
+  },
+];
+
+function MobileCard({ f }: { f: Fragment }) {
   return (
-    <div
-      ref={cardRef}
-      className={`triad-card h-full${armed ? " is-in" : ""}`}
-      style={{ transitionDelay: `${delay}s` }}
+    <Link
+      href={f.href}
+      className="card-hover accent-violet group relative flex flex-col gap-3 overflow-hidden rounded-md border border-hairline bg-gradient-to-b from-surface to-[#0C0C16] p-6"
     >
-      <Link
-        href={`/${slug}`}
-        className={`card-hover accent-${s.accent} group relative flex h-full flex-col gap-5 overflow-hidden rounded-md border border-hairline bg-gradient-to-b from-surface to-[#0C0C16] p-8`}
-      >
-        <TessellationField className="card-glow" masked size={50} />
-        <div className="relative z-10 flex items-start justify-between gap-3">
-          <div className="font-display text-lg font-bold uppercase leading-tight text-ink">
-            {s.name}
-          </div>
-          <div className={`shrink-0 font-mono text-[11px] tracking-wide ${tagColorClass[s.tagColor]}`}>
-            {s.tag}
-          </div>
-        </div>
-        <p className="relative z-10 text-sm leading-relaxed text-muted">{s.tagline}</p>
-        <span className="relative z-10 mt-auto font-mono text-xs text-ink opacity-80 transition-opacity group-hover:opacity-100">
-          Explore <span className="text-violet">→</span>
-        </span>
-      </Link>
-    </div>
+      <div className="font-mono text-xs uppercase tracking-wide text-violet">{f.tag}</div>
+      <div className="font-display text-lg font-bold uppercase leading-tight text-ink">
+        {f.titleLines[0]}
+        <br />
+        {f.titleLines[1]}
+      </div>
+      <p className="text-sm leading-relaxed text-muted">{f.copy}</p>
+      <span className="mt-auto font-mono text-xs text-cyan">Explore</span>
+    </Link>
   );
 }
 
-type Pt = { x: number; y: number };
-type Geometry = { w: number; h: number; apex: Pt; baseLeft: Pt; baseRight: Pt };
-
 export default function ServicesTriad() {
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const topRef = useRef<HTMLDivElement>(null);
-  const leftRef = useRef<HTMLDivElement>(null);
-  const rightRef = useRef<HTMLDivElement>(null);
-  const [geo, setGeo] = useState<Geometry | null>(null);
-  const [drawn, setDrawn] = useState(false);
-  const [armed, setArmed] = useState(false);
+  const [hotIndex, setHotIndex] = useState<number | null>(null);
+  const [revealed, setRevealed] = useState(false);
+  // Unlike a plain reduced-motion flag (which only ever changes a class on
+  // an otherwise-identical tree), isMobile picks between two structurally
+  // different subtrees — SVG fragments vs. stacked cards. Reading
+  // window.innerWidth in a lazy initializer would make the client's first
+  // render disagree with the server-prerendered (always-desktop) HTML and
+  // throw a hydration error, so this starts false unconditionally and only
+  // flips client-side in the effect below, after hydration has committed.
+  const [isMobile, setIsMobile] = useState(false);
+  const triadRef = useRef<HTMLDivElement>(null);
+  const popRefs = useRef<(HTMLDivElement | null)[]>([]);
 
-  // Measure the real card boxes (layout-only, transform-independent) so the
-  // triangle's apex/base points always land exactly on the card corners,
-  // regardless of viewport width or the cards' reveal-in translateY.
   useEffect(() => {
-    const measure = () => {
-      const wrap = wrapRef.current;
-      const top = topRef.current;
-      const left = leftRef.current;
-      const right = rightRef.current;
-      if (!wrap || !top || !left || !right) return;
-      setGeo({
-        w: wrap.offsetWidth,
-        h: wrap.offsetHeight,
-        apex: { x: top.offsetLeft + top.offsetWidth / 2, y: top.offsetTop + top.offsetHeight },
-        baseLeft: { x: left.offsetLeft, y: left.offsetTop + left.offsetHeight },
-        baseRight: { x: right.offsetLeft + right.offsetWidth, y: right.offsetTop + right.offsetHeight },
-      });
-    };
-
-    measure();
-    const ro = new ResizeObserver(measure);
-    if (wrapRef.current) ro.observe(wrapRef.current);
-    window.addEventListener("resize", measure);
-    return () => {
-      ro.disconnect();
-      window.removeEventListener("resize", measure);
-    };
+    const mq = window.matchMedia("(max-width: 619px)");
+    const onChange = () => setIsMobile(mq.matches);
+    onChange();
+    mq.addEventListener("change", onChange);
+    return () => mq.removeEventListener("change", onChange);
   }, []);
 
+  // The pop panels are positioned via fixed percentages relative to the
+  // triad (p1/p2 deliberately sit slightly past its left/right edge), which
+  // is fine while the triad has room to spare but clips off-screen once it
+  // sits close to a narrow viewport's edge. Nudge each pop back in view via
+  // a --clamp-x custom property that composes into its existing transform
+  // (see .pop/.p0/.pop.show in globals.css) — a margin-based nudge doesn't
+  // work here since p2 is anchored with `right` and no `left`, so the
+  // browser just recomputes its auto `left` to compensate and keeps the
+  // right edge exactly where it was regardless of margin-left.
   useEffect(() => {
-    const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduceMotion) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect -- syncing a client-only capability check (matchMedia) into state; cannot be derived during render or SSR
-      setDrawn(true);
-      setArmed(true);
-      return;
-    }
-    const el = wrapRef.current;
-    if (!el) return;
+    if (isMobile) return;
+    const clamp = () => {
+      const margin = 16;
+      // clientWidth (not window.innerWidth, which includes the scrollbar
+      // gutter) is what actually bounds horizontal overflow.
+      const viewportWidth = document.documentElement.clientWidth;
+      popRefs.current.forEach((el) => {
+        if (!el) return;
+        el.style.setProperty("--clamp-x", "0px");
+        const rect = el.getBoundingClientRect();
+        let dx = 0;
+        if (rect.right > viewportWidth - margin) dx = viewportWidth - margin - rect.right;
+        else if (rect.left < margin) dx = margin - rect.left;
+        if (dx !== 0) el.style.setProperty("--clamp-x", `${dx}px`);
+      });
+    };
+    clamp();
+    window.addEventListener("resize", clamp);
+    return () => window.removeEventListener("resize", clamp);
+  }, [isMobile]);
 
+  useEffect(() => {
+    if (isMobile) return;
+    const el = triadRef.current;
+    if (!el) return;
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            io.unobserve(entry.target);
-            requestAnimationFrame(() => {
-              setDrawn(true);
-              setArmed(true);
-            });
+            setRevealed(true);
+            io.disconnect();
           }
         });
       },
-      { threshold: 0.25 },
+      { threshold: 0.3 },
     );
     io.observe(el);
     return () => io.disconnect();
-  }, []);
+  }, [isMobile]);
 
   return (
     <section id="services" data-quest="Services" className="section-rhythm snap-start border-t border-hairline">
@@ -130,57 +174,60 @@ export default function ServicesTriad() {
           </p>
         </RevealOnScroll>
 
-        <div ref={wrapRef} className="relative mx-auto max-w-[940px]">
-          {geo && (
-            <svg
-              className={`triad-bg pointer-events-none absolute inset-0 z-0 h-full w-full${drawn ? " is-drawn" : ""}`}
-              viewBox={`0 0 ${geo.w} ${geo.h}`}
-              aria-hidden="true"
-            >
-              <defs>
-                <linearGradient id="triad-line-grad" x1="0" y1="0" x2="1" y2="1">
-                  <stop offset="0" stopColor="#7B6CF0" />
-                  <stop offset="1" stopColor="#9DD3FF" />
-                </linearGradient>
-                <filter id="triad-line-glow" x="-50%" y="-50%" width="200%" height="200%">
-                  <feGaussianBlur stdDeviation="4" />
-                </filter>
-              </defs>
-              <polygon
-                className="triad-glow"
-                points={`${geo.apex.x},${geo.apex.y} ${geo.baseLeft.x},${geo.baseLeft.y} ${geo.baseRight.x},${geo.baseRight.y}`}
-                fill="none"
-                stroke="url(#triad-line-grad)"
-                strokeWidth="1.5"
-                strokeOpacity="0.4"
-                filter="url(#triad-line-glow)"
-              />
-              <polygon
-                className="triad-line"
-                pathLength={1}
-                points={`${geo.apex.x},${geo.apex.y} ${geo.baseLeft.x},${geo.baseLeft.y} ${geo.baseRight.x},${geo.baseRight.y}`}
-                fill="none"
-                stroke="url(#triad-line-grad)"
-                strokeWidth="1"
-                strokeOpacity="0.55"
-                strokeLinejoin="round"
-              />
-            </svg>
-          )}
-
-          <div className="relative z-10 flex flex-col items-center gap-6">
-            {/* Matches a single base card's width exactly: the base row is a
-                2-col grid with a 24px gap (gap-6), so each base card is
-                (100% - 24px) / 2 wide once stacked — same formula here. */}
-            <div className="w-full sm:w-[calc((100%-24px)/2)]">
-              <ServiceCard slug="strategy" cardRef={topRef} armed={armed} delay={0.5} />
-            </div>
-            <div className="grid w-full gap-6 sm:grid-cols-2">
-              <ServiceCard slug="social" cardRef={leftRef} armed={armed} delay={0.68} />
-              <ServiceCard slug="software" cardRef={rightRef} armed={armed} delay={0.68} />
-            </div>
+        {isMobile ? (
+          <div className="flex flex-col gap-6">
+            {FRAGMENTS.map((f) => (
+              <MobileCard key={f.key} f={f} />
+            ))}
           </div>
-        </div>
+        ) : (
+          <div ref={triadRef} className={`triad triad-reveal${revealed ? " is-in" : ""}`}>
+            <svg viewBox="0 0 600 480" xmlns="http://www.w3.org/2000/svg" aria-label="Services as three exploded triangle fragments">
+              {FRAGMENTS.map((f, i) => (
+                <a key={f.key} href={f.href}>
+                  <g
+                    className={`frag ${f.fragClass}${hotIndex === i ? " hot" : ""}`}
+                    data-i={i}
+                    onMouseEnter={() => setHotIndex(i)}
+                    onMouseLeave={() => setHotIndex((h) => (h === i ? null : h))}
+                  >
+                    <g className={f.driftClass}>
+                      <g className="lift">
+                        <polygon className="shape" points={f.shapePoints} />
+                        <polyline className="edge" points={f.edgePoints} />
+                        <foreignObject x={f.fo.x} y={f.fo.y} width={f.fo.w} height={f.fo.h}>
+                          <div {...XHTML_NS} className={`fo ${f.align}`}>
+                            <div className="tag">{f.tag}</div>
+                            <div className="ttl">
+                              {f.titleLines[0]}
+                              <br />
+                              {f.titleLines[1]}
+                            </div>
+                          </div>
+                        </foreignObject>
+                      </g>
+                    </g>
+                  </g>
+                </a>
+              ))}
+            </svg>
+            {FRAGMENTS.map((f, i) => (
+              <div
+                key={f.key}
+                ref={(node) => {
+                  popRefs.current[i] = node;
+                }}
+                className={`pop ${f.popClass}${hotIndex === i ? " show" : ""}`}
+              >
+                <div className="pt">{f.tag}</div>
+                <p>{f.copy}</p>
+                <Link href={f.href} className="go">
+                  Explore
+                </Link>
+              </div>
+            ))}
+          </div>
+        )}
       </Container>
     </section>
   );

@@ -761,49 +761,236 @@ body {
   }
 }
 
-/* services triad — self-drawing background triangle + card assembly */
-.triad-bg .triad-glow {
-  opacity: 0;
-  transition: opacity 1s ease 0.25s;
+/* ═══ services triad — exploded triangle (lifted as-is from the provided
+   component). Two integration-only changes from the source: its violet,
+   cyan, ink, and mono custom properties are mapped to this app's existing
+   color and font tokens (the source file isn't loaded here, so those
+   names would otherwise resolve to nothing), and its reveal/in classes are
+   renamed triad-reveal/is-in — this codebase already has a global .reveal
+   used by RevealOnScroll with different semantics, and reusing that name
+   would have made this container permanently stuck at opacity:0 since
+   nothing here ever adds the .in-view class that rule waits for. Nothing
+   else — geometry, timing, colors, structure — was changed. ═══ */
+.triad {
+  position: relative;
+  width: min(820px, 96vw);
+  aspect-ratio: 820 / 660;
+  margin-inline: auto;
 }
-.triad-bg.is-drawn .triad-glow {
-  opacity: 1;
+.triad svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
 }
-/* pathLength=1 normalizes the polygon's length to 1 regardless of its actual
-   geometry, so the draw-in animation needs no JS getTotalLength() call and
-   stays correct across any card layout/breakpoint. */
-.triad-bg .triad-line {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  transition: stroke-dashoffset 1.1s cubic-bezier(0.16, 1, 0.3, 1) 0.25s;
+.frag {
+  cursor: pointer;
 }
-.triad-bg.is-drawn .triad-line {
-  stroke-dashoffset: 0;
+.frag .lift {
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
-.triad-card {
-  opacity: 0;
-  transform: translateY(28px);
+.frag.hot .lift {
+  transform: translateY(-9px);
+}
+.frag .shape {
+  fill: rgba(16, 16, 30, 0.55);
+  stroke: #2e2e44;
+  stroke-width: 1.2;
   transition:
-    opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
-    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    fill 0.3s,
+    stroke 0.3s;
 }
-.triad-card.is-in {
+.frag.hot .shape {
+  fill: rgba(123, 108, 240, 0.13);
+  stroke: var(--color-violet);
+}
+.frag .edge {
+  fill: none;
+  stroke: #bfe0ff;
+  stroke-width: 1.1;
+  stroke-opacity: 0.55;
+}
+.tag {
+  font-family: var(--font-mono-sq);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  color: var(--color-violet);
+  text-transform: uppercase;
+}
+.ttl {
+  font-family: var(--font-display);
+  font-weight: 600;
+  text-transform: uppercase;
+  font-size: 17px;
+  line-height: 1.05;
+  color: var(--color-ink);
+  margin: 5px 0 0;
+}
+.fo {
+  padding: 2px;
+}
+.fo.c {
+  text-align: center;
+}
+.fo.r {
+  text-align: right;
+}
+.fo.l {
+  text-align: left;
+}
+.pop {
+  position: absolute;
+  pointer-events: none;
+  width: 320px;
+  background: rgba(10, 10, 20, 0.94);
+  border: 1px solid var(--color-violet);
+  border-radius: 4px;
+  padding: 14px 16px;
+  backdrop-filter: blur(6px);
+  opacity: 0;
+  /* --clamp-x (default 0, set from JS only when a pop would clip past the
+     viewport edge) composes as an extra translateX ahead of each pop's own
+     positioning transform below, so it works regardless of which edge
+     (left/right/centered) that pop is anchored from. */
+  transform: translateX(var(--clamp-x, 0px)) translateY(6px) scale(0.97);
+  transition:
+    opacity 0.28s ease,
+    transform 0.28s ease;
+  z-index: 5;
+}
+.pop.show {
   opacity: 1;
-  transform: translateY(0);
+  transform: translateX(var(--clamp-x, 0px)) translateY(0) scale(1);
+  /* base .pop is pointer-events:none so the panel never eats clicks while
+     hidden/mid-transition; re-enabled only once visible so its Explore
+     link is actually clickable, per the "pop also links out" requirement */
+  pointer-events: auto;
 }
-
+.pop.p0.show {
+  transform: translateX(calc(-50% + var(--clamp-x, 0px))) translateY(0) scale(1);
+}
+.pop::before,
+.pop::after {
+  content: "";
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-color: var(--color-cyan);
+  border-style: solid;
+}
+.pop::before {
+  left: -1px;
+  top: -1px;
+  border-width: 1px 0 0 1px;
+}
+.pop::after {
+  right: -1px;
+  bottom: -1px;
+  border-width: 0 1px 1px 0;
+}
+.pop .pt {
+  font-family: var(--font-mono-sq);
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: var(--color-cyan);
+  text-transform: uppercase;
+  margin-bottom: 7px;
+}
+.pop p {
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--color-ink);
+}
+.pop .go {
+  font-family: var(--font-mono-sq);
+  font-size: 11px;
+  color: var(--color-cyan);
+  letter-spacing: 0.06em;
+  margin-top: 10px;
+  display: inline-block;
+}
+.p0 {
+  left: 50%;
+  top: 2%;
+  transform: translateX(calc(-50% + var(--clamp-x, 0px))) translateY(6px) scale(0.97);
+}
+.p1 {
+  left: -2%;
+  top: 42%;
+}
+.p2 {
+  right: -2%;
+  top: 42%;
+}
+.d0 {
+  animation: dr0 9s ease-in-out infinite;
+}
+.d1 {
+  animation: dr1 11s ease-in-out infinite;
+}
+.d2 {
+  animation: dr2 10s ease-in-out infinite;
+}
+@keyframes dr0 {
+  0%,
+  100% {
+    transform: translate(0, -12px);
+  }
+  50% {
+    transform: translate(0, -17px);
+  }
+}
+@keyframes dr1 {
+  0%,
+  100% {
+    transform: translate(-16px, 12px);
+  }
+  50% {
+    transform: translate(-21px, 16px);
+  }
+}
+@keyframes dr2 {
+  0%,
+  100% {
+    transform: translate(16px, 12px);
+  }
+  50% {
+    transform: translate(21px, 16px);
+  }
+}
+.triad-reveal .frag {
+  opacity: 0;
+  transition: opacity 0.7s ease;
+}
+.triad-reveal.is-in .frag {
+  opacity: 1;
+}
+.triad-reveal.is-in .frag.f1 {
+  transition-delay: 0.12s;
+}
+.triad-reveal.is-in .frag.f2 {
+  transition-delay: 0.24s;
+}
 @media (prefers-reduced-motion: reduce) {
-  .triad-bg .triad-glow {
-    transition: none;
+  .d0,
+  .d1,
+  .d2 {
+    animation: none;
+  }
+  .triad-reveal .frag {
     opacity: 1;
   }
-  .triad-bg .triad-line {
+  .pop {
     transition: none;
-    stroke-dashoffset: 0;
   }
-  .triad-card {
+  /* the source file's own reduced-motion block covers drift/reveal/pop-
+     transition but not the hover lift — added so hovering a fragment
+     doesn't shift it under reduced motion either */
+  .frag .lift {
     transition: none;
-    opacity: 1;
+  }
+  .frag.hot .lift {
     transform: none;
   }
 }
