@@ -37,6 +37,38 @@ body {
   color: var(--color-hot);
 }
 
+/* site-wide background: fixed lattice + top glow + bottom-darkening fade,
+   painted behind all page content (first child of body, default z-index
+   stacking puts every later sibling — nav, main, footer — on top of it). */
+.site-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+}
+.site-bg-field {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.055;
+}
+.site-bg-glow {
+  position: absolute;
+  top: 10%;
+  left: 50%;
+  width: 900px;
+  height: 600px;
+  max-width: 140vw;
+  transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgba(123, 108, 240, 0.1), transparent 70%);
+}
+.site-bg-fade {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, transparent 35%, var(--color-base) 100%);
+}
+
 .section-rhythm {
   padding-block: clamp(96px, 14vh, 180px);
   scroll-margin-top: 90px;
@@ -547,50 +579,35 @@ body {
   }
 }
 
-/* quest marker */
-.quest-marker {
-  position: fixed;
-  top: 0;
-  left: 0;
+/* quest pin — a per-section "pin on the map": position:absolute inside
+   its own section (not fixed to the viewport), so it scrolls away with
+   the section instead of tracking scroll like a HUD. Locks in (corner
+   draw-in + ping, via .ql-reticle.lock/.ql-ping.go below) once when
+   scrolled into view, then just sits there and scrolls off. */
+.quest-pin {
+  position: absolute;
+  z-index: 2;
   display: flex;
   align-items: center;
   gap: 10px;
-  opacity: 0;
   pointer-events: none;
-  z-index: 45;
-  /* --qm-x/--qm-y (px, set from JS) mark a fixed point hand-placed in the
-     active section's open gutter space; translateY(-50%) centers the
-     marker vertically on it. Left-side sections hang the marker's right
-     edge off that point via translateX(-100%) (growing further left, away
-     from the centered content column, toward the outer viewport edge);
-     right-side sections flip via .side-right below so the marker's left
-     edge hangs off the point instead (growing right, away from the
-     column). Both grow outward into their margin rather than inward
-     toward the column, so the marker never overlaps page content.
-     --qm-edge is a second, independently-set correction (0px unless the
-     margin was too narrow to hold the marker without going off-screen)
-     that nudges it back into the viewport. */
-  transform: translate(var(--qm-x, 0px), var(--qm-y, 0px)) translateY(-50%) translateX(-100%)
-    translateX(var(--qm-edge, 0px));
+  opacity: 0;
+  transform: translateY(10px);
   transition:
-    transform 0.6s ease,
-    opacity 0.4s ease;
+    opacity 0.5s ease,
+    transform 0.5s ease;
 }
-.quest-marker.side-right {
-  transform: translate(var(--qm-x, 0px), var(--qm-y, 0px)) translateY(-50%) translateX(var(--qm-edge, 0px));
-}
-.quest-marker.is-ready {
+.quest-pin.is-locked {
   opacity: 0.85;
-  pointer-events: auto;
+  transform: translateY(0);
 }
 /* ═══ reticle-lock marker (lifted as-is from the provided component) ═══
-   .quest-marker / .side-right / .is-ready above are OURS: fixed
-   per-section anchor point + the side-to-side position tween + the
-   619px mobile fallback. .ql-* below is the provided component, lifted
-   verbatim, nested inside .quest-marker so both systems compose: the outer
-   class controls which margin the marker sits in and glides between;
-   the inner ql-left/ql-right (kept in sync, same side value) controls the
-   reticle/tag order and the chevron's inward flip. No status dot. */
+   .quest-pin above is OURS: the per-section absolute placement + scroll-
+   in reveal. .ql-* below is the provided component, lifted verbatim,
+   nested inside .quest-pin — the outer class controls which side of the
+   pin's own section it sits on; the inner ql-left/ql-right (kept in sync,
+   same side value) controls the reticle/tag order and the chevron's
+   inward flip. No status dot. */
 .ql-marker {
   display: flex;
   align-items: center;
@@ -643,7 +660,7 @@ body {
   width: 13px;
   height: 13px;
 }
-.quest-marker.side-right .ql-chevron {
+.quest-pin.side-right .ql-chevron {
   transform: translate(-50%, -50%) scaleX(-1);
 }
 .ql-ping {
@@ -720,7 +737,6 @@ body {
   letter-spacing: 0.12em;
   color: var(--color-ink);
   text-transform: uppercase;
-  transition: opacity 0.22s ease;
 }
 .ql-prog {
   display: block;
@@ -730,34 +746,64 @@ body {
   color: var(--color-violet);
   margin-top: 2px;
 }
-.ql-name.swap {
-  opacity: 0;
+/* quest progress — a quiet, always-on odometer, deliberately plain next to
+   the reticle-styled pins above (no chevron, no corner brackets) so the
+   two never compete for attention. */
+.quest-progress {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  background: rgba(7, 7, 13, 0.6);
+  border: 1px solid var(--color-hairline);
+  border-radius: 2px;
+  backdrop-filter: blur(3px);
+  opacity: 0.72;
+  pointer-events: none;
+}
+.quest-progress-segs {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.quest-progress-seg {
+  width: 10px;
+  height: 2px;
+  background: var(--color-hairline);
+  transition: background-color 0.3s ease;
+}
+.quest-progress-seg.is-filled {
+  background: var(--color-violet);
+}
+.quest-progress-count {
+  font-family: var(--font-mono-sq);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--color-muted);
 }
 @media (max-width: 619px) {
-  /* Varied per-section heights don't work on a narrow screen: collapse to
-     a single small fixed corner indicator that just updates the label. */
-  .quest-marker {
-    top: auto;
-    bottom: 18px;
-    left: auto;
-    right: 16px;
-    transform: none !important;
-  }
-  .ql-reticle {
-    width: 26px;
-    height: 26px;
+  /* Section padding is already tight on a narrow screen — a pin next to
+     the content would crowd it, so the per-section pins drop out; the
+     fixed corner progress readout (.quest-progress) is the only quest
+     indicator left on mobile. */
+  .quest-pin {
+    display: none;
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .quest-marker {
+  .quest-pin {
+    transition: none;
+  }
+  .quest-progress-seg {
     transition: none;
   }
   .ql-ping,
   .ql-reticle.lock .ql-corner {
     animation: none;
-  }
-  .ql-name {
-    transition: none;
   }
 }
 

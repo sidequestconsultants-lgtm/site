@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import CornerBracket from "@/components/brand/CornerBracket";
 import Container from "@/components/Container";
+import QuestPin from "@/components/QuestPin";
 
 const steps = [
   { num: "01", tag: "Diagnose", micro: "// audit", detail: "The audit — map the grind, find the AI-shaped gaps." },
@@ -11,7 +12,7 @@ const steps = [
   { num: "03", tag: "Run", micro: "// ship", detail: "The retainer — AI-run social, creative, and paid, shipped weekly." },
 ];
 
-export default function Method() {
+export default function Method({ showQuestPin = false }: { showQuestPin?: boolean }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [active, setActive] = useState(
     () => typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches,
@@ -37,7 +38,10 @@ export default function Method() {
   }, [active]);
 
   return (
-    <section id="method-preview" data-quest="Method" className="section-rhythm snap-start border-t border-hairline">
+    <section id="method-preview" data-quest="Method" className="section-rhythm relative snap-start border-t border-hairline">
+      {showQuestPin && (
+        <QuestPin label="Method" progress={3} side="left" className="left-4 top-6 hidden md:flex lg:left-10" />
+      )}
       <Container>
         <RevealOnScroll className="mb-6 sm:mb-8">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">
