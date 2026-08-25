@@ -24,7 +24,7 @@ export default function Prism({ className }: { className?: string }) {
   }, []);
 
   return (
-    <div ref={stageRef} data-shard-anchor="prism" className={["prism-stage", className].filter(Boolean).join(" ")}>
+    <div ref={stageRef} className={["prism-stage", className].filter(Boolean).join(" ")}>
       <div className="prism-glow" />
       <svg viewBox="0 0 400 400" role="img" aria-label="Luminous subdivided triangular prism, lit from within">
         {facets.map((f, i) => (

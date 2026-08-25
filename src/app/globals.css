@@ -792,25 +792,6 @@ body {
   transform: translateY(0);
 }
 
-/* shards traveling from the hero prism to the three service cards, bound
-   directly to scroll position (no transition — the scroll is the tween) */
-.scroll-shards {
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 40;
-}
-.scroll-shard {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 26px;
-  height: 26px;
-  margin: -13px 0 0 -13px;
-  opacity: 0;
-  will-change: transform, opacity;
-}
-
 @media (prefers-reduced-motion: reduce) {
   .triad-bg .triad-glow {
     transition: none;

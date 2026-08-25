@@ -13,13 +13,11 @@ const tagColorClass = { dim: "text-dim", cyan: "text-cyan", violet: "text-violet
 function ServiceCard({
   slug,
   cardRef,
-  anchor,
   armed,
   delay,
 }: {
   slug: ServiceSlug;
   cardRef: RefObject<HTMLDivElement | null>;
-  anchor: string;
   armed: boolean;
   delay: number;
 }) {
@@ -27,7 +25,6 @@ function ServiceCard({
   return (
     <div
       ref={cardRef}
-      data-shard-anchor={anchor}
       className={`triad-card h-full${armed ? " is-in" : ""}`}
       style={{ transitionDelay: `${delay}s` }}
     >
@@ -172,12 +169,15 @@ export default function ServicesTriad() {
           )}
 
           <div className="relative z-10 flex flex-col items-center gap-6">
-            <div className="w-full max-w-[440px]">
-              <ServiceCard slug="strategy" cardRef={topRef} anchor="apex" armed={armed} delay={0.5} />
+            {/* Matches a single base card's width exactly: the base row is a
+                2-col grid with a 24px gap (gap-6), so each base card is
+                (100% - 24px) / 2 wide once stacked — same formula here. */}
+            <div className="w-full sm:w-[calc((100%-24px)/2)]">
+              <ServiceCard slug="strategy" cardRef={topRef} armed={armed} delay={0.5} />
             </div>
             <div className="grid w-full gap-6 sm:grid-cols-2">
-              <ServiceCard slug="social" cardRef={leftRef} anchor="social" armed={armed} delay={0.68} />
-              <ServiceCard slug="software" cardRef={rightRef} anchor="software" armed={armed} delay={0.68} />
+              <ServiceCard slug="social" cardRef={leftRef} armed={armed} delay={0.68} />
+              <ServiceCard slug="software" cardRef={rightRef} armed={armed} delay={0.68} />
             </div>
           </div>
         </div>
