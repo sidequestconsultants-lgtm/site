@@ -548,45 +548,47 @@ body {
 }
 
 /* quest marker */
-.quest-marker-track {
-  position: fixed;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 0;
-  pointer-events: none;
-  z-index: 45;
-}
 .quest-marker {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   display: flex;
   align-items: center;
   gap: 10px;
   opacity: 0;
-  transform: translate(calc(50vw - 660px - 100%), -50%);
+  pointer-events: none;
+  z-index: 45;
+  /* --qm-x/--qm-y (px, set from JS) mark a fixed point hand-placed in the
+     active section's open gutter space; translateY(-50%) centers the
+     marker vertically on it. Left-side sections hang the marker's right
+     edge off that point via translateX(-100%) (growing further left, away
+     from the centered content column, toward the outer viewport edge);
+     right-side sections flip via .side-right below so the marker's left
+     edge hangs off the point instead (growing right, away from the
+     column). Both grow outward into their margin rather than inward
+     toward the column, so the marker never overlaps page content.
+     --qm-edge is a second, independently-set correction (0px unless the
+     margin was too narrow to hold the marker without going off-screen)
+     that nudges it back into the viewport. */
+  transform: translate(var(--qm-x, 0px), var(--qm-y, 0px)) translateY(-50%) translateX(-100%)
+    translateX(var(--qm-edge, 0px));
   transition:
-    transform 0.7s cubic-bezier(0.65, 0, 0.35, 1),
+    transform 0.6s ease,
     opacity 0.4s ease;
 }
-.quest-marker.side-left {
-  /* anchored just outside the 1200px content container's left edge, never inside it */
-  transform: translate(calc(50vw - 660px - 100%), -50%);
-}
 .quest-marker.side-right {
-  /* anchored just outside the container's right edge */
-  transform: translate(calc(50vw + 660px), -50%);
+  transform: translate(var(--qm-x, 0px), var(--qm-y, 0px)) translateY(-50%) translateX(var(--qm-edge, 0px));
 }
 .quest-marker.is-ready {
   opacity: 0.85;
+  pointer-events: auto;
 }
 /* ═══ reticle-lock marker (lifted as-is from the provided component) ═══
-   .quest-marker-track / .quest-marker / .side-left / .side-right / .is-ready
-   above are OURS: the fixed track + the side-to-side position tween + the
-   1366px mobile fallback. .ql-* below is the provided component, lifted
+   .quest-marker / .side-right / .is-ready above are OURS: fixed
+   per-section anchor point + the side-to-side position tween + the
+   619px mobile fallback. .ql-* below is the provided component, lifted
    verbatim, nested inside .quest-marker so both systems compose: the outer
-   class controls which page edge the marker sits at and glides between;
+   class controls which margin the marker sits in and glides between;
    the inner ql-left/ql-right (kept in sync, same side value) controls the
    reticle/tag order and the chevron's inward flip. No status dot. */
 .ql-marker {
@@ -731,16 +733,14 @@ body {
 .ql-name.swap {
   opacity: 0;
 }
-@media (max-width: 1366px) {
-  .quest-marker-track {
+@media (max-width: 619px) {
+  /* Varied per-section heights don't work on a narrow screen: collapse to
+     a single small fixed corner indicator that just updates the label. */
+  .quest-marker {
     top: auto;
     bottom: 18px;
     left: auto;
     right: 16px;
-    width: auto;
-  }
-  .quest-marker {
-    position: static;
     transform: none !important;
   }
   .ql-reticle {
