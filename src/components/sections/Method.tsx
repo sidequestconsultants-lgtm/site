@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import CornerBracket from "@/components/brand/CornerBracket";
 import Container from "@/components/Container";
+import QuestWaypoint from "@/components/QuestWaypoint";
 
 const steps = [
   { num: "01", tag: "Diagnose", micro: "// audit", detail: "The audit — map the grind, find the AI-shaped gaps." },
@@ -38,6 +39,7 @@ export default function Method() {
 
   return (
     <section id="method-preview" data-quest="Method" className="section-rhythm relative snap-start border-t border-hairline">
+      <QuestWaypoint side="right" />
       <Container>
         <RevealOnScroll className="mb-6 sm:mb-8">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">

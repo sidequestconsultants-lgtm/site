@@ -2,11 +2,13 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import Container from "@/components/Container";
 import CornerBracket from "@/components/brand/CornerBracket";
 import FounderSilhouette from "@/components/brand/FounderSilhouette";
+import QuestWaypoint from "@/components/QuestWaypoint";
 import { founders, studioLine } from "@/data/team";
 
 export default function Studio() {
   return (
     <section id="studio" data-quest="Studio" className="section-rhythm relative snap-start border-t border-hairline">
+      <QuestWaypoint side="right" />
       <Container>
         <RevealOnScroll className="mb-10 max-w-xl">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">

@@ -5,6 +5,7 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import Container from "@/components/Container";
 import TessellationField from "@/components/brand/TessellationField";
 import CornerBracket from "@/components/brand/CornerBracket";
+import QuestWaypoint from "@/components/QuestWaypoint";
 import { workItems, workNote, type WorkCategory } from "@/data/work";
 
 const filters: ("All" | WorkCategory)[] = ["All", "Strategy", "Social", "Software"];
@@ -20,6 +21,7 @@ export default function Work() {
 
   return (
     <section id="work" data-quest="Work" className="section-rhythm relative snap-start border-t border-hairline">
+      <QuestWaypoint side="left" />
       <Container>
         <RevealOnScroll className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">

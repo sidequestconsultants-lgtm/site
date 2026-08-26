@@ -2,10 +2,12 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import Container from "@/components/Container";
 import CornerBracket from "@/components/brand/CornerBracket";
 import TessellationField from "@/components/brand/TessellationField";
+import QuestWaypoint from "@/components/QuestWaypoint";
 
 export default function Manifesto() {
   return (
     <section id="pov" data-quest="POV" className="section-rhythm relative overflow-hidden border-t border-hairline">
+      <QuestWaypoint side="left" />
       <TessellationField
         className="field-mask-center pointer-events-none absolute inset-0 h-full w-full opacity-[0.05]"
         size={46}

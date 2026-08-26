@@ -2,19 +2,20 @@
 
 import { useEffect, useRef } from "react";
 
-type Anchor = { name: string; x: number; y: number; side: "left" | "right" };
+type Anchor = { name: string; side: "left" | "right" };
 
-// Hand-placed viewport-% anchor spots, strictly alternating sides in
-// section order with descending heights — this array's order must match
-// the real DOM order of the [data-quest] sections below.
+// Order must match the real DOM order of the [data-quest] sections below —
+// only name + side are needed here now; each waypoint's actual position
+// lives on the page (via <QuestWaypoint> inside its section) and is read
+// live every frame, never cached.
 const WAYPOINTS: Anchor[] = [
-  { name: "Home", x: 12, y: 16, side: "left" },
-  { name: "Services", x: 88, y: 27, side: "right" },
-  { name: "POV", x: 13, y: 38, side: "left" },
-  { name: "Method", x: 87, y: 49, side: "right" },
-  { name: "Work", x: 15, y: 60, side: "left" },
-  { name: "Studio", x: 86, y: 71, side: "right" },
-  { name: "Start", x: 12, y: 84, side: "left" },
+  { name: "Home", side: "left" },
+  { name: "Services", side: "right" },
+  { name: "POV", side: "left" },
+  { name: "Method", side: "right" },
+  { name: "Work", side: "left" },
+  { name: "Studio", side: "right" },
+  { name: "Start", side: "left" },
 ];
 const TOTAL = WAYPOINTS.length;
 const TRAIL_COUNT = 3;
@@ -23,19 +24,24 @@ function progressText(i: number) {
   return `${String(i + 1).padStart(2, "0")} / ${String(TOTAL).padStart(2, "0")}`;
 }
 
-// ═══ quest dot + waypoints (lifted as-is from the provided reference
-// component) ═══ 7 fixed reticle waypoints that never reposition; one
-// glowing dot with a short fading trail threads them in DOM order as the
-// page scrolls, interpolating between the two anchors the current scroll
-// position sits between. Direct style mutation via refs (not React state)
-// on every scroll frame, matching the reference's approach — this needs
-// to update at native scroll speed, not through a render cycle.
+function centerOf(el: HTMLElement): [number, number] {
+  const r = el.getBoundingClientRect();
+  return [r.left + r.width / 2, r.top + r.height / 2];
+}
+
+// ═══ quest dot ═══ waypoint reticles now live on the page (absolute,
+// inside their own section) instead of floating at fixed viewport-%
+// spots. This component just threads a single glowing dot + fading trail
+// between them: every scroll frame it re-reads each waypoint's live
+// getBoundingClientRect() (never cached, since the page scrolls under
+// them) and interpolates the dot — itself position:fixed, so its
+// viewport-coordinate math lines up directly with the rects it reads —
+// between the current pair by scroll progress.
 export default function QuestDot() {
   const dotRef = useRef<HTMLDivElement>(null);
   const labelRef = useRef<HTMLDivElement>(null);
   const labelNameRef = useRef<HTMLDivElement>(null);
   const labelProgRef = useRef<HTMLDivElement>(null);
-  const wpRefs = useRef<(HTMLDivElement | null)[]>([]);
   const trailRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mobileNameRef = useRef<HTMLSpanElement>(null);
   const mobileProgRef = useRef<HTMLSpanElement>(null);
@@ -43,21 +49,15 @@ export default function QuestDot() {
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-quest]"));
-    // The waypoint chain assumes exactly one section per waypoint, in the
-    // same order — if that ever drifts out of sync, sit this out rather
-    // than threading the dot through the wrong anchors.
     if (sections.length !== TOTAL) return;
+    const wps = sections.map((s) => s.querySelector<HTMLElement>(".wp"));
+    if (wps.some((w) => !w)) return;
 
-    // The trail reads history entries several steps back (index 3, 6, 9),
-    // so on the very first frame — before scrolling has appended enough
-    // history — those reads are undefined and the trail dots are left
-    // with no left/top ever applied, showing at their default (0,0)
-    // static-flow position instead of near the dot. Pre-seed history with
-    // the starting position so the trail sits on the dot from first paint.
-    histRef.current = Array.from({ length: 12 }, () => [
-      WAYPOINTS[0].x * (window.innerWidth / 100),
-      WAYPOINTS[0].y * (window.innerHeight / 100),
-    ]);
+    // Pre-seed history with the starting waypoint's live position so the
+    // trail dots have valid coordinates from the very first paint, rather
+    // than sitting at (0,0) until enough scroll events accumulate.
+    const start = centerOf(wps[0]!);
+    histRef.current = Array.from({ length: 12 }, () => start);
 
     function update() {
       const probe = window.scrollY + 40;
@@ -69,27 +69,25 @@ export default function QuestDot() {
       const span = sections[j].offsetTop - sections[i].offsetTop || 1;
       const p = i === j ? 0 : Math.min(1, Math.max(0, (probe - sections[i].offsetTop) / span));
 
-      const vw = window.innerWidth / 100;
-      const vh = window.innerHeight / 100;
-      const a = WAYPOINTS[i];
-      const b = WAYPOINTS[j];
-      const x = (a.x + (b.x - a.x) * p) * vw;
-      const y = (a.y + (b.y - a.y) * p) * vh;
+      const [ax, ay] = centerOf(wps[i]!);
+      const [bx, by] = centerOf(wps[j]!);
+      const x = ax + (bx - ax) * p;
+      const y = ay + (by - ay) * p;
 
       if (dotRef.current) {
         dotRef.current.style.left = `${x}px`;
         dotRef.current.style.top = `${y}px`;
       }
 
-      wpRefs.current.forEach((w, k) => {
-        w?.classList.toggle("show", k === i || k === j);
+      wps.forEach((w, k) => {
         w?.classList.toggle("lit", k <= i);
       });
 
       const cur = WAYPOINTS[i];
+      const [cx, cy] = centerOf(wps[i]!);
       if (labelRef.current) {
-        labelRef.current.style.left = cur.side === "right" ? `${cur.x * vw - 16}px` : `${cur.x * vw + 22}px`;
-        labelRef.current.style.top = `${cur.y * vh}px`;
+        labelRef.current.style.left = cur.side === "right" ? `${cx - 16}px` : `${cx + 22}px`;
+        labelRef.current.style.top = `${cy}px`;
         labelRef.current.style.transform = `translateY(-50%)${cur.side === "right" ? " translateX(-100%)" : ""}`;
       }
       if (labelNameRef.current) labelNameRef.current.textContent = cur.name;
@@ -126,33 +124,6 @@ export default function QuestDot() {
 
   return (
     <>
-      {WAYPOINTS.map((w, i) => (
-        <div
-          key={w.name}
-          ref={(el) => {
-            wpRefs.current[i] = el;
-          }}
-          className="wp"
-          style={{ left: `${w.x}vw`, top: `${w.y}vh` }}
-          aria-hidden="true"
-        >
-          <span className="wpc tl" />
-          <span className="wpc tr" />
-          <span className="wpc bl" />
-          <span className="wpc br" />
-          <svg className="chev" viewBox="0 0 12 12" aria-hidden="true">
-            <path
-              d="M3 2 L9 6 L3 10"
-              fill="none"
-              stroke="#7B6CF0"
-              strokeWidth={2}
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              transform={w.side === "right" ? "translate(12,0) scale(-1,1)" : undefined}
-            />
-          </svg>
-        </div>
-      ))}
       <div id="quest-label" ref={labelRef} aria-hidden="true">
         <div className="nm" ref={labelNameRef}>
           Home

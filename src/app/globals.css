@@ -658,30 +658,30 @@ body {
   }
 }
 
-/* ═══ quest dot + waypoints (lifted as-is from the provided component) ═══
-   7 fixed reticle waypoints at hand-placed viewport-% anchor spots — they
-   never reposition. A single glowing dot with a fading trail threads them
-   in DOM order as the page scrolls, interpolating between the two anchors
-   the scroll position currently sits between. One label chip sits on the
-   current waypoint. Only class/color-token names changed to map onto this
-   app's existing tokens (--cyan/--violet/--hot/--line/--mono didn't exist
-   here under those names). */
+/* ═══ quest dot + waypoints ═══ each waypoint reticle is placed once,
+   absolutely, inside its own section (which is position:relative) so it
+   scrolls with the page like any other content instead of floating at a
+   fixed viewport spot. A single glowing dot with a fading trail threads
+   them in DOM order as the page scrolls, interpolating between the two
+   waypoints' live positions the scroll position currently sits between.
+   One label chip sits on the current waypoint. */
 .wp {
-  position: fixed;
+  position: absolute;
+  top: clamp(28px, 6vh, 64px);
   width: 26px;
   height: 26px;
-  transform: translate(-50%, -50%);
-  z-index: 50;
-  opacity: 0;
+  z-index: 5;
+  opacity: 0.35;
+  pointer-events: none;
   transition: opacity 0.4s ease;
 }
-/* Only the current and next waypoint (the two the dot is travelling
-   between) are ever shown — .show gates visibility, .lit (only ever set
-   on the current one) brightens it once reached. */
-.wp.show {
-  opacity: 0.35;
+.wp[data-side="left"] {
+  left: clamp(16px, 4vw, 40px);
 }
-.wp.show.lit {
+.wp[data-side="right"] {
+  right: clamp(16px, 4vw, 40px);
+}
+.wp.lit {
   opacity: 1;
 }
 /* .wpc (not .corner) so this never collides with the unrelated global

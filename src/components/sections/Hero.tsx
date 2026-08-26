@@ -5,6 +5,7 @@ import Link from "next/link";
 import Prism from "@/components/brand/Prism";
 import Button from "@/components/ui/Button";
 import Container from "@/components/Container";
+import QuestWaypoint from "@/components/QuestWaypoint";
 import { serviceOrder, services, type ServiceSlug } from "@/data/services";
 
 const modeLabels: Record<ServiceSlug, string> = {
@@ -19,6 +20,7 @@ export default function Hero() {
 
   return (
     <section id="home" data-quest="Home" className="section-rhythm relative overflow-hidden">
+      <QuestWaypoint side="left" />
       <Container className="flex flex-col gap-10">
         <div className="flex w-fit gap-1 rounded-full border border-hairline p-1" role="tablist" aria-label="Choose a service to preview">
           {serviceOrder.map((slug) => (
