@@ -191,19 +191,17 @@ body {
   background: linear-gradient(180deg, #b9c8ff 0%, var(--color-violet) 100%);
   border: 1px solid rgba(157, 211, 255, 0.45);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.45),
-    inset 0 -8px 12px -8px rgba(0, 0, 0, 0.35),
-    0 14px 36px rgba(123, 108, 240, 0.35);
+    inset 0 1px 0 rgba(255, 255, 255, 0.5),
+    0 2px 12px rgba(123, 108, 240, 0.22);
   transition:
-    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-    box-shadow 0.35s ease;
+    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.2s ease;
 }
 .btn-primary:hover {
-  transform: translateY(-2px);
+  transform: translateY(-1px);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    inset 0 -8px 12px -8px rgba(0, 0, 0, 0.35),
-    0 18px 44px rgba(123, 108, 240, 0.5);
+    inset 0 1px 0 rgba(255, 255, 255, 0.55),
+    0 4px 18px rgba(123, 108, 240, 0.32);
 }
 
 .card-glow {
@@ -579,139 +577,86 @@ body {
   }
 }
 
-/* quest pin — a per-section "pin on the map": position:absolute inside
-   its own section (not fixed to the viewport), so it scrolls away with
-   the section instead of tracking scroll like a HUD. Locks in (corner
-   draw-in + ping, via .ql-reticle.lock/.ql-ping.go below) once when
-   scrolled into view, then just sits there and scrolls off. */
-.quest-pin {
+/* ═══ quest dot + waypoints (lifted as-is from the provided component) ═══
+   7 fixed reticle waypoints at hand-placed viewport-% anchor spots — they
+   never reposition. A single glowing dot with a fading trail threads them
+   in DOM order as the page scrolls, interpolating between the two anchors
+   the scroll position currently sits between. One label chip sits on the
+   current waypoint. Only class/color-token names changed to map onto this
+   app's existing tokens (--cyan/--violet/--hot/--line/--mono didn't exist
+   here under those names). */
+.wp {
+  position: fixed;
+  width: 26px;
+  height: 26px;
+  transform: translate(-50%, -50%);
+  z-index: 50;
+  opacity: 0.35;
+  transition: opacity 0.4s ease;
+}
+.wp.lit {
+  opacity: 1;
+}
+.wp .corner {
   position: absolute;
-  z-index: 2;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  pointer-events: none;
-  opacity: 0;
-  transform: translateY(10px);
-  transition:
-    opacity 0.5s ease,
-    transform 0.5s ease;
+  width: 7px;
+  height: 7px;
+  border: 1.3px solid #4a4a66;
+  transition: border-color 0.4s ease;
 }
-.quest-pin.is-locked {
-  opacity: 0.85;
-  transform: translateY(0);
+.wp.lit .corner {
+  border-color: var(--color-cyan);
 }
-/* ═══ reticle-lock marker (lifted as-is from the provided component) ═══
-   .quest-pin above is OURS: the per-section absolute placement + scroll-
-   in reveal. .ql-* below is the provided component, lifted verbatim,
-   nested inside .quest-pin — the outer class controls which side of the
-   pin's own section it sits on; the inner ql-left/ql-right (kept in sync,
-   same side value) controls the reticle/tag order and the chevron's
-   inward flip. No status dot. */
-.ql-marker {
-  display: flex;
-  align-items: center;
-  gap: 11px;
-}
-.ql-marker.ql-right {
-  flex-direction: row-reverse;
-}
-.ql-reticle {
-  position: relative;
-  width: 34px;
-  height: 34px;
-  flex-shrink: 0;
-}
-.ql-corner {
-  position: absolute;
-  width: 9px;
-  height: 9px;
-  border: 1.4px solid var(--color-cyan);
-}
-.ql-corner.tl {
+.wp .tl {
   left: 0;
   top: 0;
   border-right: 0;
   border-bottom: 0;
 }
-.ql-corner.tr {
+.wp .tr {
   right: 0;
   top: 0;
   border-left: 0;
   border-bottom: 0;
 }
-.ql-corner.bl {
+.wp .bl {
   left: 0;
   bottom: 0;
   border-right: 0;
   border-top: 0;
 }
-.ql-corner.br {
+.wp .br {
   right: 0;
   bottom: 0;
   border-left: 0;
   border-top: 0;
 }
-.ql-chevron {
+.wp .chev {
   position: absolute;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 13px;
-  height: 13px;
+  width: 10px;
+  height: 10px;
+  opacity: 0.4;
+  transition: opacity 0.4s;
 }
-.quest-pin.side-right .ql-chevron {
-  transform: translate(-50%, -50%) scaleX(-1);
+.wp.lit .chev {
+  opacity: 1;
 }
-.ql-ping {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 34px;
-  height: 34px;
-  margin: -17px 0 0 -17px;
-  border-radius: 50%;
-  border: 1px solid var(--color-violet);
-  opacity: 0;
-  pointer-events: none;
-}
-.ql-ping.go {
-  animation: ql-ping 0.6s cubic-bezier(0.2, 0.6, 0.3, 1) forwards;
-}
-@keyframes ql-ping {
-  0% {
-    transform: scale(0.4);
-    opacity: 0.65;
-  }
-  100% {
-    transform: scale(1.9);
-    opacity: 0;
-  }
-}
-.ql-reticle.lock .ql-corner {
-  animation: ql-draw 0.3s cubic-bezier(0.16, 1, 0.3, 1) backwards;
-}
-@keyframes ql-draw {
-  from {
-    opacity: 0;
-    transform: scale(0.6);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
-  }
-}
-.ql-tag {
-  position: relative;
-  background: rgba(7, 7, 13, 0.72);
+#quest-label {
+  position: fixed;
+  transform: translateY(-50%);
+  z-index: 52;
+  background: rgba(7, 7, 13, 0.78);
   border: 1px solid var(--color-hairline);
   border-radius: 2px;
-  padding: 6px 12px;
+  padding: 5px 11px;
   backdrop-filter: blur(3px);
-  line-height: 1.25;
+  transition: opacity 0.3s;
 }
-.ql-tag::before,
-.ql-tag::after {
+#quest-label::before,
+#quest-label::after {
   content: "";
   position: absolute;
   width: 5px;
@@ -719,91 +664,104 @@ body {
   border-color: var(--color-violet);
   border-style: solid;
 }
-.ql-tag::before {
+#quest-label::before {
   left: -1px;
   top: -1px;
   border-width: 1px 0 0 1px;
 }
-.ql-tag::after {
+#quest-label::after {
   right: -1px;
   bottom: -1px;
   border-width: 0 1px 1px 0;
 }
-.ql-name {
-  display: block;
+#quest-label .nm {
   font-family: var(--font-mono-sq);
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
   letter-spacing: 0.12em;
   color: var(--color-ink);
   text-transform: uppercase;
 }
-.ql-prog {
-  display: block;
+#quest-label .pr {
   font-family: var(--font-mono-sq);
-  font-size: 9px;
+  font-size: 8px;
   letter-spacing: 0.14em;
   color: var(--color-violet);
   margin-top: 2px;
 }
-/* quest progress — a quiet, always-on odometer, deliberately plain next to
-   the reticle-styled pins above (no chevron, no corner brackets) so the
-   two never compete for attention. */
-.quest-progress {
+#quest-dot {
   position: fixed;
-  left: 16px;
-  bottom: 16px;
-  z-index: 40;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 10px;
-  background: rgba(7, 7, 13, 0.6);
-  border: 1px solid var(--color-hairline);
-  border-radius: 2px;
-  backdrop-filter: blur(3px);
-  opacity: 0.72;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--color-hot);
+  transform: translate(-50%, -50%);
+  z-index: 55;
+  box-shadow:
+    0 0 10px 3px rgba(157, 211, 255, 0.8),
+    0 0 22px 8px rgba(123, 108, 240, 0.5);
+}
+.quest-trail {
+  position: fixed;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--color-cyan);
+  transform: translate(-50%, -50%);
+  z-index: 54;
   pointer-events: none;
 }
-.quest-progress-segs {
-  display: flex;
-  align-items: center;
-  gap: 3px;
+/* mobile (<760px) fallback — the fly-across chain doesn't work on a
+   narrow screen, so it drops out entirely in favor of a small always-on
+   corner readout (name + progress, no reticle/dot/trail). */
+.quest-mobile {
+  display: none;
 }
-.quest-progress-seg {
-  width: 10px;
-  height: 2px;
-  background: var(--color-hairline);
-  transition: background-color 0.3s ease;
-}
-.quest-progress-seg.is-filled {
-  background: var(--color-violet);
-}
-.quest-progress-count {
-  font-family: var(--font-mono-sq);
-  font-size: 11px;
-  letter-spacing: 0.08em;
-  color: var(--color-muted);
-}
-@media (max-width: 619px) {
-  /* Section padding is already tight on a narrow screen — a pin next to
-     the content would crowd it, so the per-section pins drop out; the
-     fixed corner progress readout (.quest-progress) is the only quest
-     indicator left on mobile. */
-  .quest-pin {
+@media (max-width: 759px) {
+  .wp,
+  #quest-dot,
+  .quest-trail,
+  #quest-label {
     display: none;
+  }
+  .quest-mobile {
+    position: fixed;
+    left: 16px;
+    bottom: 16px;
+    z-index: 52;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: rgba(7, 7, 13, 0.72);
+    border: 1px solid var(--color-hairline);
+    border-radius: 2px;
+    backdrop-filter: blur(3px);
+  }
+  .quest-mobile .nm {
+    font-family: var(--font-mono-sq);
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    color: var(--color-ink);
+    text-transform: uppercase;
+  }
+  .quest-mobile .pr {
+    font-family: var(--font-mono-sq);
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    color: var(--color-violet);
   }
 }
 @media (prefers-reduced-motion: reduce) {
-  .quest-pin {
-    transition: none;
+  /* Waypoints still light up by section as you scroll; only the moving
+     dot/trail (and the transition on the label) are suppressed. */
+  #quest-dot,
+  .quest-trail {
+    display: none;
   }
-  .quest-progress-seg {
+  #quest-label {
     transition: none;
-  }
-  .ql-ping,
-  .ql-reticle.lock .ql-corner {
-    animation: none;
   }
 }
 

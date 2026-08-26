@@ -2,15 +2,11 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import Container from "@/components/Container";
 import CornerBracket from "@/components/brand/CornerBracket";
 import FounderSilhouette from "@/components/brand/FounderSilhouette";
-import QuestPin from "@/components/QuestPin";
 import { founders, studioLine } from "@/data/team";
 
-export default function Studio({ showQuestPin = false }: { showQuestPin?: boolean }) {
+export default function Studio() {
   return (
     <section id="studio" data-quest="Studio" className="section-rhythm relative snap-start border-t border-hairline">
-      {showQuestPin && (
-        <QuestPin label="Studio" progress={5} side="left" className="left-4 top-6 hidden md:flex lg:left-10" />
-      )}
       <Container>
         <RevealOnScroll className="mb-10 max-w-xl">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">

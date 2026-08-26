@@ -5,7 +5,6 @@ import RevealOnScroll from "@/components/RevealOnScroll";
 import Container from "@/components/Container";
 import TessellationField from "@/components/brand/TessellationField";
 import CornerBracket from "@/components/brand/CornerBracket";
-import QuestPin from "@/components/QuestPin";
 import { workItems, workNote, type WorkCategory } from "@/data/work";
 
 const filters: ("All" | WorkCategory)[] = ["All", "Strategy", "Social", "Software"];
@@ -15,15 +14,12 @@ const accentByCategory: Record<WorkCategory, "violet" | "cyan"> = {
   Software: "violet",
 };
 
-export default function Work({ showQuestPin = false }: { showQuestPin?: boolean }) {
+export default function Work() {
   const [filter, setFilter] = useState<"All" | WorkCategory>("All");
   const visible = filter === "All" ? workItems : workItems.filter((w) => w.category === filter);
 
   return (
     <section id="work" data-quest="Work" className="section-rhythm relative snap-start border-t border-hairline">
-      {showQuestPin && (
-        <QuestPin label="Work" progress={4} side="right" className="right-4 top-6 hidden md:flex lg:right-10" />
-      )}
       <Container>
         <RevealOnScroll className="mb-10 flex flex-wrap items-end justify-between gap-6">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">

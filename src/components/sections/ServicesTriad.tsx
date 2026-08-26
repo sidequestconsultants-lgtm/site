@@ -4,7 +4,6 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import RevealOnScroll from "@/components/RevealOnScroll";
 import Container from "@/components/Container";
-import QuestPin from "@/components/QuestPin";
 
 type FragAlign = "c" | "r" | "l";
 
@@ -167,12 +166,6 @@ export default function ServicesTriad() {
 
   return (
     <section id="services" data-quest="Services" className="section-rhythm relative snap-start border-t border-hairline">
-      <QuestPin
-        label="Services"
-        progress={2}
-        side="right"
-        className="left-1/2 top-[30%] hidden translate-x-[420px] xl:flex"
-      />
       <Container>
         <RevealOnScroll className="mb-14 max-w-xl">
           <p className="text-[17px] leading-relaxed text-muted">

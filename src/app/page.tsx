@@ -5,19 +5,19 @@ import Method from "@/components/sections/Method";
 import Work from "@/components/sections/Work";
 import Studio from "@/components/sections/Studio";
 import CtaIntake from "@/components/sections/CtaIntake";
-import QuestProgress from "@/components/QuestProgress";
+import QuestDot from "@/components/QuestDot";
 
 export default function Home() {
   return (
     <>
-      <QuestProgress />
+      <QuestDot />
       <Hero />
       <ServicesTriad />
       <Manifesto />
-      <Method showQuestPin />
-      <Work showQuestPin />
-      <Studio showQuestPin />
-      <CtaIntake showQuestPin />
+      <Method />
+      <Work />
+      <Studio />
+      <CtaIntake />
     </>
   );
 }
