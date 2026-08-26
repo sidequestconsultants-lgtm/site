@@ -19,7 +19,7 @@ export default function Hero() {
   const active = services[mode];
 
   return (
-    <section id="home" data-quest="Home" className="section-rhythm relative overflow-hidden">
+    <section id="home" data-quest="Home" className="section-rhythm relative snap-start overflow-hidden">
       <QuestWaypoint side="left" />
       <Container className="flex flex-col gap-10">
         <div className="flex w-fit gap-1 rounded-full border border-hairline p-1" role="tablist" aria-label="Choose a service to preview">

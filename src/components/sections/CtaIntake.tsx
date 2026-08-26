@@ -8,7 +8,8 @@ export default function CtaIntake() {
     <section
       id="start"
       data-quest="Start"
-      className="section-rhythm relative flex min-h-screen snap-start items-center border-t border-hairline"
+      className="section-rhythm relative flex min-h-[72vh] snap-start items-center border-t border-hairline"
+      style={{ paddingBlock: "clamp(72px, 10vh, 135px)" }}
     >
       <QuestWaypoint side="left" />
       <Container>

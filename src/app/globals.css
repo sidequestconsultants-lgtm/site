@@ -74,8 +74,6 @@ body {
   scroll-margin-top: 90px;
 }
 
-/* applied only to the 6 primary quest-marker sections, not every section,
-   so snap points stay spaced out instead of fighting each other */
 .snap-start {
   scroll-snap-align: start;
 }
@@ -667,7 +665,8 @@ body {
    One label chip sits on the current waypoint. */
 .wp {
   position: absolute;
-  top: clamp(28px, 6vh, 64px);
+  top: 50%;
+  transform: translateY(-50%);
   width: 26px;
   height: 26px;
   z-index: 5;
