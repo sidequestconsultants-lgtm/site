@@ -186,22 +186,103 @@ body {
   }
 }
 
-.btn-primary {
-  color: #0a0a12;
-  background: linear-gradient(180deg, #b9c8ff 0%, var(--color-violet) 100%);
-  border: 1px solid rgba(157, 211, 255, 0.45);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.5),
-    0 2px 12px rgba(123, 108, 240, 0.22);
+/* ═══ sidequest button system (lifted as-is from the provided component)
+   ═══ ALL buttons carry cyan corner ticks (top-left + bottom-right).
+   Ghost/outline at rest, SOLID violet fill on hover — not before. Variants:
+   .secondary (quieter border) · .sm (smaller). Ticks on every variant. */
+.sq-btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  cursor: pointer;
+  font-family: var(--font-mono-sq);
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 11px 24px;
+  border-radius: 2px;
+  color: var(--color-ink);
+  background: transparent;
+  border: 1px solid rgba(123, 108, 240, 0.6);
   transition:
-    transform 0.2s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
     box-shadow 0.2s ease;
 }
-.btn-primary:hover {
-  transform: translateY(-1px);
-  box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.55),
-    0 4px 18px rgba(123, 108, 240, 0.32);
+.sq-btn:hover,
+.sq-btn:focus-visible {
+  color: #0a0a12;
+  background: var(--color-violet);
+  border-color: var(--color-violet);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 22px -8px rgba(123, 108, 240, 0.75);
+  outline: none;
+}
+.sq-btn:active {
+  transform: translateY(0);
+}
+.sq-btn .arw {
+  font-size: 14px;
+  line-height: 1;
+}
+/* corner ticks — on ALL buttons (top-left + bottom-right), flare to --hot on hover */
+.sq-btn::before,
+.sq-btn::after {
+  content: "";
+  position: absolute;
+  width: 7px;
+  height: 7px;
+  border-color: var(--color-cyan);
+  border-style: solid;
+  transition: border-color 0.2s ease;
+}
+.sq-btn::before {
+  left: -3px;
+  top: -3px;
+  border-width: 1.4px 0 0 1.4px;
+}
+.sq-btn::after {
+  right: -3px;
+  bottom: -3px;
+  border-width: 0 1.4px 1.4px 0;
+}
+.sq-btn:hover::before,
+.sq-btn:hover::after,
+.sq-btn:focus-visible::before,
+.sq-btn:focus-visible::after {
+  border-color: var(--color-hot);
+}
+/* SECONDARY — quieter border, keeps the ticks, fills the same on hover */
+.sq-btn.secondary {
+  border: 1px solid #2c2c48;
+}
+/* SMALL — tighter padding + type; ticks slightly smaller, everything else identical */
+.sq-btn.sm {
+  font-size: 11px;
+  padding: 8px 16px;
+  gap: 7px;
+}
+.sq-btn.sm::before,
+.sq-btn.sm::after {
+  width: 6px;
+  height: 6px;
+}
+.sq-btn.sm .arw {
+  font-size: 12px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .sq-btn {
+    transition:
+      background 0.2s ease,
+      color 0.2s ease,
+      border-color 0.2s ease;
+  }
+  .sq-btn:hover {
+    transform: none;
+  }
 }
 
 .card-glow {
@@ -591,41 +672,52 @@ body {
   height: 26px;
   transform: translate(-50%, -50%);
   z-index: 50;
-  opacity: 0.35;
+  opacity: 0;
   transition: opacity 0.4s ease;
 }
-.wp.lit {
+/* Only the current and next waypoint (the two the dot is travelling
+   between) are ever shown — .show gates visibility, .lit (only ever set
+   on the current one) brightens it once reached. */
+.wp.show {
+  opacity: 0.35;
+}
+.wp.show.lit {
   opacity: 1;
 }
-.wp .corner {
+/* .wpc (not .corner) so this never collides with the unrelated global
+   .corner/.tl/.tr/.bl/.br bracket rule used by manifesto/work/founder
+   frames (which resizes and rotates anything matching those bare class
+   names) — scoping under .wp alone isn't enough since equal-specificity
+   selectors fall back to source order, not intent. */
+.wp .wpc {
   position: absolute;
   width: 7px;
   height: 7px;
   border: 1.3px solid #4a4a66;
   transition: border-color 0.4s ease;
 }
-.wp.lit .corner {
+.wp.lit .wpc {
   border-color: var(--color-cyan);
 }
-.wp .tl {
+.wp .wpc.tl {
   left: 0;
   top: 0;
   border-right: 0;
   border-bottom: 0;
 }
-.wp .tr {
+.wp .wpc.tr {
   right: 0;
   top: 0;
   border-left: 0;
   border-bottom: 0;
 }
-.wp .bl {
+.wp .wpc.bl {
   left: 0;
   bottom: 0;
   border-right: 0;
   border-top: 0;
 }
-.wp .br {
+.wp .wpc.br {
   right: 0;
   bottom: 0;
   border-left: 0;

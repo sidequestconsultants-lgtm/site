@@ -52,7 +52,7 @@ export default function Nav() {
         </nav>
 
         <div className="hidden md:block">
-          <Button href="/start" className="px-5 py-3 text-xs">
+          <Button href="/start" size="sm">
             Start a sidequest →
           </Button>
         </div>
@@ -80,7 +80,7 @@ export default function Nav() {
               {l.label}
             </Link>
           ))}
-          <Button href="/start" className="mt-3 justify-center px-5 py-3 text-xs">
+          <Button href="/start" size="sm" className="mt-3 justify-center">
             Start a sidequest →
           </Button>
         </Container>

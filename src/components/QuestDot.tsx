@@ -81,7 +81,10 @@ export default function QuestDot() {
         dotRef.current.style.top = `${y}px`;
       }
 
-      wpRefs.current.forEach((w, k) => w?.classList.toggle("lit", k <= i));
+      wpRefs.current.forEach((w, k) => {
+        w?.classList.toggle("show", k === i || k === j);
+        w?.classList.toggle("lit", k <= i);
+      });
 
       const cur = WAYPOINTS[i];
       if (labelRef.current) {
@@ -133,10 +136,10 @@ export default function QuestDot() {
           style={{ left: `${w.x}vw`, top: `${w.y}vh` }}
           aria-hidden="true"
         >
-          <span className="corner tl" />
-          <span className="corner tr" />
-          <span className="corner bl" />
-          <span className="corner br" />
+          <span className="wpc tl" />
+          <span className="wpc tr" />
+          <span className="wpc bl" />
+          <span className="wpc br" />
           <svg className="chev" viewBox="0 0 12 12" aria-hidden="true">
             <path
               d="M3 2 L9 6 L3 10"

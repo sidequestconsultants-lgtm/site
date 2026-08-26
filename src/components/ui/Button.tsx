@@ -5,41 +5,38 @@ type ButtonProps = {
   href: string;
   children: ReactNode;
   variant?: "primary" | "secondary";
+  size?: "default" | "sm";
   className?: string;
 };
 
-export default function Button({ href, children, variant = "primary", className }: ButtonProps) {
-  const isExternal = href.startsWith("http") || href.startsWith("mailto:");
-
-  if (variant === "secondary") {
-    return (
-      <Link
-        href={href}
-        className={[
-          "inline-flex w-fit items-center gap-2 rounded-[3px] border border-hairline px-5 py-2.5 font-mono text-[13px] text-ink opacity-85 transition-[opacity,border-color] duration-200 hover:opacity-100 hover:border-[#33334a]",
-          className,
-        ]
-          .filter(Boolean)
-          .join(" ")}
-        {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
-      >
-        {children}
-      </Link>
-    );
+// Labels are plain strings ending in "→" (e.g. "Book an audit →") — split
+// the arrow into its own span so .sq-btn's .arw sizing rule (bigger than
+// the surrounding uppercase mono text, smaller again in .sm) actually has
+// something to target, without every call site needing to pass it separately.
+function withArrow(children: ReactNode): ReactNode {
+  if (typeof children === "string") {
+    const trimmed = children.trimEnd();
+    if (trimmed.endsWith("→")) {
+      const label = trimmed.slice(0, -1).trimEnd();
+      return (
+        <>
+          {label} <span className="arw">→</span>
+        </>
+      );
+    }
   }
+  return children;
+}
+
+export default function Button({ href, children, variant = "primary", size = "default", className }: ButtonProps) {
+  const isExternal = href.startsWith("http") || href.startsWith("mailto:");
+  const classes = ["sq-btn", "w-fit", variant === "secondary" && "secondary", size === "sm" && "sm", className]
+    .filter(Boolean)
+    .join(" ");
 
   return (
-    <Link
-      href={href}
-      className={[
-        "btn-primary inline-flex w-fit items-center gap-2 rounded-[3px] px-5 py-2.5 font-mono text-[13px] font-bold tracking-wide",
-        className,
-      ]
-        .filter(Boolean)
-        .join(" ")}
-      {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}
-    >
-      {children}
+    <Link href={href} className={classes} {...(isExternal ? { target: "_blank", rel: "noreferrer" } : {})}>
+      {withArrow(children)}
     </Link>
   );
 }

@@ -110,8 +110,8 @@ export default function IntakeForm() {
         />
       </label>
 
-      <button type="submit" className="btn-primary w-fit rounded px-6 py-4 font-mono text-sm font-bold tracking-wide">
-        Send the brief →
+      <button type="submit" className="sq-btn w-fit">
+        Send the brief <span className="arw">→</span>
       </button>
     </form>
   );
