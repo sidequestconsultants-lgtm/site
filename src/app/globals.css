@@ -691,6 +691,16 @@ body {
 .wp[data-side="right"] {
   right: min(max(24px, calc((100vw - 1200px) / 4)), calc(max(0px, (100vw - 1200px) / 2) + clamp(20px, 4vw, 48px) - 34px));
 }
+/* Start is the last waypoint and the quest dot clamps to it once scrolled
+   past — vertically centering it (like every other waypoint) left it
+   floating mid-section with a visible gap of empty space (now the
+   footer) below, instead of reading as the dot's final resting point.
+   Anchor it near the section's bottom edge instead. */
+#start .wp {
+  top: auto;
+  bottom: clamp(32px, 8vh, 72px);
+  transform: none;
+}
 .wp.lit {
   opacity: 1;
 }
