@@ -678,11 +678,18 @@ body {
    the viewport edge; (100vw - 1200px)/4 centers the marker inside that
    gutter (half of half the leftover width), with a 24px floor so it
    never crowds the edge on narrower desktop widths. */
+/* The plain gutter-center formula alone would crowd (even overlap) the
+   content column once the column's own side padding shrinks faster than
+   the 24px floor gives up ground — clamp it against a second formula
+   derived from that same padding (container's own edge, plus its
+   clamp(20px,4vw,48px) padding, minus the marker's width and an 8px
+   buffer) so it never sits closer to the content than that, at any
+   width where the marker is shown at all (see the 900px cutoff below). */
 .wp[data-side="left"] {
-  left: max(24px, calc((100vw - 1200px) / 4));
+  left: min(max(24px, calc((100vw - 1200px) / 4)), calc(max(0px, (100vw - 1200px) / 2) + clamp(20px, 4vw, 48px) - 34px));
 }
 .wp[data-side="right"] {
-  right: max(24px, calc((100vw - 1200px) / 4));
+  right: min(max(24px, calc((100vw - 1200px) / 4)), calc(max(0px, (100vw - 1200px) / 2) + clamp(20px, 4vw, 48px) - 34px));
 }
 .wp.lit {
   opacity: 1;
@@ -806,13 +813,15 @@ body {
   z-index: 54;
   pointer-events: none;
 }
-/* mobile (<760px) fallback — the fly-across chain doesn't work on a
-   narrow screen, so it drops out entirely in favor of a small always-on
-   corner readout (name + progress, no reticle/dot/trail). */
+/* mobile (<900px) fallback — the fly-across chain doesn't work below
+   the width where the gutter formula above can still guarantee real
+   clearance from the content column, so it drops out entirely in favor
+   of a small always-on corner readout (name + progress, no
+   reticle/dot/trail). */
 .quest-mobile {
   display: none;
 }
-@media (max-width: 759px) {
+@media (max-width: 899px) {
   .wp,
   #quest-dot,
   .quest-trail,
