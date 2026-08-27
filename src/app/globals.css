@@ -674,11 +674,15 @@ body {
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
+/* gutter = empty space between the centered ~1200px content column and
+   the viewport edge; (100vw - 1200px)/4 centers the marker inside that
+   gutter (half of half the leftover width), with a 24px floor so it
+   never crowds the edge on narrower desktop widths. */
 .wp[data-side="left"] {
-  left: clamp(16px, 4vw, 40px);
+  left: max(24px, calc((100vw - 1200px) / 4));
 }
 .wp[data-side="right"] {
-  right: clamp(16px, 4vw, 40px);
+  right: max(24px, calc((100vw - 1200px) / 4));
 }
 .wp.lit {
   opacity: 1;
