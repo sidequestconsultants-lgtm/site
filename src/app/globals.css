@@ -674,22 +674,21 @@ body {
   pointer-events: none;
   transition: opacity 0.4s ease;
 }
-/* gutter = empty space between the centered ~1200px content column and
-   the viewport edge; (100vw - 1200px)/4 centers the marker inside that
-   gutter (half of half the leftover width), with a 24px floor so it
-   never crowds the edge on narrower desktop widths. */
+/* Every waypoint now sits in the LEFT gutter — no more alternating sides
+   — so the dot travels in a mostly straight vertical line down the left
+   edge. gutter = empty space between the centered ~1200px content
+   column and the viewport edge; (100vw - 1200px)/4 centers the marker
+   inside that gutter (half of half the leftover width), with a 24px
+   floor so it never crowds the edge on narrower desktop widths. */
 /* The plain gutter-center formula alone would crowd (even overlap) the
    content column once the column's own side padding shrinks faster than
    the 24px floor gives up ground — clamp it against a second formula
    derived from that same padding (container's own edge, plus its
    clamp(20px,4vw,48px) padding, minus the marker's width and an 8px
    buffer) so it never sits closer to the content than that, at any
-   width where the marker is shown at all (see the 900px cutoff below). */
+   width where the marker is shown at all (see the 1100px cutoff below). */
 .wp[data-side="left"] {
   left: min(max(24px, calc((100vw - 1200px) / 4)), calc(max(0px, (100vw - 1200px) / 2) + clamp(20px, 4vw, 48px) - 34px));
-}
-.wp[data-side="right"] {
-  right: min(max(24px, calc((100vw - 1200px) / 4)), calc(max(0px, (100vw - 1200px) / 2) + clamp(20px, 4vw, 48px) - 34px));
 }
 /* Start is the last waypoint and the quest dot clamps to it once scrolled
    past — vertically centering it (like every other waypoint) left it
@@ -823,15 +822,14 @@ body {
   z-index: 54;
   pointer-events: none;
 }
-/* mobile (<900px) fallback — the fly-across chain doesn't work below
-   the width where the gutter formula above can still guarantee real
-   clearance from the content column, so it drops out entirely in favor
+/* mobile (<1100px) fallback — below the width where there's a real
+   usable left gutter, the fly-across chain drops out entirely in favor
    of a small always-on corner readout (name + progress, no
    reticle/dot/trail). */
 .quest-mobile {
   display: none;
 }
-@media (max-width: 899px) {
+@media (max-width: 1099px) {
   .wp,
   #quest-dot,
   .quest-trail,

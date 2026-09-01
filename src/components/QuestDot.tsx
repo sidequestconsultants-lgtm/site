@@ -10,11 +10,11 @@ type Anchor = { name: string; side: "left" | "right" };
 // live every frame, never cached.
 const WAYPOINTS: Anchor[] = [
   { name: "Home", side: "left" },
-  { name: "Services", side: "right" },
+  { name: "Services", side: "left" },
   { name: "POV", side: "left" },
-  { name: "Method", side: "right" },
+  { name: "Method", side: "left" },
   { name: "Work", side: "left" },
-  { name: "Studio", side: "right" },
+  { name: "Studio", side: "left" },
   { name: "Start", side: "left" },
 ];
 const TOTAL = WAYPOINTS.length;

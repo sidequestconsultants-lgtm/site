@@ -39,7 +39,7 @@ export default function Method() {
 
   return (
     <section id="method-preview" data-quest="Method" className="section-rhythm relative snap-start border-t border-hairline">
-      <QuestWaypoint side="right" />
+      <QuestWaypoint side="left" />
       <Container>
         <RevealOnScroll className="mb-6 sm:mb-8">
           <h2 className="text-balance font-display text-[clamp(1.8rem,3.2vw,2.6rem)] font-bold uppercase leading-tight text-ink">

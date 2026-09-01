@@ -167,7 +167,7 @@ export default function ServicesTriad() {
 
   return (
     <section id="services" data-quest="Services" className="section-rhythm relative snap-start border-t border-hairline">
-      <QuestWaypoint side="right" />
+      <QuestWaypoint side="left" />
       <Container>
         <RevealOnScroll className="mb-14 max-w-xl">
           <p className="text-[17px] leading-relaxed text-muted">
