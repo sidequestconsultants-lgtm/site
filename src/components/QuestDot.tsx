@@ -32,7 +32,7 @@ function centerOf(el: HTMLElement): [number, number] {
 // ═══ quest dot ═══ waypoint reticles now live on the page (absolute,
 // inside their own section) instead of floating at fixed viewport-%
 // spots. This component just threads a single glowing dot + fading trail
-// between them: every scroll frame it re-reads each waypoint's live
+// between them: every animation frame it re-reads each waypoint's live
 // getBoundingClientRect() (never cached, since the page scrolls under
 // them) and interpolates the dot — itself position:fixed, so its
 // viewport-coordinate math lines up directly with the rects it reads —
@@ -55,7 +55,7 @@ export default function QuestDot() {
 
     // Pre-seed history with the starting waypoint's live position so the
     // trail dots have valid coordinates from the very first paint, rather
-    // than sitting at (0,0) until enough scroll events accumulate.
+    // than sitting at (0,0) until enough frames accumulate.
     const start = centerOf(wps[0]!);
     histRef.current = Array.from({ length: 12 }, () => start);
 
@@ -95,6 +95,15 @@ export default function QuestDot() {
       if (mobileNameRef.current) mobileNameRef.current.textContent = cur.name;
       if (mobileProgRef.current) mobileProgRef.current.textContent = progressText(i);
 
+      // Re-sampling every animation frame — not just on scroll events —
+      // is what makes the trail behave like a comet tail instead of a
+      // fixed offset: each trail dot reads a few frames back in this
+      // history, so it always sits behind wherever the dot actually just
+      // was, in whichever direction it was actually moving. It's also
+      // what makes the trail collapse back onto the dot when scrolling
+      // stops — once x/y stop changing, every frame unshifts the same
+      // position, so within TRAIL_COUNT*3 frames the whole history (and
+      // every trail dot reading from it) converges on the dot itself.
       histRef.current.unshift([x, y]);
       histRef.current = histRef.current.slice(0, 12);
       trailRefs.current.forEach((t, ti) => {
@@ -108,15 +117,13 @@ export default function QuestDot() {
     }
 
     let raf = 0;
-    const onScroll = () => {
-      cancelAnimationFrame(raf);
-      raf = requestAnimationFrame(update);
+    const loop = () => {
+      update();
+      raf = requestAnimationFrame(loop);
     };
-    window.addEventListener("scroll", onScroll, { passive: true });
+    raf = requestAnimationFrame(loop);
     window.addEventListener("resize", update);
-    update();
     return () => {
-      window.removeEventListener("scroll", onScroll);
       window.removeEventListener("resize", update);
       cancelAnimationFrame(raf);
     };
@@ -140,6 +147,7 @@ export default function QuestDot() {
           ref={(el) => {
             trailRefs.current[i] = el;
           }}
+          style={{ width: `${7 - i * 2}px`, height: `${7 - i * 2}px` }}
           aria-hidden="true"
         />
       ))}
