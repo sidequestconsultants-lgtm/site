@@ -45,15 +45,7 @@ export default function QuestDot() {
   const trailRefs = useRef<(HTMLDivElement | null)[]>([]);
   const mobileNameRef = useRef<HTMLSpanElement>(null);
   const mobileProgRef = useRef<HTMLSpanElement>(null);
-  // Waypoints are page-anchored (they scroll with the page), so the dot's
-  // on-screen motion doesn't reliably track scroll direction — a segment
-  // transition, a resize, or just where a waypoint happens to sit can move
-  // the dot opposite to how the page is actually scrolling. A trail built
-  // from the dot's own position history inherits that same unreliability.
-  // Base the trail on scroll direction itself instead, which is always
-  // unambiguous.
-  const lastYRef = useRef(0);
-  const scrollDirRef = useRef(1);
+  const histRef = useRef<Array<[number, number]>>([]);
 
   useEffect(() => {
     const sections = Array.from(document.querySelectorAll<HTMLElement>("[data-quest]"));
@@ -61,7 +53,15 @@ export default function QuestDot() {
     const wps = sections.map((s) => s.querySelector<HTMLElement>(".wp"));
     if (wps.some((w) => !w)) return;
 
-    lastYRef.current = window.scrollY;
+    // History is stored in DOCUMENT space (viewport y + scrollY), not
+    // viewport space — document-space y always increases as you scroll
+    // down regardless of where on screen a page-anchored waypoint happens
+    // to put the dot, so converting back to viewport at render time (minus
+    // the CURRENT scrollY) is what makes older samples land above the dot
+    // when scrolling down and below it when scrolling up, while still
+    // being real history (springy lag, collapses onto the dot when idle).
+    const seed = centerOf(wps[0]!);
+    histRef.current = Array.from({ length: 30 }, () => [seed[0], seed[1] + window.scrollY]);
 
     function update() {
       const probe = window.scrollY + 40;
@@ -99,18 +99,21 @@ export default function QuestDot() {
       if (mobileNameRef.current) mobileNameRef.current.textContent = cur.name;
       if (mobileProgRef.current) mobileProgRef.current.textContent = progressText(i);
 
-      // Trail offset follows scroll direction, not the dot's own (possibly
-      // opposite) on-screen drift: scrolling down puts the trail above the
-      // dot, scrolling up puts it below, every frame, unambiguously.
+      // Store this frame's dot position in document space, then render
+      // trail dots from OLDER samples converted back to viewport space —
+      // see the histRef comment above for why document space is what
+      // makes this both elastic (real history) and always point the
+      // right way (unlike viewport-space history, which inherits the
+      // dot's own possibly-direction-opposite on-screen drift).
       const sy = window.scrollY;
-      scrollDirRef.current = sy > lastYRef.current ? 1 : sy < lastYRef.current ? -1 : scrollDirRef.current;
-      lastYRef.current = sy;
+      histRef.current.unshift([x, y + sy]);
+      histRef.current = histRef.current.slice(0, 30);
       trailRefs.current.forEach((t, ti) => {
-        const off = (ti + 1) * 12;
-        if (t) {
-          t.style.left = `${x}px`;
-          t.style.top = `${y - scrollDirRef.current * off}px`;
-          t.style.opacity = String(0.5 - ti * 0.14);
+        const h = histRef.current[(ti + 1) * 6];
+        if (t && h) {
+          t.style.left = `${h[0]}px`;
+          t.style.top = `${h[1] - sy}px`;
+          t.style.opacity = String(0.55 - ti * 0.16);
         }
       });
     }
