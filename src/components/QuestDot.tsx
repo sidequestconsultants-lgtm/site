@@ -57,7 +57,7 @@ export default function QuestDot() {
     // trail dots have valid coordinates from the very first paint, rather
     // than sitting at (0,0) until enough frames accumulate.
     const start = centerOf(wps[0]!);
-    histRef.current = Array.from({ length: 12 }, () => start);
+    histRef.current = Array.from({ length: 30 }, () => start);
 
     function update() {
       const probe = window.scrollY + 40;
@@ -95,23 +95,26 @@ export default function QuestDot() {
       if (mobileNameRef.current) mobileNameRef.current.textContent = cur.name;
       if (mobileProgRef.current) mobileProgRef.current.textContent = progressText(i);
 
-      // Re-sampling every animation frame — not just on scroll events —
-      // is what makes the trail behave like a comet tail instead of a
-      // fixed offset: each trail dot reads a few frames back in this
-      // history, so it always sits behind wherever the dot actually just
-      // was, in whichever direction it was actually moving. It's also
-      // what makes the trail collapse back onto the dot when scrolling
-      // stops — once x/y stop changing, every frame unshifts the same
-      // position, so within TRAIL_COUNT*3 frames the whole history (and
-      // every trail dot reading from it) converges on the dot itself.
+      // positions[0] is always this frame's dot position (unshifted right
+      // after the dot itself is placed above) — every trail dot reads a
+      // FURTHER-BACK (higher, i.e. older) index, never the front of the
+      // array, so it renders at wherever the dot already WAS, not where
+      // it's headed: scrolling down (dot moving down) puts the trail
+      // above it, scrolling up puts it below — automatically, because
+      // it's real history, not a fixed offset. Re-sampling every
+      // animation frame — not just on scroll events — is also what lets
+      // the trail collapse back onto the dot when scrolling stops: once
+      // x/y stop changing, every frame unshifts the same position, so
+      // within ~18 frames the whole history (and every trail dot reading
+      // from it) converges on the dot itself.
       histRef.current.unshift([x, y]);
-      histRef.current = histRef.current.slice(0, 12);
+      histRef.current = histRef.current.slice(0, 30);
       trailRefs.current.forEach((t, ti) => {
-        const h = histRef.current[(ti + 1) * 3];
+        const h = histRef.current[(ti + 1) * 6];
         if (t && h) {
           t.style.left = `${h[0]}px`;
           t.style.top = `${h[1]}px`;
-          t.style.opacity = String(0.42 - ti * 0.12);
+          t.style.opacity = String(0.55 - ti * 0.16);
         }
       });
     }
@@ -147,7 +150,7 @@ export default function QuestDot() {
           ref={(el) => {
             trailRefs.current[i] = el;
           }}
-          style={{ width: `${7 - i * 2}px`, height: `${7 - i * 2}px` }}
+          style={{ width: `${9 - i * 2}px`, height: `${9 - i * 2}px` }}
           aria-hidden="true"
         />
       ))}
