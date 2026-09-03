@@ -1,0 +1,1193 @@
+{
+  "meta": {
+    "updated": "03 SEP 15:10 IST",
+    "updatedISO": "2026-09-03T09:40:17Z",
+    "spamRateBase": 0.61,
+    "handles": {
+      "kingfisher": {
+        "ig": [
+          "@kingfisherworld"
+        ],
+        "yt": "@KingfisherWorld"
+      },
+      "budweiser": {
+        "ig": [
+          "@budweiserindia"
+        ],
+        "yt": "@BudweiserIndia"
+      },
+      "tuborg": {
+        "ig": [
+          "@tuborgindia"
+        ],
+        "yt": "@TuborgIndia"
+      },
+      "bira91": {
+        "ig": [
+          "@bira91"
+        ],
+        "yt": "@Bira91"
+      },
+      "corona": {
+        "ig": [
+          "@coronaindia"
+        ],
+        "yt": "@CoronaIndia"
+      },
+      "carlsberg": {
+        "ig": [
+          "@carlsbergindia"
+        ],
+        "yt": "@CarlsbergIndia"
+      },
+      "haywards5000": {
+        "ig": [
+          "@haywards5000"
+        ],
+        "yt": "@Haywards5000"
+      },
+      "simba": {
+        "ig": [
+          "@simbabeer"
+        ],
+        "yt": "@SimbaBeer"
+      }
+    },
+    "trendsQueries": {
+      "kingfisher": "Kingfisher beer",
+      "budweiser": "Budweiser India",
+      "tuborg": "Tuborg India",
+      "bira91": "Bira 91 beer",
+      "corona": "Corona beer India",
+      "carlsberg": "Carlsberg India",
+      "haywards5000": "Haywards 5000 beer",
+      "simba": "Simba beer India"
+    },
+    "anomalyThreshold": 1.8,
+    "logoSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 1.5 22 7v10l-10 5.5L2 17V7L12 1.5Z\" stroke=\"url(#lg)\" stroke-width=\"1.3\"/><circle cx=\"12\" cy=\"12\" r=\"3.1\" fill=\"var(--cyan)\"/><defs><linearGradient id=\"lg\" x1=\"2\" y1=\"1.5\" x2=\"22\" y2=\"22.5\"><stop stop-color=\"var(--violet)\"/><stop offset=\"1\" stop-color=\"var(--cyan)\"/></linearGradient></defs></svg>",
+    "metaAdNote": "Meta's Ad Library API returns only political and social-issue ads outside the EU and UK, and does not expose spend for commercial advertisers anywhere. No measured spend figure is obtainable for this category. All expense values are modelled from public impression proxies and published CPM benchmarks.",
+    "viewProxyCaveat": "VIEW-BASED PROXY · SHORT-FORM LOOPING CONTENT INFLATES COUNTS · NOT REACH",
+    "surrogateCaveat": "INDIAN ALCOBEV — MEASURED CONTENT IS PREDOMINANTLY SURROGATE. SEE SURROGATE SPLIT.",
+    "searchCaveat": "SEARCH INTEREST · RELATIVE INDEX 0–100 · NOT COMPARABLE TO SOV SCALE"
+  },
+  "brands": {
+    "kingfisher": {
+      "name": "Kingfisher",
+      "parent": "unitedbreweries",
+      "color": "var(--c-kingfisher)",
+      "isClient": true,
+      "handleIG": "@kingfisherworld",
+      "handleYT": "@KingfisherWorld"
+    },
+    "budweiser": {
+      "name": "Budweiser",
+      "parent": "abinbev",
+      "color": "var(--c-budweiser)",
+      "isClient": false,
+      "handleIG": "@budweiserindia",
+      "handleYT": "@BudweiserIndia"
+    },
+    "tuborg": {
+      "name": "Tuborg",
+      "parent": "carlsbergindia",
+      "color": "var(--c-tuborg)",
+      "isClient": false,
+      "handleIG": "@tuborgindia",
+      "handleYT": "@TuborgIndia"
+    },
+    "bira91": {
+      "name": "Bira 91",
+      "parent": "b9",
+      "color": "var(--c-bira91)",
+      "isClient": false,
+      "handleIG": "@bira91",
+      "handleYT": "@Bira91"
+    },
+    "corona": {
+      "name": "Corona",
+      "parent": "abinbev",
+      "color": "var(--c-corona)",
+      "isClient": false,
+      "handleIG": "@coronaindia",
+      "handleYT": "@CoronaIndia"
+    },
+    "carlsberg": {
+      "name": "Carlsberg",
+      "parent": "carlsbergindia",
+      "color": "var(--c-carlsberg)",
+      "isClient": false,
+      "handleIG": "@carlsbergindia",
+      "handleYT": "@CarlsbergIndia"
+    },
+    "haywards5000": {
+      "name": "Haywards 5000",
+      "parent": "abinbev",
+      "color": "var(--c-haywards5000)",
+      "isClient": false,
+      "handleIG": "@haywards5000",
+      "handleYT": "@Haywards5000"
+    },
+    "simba": {
+      "name": "Simba",
+      "parent": "simba",
+      "color": "var(--c-simba)",
+      "isClient": false,
+      "handleIG": "@simbabeer",
+      "handleYT": "@SimbaBeer"
+    }
+  },
+  "portfolios": {
+    "unitedbreweries": {
+      "name": "United Breweries",
+      "members": [
+        "kingfisher"
+      ],
+      "color": "var(--c-kingfisher)",
+      "isClient": true
+    },
+    "abinbev": {
+      "name": "AB InBev India",
+      "members": [
+        "budweiser",
+        "corona",
+        "haywards5000"
+      ],
+      "color": "var(--c-budweiser)"
+    },
+    "carlsbergindia": {
+      "name": "Carlsberg India",
+      "members": [
+        "tuborg",
+        "carlsberg"
+      ],
+      "color": "var(--c-tuborg)"
+    },
+    "b9": {
+      "name": "B9 Beverages",
+      "members": [
+        "bira91"
+      ],
+      "color": "var(--c-bira91)"
+    },
+    "simba": {
+      "name": "Simba",
+      "members": [
+        "simba"
+      ],
+      "color": "var(--c-simba)"
+    }
+  },
+  "untracked": {
+    "id": "untracked",
+    "name": "Other / Untracked",
+    "color": "var(--c-untracked)",
+    "windows": {
+      "7": {},
+      "30": {},
+      "90": {}
+    },
+    "prev30": {}
+  },
+  "profiles": {
+    "kingfisher": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    },
+    "budweiser": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    },
+    "tuborg": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    },
+    "bira91": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    },
+    "corona": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    },
+    "carlsberg": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    },
+    "haywards5000": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    },
+    "simba": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "soda": 0.0,
+        "nonalc": 0.0,
+        "music": 0.0,
+        "merch": 0.0,
+        "direct": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.0,
+        "neu": 0.0,
+        "neg": 0.0
+      },
+      "negDeltaPP": 0.0,
+      "themeShare": {
+        "availability": 0.0,
+        "price": 0.0,
+        "taste": 0.0,
+        "events": 0.0,
+        "nostalgia": 0.0,
+        "other": 0.0
+      },
+      "engagement30": {
+        "likes": 0,
+        "comments": 0,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        0,
+        0,
+        0,
+        0,
+        0,
+        0
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 0,
+        "spamRate": 0.61
+      }
+    }
+  }
+}

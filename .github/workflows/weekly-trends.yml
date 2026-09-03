@@ -1,0 +1,53 @@
+name: CI weekly trends pull
+
+# Google Trends barely moves day to day and the unofficial API rate-limits
+# hard, so this runs Mondays only, well clear of the daily pipeline's
+# 03:30 UTC slot. See Phase 6 in the build prompt.
+on:
+  schedule:
+    - cron: '0 4 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: ci-weekly-trends
+  cancel-in-progress: false
+
+jobs:
+  trends:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+          cache-dependency-path: pipeline/requirements.txt
+
+      - name: Install pipeline dependencies
+        run: pip install -r pipeline/requirements.txt
+
+      - name: Pull search trends
+        run: python -m pipeline.pull_trends
+
+      - name: Rebuild data.json with fresh trends
+        run: python -m pipeline.build_data
+
+      - name: Rebuild offline demo build
+        run: python -m pipeline.build_demo
+
+      - name: Commit and push
+        run: |
+          git config user.name "ci-pipeline-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add store/trends.json store/pull_log.json store/snapshots public/ci/data.json dashboard-demo.html
+          if git diff --cached --quiet; then
+            echo "No changes to commit."
+            exit 0
+          fi
+          git commit -m "ci: weekly trends refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
+          git push
