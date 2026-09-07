@@ -9,6 +9,20 @@ log them, never fail the run. Fill them in later without touching anything else.
 YouTube handles resolve to channel IDs via channels.list?forHandle= at pull time.
 Note they do NOT follow the Instagram naming pattern — Kingfisher is
 @kingofgoodtimes, Budweiser is "Budweiser Experiences". Never guess a handle.
+
+`ig_followers_hint` — optional, hand-verified approximate IG follower count.
+pull_instagram.py's under-fetch volume guard prefers a freshly scraped
+follower count when the actor's response happens to carry one, and falls
+back to this when it doesn't. Leave `None` until hand-checked; a missing
+value just means the guard can't run for that brand, logged explicitly
+each pull rather than silently skipped.
+
+`dormant_since` — optional, hand-verified free-text note (not necessarily a
+full ISO date — "2025" is a legitimate value pending a more exact one) for
+a brand with no recent Instagram activity. The dashboard renders such a
+brand as DORMANT with this text instead of as a competitor sitting at ~0%
+SOV, which would misread as "we measured them and they're near-invisible"
+rather than "this account isn't posting."
 """
 
 from pathlib import Path
@@ -48,6 +62,8 @@ BRANDS = {
         "color_var": "--c-kingfisher",
         "trends_query": "Kingfisher beer + Kingfisher Premium + Kingfisher Strong + Kingfischer + किंगफिशर बियर",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
     "kingfisher_ultra": {
         "name": "Kingfisher Ultra",
@@ -62,6 +78,8 @@ BRANDS = {
         "color_var": "--c-kfultra",
         "trends_query": "Kingfisher Ultra + KF Ultra + Ultra Max + Kingfischer Ultra + किंगफिशर अल्ट्रा",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
     "heineken_india": {
         "name": "Heineken",
@@ -77,6 +95,8 @@ BRANDS = {
         "color_var": "--c-heineken",
         "trends_query": "Heineken + Heiniken + Hineken + Heinken + हेनेकेन",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
     "budweiser": {
         "name": "Budweiser",
@@ -88,6 +108,8 @@ BRANDS = {
         "color_var": "--c-budweiser",
         "trends_query": "Budweiser + Budwiser + Budweizer + Bud Magnum + बडवाइज़र",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
     "corona": {
         "name": "Corona",
@@ -100,6 +122,8 @@ BRANDS = {
         # NEVER query bare "Corona" — the series is dominated by the virus.
         "trends_query": "Corona beer + Corona Extra + Karona beer + कोरोना बियर",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
     "tuborg": {
         "name": "Tuborg",
@@ -111,6 +135,8 @@ BRANDS = {
         "color_var": "--c-tuborg",
         "trends_query": "Tuborg + Tuborge + Tubourg + Tuborg Classic + टुबोर्ग",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
     "carlsberg": {
         "name": "Carlsberg",
@@ -122,6 +148,8 @@ BRANDS = {
         "color_var": "--c-carlsberg",
         "trends_query": "Carlsberg + Carlsburg + Karlsberg + Carlsberg Elephant + कार्ल्सबर्ग",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
     "bira91": {
         "name": "Bira 91",
@@ -133,6 +161,8 @@ BRANDS = {
         "color_var": "--c-bira",
         "trends_query": "Bira 91 + Bira beer + Bira + Bira91 + बीरा बियर",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": "2025",  # hand-verified — last known IG post in 2025; exact date TBD
     },
     "simba": {
         "name": "Simba",
@@ -144,6 +174,8 @@ BRANDS = {
         "color_var": "--c-simba",
         "trends_query": "Simba beer + Simba Wit + Simba Stout + Simmba beer + सिम्बा बियर",
         "verified": True,
+        "ig_followers_hint": None,
+        "dormant_since": None,
     },
 }
 

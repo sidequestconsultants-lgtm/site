@@ -108,6 +108,55 @@ Every script exits non-zero on a `warn` or `error` `pull_log` status
 (including a zero-record pull — that's a warning, never a success), so a CI
 step failing is the pipeline working correctly, not a bug to route around.
 
+## Instagram accounts that come back thin — restricted profiles
+
+A real run turned up four brands (Budweiser, Corona, Tuborg, Carlsberg)
+that returned exactly one post each while others paginated normally.
+Root cause: Apify's actor runs logged-out for every profile — it cannot use
+a login or session, full stop, for legal reasons the actor's own docs state
+— and Instagram serves a reduced or fully gated view to logged-out viewers
+on accounts with the alcohol/sensitive-content age gate turned on. When
+that happens the actor doesn't paginate short; it returns a single
+placeholder item carrying an `error`/`errorDescription` (or
+`isRestrictedProfile`) field instead of real post data. There is no Apify
+input setting that bypasses this — it's a hard platform restriction, not a
+config knob — so the fix is detection, not a workaround:
+
+- `pull_instagram.py` checks every raw item for that error signature
+  (`_is_restricted_item()`) and excludes it from the saved records, so a
+  gated brand reads as genuinely unmeasurable, never as "posted once."
+- The raw (pre-filter) item count is logged for every brand/request, so a
+  short response is visible in the run log regardless of cause.
+- A volume guard flags any brand with a known follower count over 10k that
+  still comes back with fewer than 3 posts in the trailing 90 days as
+  `warn`, with the raw response attached to `pull_log` — never passed
+  through silently. Follower counts come from whatever the Apify response
+  happens to carry (best-effort field probing, `_extract_followers()`,
+  persisted to `store/channel_stats.json`'s `ig` entry) or, failing that,
+  a hand-filled `ig_followers_hint` in `config.py`.
+
+If a brand you expect to be active keeps tripping the restricted-profile
+warning, that's Instagram's age gate on that specific account, not a bug
+here — verify by hand and decide whether to exclude the brand (like
+`EXCLUDED`) or accept it as permanently unmeasurable via this pipeline.
+
+## Dormant brands
+
+A brand can genuinely stop posting (Bira 91's Instagram, verified by hand,
+has no activity since 2025). Left alone, that renders identically to "we
+measured this brand and it's near-invisible" — a materially different and
+much less charitable story than "this account isn't posting." `dormant_since`
+in `config.py` (free-text, not necessarily a full date — a bare year is a
+legitimate value pending a more exact one) flags this by hand per brand.
+
+The dashboard only replaces a brand's bar/ring with a `DORMANT` badge when
+its *combined* share still rounds to nothing (`row.dormantFull`, computed
+in `computeRows()`) — a brand that's gone quiet on Instagram but still has
+real YouTube-driven share keeps its real bar, with an `IG DORMANT SINCE …`
+note appended instead. This never hides a genuine non-zero number; it only
+relabels a true zero that would otherwise be indistinguishable from a
+competitor genuinely losing.
+
 ## Data flow
 
 `pull_youtube.py` / `pull_instagram.py` → `store/posts.json` (dedupe key

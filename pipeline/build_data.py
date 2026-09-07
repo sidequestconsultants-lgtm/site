@@ -360,6 +360,7 @@ def build() -> dict:
             "isClient": b.get("is_client", False),
             "handleIG": f"@{b['handle_ig']}" if b.get("handle_ig") else None,
             "handleYT": b.get("yt_handle"),
+            "dormantSince": b.get("dormant_since"),
         }
         for bid, b in config.BRANDS.items()
     }

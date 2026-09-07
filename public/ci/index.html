@@ -190,6 +190,7 @@ main{flex:1;min-width:0;padding:36px 40px 90px}
 .ring-value.tier-derived,.tier-derived{text-decoration:underline;text-decoration-color:var(--cyan);text-underline-offset:3px}
 .ring-label{font-family:var(--f-mono);font-size:9.5px;letter-spacing:.04em;fill:var(--muted)}
 .ring-value{font-family:var(--f-display);font-weight:700;fill:var(--ink)}
+.ring-value.ring-dormant{fill:var(--dim);font-weight:400;letter-spacing:.04em}
 .ring-you{fill:var(--cyan);font-family:var(--f-mono);font-weight:700;font-size:8px;letter-spacing:.1em}
 .ceiling-label{font-family:var(--f-mono);font-size:9px;fill:var(--dim);letter-spacing:.04em}
 .centre-label{font-family:var(--f-mono);font-size:9.5px;fill:var(--dim);letter-spacing:.1em;text-transform:uppercase}
@@ -211,6 +212,10 @@ main{flex:1;min-width:0;padding:36px 40px 90px}
 .bar-row:hover{background:rgba(123,108,240,.05)}
 .bar-row.untracked{cursor:default;opacity:.65}
 .bar-row.untracked:hover{background:none}
+.bar-row.dormant{opacity:.75}
+.bar-dormant-note{font:400 10px var(--f-mono);letter-spacing:.03em;color:var(--dim);text-transform:uppercase}
+.bar-dormant-badge{font:700 11px var(--f-mono);letter-spacing:.06em;color:var(--dim);border:1px solid var(--hairline);padding:3px 7px;border-radius:2px}
+.bar-dormant-inline{font:400 10px var(--f-mono);letter-spacing:.02em;color:var(--dim);text-transform:uppercase}
 .bar-rank{font:700 11px var(--f-mono);color:var(--dim)}
 .bar-mid{min-width:0}
 .bar-name-row{display:flex;align-items:center;gap:8px;margin-bottom:6px;flex-wrap:wrap}
@@ -557,7 +562,8 @@ function computeRows(range,lens,metric,vehicleFilter){
       const prevVal = metricValue(p.prev30,p.formatMix,metric,vehicleFilter,p.vehicleMix);
       rows.push({id,type:'brand',name:b.name,color:b.color,isClient:b.isClient,handleIG:b.handleIG,handleYT:b.handleYT,
         value:val, prevValue:prevVal, tier: metric==='sov'?'derived':'modelled',
-        vehicleMix:p.vehicleMix, formatMix:p.formatMix, bd, negDeltaPP:p.negDeltaPP, parent:b.parent});
+        vehicleMix:p.vehicleMix, formatMix:p.formatMix, bd, negDeltaPP:p.negDeltaPP, parent:b.parent,
+        dormantSince:b.dormantSince||null});
     });
   } else {
     Object.keys(PORTFOLIOS).forEach(pid=>{
@@ -570,8 +576,14 @@ function computeRows(range,lens,metric,vehicleFilter){
         val+=mv; prevVal+=pv;
         members.push({id:mid,name:b.name,color:b.color,value:mv,formatMix:p.formatMix});
       });
+      // Only meaningful when every member is dormant — a multi-brand
+      // portfolio with one quiet member and one active one is not dormant,
+      // it's just carried by its other brand.
+      const portfolioDormantSince = po.members.every(mid=>BRANDS[mid]&&BRANDS[mid].dormantSince)
+        ? BRANDS[po.members[0]].dormantSince : null;
       rows.push({id:pid,type:'portfolio',name:po.name,color:po.color,isClient:!!po.isClient,
-        value:val, prevValue:prevVal, tier: metric==='sov'?'derived':'modelled', members, multi:members.length>1});
+        value:val, prevValue:prevVal, tier: metric==='sov'?'derived':'modelled', members, multi:members.length>1,
+        dormantSince:portfolioDormantSince});
     });
   }
   let untrackedVal=0, untrackedPrev=0;
@@ -589,6 +601,11 @@ function computeRows(range,lens,metric,vehicleFilter){
   const total = rows.reduce((s,r)=>s+r.value,0) + untrackedVal;
   const prevTotal = rows.reduce((s,r)=>s+r.prevValue,0) + untrackedPrev;
   rows.forEach(r=>{ r.pct = total? r.value/total*100:0; r.prevPct = prevTotal? r.prevValue/prevTotal*100:0; });
+  // A dormant brand that still posts real, non-trivial volume on another
+  // platform keeps its real bar (with a DORMANT note attached) — only a
+  // brand whose combined share also rounds to nothing gets the bar itself
+  // replaced by DORMANT, so this can never suppress a genuine number.
+  rows.forEach(r=>{ r.dormantFull = !!(r.dormantSince && r.pct < 0.05); });
   rows.sort((a,b)=>b.value-a.value);
   rows.forEach((r,i)=>r.rank=i+1);
   const prevSorted=[...rows].sort((a,b)=>b.prevValue-a.prevValue);
@@ -700,11 +717,17 @@ function renderRadial(computed, opts){
     const namePt = { x:nameListX, y:nameListY0 + i*nameLineH };
     const valPt = polarPoint(cx,cy,r,valueAngle);
     const anchor = sideAnchor(valueAngle);
-    const tipId = registerTip(row.name.toUpperCase()+' · RANK '+row.rank, [
+    const tipId = row.dormantFull
+      ? registerTip(row.name.toUpperCase()+' · DORMANT', [
+          'No Instagram activity since '+row.dormantSince,
+          'Excluded from ranking, not scored at 0%'
+        ])
+      : registerTip(row.name.toUpperCase()+' · RANK '+row.rank, [
       fmtPct(row.pct,1)+' SHARE · '+fmtInt(row.value)+(opts.metric==='sov'?' impressions':' est. spend units'),
       'Δ vs previous period '+fmtPP(row.deltaPP),
       'Confidence: '+row.tier.toUpperCase(),
-      row.vehicleMix ? 'Dominant vehicle: '+dominantVehicle(row.vehicleMix).label : ''
+      row.vehicleMix ? 'Dominant vehicle: '+dominantVehicle(row.vehicleMix).label : '',
+      row.dormantSince ? 'IG dormant since '+row.dormantSince : ''
     ].filter(Boolean));
     const navTarget = row.type==='portfolio' ? `group:${row.id}` : `brand:${row.id}`;
     rings += `<g class="ring-group" data-tip-id="${tipId}" data-ring-idx="${i}" data-key="${row.id}" data-nav="${navTarget}">
@@ -714,7 +737,7 @@ function renderRadial(computed, opts){
       <circle class="ring-legend-dot" cx="${namePt.x}" cy="${namePt.y-3}" r="3.4" fill="${row.color}"/>
       <text class="ring-label" x="${namePt.x+9}" y="${namePt.y}" text-anchor="start" font-size="9">${esc(row.name.toUpperCase())}</text>
       ${row.isClient?`<text class="ring-you" x="${namePt.x+9+row.name.length*6.1+11}" y="${namePt.y}" text-anchor="start">YOU</text>`:''}
-      <text class="ring-value tier-${row.tier}" data-vr="${r}" x="${valPt.x + (anchor==='end'?-10:10)}" y="${valPt.y+4}" text-anchor="${anchor}" font-size="${n>=8?11:13}">${fmtPct(row.pct,1)}</text>
+      <text class="ring-value tier-${row.tier} ${row.dormantFull?'ring-dormant':''}" data-vr="${r}" x="${valPt.x + (anchor==='end'?-10:10)}" y="${valPt.y+4}" text-anchor="${anchor}" font-size="${row.dormantFull?9:(n>=8?11:13)}">${row.dormantFull?'DORMANT':fmtPct(row.pct,1)}</text>
     </g>`;
   });
   // 230deg sits at the midpoint of the untouched 190-270deg track gap, so the
@@ -792,13 +815,29 @@ function bindRadialHover(container){
 
 /* ═══════════════════════════ RANKED BARS ═══════════════════════════ */
 function barRowHtml(row, ceiling, opts){
+  const nav = row.type==='untracked' ? '' : `data-nav="${row.type==='portfolio'?'group:'+row.id:'brand:'+row.id}"`;
+  if(row.dormantFull){
+    // No measured activity worth a bar — a flat 0.0% next to active
+    // competitors reads as "trying and losing," not "not posting." This
+    // replaces the bar with the real reason instead of a fabricated rank.
+    return `<div class="bar-row dormant" data-key="${row.id}" ${nav}>
+      <span class="bar-rank">${String(row.rank).padStart(2,'0')}</span>
+      <div class="bar-mid">
+        <div class="bar-name-row">
+          <span class="bar-name">${esc(row.name.toUpperCase())}</span>
+          ${row.isClient?'<span class="bar-you">YOU</span>':''}
+        </div>
+        <div class="bar-dormant-note">NO INSTAGRAM ACTIVITY SINCE ${esc(row.dormantSince)}</div>
+      </div>
+      <div class="bar-right"><span class="bar-dormant-badge">DORMANT</span></div>
+    </div>`;
+  }
   const widthPct = clamp(row.pct/ceiling*100, row.pct>0?1.5:0, 100);
   const moveCls = row.rankMove>0?'up':row.rankMove<0?'down':'flat';
   const moveTxt = row.rankMove>0?('▲'+row.rankMove):row.rankMove<0?('▼'+Math.abs(row.rankMove)):'—';
   const sentCls = row.negDeltaPP<0?'pos':row.negDeltaPP>0?'neg':'';
   const sentArrow = row.negDeltaPP<0?'▼':row.negDeltaPP>0?'▲':'—';
   const hatched = row.tier==='modelled' ? 'hatched' : '';
-  const nav = row.type==='untracked' ? '' : `data-nav="${row.type==='portfolio'?'group:'+row.id:'brand:'+row.id}"`;
   const expander = row.multi ? `<span class="bar-expander" data-expander="${row.id}">▸</span>` : '<span style="width:16px;display:inline-block"></span>';
   let members = '';
   if(row.members){
@@ -822,6 +861,7 @@ function barRowHtml(row, ceiling, opts){
           ${row.isClient?'<span class="bar-you">YOU</span>':''}
           ${row.type!=='untracked'?`<span class="bar-move ${moveCls}">${moveTxt}</span>`:''}
           ${row.type!=='untracked'&&row.negDeltaPP!==undefined?`<span class="bar-sent ${sentCls}">SENTIMENT Δ ${sentArrow}${Math.abs(row.negDeltaPP).toFixed(1)}pp neg</span>`:''}
+          ${row.dormantSince?`<span class="bar-dormant-inline">IG DORMANT SINCE ${esc(row.dormantSince)}</span>`:''}
         </div>
         <div class="bar-track"><div class="bar-fill ${hatched}" style="width:${widthPct}%;background:${row.color}"></div></div>
       </div>
@@ -862,6 +902,12 @@ function renderSurrogateBand(range, lens){
       row.members.forEach(m=>{ const pm = PROFILES[m.id].vehicleMix; VEHICLES.forEach(v=>{ mix[v.id]+= pm[v.id]*m.value; }); tot+=m.value; });
       if(tot) VEHICLES.forEach(v=>mix[v.id]/=tot);
     } else { mix = row.vehicleMix; }
+    if(row.dormantFull){
+      return `<div class="sband-row" data-nav="${row.type==='portfolio'?'group:'+row.id:'brand:'+row.id}" style="cursor:pointer">
+        <span class="sband-label">${esc(row.name.toUpperCase())}</span>
+        <div class="sband-track"><span class="bar-dormant-note" style="padding-left:2px">DORMANT — NO CONTENT TO CLASSIFY SINCE ${esc(row.dormantSince)}</span></div>
+      </div>`;
+    }
     const segs = VEHICLES.map(v=>`<div class="sband-seg" style="width:${(mix[v.id]*100).toFixed(2)}%;background:${v.color}" data-tip-id="${registerTip(row.name.toUpperCase()+' · '+v.label,[fmtPct(mix[v.id]*100,1)+' of classified content', 'n ≈ '+fmtInt((row.bd?(row.bd.ig.posts+row.bd.yt.posts):(row.members?row.members.reduce((s,m)=>s+PROFILES[m.id].windows[range].ig.posts+PROFILES[m.id].windows[range].yt.posts,0):0))*mix[v.id])+' posts'])}"></div>`).join('');
     return `<div class="sband-row" data-nav="${row.type==='portfolio'?'group:'+row.id:'brand:'+row.id}" style="cursor:pointer">
       <span class="sband-label">${esc(row.name.toUpperCase())}</span>
@@ -1297,7 +1343,7 @@ function entityForDetail(id, type, range){
     return { id, type:'brand', name:b.name, color:b.color, isClient:b.isClient, handleIG:b.handleIG, handleYT:b.handleYT,
       ig:bd.ig, yt:bd.yt, engagement:p.engagement30, vehicleMix:p.vehicleMix, vehiclePrevMix:p.vehiclePrevMix,
       formatMix:p.formatMix, search:p.search, comments:deriveThemeMatrix(p),
-      seriesIG:p.seriesIG, seriesYT:p.seriesYT, members:null };
+      seriesIG:p.seriesIG, seriesYT:p.seriesYT, members:null, dormantSince:b.dormantSince||null };
   }
   const po = PORTFOLIOS[id];
   const ig={organic:0,paid:0,followers:0,posts:0}, yt={organic:0,paid:0,followers:0,posts:0};
@@ -1336,12 +1382,14 @@ function entityForDetail(id, type, range){
   const search = searchAgg.map((v,i)=>searchWeight[i] ? v/searchWeight[i] : null);
   const seriesIG = weightTotal ? seriesIGAgg.map(v=>v/weightTotal) : seriesIGAgg;
   const seriesYT = weightTotal ? seriesYTAgg.map(v=>v/weightTotal) : seriesYTAgg;
+  const groupDormantSince = po.members.every(mid=>BRANDS[mid]&&BRANDS[mid].dormantSince)
+    ? BRANDS[po.members[0]].dormantSince : null;
   return { id, type:'group', name:po.name, color:po.color, isClient:!!po.isClient,
     ig, yt, engagement:{likes:engagement.likes,comments:engagement.comments,
       shares:sharesKnown?engagement.shares:null, saves:savesKnown?engagement.saves:null},
     vehicleMix, vehiclePrevMix, formatMix:PROFILES[dominant].formatMix,
     search, comments:{ raw:commentsRaw, spamRate: commentsRaw?commentsSpamW/commentsRaw:0, matrix },
-    seriesIG, seriesYT, members:po.members };
+    seriesIG, seriesYT, members:po.members, dormantSince:groupDormantSince };
 }
 
 function detailBreadcrumb(entity){
@@ -1485,6 +1533,7 @@ function renderDetailPage(id, type){
       <span class="eyebrow">${type==='brand'?'BRAND DETAIL':'GROUP DETAIL'}</span>
       <h2 class="h2">${esc(entity.name.toUpperCase())}</h2>
       <div class="headline-fact mono">ALL PLATFORMS · <span class="rank-chip">RANK ${rankRow?rankRow.rank:'—'}</span>${entity.isClient?' <span class="bar-you">YOU</span>':''}</div>
+      ${entity.dormantSince?`<div class="bar-dormant-note" style="margin-top:8px">DORMANT — NO INSTAGRAM ACTIVITY SINCE ${esc(entity.dormantSince)}</div>`:''}
     </div>
     ${memberContribBlock(entity, range)}
     <div class="section rev"><div class="section-head"><span class="section-label">PLATFORM SPLIT</span></div>${platformSplitBlock(entity, range)}</div>
