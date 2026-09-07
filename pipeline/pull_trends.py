@@ -42,28 +42,44 @@ def make_batches(anchor_id: str, brand_ids: list[str]) -> list[list[str]]:
     return batches or [[anchor_id]]
 
 
-def bucket_series(df, kw: str, buckets: int = SERIES_BUCKETS) -> list[float]:
+def bucket_series(df, kw: str, buckets: int = SERIES_BUCKETS) -> list[float | None]:
     """Collapse a daily interest_over_time column into `buckets` evenly
-    spaced means — the same 6-point convention as seriesIG/seriesYT."""
+    spaced means — the same 6-point convention as seriesIG/seriesYT.
+
+    A bucket that averages to exactly 0 is Trends reporting "below my
+    threshold", not "measured zero interest" (Phase 4 / RULE 3) — when
+    config.TRENDS_ZERO_IS_NULL, that bucket comes back as `None` rather than
+    0.0, so the front end can draw a gap instead of a line to the floor."""
     if df is None or df.empty or kw not in df.columns:
-        return [0.0] * buckets
+        return [None if config.TRENDS_ZERO_IS_NULL else 0.0] * buckets
     values = df[kw].tolist()
     n = len(values)
     if n == 0:
-        return [0.0] * buckets
+        return [None if config.TRENDS_ZERO_IS_NULL else 0.0] * buckets
     out = []
     for i in range(buckets):
         lo = int(i * n / buckets)
         hi = max(lo + 1, int((i + 1) * n / buckets))
         chunk = values[lo:hi]
-        out.append(round(sum(chunk) / len(chunk), 1) if chunk else 0.0)
+        mean = round(sum(chunk) / len(chunk), 1) if chunk else 0.0
+        if mean == 0.0 and config.TRENDS_ZERO_IS_NULL:
+            out.append(None)
+        else:
+            out.append(mean)
     return out
 
 
 def fetch_batch(pytrends, queries: dict, batch_ids: list[str]):
     kw_list = [queries[b] for b in batch_ids]
-    pytrends.build_payload(kw_list, timeframe=TIMEFRAME, geo="IN")
+    # geo is never omitted — an ungeo'd query blends in every market Trends
+    # covers and the resulting series means nothing for an India read (Phase 5).
+    pytrends.build_payload(kw_list, timeframe=TIMEFRAME, geo=config.TRENDS_GEO)
     return pytrends.interest_over_time()
+
+
+def _mean_ignoring_none(values: list[float | None]) -> float:
+    known = [v for v in values if v is not None]
+    return (sum(known) / len(known)) if known else 0.0
 
 
 def run(pytrends_factory=None) -> str:
@@ -71,20 +87,20 @@ def run(pytrends_factory=None) -> str:
     try:
         if pytrends_factory is None:
             from pytrends.request import TrendReq
-            pytrends_factory = lambda: TrendReq(hl="en-US", tz=330)  # noqa: E731
+            pytrends_factory = lambda: TrendReq(hl="en-US", tz=config.TRENDS_TIMEZONE)  # noqa: E731
         pytrends = pytrends_factory()
     except Exception as exc:  # noqa: BLE001
         store.append_pull_log("pull_trends", started_at, store.now_iso(), 0, 0, "error", str(exc))
         print(f"[pull_trends] could not initialise pytrends: {exc}", file=sys.stderr)
         return "error"
 
-    anchor_id = config.client_brand_id()
+    anchor_id = config.TRENDS_ANCHOR
     brand_ids = list(config.BRANDS.keys())
     queries = {bid: b["trends_query"] for bid, b in config.BRANDS.items()}
     batches = make_batches(anchor_id, brand_ids)
 
-    results: dict[str, list[float]] = {}
-    anchor_reference: list[float] | None = None
+    results: dict[str, list[float | None]] = {}
+    anchor_reference: list[float | None] | None = None
     errors: list[str] = []
 
     for batch_ids in batches:
@@ -95,21 +111,29 @@ def run(pytrends_factory=None) -> str:
                 anchor_reference = anchor_series
                 scale = 1.0
             else:
-                ref_mean = (sum(anchor_reference) / len(anchor_reference)) or 1.0
-                this_mean = (sum(anchor_series) / len(anchor_series)) or 1.0
+                # Rescaling compounds error on top of Trends' own relative
+                # scaling (Phase 5) — this is already the lowest-confidence
+                # figure in the product; ignoring null buckets when finding
+                # the anchor's mean keeps a below-threshold period from
+                # dragging the scale factor toward zero for no reason.
+                ref_mean = _mean_ignoring_none(anchor_reference) or 1.0
+                this_mean = _mean_ignoring_none(anchor_series) or 1.0
                 scale = ref_mean / this_mean
             for bid in batch_ids:
                 if bid in results:
                     continue
                 series = bucket_series(df, queries[bid])
-                results[bid] = [round(v * scale, 1) for v in series]
+                results[bid] = [round(v * scale, 1) if v is not None else None for v in series]
         except Exception as exc:  # noqa: BLE001 — one bad batch must not sink the run
             errors.append(f"batch {batch_ids}: {exc}")
             print(f"[pull_trends] ERROR batch {batch_ids}: {exc}", file=sys.stderr)
         time.sleep(REQUEST_DELAY_S)
 
     trends_out = {
-        bid: {"series": results.get(bid, [0] * SERIES_BUCKETS), "query": queries[bid], "fetched_at": store.now_iso()}
+        # A brand missing from `results` entirely (its batch errored) is
+        # no more "measured zero" than a below-threshold bucket is — None
+        # throughout, same as bucket_series would emit, not a flat 0 line.
+        bid: {"series": results.get(bid, [None] * SERIES_BUCKETS), "query": queries[bid], "fetched_at": store.now_iso()}
         for bid in brand_ids
     }
     store.save_json(config.TRENDS_PATH, trends_out)

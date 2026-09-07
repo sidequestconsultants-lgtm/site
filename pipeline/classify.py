@@ -10,15 +10,19 @@ Two independent jobs, both idempotent by model_version:
                          CURRENT_MODEL_VERSION. Confidence < 0.7 is forced to
                          'unclassified' — never guessed into a bucket.
 
-  classify_comments() — for the top 25 posts per brand by engagement, fetches
-                         up to 200 comments each (YouTube commentThreads.list
-                         is free; Instagram goes through a second, smaller
-                         Apify actor — this is real credit spend on top of
-                         pull_instagram.py's, budget for it), then classifies
-                         spam / polarity / theme / language on the survivors.
-                         Comments are heavily Hinglish and code-mixed, which
-                         is the whole reason this is an LLM pass and not a
-                         classical sentiment model.
+  classify_comments() — samples top posts per brand by engagement and fetches
+                         their comments, asymmetrically: YouTube (free within
+                         quota) gets the top 25 posts × 200 comments each via
+                         commentThreads.list; Instagram (Apify credit shared
+                         with pull_instagram.py's post scraping) gets a much
+                         thinner 8 posts × 100 comments, and stops fetching
+                         entirely once the month's estimated Apify spend
+                         (usage.py) crosses config.APIFY_MONTHLY_CEILING_USD —
+                         post ingestion always has priority (RULE 7). Then
+                         classifies spam / polarity / theme / language on the
+                         survivors. Comments are heavily Hinglish and
+                         code-mixed, which is the whole reason this is an LLM
+                         pass and not a classical sentiment model.
 
 Nothing here stores a comment author/username — see RULE in Phase 1.
 """
@@ -32,14 +36,16 @@ from datetime import datetime, timezone
 
 import requests
 
-from . import config, store
+from . import config, store, usage
 
 GEMINI_MODEL = "gemini-1.5-flash"
 GEMINI_API = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 CURRENT_MODEL_VERSION = f"{GEMINI_MODEL}-classify-v1"
 POST_BATCH_SIZE = 20
-TOP_POSTS_PER_BRAND = 25
-MAX_COMMENTS_PER_POST = 200
+# Asymmetric comment sampling (Phase 2 of the go-live prompt): YouTube
+# commentThreads is free within quota, sample generously; Instagram costs
+# Apify credit shared with post ingestion, sample much thinner and gate it
+# behind the monthly spend ceiling (see usage.py). Both live in config.py.
 
 VEHICLE_SCHEMA = {
     "type": "ARRAY",
@@ -143,7 +149,7 @@ def classify_posts(api_key: str | None = None) -> str:
             results = classify_posts_batch(batch, api_key)
             for rec, res in zip(batch, results):
                 confidence = float(res.get("confidence", 0))
-                vehicle = res.get("vehicle") if confidence >= config.CLASSIFY_CONFIDENCE_FLOOR else "unclassified"
+                vehicle = res.get("vehicle") if confidence >= config.VEHICLE_CONFIDENCE_FLOOR else "unclassified"
                 rec["vehicle"] = vehicle
                 rec["confidence"] = confidence
                 rec["model_version"] = CURRENT_MODEL_VERSION
@@ -171,13 +177,13 @@ def classify_posts(api_key: str | None = None) -> str:
 
 # ═══════════════════════════════ COMMENTS ═══════════════════════════════
 
-def select_top_posts(posts: dict, brand_id: str, n: int = TOP_POSTS_PER_BRAND) -> list[dict]:
-    records = posts.get(brand_id, [])
+def select_top_posts(posts: dict, brand_id: str, platform: str, n: int) -> list[dict]:
+    records = [r for r in posts.get(brand_id, []) if r.get("platform") == platform]
     scored = sorted(records, key=lambda r: (r.get("likes") or 0) + (r.get("comments") or 0), reverse=True)
     return scored[:n]
 
 
-def fetch_youtube_comments(video_id: str, api_key: str, max_n: int = MAX_COMMENTS_PER_POST) -> list[dict]:
+def fetch_youtube_comments(video_id: str, api_key: str, max_n: int = config.YT_COMMENT_PER_POST) -> list[dict]:
     out: list[dict] = []
     page_token = None
     while len(out) < max_n:
@@ -207,7 +213,7 @@ def fetch_youtube_comments(video_id: str, api_key: str, max_n: int = MAX_COMMENT
     return out[:max_n]
 
 
-def fetch_instagram_comments(post_url: str, apify_token: str, max_n: int = MAX_COMMENTS_PER_POST,
+def fetch_instagram_comments(post_url: str, apify_token: str, max_n: int = config.IG_COMMENT_PER_POST,
                               actor: str = "apify~instagram-comment-scraper") -> list[dict]:
     run_input = {"directUrls": [post_url], "resultsLimit": max_n}
     resp = requests.post(
@@ -217,6 +223,7 @@ def fetch_instagram_comments(post_url: str, apify_token: str, max_n: int = MAX_C
     if not resp.ok:
         raise RuntimeError(f"Apify comment actor failed: {resp.status_code} {resp.text[:200]}")
     items = resp.json()
+    usage.record_usage("classify_comments_ig", len(items))
     out = []
     for item in items[:max_n]:
         out.append({
@@ -253,6 +260,13 @@ def classify_comments_batch(batch: list[dict], api_key: str) -> list[dict]:
 
 def classify_comments(youtube_key: str | None = None, apify_token: str | None = None,
                        gemini_key: str | None = None) -> str:
+    """Priority rule (RULE 7): post ingestion always wins, comment fetching is
+    what gets cut. YouTube comments are free within quota and sampled
+    generously (config.YT_COMMENT_POSTS/PER_POST); Instagram comments cost
+    Apify credit shared with pull_instagram.py's post scraping, sampled much
+    thinner (config.IG_COMMENT_POSTS/PER_POST) and gated on the monthly
+    spend ceiling — once over budget, Instagram comment fetching is skipped
+    (logged as `warn`, never fails the run) and YouTube comments continue."""
     youtube_key = youtube_key or os.environ.get("YOUTUBE_API_KEY")
     apify_token = apify_token or os.environ.get("APIFY_TOKEN")
     gemini_key = gemini_key or os.environ.get("GEMINI_API_KEY")
@@ -266,19 +280,27 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
     total_fetched = 0
     total_classified = 0
     errors: list[str] = []
+    ig_skipped_over_ceiling = False
 
     for brand_id in config.BRANDS:
         bucket = comments.setdefault(brand_id, [])
         by_key = {c["external_id"]: c for c in bucket}
-        top_posts = select_top_posts(posts, brand_id)
-        for post in top_posts:
+
+        sample_posts: list[tuple[dict, str]] = []
+        if youtube_key:
+            sample_posts += [(p, "yt") for p in select_top_posts(posts, brand_id, "yt", config.YT_COMMENT_POSTS)]
+        if apify_token:
+            sample_posts += [(p, "ig") for p in select_top_posts(posts, brand_id, "ig", config.IG_COMMENT_POSTS)]
+
+        for post, platform in sample_posts:
             try:
-                if post["platform"] == "yt" and youtube_key:
+                if platform == "yt":
                     fetched = fetch_youtube_comments(post["external_id"], youtube_key)
-                elif post["platform"] == "ig" and apify_token:
-                    fetched = fetch_instagram_comments(post.get("media_url", ""), apify_token)
                 else:
-                    continue
+                    if usage.over_ceiling():
+                        ig_skipped_over_ceiling = True
+                        continue
+                    fetched = fetch_instagram_comments(post.get("media_url", ""), apify_token)
             except Exception as exc:  # noqa: BLE001
                 errors.append(f"{brand_id}/{post['key']}: fetch failed: {exc}")
                 print(f"[classify_comments] ERROR fetching {post['key']}: {exc}", file=sys.stderr)
@@ -288,6 +310,7 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
                 if c["external_id"] in by_key:
                     continue  # already have this one
                 c["posted_at"] = c.get("posted_at") or post.get("posted_at")
+                c["platform"] = platform  # so build_data.py can report meta.commentSample's yt/ig split
                 c.setdefault("spam", None)
                 c.setdefault("polarity", None)
                 c.setdefault("theme", None)
@@ -316,7 +339,11 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
 
     store.save_comments(comments)
     finished_at = store.now_iso()
-    if errors and total_classified == 0:
+    if ig_skipped_over_ceiling:
+        note = f"Instagram comment fetching skipped — over ${config.APIFY_MONTHLY_CEILING_USD:.2f}/mo ceiling"
+        errors.append(note)
+        print(f"[classify_comments] WARN {note}")
+    if errors and total_classified == 0 and not ig_skipped_over_ceiling:
         status = "error"
     elif errors:
         status = "warn"
@@ -324,7 +351,8 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
         status = "ok"
     store.append_pull_log("classify_comments", started_at, finished_at, total_fetched, total_classified, status,
                            "; ".join(errors) if errors else None)
-    print(f"[classify_comments] done: status={status} fetched={total_fetched} classified={total_classified}")
+    print(f"[classify_comments] done: status={status} fetched={total_fetched} classified={total_classified} "
+          f"apify_month_to_date=${usage.month_to_date_usd():.2f}")
     return status
 
 

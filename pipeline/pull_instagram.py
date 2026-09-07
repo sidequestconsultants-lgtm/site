@@ -26,7 +26,7 @@ from datetime import datetime, timedelta, timezone
 
 import requests
 
-from . import config, store
+from . import config, store, usage
 
 APIFY_API = "https://api.apify.com/v2"
 DEFAULT_ACTOR = "apify~instagram-scraper"
@@ -47,7 +47,7 @@ def compute_since(brand_id: str, posts: dict) -> datetime:
     for a brand with no history yet backfills 90 days, matching the
     YouTube lookback so the two platforms start from a comparable window."""
     now = datetime.now(timezone.utc)
-    refresh_cutoff = now - timedelta(days=config.INSTAGRAM_REFRESH_WINDOW_DAYS)
+    refresh_cutoff = now - timedelta(days=config.REFETCH_DAYS)
     existing = [p for p in posts.get(brand_id, []) if p.get("platform") == "ig"]
     dates = [d for d in (parse_dt(p.get("posted_at")) for p in existing) if d]
     if not dates:
@@ -93,9 +93,9 @@ def build_post_record(item: dict) -> dict | None:
     }
 
 
-def call_apify(handles: list[str], since: datetime, token: str, actor: str = DEFAULT_ACTOR) -> list[dict]:
+def call_apify(handle: str, since: datetime, token: str, actor: str = DEFAULT_ACTOR) -> list[dict]:
     run_input = {
-        "directUrls": [f"https://www.instagram.com/{h.lstrip('@')}/" for h in handles],
+        "directUrls": [f"https://www.instagram.com/{handle.lstrip('@')}/"],
         "resultsType": "posts",
         "resultsLimit": RESULTS_LIMIT,
         "onlyPostsNewerThan": since.strftime("%Y-%m-%d"),
@@ -108,18 +108,24 @@ def call_apify(handles: list[str], since: datetime, token: str, actor: str = DEF
     )
     if not resp.ok:
         raise RuntimeError(f"Apify actor run failed: {resp.status_code} {resp.text[:300]}")
-    return resp.json()
+    items = resp.json()
+    usage.record_usage("pull_instagram", len(items))
+    return items
 
 
 def dry_run() -> None:
     posts = store.load_posts()
     print("[pull_instagram] DRY RUN — no network call, no credit spent, no store write")
+    print(f"  month-to-date estimated Apify spend: ${usage.month_to_date_usd():.2f} "
+          f"of ${config.APIFY_MONTHLY_CEILING_USD:.2f}")
     for brand_id, brand in config.BRANDS.items():
-        if not brand.get("handles_ig"):
+        handle = brand.get("handle_ig")
+        if not handle:
+            print(f"  {brand_id}: no handle_ig in config, will be skipped")
             continue
         since = compute_since(brand_id, posts)
         flag = "" if brand.get("verified") else "  ** UNVERIFIED — real run will refuse **"
-        print(f"  {brand_id}: handles={brand['handles_ig']} since={since:%Y-%m-%d} "
+        print(f"  {brand_id}: handle={handle} since={since:%Y-%m-%d} "
               f"limit={RESULTS_LIMIT}{flag}")
 
 
@@ -143,14 +149,19 @@ def run(token: str | None = None) -> str:
     total_in = 0
     total_upserted = 0
     errors: list[str] = []
+    skipped: list[str] = []
 
     for brand_id, brand in config.BRANDS.items():
-        handles = brand.get("handles_ig") or []
-        if not handles:
+        handle = brand.get("handle_ig")
+        if not handle:
+            # Null is an unresolved handle, not an error — skip and log,
+            # never fail the run over it (config.py's module docstring).
+            skipped.append(brand_id)
+            print(f"[pull_instagram] {brand_id}: no handle_ig in config, skipping")
             continue
         try:
             since = compute_since(brand_id, posts)
-            items = call_apify(handles, since, token)
+            items = call_apify(handle, since, token)
             records = [r for r in (build_post_record(i) for i in items) if r is not None]
             rows_in, rows_new, rows_updated = store.upsert_posts(posts, brand_id, "ig", records)
             total_in += rows_in
@@ -173,7 +184,7 @@ def run(token: str | None = None) -> str:
 
     error_text = "; ".join(errors) if errors else None
     store.append_pull_log("pull_instagram", started_at, finished_at, total_in, total_upserted, status, error_text)
-    print(f"[pull_instagram] done: status={status} rows_in={total_in} rows_upserted={total_upserted}")
+    print(f"[pull_instagram] done: status={status} rows_in={total_in} rows_upserted={total_upserted} skipped={skipped}")
     return status
 
 

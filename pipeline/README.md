@@ -26,19 +26,26 @@ the diff notes at the bottom of this file if you're auditing that claim.
 
 ```
 pipeline/            hand-write config.py; everything else is generated code
-  config.py           the 8 brands, handles, parent mapping, thresholds — edit this by hand
+  config.py           the 9 brands, handles, parent mapping, thresholds — edit this by hand
   store.py             shared JSON I/O + the dedupe-by-key upsert that makes ingestion idempotent
+  usage.py              Apify spend tracking against the $4 monthly ceiling (store/usage.json)
+  preflight.py           validates the 3 API keys are present and reachable before a real run
+  verify_handles.py        read-only handle/channel verification report — no store writes
   pull_youtube.py       Phase 2
   pull_instagram.py      Phase 3 (refuses to run for real until brands are verified — see below)
   build_data.py           Phase 4 — the aggregator, emits public/ci/data.json
   build_demo.py             Phase 4f — inlines data.json into dashboard-demo.html
-  classify.py                Phase 5 — Gemini Flash vehicle/comment classification
+  classify.py                Phase 5 — Gemini Flash vehicle/comment classification, asymmetric
+                              YT/IG comment sampling within the Apify spend ceiling
   pull_trends.py               Phase 6 — weekly search-interest pull
 store/                committed JSON state
   posts.json           deduped raw posts per brand, platform:external_id keyed
   comments.json          sampled + classified comments per brand
   channel_stats.json      follower/subscriber snapshots
   pull_log.json             one row per pipeline run — fn, counts, status, error
+  usage.json                 month-to-date estimated Apify spend, keyed YYYY-MM
+  client_insights.json         hand-maintained only, never written by a pull script — the
+                                client's own shares/saves from Meta Business Suite Insights
   snapshots/YYYY-MM-DD.json  a full data.json copy per day — rollback is a file, not an operation
 public/ci/
   index.html            the live dashboard (fetches ./data.json)
@@ -56,14 +63,28 @@ dashboard-demo.html      offline build, opens from file://, regenerate on demand
    `pull_instagram.py` refuses to run for real while *any* brand is
    unverified — a wrong handle silently produces wrong data for that brand,
    and this is the pull most likely to point at the wrong account.
-2. Pin `yt_channel_id` for each brand once you've resolved it (the script
-   will resolve by `yt_handle` on every run if you don't, which works but
-   costs an extra quota unit and is one more thing that can drift if a
-   channel renames its handle).
-3. Set the four GitHub Actions repo secrets: `APIFY_TOKEN`,
-   `YOUTUBE_API_KEY`, `GEMINI_API_KEY`. Keep the repo **private** if you use
+   `python -m pipeline.verify_handles` prints a read-only report (channel
+   title, follower count, last-post date per handle) to check by hand
+   against the live account before flipping `verified`; it makes no store
+   writes and costs no Apify credit.
+2. `yt_channel_id` is deliberately not pinned anywhere — `pull_youtube.py`
+   resolves each brand's channel by `yt_handle` via `channels.list?forHandle=`
+   on every run. That costs one extra quota unit per brand per run
+   (negligible against the 10,000/day budget) and avoids a pinned ID
+   silently going stale if a channel changes its handle or branding.
+3. Set the three GitHub Actions repo secrets: `APIFY_TOKEN`,
+   `YOUTUBE_API_KEY`, `GEMINI_API_KEY`. `python -m pipeline.preflight`
+   checks all three are present and reachable (a cheap, quota-safe call
+   per API) before any real pull runs. Keep the repo **private** if you use
    it — public repos get unlimited Actions minutes, but `store/` becomes
    public with them.
+4. `store/client_insights.json` starts as `{}`. Nothing in this pipeline
+   writes to it automatically — shares/saves aren't exposed by any public
+   API this pipeline touches (Apify's IG scrape has no share/save count;
+   YouTube has no "save" concept). The client can hand-fill their own
+   entry (`{"<client_brand_id>": {"shares": N, "saves": N}}`) from their
+   Meta Business Suite Insights; every other brand's shares/saves stay
+   `null` regardless of what this file contains.
 
 ## Running locally
 
@@ -73,6 +94,8 @@ export YOUTUBE_API_KEY=...
 export APIFY_TOKEN=...
 export GEMINI_API_KEY=...
 
+python -m pipeline.preflight                  # checks all 3 API keys are present + reachable
+python -m pipeline.verify_handles             # read-only report, no store writes, no credit spent
 python -m pipeline.pull_instagram --dry-run   # preview what would be fetched, no credit spent
 python -m pipeline.pull_youtube
 python -m pipeline.pull_instagram
@@ -89,9 +112,16 @@ step failing is the pipeline working correctly, not a bug to route around.
 
 `pull_youtube.py` / `pull_instagram.py` → `store/posts.json` (dedupe key
 `platform:external_id`, idempotent — a re-run refreshes counters on existing
-rows, never appends a duplicate) → `classify.py` fetches a comment sample for
-the top 25 posts per brand into `store/comments.json` and tags both posts
-(surrogate vehicle) and comments (spam/polarity/theme/language) →
+rows, never appends a duplicate; post ingestion always runs before, and
+takes priority over, comment fetching) → `classify.py` samples comments
+asymmetrically — YouTube's `commentThreads` is free within quota
+(`YT_COMMENT_POSTS=25` posts × `YT_COMMENT_PER_POST=200`), Instagram
+comments cost Apify credit (`IG_COMMENT_POSTS=8` × `IG_COMMENT_PER_POST=100`)
+and stop being fetched the moment month-to-date spend
+(`store/usage.json`, tracked by `usage.py`) reaches `APIFY_MONTHLY_CEILING_USD`
+— into `store/comments.json`, tagging both posts (surrogate vehicle) and
+comments (spam/polarity/theme/language); the platform composition of each
+run's sample is surfaced in `meta.commentSample` →
 `build_data.py` reads the whole store, estimates paid/organic per post from
 a trailing-90-day median baseline, and emits `public/ci/data.json` in the
 exact shape `index.html`'s `init()` expects → `build_demo.py` inlines that
@@ -105,10 +135,16 @@ file to copy back over `public/ci/data.json`.
 
 The dashboard's "Other / Untracked" row represents the long tail of smaller
 and craft competitors this pipeline never scrapes. Real ingestion only
-covers the eight named brands, so `untracked`'s per-window figures are left
-empty rather than filled with a fabricated tail percentage — the front end
-treats a missing untracked window as a zero contribution. An honest "we
-don't measure this" beats a confident-looking number nobody can support.
+covers the nine named brands, so `untracked` is not a measurement — it's a
+disclosed, fixed-share model: `config.UNTRACKED["share_assumption"]`
+(currently 0.074) is solved, per window, so that
+`untracked / (tracked_total + untracked) == share_assumption` holds exactly
+against that window's real tracked total. The whole modelled figure is
+carried on `ig.organic` (there's no per-platform breakdown for a bucket
+nothing is actually scraped from); `untrackedShareAssumption` is surfaced in
+`meta` and printed in METHODOLOGY so the number is never mistaken for a
+measurement. An honest, disclosed model beats either a fabricated precise
+figure or a silent zero.
 
 ## Front-end edits, for anyone auditing "no render function changed"
 
@@ -130,9 +166,17 @@ Every edit inside `public/ci/index.html` falls into one of three buckets:
    theme×polarity cell, so this cross-tab was always a derivation, not raw
    data — it's the same derivation as before, just fed real inputs now).
    `shares`/`saves` can legitimately be `null` now (not public data for any
-   brand this pipeline touches); the one display site that printed them
-   raw (`renderEngagementChart`'s breakdown cards) shows `NOT PUBLIC`
-   instead of a false zero.
+   brand this pipeline touches, `client_insights.json` aside); the one
+   display site that printed them raw (`renderEngagementChart`'s breakdown
+   cards) shows `NOT PUBLIC` instead of a false zero. `search` (Trends)
+   series can legitimately contain `null` buckets too — a bucket Trends
+   reports as flat 0 means "below its reporting floor," not "measured zero
+   interest" (`config.TRENDS_ZERO_IS_NULL`), so `renderSearchSeries()` draws
+   a gap in the line rather than a false trough, `renderSearchStrip()` /
+   `trendBlock()` append a BELOW THRESHOLD note when any bucket is null, and
+   the portfolio/group weighted average in `entityForDetail()` excludes a
+   member's null bucket from that bucket's weight instead of letting
+   `null * weight` silently coerce to a measured zero.
 3. **Everything else** — every render function (the radial chart, ranked
    bars, surrogate band, all of Platform Intelligence and Brand/Group
    Detail, the methodology panel's layout) is byte-for-byte what it was in

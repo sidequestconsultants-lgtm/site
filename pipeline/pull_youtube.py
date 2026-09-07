@@ -52,10 +52,13 @@ def _get(path: str, api_key: str, **params) -> dict:
 
 
 def resolve_channel_id(handle: str, api_key: str) -> str | None:
-    """Resolve a stable channel ID from an @handle. Prefer pinning
-    `yt_channel_id` in config.py once known — a handle can be renamed
-    without the ID changing, so re-resolving every run buys nothing and
-    costs a quota unit for no reason."""
+    """Resolve a channel ID from config's `yt_handle` via channels.list?forHandle=.
+    Costs one quota unit per brand per run — negligible against the 10,000/day
+    budget, and simpler than pinning a channel ID that could silently go stale
+    if a channel's own upload cadence or branding changes. Handles here do NOT
+    follow the Instagram naming pattern (Kingfisher is @kingofgoodtimes,
+    Budweiser's channel is "Budweiser Experiences") — never derive one, only
+    ever use what's hand-verified in config.py."""
     data = _get("channels", api_key, part="id", forHandle=handle.lstrip("@"))
     items = data.get("items") or []
     return items[0]["id"] if items else None
@@ -126,23 +129,26 @@ def run(api_key: str | None = None) -> tuple[str, dict]:
 
     posts = store.load_posts()
     channel_stats = store.load_channel_stats()
-    published_after = (datetime.now(timezone.utc) - timedelta(days=config.YOUTUBE_LOOKBACK_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
+    published_after = (datetime.now(timezone.utc) - timedelta(days=config.BASELINE_DAYS)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     total_in = 0
     total_upserted = 0
     per_brand = {}
     errors = []
+    skipped = []
 
     for brand_id, brand in config.BRANDS.items():
-        channel_id = brand.get("yt_channel_id")
         handle = brand.get("yt_handle")
-        if not channel_id and not handle:
+        if not handle:
+            # Null is an unresolved handle, not an error (see config.py's
+            # module docstring) — skip and log, never fail the run over it.
+            skipped.append(brand_id)
+            print(f"[pull_youtube] {brand_id}: no yt_handle in config, skipping")
             continue
         try:
+            channel_id = resolve_channel_id(handle, api_key)
             if not channel_id:
-                channel_id = resolve_channel_id(handle, api_key)
-                if not channel_id:
-                    raise RuntimeError(f"could not resolve channel for handle {handle}")
+                raise RuntimeError(f"could not resolve channel for handle {handle}")
 
             stats = get_channel_stats(channel_id, api_key)
             channel_stats.setdefault(brand_id, {})["yt"] = {
@@ -182,7 +188,7 @@ def run(api_key: str | None = None) -> tuple[str, dict]:
 
     error_text = "; ".join(errors) if errors else None
     store.append_pull_log("pull_youtube", started_at, finished_at, total_in, total_upserted, status, error_text)
-    print(f"[pull_youtube] done: status={status} rows_in={total_in} rows_upserted={total_upserted}")
+    print(f"[pull_youtube] done: status={status} rows_in={total_in} rows_upserted={total_upserted} skipped={skipped}")
     return status, per_brand
 
 

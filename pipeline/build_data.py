@@ -12,12 +12,13 @@ views against the trailing-90-day median for its own brand/platform/type.
 Everything here is public-data arithmetic; nothing needs an LLM. That's
 Phase 5.
 
-`untracked` is left with EMPTY per-window objects, deliberately — this
-pipeline only ever measures the eight named competitors. Fabricating a tail
-percentage for brands never scraped would be exactly the "falsely confident
-bar" the brief spends a whole section warning against, so the honest output
-is nothing measured, and the front end (Phase 4e rewiring) treats a missing
-untracked window as a zero contribution rather than crashing on it.
+`untracked` is computed from config.UNTRACKED["share_assumption"] (0.074) — a
+stated, MODELLED tail share, not a measurement. Each window's untracked value
+is solved so that untracked / (tracked_total + untracked) == share_assumption
+for that window's tracked total, so the assumption reads consistently at
+every range. This is a placeholder until a wider market estimate exists —
+flagged MODELLED tier at render time exactly like everything else derived
+from an assumption rather than a raw count.
 """
 
 from __future__ import annotations
@@ -120,7 +121,8 @@ def compute_vehicle_mix(posts: list[dict], start: datetime, end: datetime) -> di
     return {v: round(counts.get(v, 0) / total, 4) for v in config.VEHICLES}
 
 
-def compute_engagement30(posts: list[dict], start: datetime, end: datetime, is_client: bool) -> dict:
+def compute_engagement30(posts: list[dict], start: datetime, end: datetime, is_client: bool,
+                          client_insights: dict) -> dict:
     likes = 0
     comments = 0
     for p in posts:
@@ -130,9 +132,14 @@ def compute_engagement30(posts: list[dict], start: datetime, end: datetime, is_c
         comments += p.get("comments") or 0
     # Shares/saves aren't exposed by any public-data source this pipeline
     # touches (Apify's public IG scrape has no share/save count; YouTube has
-    # no "save" concept) — null for every brand, client included, per RULE 3:
-    # this is a structural gap, not a zero.
-    return {"likes": likes, "comments": comments, "shares": None, "saves": None}
+    # no "save" concept) — structurally null for every competitor, forever.
+    # The client can fill their own from Meta Business Suite Insights (an
+    # authenticated source no scraper here has) by hand-editing
+    # store/client_insights.json; nothing pulls or overwrites that file
+    # automatically. Everyone else stays null per RULE 3 — never a zero.
+    shares = client_insights.get("shares") if is_client else None
+    saves = client_insights.get("saves") if is_client else None
+    return {"likes": likes, "comments": comments, "shares": shares, "saves": saves}
 
 
 def compute_series(posts: list[dict], baselines: dict[str, float], now: datetime) -> list[float]:
@@ -196,8 +203,27 @@ def compute_comment_stats(brand_id: str, comments_store: dict, now: datetime) ->
     return sentiment, neg_delta_pp, theme_share, comment_sample
 
 
+def compute_meta_comment_sample(comments_store: dict, now: datetime) -> dict:
+    """Top-level composition across every brand's current-window sample —
+    "n = X · YT 70% / IG 30%" on the dashboard. YT/IG are sampled at very
+    different depths (config.YT_COMMENT_POSTS/PER_POST vs IG_COMMENT_POSTS/
+    PER_POST, Phase 2), so a sample whose platform mix is invisible can't be
+    trusted; this is what makes that mix visible."""
+    win_start = now - timedelta(days=30)
+    all_recs = []
+    for recs in comments_store.values():
+        all_recs.extend(c for c in recs if in_window(parse_dt(c.get("posted_at")), win_start, now))
+    n_total = len(all_recs)
+    if n_total == 0:
+        return {"n": 0, "spamRate": config.SPAM_RATE_BASE, "ytShare": 0.0, "igShare": 0.0}
+    spam_rate = round(sum(1 for c in all_recs if c.get("spam")) / n_total, 3)
+    yt_share = round(sum(1 for c in all_recs if c.get("platform") == "yt") / n_total, 3)
+    ig_share = round(sum(1 for c in all_recs if c.get("platform") == "ig") / n_total, 3)
+    return {"n": n_total, "spamRate": spam_rate, "ytShare": yt_share, "igShare": ig_share}
+
+
 def build_profile(brand_id: str, brand: dict, posts: dict, channel_stats: dict,
-                   comments_store: dict, trends: dict, now: datetime) -> dict:
+                   comments_store: dict, trends: dict, now: datetime, client_insights: dict) -> dict:
     ig_posts = [p for p in posts.get(brand_id, []) if p.get("platform") == "ig"]
     yt_posts = [p for p in posts.get(brand_id, []) if p.get("platform") == "yt"]
 
@@ -229,14 +255,18 @@ def build_profile(brand_id: str, brand: dict, posts: dict, channel_stats: dict,
     vehicle_mix = compute_vehicle_mix(all_posts, win30_start, now)
     vehicle_prev_mix = compute_vehicle_mix(all_posts, prev_start, prev_end)
 
-    engagement30 = compute_engagement30(all_posts, win30_start, now, brand.get("is_client", False))
+    engagement30 = compute_engagement30(all_posts, win30_start, now, brand.get("is_client", False),
+                                         client_insights)
 
     series_ig = compute_series(ig_posts, ig_baselines, now)
     series_yt = compute_series(yt_posts, yt_baselines, now)
 
     sentiment, neg_delta_pp, theme_share, comment_sample = compute_comment_stats(brand_id, comments_store, now)
 
-    search = (trends.get(brand_id) or {}).get("series") or [0, 0, 0, 0, 0, 0]
+    # No trends.json entry yet (pull_trends.py hasn't run) is the same "no
+    # real number" case as a below-threshold bucket — None throughout, not
+    # a flat 0 line the front end would draw as measured zero interest.
+    search = (trends.get(brand_id) or {}).get("series") or [None] * 6
 
     return {
         "windows": windows,
@@ -255,9 +285,10 @@ def build_profile(brand_id: str, brand: dict, posts: dict, channel_stats: dict,
     }
 
 
-def build_meta(now: datetime) -> dict:
+def build_meta(now: datetime, comments_store: dict) -> dict:
     handles = {
-        bid: {"ig": [f"@{h}" for h in b["handles_ig"]], "yt": b.get("yt_handle") or b.get("name")}
+        bid: {"ig": [f"@{b['handle_ig']}"] if b.get("handle_ig") else [],
+              "yt": b.get("yt_handle"), "fb": b.get("handle_fb")}
         for bid, b in config.BRANDS.items()
     }
     trends_queries = {bid: b["trends_query"] for bid, b in config.BRANDS.items()}
@@ -271,8 +302,47 @@ def build_meta(now: datetime) -> dict:
         "handles": handles,
         "trendsQueries": trends_queries,
         "anomalyThreshold": config.ANOMALY_THRESHOLD,
+        "untrackedShareAssumption": config.UNTRACKED["share_assumption"],
+        "commentSample": compute_meta_comment_sample(comments_store, now),
+        "excluded": dict(config.EXCLUDED),
         "logoSvg": config.LOGO_SVG,
         **config.META_STRINGS,
+    }
+
+
+def _css_var(name: str) -> str:
+    return f"var({name})"
+
+
+def compute_untracked(profiles_out: dict) -> dict:
+    """Solve each window's untracked value so that
+    untracked / (tracked_total + untracked) == share_assumption for that
+    window's own tracked total — a stated, disclosed MODELLED figure, not a
+    measurement (see module docstring). No per-platform breakdown exists for
+    a bucket nothing is actually scraped from, so the whole modelled value
+    is carried on `ig.organic`; `yt` stays zero rather than an arbitrary split."""
+    share = config.UNTRACKED["share_assumption"]
+
+    def tracked_total(getter):
+        return sum(
+            getter(p)["ig"]["organic"] + getter(p)["ig"]["paid"] +
+            getter(p)["yt"]["organic"] + getter(p)["yt"]["paid"]
+            for p in profiles_out.values()
+        )
+
+    def solve(total: float) -> int:
+        return round(total * share / (1 - share)) if total else 0
+
+    windows_out = {}
+    for label in ("7", "30", "90"):
+        val = solve(tracked_total(lambda p, l=label: p["windows"][l]))
+        windows_out[label] = {"ig": {"organic": val, "paid": 0}, "yt": {"organic": 0, "paid": 0}}
+    prev_val = solve(tracked_total(lambda p: p["prev30"]))
+    prev30_out = {"ig": {"organic": prev_val, "paid": 0}, "yt": {"organic": 0, "paid": 0}}
+    return {
+        "id": config.UNTRACKED["id"], "name": config.UNTRACKED["name"],
+        "color": _css_var(config.UNTRACKED["color_var"]),
+        "windows": windows_out, "prev30": prev30_out,
     }
 
 
@@ -282,32 +352,32 @@ def build() -> dict:
     channel_stats = store.load_channel_stats()
     comments_store = store.load_comments()
     trends = store.load_json(config.TRENDS_PATH, {})
+    client_insights_all = store.load_json(config.CLIENT_INSIGHTS_PATH, {})
 
     brands_out = {
         bid: {
-            "name": b["name"], "parent": b["parent"], "color": b["color"],
+            "name": b["name"], "parent": b["parent"], "color": _css_var(b["color_var"]),
             "isClient": b.get("is_client", False),
-            "handleIG": f"@{b['handles_ig'][0]}" if b.get("handles_ig") else None,
+            "handleIG": f"@{b['handle_ig']}" if b.get("handle_ig") else None,
             "handleYT": b.get("yt_handle"),
         }
         for bid, b in config.BRANDS.items()
     }
     portfolios_out = {
-        pid: {"name": p["name"], "members": p["members"], "color": p["color"], **({"isClient": True} if p.get("is_client") else {})}
+        pid: {"name": p["name"], "members": p["members"], "color": _css_var(p["color_var"]),
+              **({"isClient": True} if p.get("is_client") else {})}
         for pid, p in config.PORTFOLIOS.items()
-    }
-    untracked_out = {
-        "id": config.UNTRACKED["id"], "name": config.UNTRACKED["name"], "color": config.UNTRACKED["color"],
-        "windows": {"7": {}, "30": {}, "90": {}}, "prev30": {},
     }
 
     profiles_out = {
-        bid: build_profile(bid, b, posts, channel_stats, comments_store, trends, now)
+        bid: build_profile(bid, b, posts, channel_stats, comments_store, trends, now,
+                            client_insights_all.get(bid, {}))
         for bid, b in config.BRANDS.items()
     }
+    untracked_out = compute_untracked(profiles_out)
 
     return {
-        "meta": build_meta(now),
+        "meta": build_meta(now, comments_store),
         "brands": brands_out,
         "portfolios": portfolios_out,
         "untracked": untracked_out,
@@ -333,6 +403,13 @@ def validate(data: dict) -> list[str]:
                 problems.append(f"profiles.{bid}.windows.{w} incomplete")
         if "prev30" not in prof:
             problems.append(f"profiles.{bid}.prev30 missing")
+    # Trends caps a query at 100 chars including the "+" joins (Phase 5) — a
+    # query over that limit doesn't error, it silently truncates and returns
+    # garbage, which is worse than failing loudly here first.
+    for bid, b in config.BRANDS.items():
+        q = b.get("trends_query", "")
+        if len(q) > 100:
+            problems.append(f"BRANDS.{bid}.trends_query is {len(q)} chars, over Trends' 100-char cap: {q!r}")
     return problems
 
 
