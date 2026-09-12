@@ -4,25 +4,42 @@ tagging don't need a frontier model.
 
 Two independent jobs, both idempotent by model_version:
 
-  classify_posts()    — vehicle classification (soda/nonalc/music/merch/
-                         direct/unclassified) from caption + post_type, for
-                         every raw_post that doesn't yet have a result at the
-                         CURRENT_MODEL_VERSION. Confidence < 0.7 is forced to
-                         'unclassified' — never guessed into a bucket.
+  classify_posts()    — vehicle classification (config.VEHICLES, confidence
+                         floor config.VEHICLE_CONFIDENCE_FLOOR) from caption
+                         + post_type, for every raw_post that doesn't yet
+                         have a result at the CURRENT_MODEL_VERSION. Below
+                         the confidence floor is forced to 'unclassified' —
+                         never guessed into a bucket. The taxonomy itself
+                         (what "vehicle" means for this category — surrogate
+                         ad vehicle for alcobev, offer type for QSR, whatever
+                         comes next) lives entirely in config.VEHICLES and
+                         this prompt's description of each value; nothing
+                         about the category is assumed anywhere else here.
 
   classify_comments() — samples top posts per brand by engagement and fetches
                          their comments, asymmetrically: YouTube (free within
-                         quota) gets the top 25 posts × 200 comments each via
+                         quota) gets config.YT_COMMENT_POSTS posts ×
+                         config.YT_COMMENT_PER_POST comments each via
                          commentThreads.list; Instagram (Apify credit shared
                          with pull_instagram.py's post scraping) gets a much
-                         thinner 8 posts × 100 comments, and stops fetching
-                         entirely once the month's estimated Apify spend
-                         (usage.py) crosses config.APIFY_MONTHLY_CEILING_USD —
-                         post ingestion always has priority (RULE 7). Then
-                         classifies spam / polarity / theme / language on the
+                         thinner config.IG_COMMENT_POSTS × IG_COMMENT_PER_POST,
+                         and stops fetching entirely once the month's
+                         estimated Apify spend (usage.py) crosses
+                         config.APIFY_MONTHLY_CEILING_USD — post ingestion
+                         always has priority (RULE 7). Then classifies spam /
+                         polarity / theme (config.THEMES) / language on the
                          survivors. Comments are heavily Hinglish and
                          code-mixed, which is the whole reason this is an LLM
                          pass and not a classical sentiment model.
+
+GEMINI_MODEL comes from config.py, never hardcoded here — a retired model
+name (gemini-1.5-* now 404s on every call) is a one-line config fix, not a
+code change, and preflight.py's ListModels check catches it before any
+credit is spent on a call that can never succeed. A 404 from Gemini is
+treated as permanent (RULE 5) — `gemini_json()` raises `PermanentAPIError`
+for it, and both classify_posts() and classify_comments() stop calling
+Gemini for the rest of the run the moment they see one, rather than
+burning every remaining batch on a call that cannot recover.
 
 Nothing here stores a comment author/username — see RULE in Phase 1.
 """
@@ -38,10 +55,16 @@ import requests
 
 from . import config, store, usage
 
-GEMINI_MODEL = "gemini-1.5-flash"
+GEMINI_MODEL = config.GEMINI_MODEL
 GEMINI_API = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 CURRENT_MODEL_VERSION = f"{GEMINI_MODEL}-classify-v1"
 POST_BATCH_SIZE = 20
+
+
+class PermanentAPIError(RuntimeError):
+    """A Gemini response that cannot succeed on retry — a 404 (model
+    doesn't exist / was retired). Callers must stop calling Gemini for the
+    rest of the run, not try the next batch against the same dead model."""
 # Asymmetric comment sampling (Phase 2 of the go-live prompt): YouTube
 # commentThreads is free within quota, sample generously; Instagram costs
 # Apify credit shared with post ingestion, sample much thinner and gate it
@@ -84,6 +107,9 @@ def gemini_json(prompt: str, schema: dict, api_key: str) -> list:
         },
     }
     resp = requests.post(GEMINI_API, params={"key": api_key}, json=body, timeout=120)
+    if resp.status_code == 404:
+        raise PermanentAPIError(f"Gemini API 404 — model {GEMINI_MODEL!r} not found or retired: "
+                                 f"{resp.text[:300]}")
     if not resp.ok:
         raise RuntimeError(f"Gemini API failed: {resp.status_code} {resp.text[:300]}")
     data = resp.json()
@@ -107,13 +133,16 @@ def classify_posts_batch(batch: list[dict], api_key: str) -> list[dict]:
         caption = (rec.get("caption") or "").replace("\n", " ")[:600]
         lines.append(f"{i}. post_type={rec.get('post_type')} caption=\"{caption}\"")
     prompt = (
-        "You are classifying Indian beer-brand social posts by SURROGATE ADVERTISING vehicle "
-        "(Indian law bars direct alcohol ads, so brands market through these vehicles instead). "
-        "For each numbered post below, return one JSON object with:\n"
-        "- vehicle: one of soda, nonalc, music, merch, direct, unclassified\n"
-        "  soda = packaged water/soda surrogate products; nonalc = 0.0/non-alcoholic variant; "
-        "music = festivals/gigs/sponsorships; merch = apparel/glassware/lifestyle merch; "
-        "direct = product-forward content that doesn't fit the above; "
+        "You are classifying Indian QSR (quick-service restaurant) brand social posts by OFFER TYPE — "
+        "whether a competitor is discounting, launching, or just building brand, which is the strategic "
+        "read this category needs. For each numbered post below, return one JSON object with:\n"
+        "- vehicle: one of new_launch, value_offer, lto, brand, delivery, csr, unclassified\n"
+        "  new_launch = a new product or permanent menu addition; "
+        "value_offer = price, combo, discount, or coupon push; "
+        "lto = limited-time, seasonal, or festival offer; "
+        "brand = lifestyle, culture, or sponsorship content with no product/price push; "
+        "delivery = a Swiggy/Zomato/own-app delivery partnership or push; "
+        "csr = sustainability, sourcing, or community content; "
         "unclassified = you are genuinely unsure\n"
         "- confidence: 0.0-1.0, your genuine confidence, not padded\n"
         "- reasoning: one short clause\n\n"
@@ -155,6 +184,13 @@ def classify_posts(api_key: str | None = None) -> str:
                 rec["model_version"] = CURRENT_MODEL_VERSION
                 rec["classified_at"] = store.now_iso()
                 total_done += 1
+        except PermanentAPIError as exc:
+            # RULE 5 — a 404 never succeeds on retry. Stop burning the rest
+            # of `pending` against a model that cannot respond, rather than
+            # repeating the same doomed call for every remaining batch.
+            errors.append(str(exc))
+            print(f"[classify_posts] ABORT — {exc}", file=sys.stderr)
+            break
         except Exception as exc:  # noqa: BLE001 — one bad batch must not sink the run
             errors.append(str(exc))
             print(f"[classify_posts] ERROR on batch {i}: {exc}", file=sys.stderr)
@@ -240,14 +276,19 @@ def classify_comments_batch(batch: list[dict], api_key: str) -> list[dict]:
     for i, c in enumerate(batch):
         text = (c.get("text") or "").replace("\n", " ")[:400]
         lines.append(f'{i}. "{text}"')
+    # QSR comment sections are complaint-led — expect service/delivery to
+    # dominate theme share and a lower spam rate than alcobev's giveaway-
+    # farming-heavy comments. Don't tune the prompt or the schema toward
+    # that expectation; tag what's actually there and let the distribution
+    # fall out of real data.
     prompt = (
-        "You are moderating and tagging comments on Indian beer-brand social posts. Comments are "
-        "heavily Hinglish and code-mixed (Hindi written in Latin script, mixed with English) — read "
-        "them as a native speaker of that mix would, not as English-only text.\n\n"
+        "You are moderating and tagging comments on Indian QSR (quick-service restaurant) brand social "
+        "posts. Comments are heavily Hinglish and code-mixed (Hindi written in Latin script, mixed with "
+        "English) — read them as a native speaker of that mix would, not as English-only text.\n\n"
         "For each numbered comment, return one JSON object with:\n"
         "- spam: true for tag-a-friend bait, giveaway farming, bot/copy-paste replies, unrelated promo\n"
         "- polarity: pos, neu, or neg toward the brand/product (ignore this field's accuracy if spam=true)\n"
-        "- theme: one of availability, price, taste, events, nostalgia, other — the comment's main topic\n"
+        "- theme: one of taste, price, service, delivery, hygiene, other — the comment's main topic\n"
         "- language: en, hi, hinglish, or other\n\n"
         "Return a JSON array with exactly one result per comment, in the same order, no other text.\n\n"
         + "\n".join(lines)
@@ -281,6 +322,7 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
     total_classified = 0
     errors: list[str] = []
     ig_skipped_over_ceiling = False
+    gemini_dead = False  # RULE 5 — once a 404 confirms the model is gone, stop calling it for every brand
 
     for brand_id in config.BRANDS:
         bucket = comments.setdefault(brand_id, [])
@@ -320,6 +362,9 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
                 by_key[c["external_id"]] = c
                 total_fetched += 1
 
+        if gemini_dead:
+            continue  # fetching still ran above; classification is the part that can't recover
+
         pending = [c for c in bucket if needs_classification(c)]
         for i in range(0, len(pending), POST_BATCH_SIZE):
             batch = pending[i:i + POST_BATCH_SIZE]
@@ -333,6 +378,13 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
                     c["model_version"] = CURRENT_MODEL_VERSION
                     c["classified_at"] = store.now_iso()
                     total_classified += 1
+            except PermanentAPIError as exc:
+                # RULE 5 — this model will 404 on every remaining batch for
+                # every remaining brand too; stop spending calls on it.
+                errors.append(f"{brand_id} comment batch: {exc}")
+                print(f"[classify_comments] ABORT — {exc}", file=sys.stderr)
+                gemini_dead = True
+                break
             except Exception as exc:  # noqa: BLE001
                 errors.append(f"{brand_id} comment batch: {exc}")
                 print(f"[classify_comments] ERROR classifying batch for {brand_id}: {exc}", file=sys.stderr)
