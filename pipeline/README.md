@@ -1,14 +1,17 @@
-# Kingfisher CI pipeline
+# Competitive Intelligence pipeline
 
-Ingestion and serving layer for the live Kingfisher Competitive Intelligence
-dashboard. Zero paid services, no database — state lives as JSON files in
-this repo, GitHub Actions runs it daily, Vercel serves the output.
+Ingestion and serving layer for the live Competitive Intelligence dashboard
+— currently tracking Indian QSR (quick-service restaurant) brands; see
+"Category pivots" below for how a different category/client gets onto this
+same pipeline. Zero paid services, no database — state lives as JSON files
+in this repo, GitHub Actions runs it daily, Vercel serves the output.
 
-The dashboard itself (`public/ci/index.html`) is a copy of the standalone
-demo file (`brand/kingfisher-competitive-intelligence.html`) with a small,
-deliberate set of edits: its hardcoded `DATA` block is gone, replaced by a
-`fetch('./data.json')` at load. **No render function was touched** — see
-the diff notes at the bottom of this file if you're auditing that claim.
+The dashboard itself (`public/ci/index.html`) is fully decoupled from
+`pipeline/config.py`'s brand set and category: it only ever reads the shape
+`build_data.py` emits to `data.json` (`brands`/`profiles`/`portfolios`/
+`untracked`/`meta`), never a brand ID or category word directly. **No
+render function was touched for this pivot** beyond the field rewiring and
+taxonomy-label wiring documented below.
 
 ## Stack
 
@@ -26,7 +29,7 @@ the diff notes at the bottom of this file if you're auditing that claim.
 
 ```
 pipeline/            hand-write config.py; everything else is generated code
-  config.py           the 9 brands, handles, parent mapping, thresholds — edit this by hand
+  config.py           tracked brands, handles, parent mapping, taxonomy, thresholds — edit this by hand
   store.py             shared JSON I/O + the dedupe-by-key upsert that makes ingestion idempotent
   usage.py              Apify spend tracking against the $4 monthly ceiling (store/usage.json)
   preflight.py           validates the 3 API keys are present and reachable before a real run
@@ -108,16 +111,39 @@ Every script exits non-zero on a `warn` or `error` `pull_log` status
 (including a zero-record pull — that's a warning, never a success), so a CI
 step failing is the pipeline working correctly, not a bug to route around.
 
+## Gemini model retirement and permanent failures
+
+`classify.py` reads the model name from `config.GEMINI_MODEL`, never
+hardcodes it — Google retires Gemini model versions (`gemini-1.5-*` now
+404 on every call), and a retired model is a one-line config fix, not a
+code change. `preflight.py`'s Gemini check goes past bare reachability: it
+calls `ListModels` and confirms `config.GEMINI_MODEL` is actually in the
+returned list, because a key authenticates fine against a dead or
+mistyped model name — the call itself succeeds, it's the *model* that
+doesn't exist — so a bare reachability check would pass and the failure
+would only surface a minute into a real `classify.py` run.
+
+A 404 from Gemini can't succeed on retry, so neither `classify_posts()`
+nor `classify_comments()` treats it like an ordinary failed batch:
+`gemini_json()` raises `PermanentAPIError` for it specifically, and both
+callers stop calling Gemini for the rest of the run the moment they see
+one (classify_comments() also stops for every brand still to come, via a
+`gemini_dead` flag — comment fetching keeps running, since that doesn't
+touch Gemini at all) instead of repeating the same doomed call across
+every remaining batch.
+
 ## Instagram accounts that come back thin — restricted profiles
 
-A real run turned up four brands (Budweiser, Corona, Tuborg, Carlsberg)
-that returned exactly one post each while others paginated normally.
-Root cause: Apify's actor runs logged-out for every profile — it cannot use
-a login or session, full stop, for legal reasons the actor's own docs state
-— and Instagram serves a reduced or fully gated view to logged-out viewers
-on accounts with the alcohol/sensitive-content age gate turned on. When
-that happens the actor doesn't paginate short; it returns a single
-placeholder item carrying an `error`/`errorDescription` (or
+A real run on an earlier tracked set turned up several brands that each
+returned exactly one post while others paginated normally. Root cause:
+Apify's actor runs logged-out for every profile — it cannot use a login or
+session, full stop, for legal reasons the actor's own docs state — and
+Instagram serves a reduced or fully gated view to logged-out viewers on
+accounts with a content gate turned on for a market (the concrete case
+that triggered this: several alcohol brands' accounts had Instagram's
+alcohol/sensitive-content age gate on; see git history for that run's
+specifics). When that happens the actor doesn't paginate short; it returns
+a single placeholder item carrying an `error`/`errorDescription` (or
 `isRestrictedProfile`) field instead of real post data. There is no Apify
 input setting that bypasses this — it's a hard platform restriction, not a
 config knob — so the fix is detection, not a workaround:
@@ -140,14 +166,45 @@ warning, that's Instagram's age gate on that specific account, not a bug
 here — verify by hand and decide whether to exclude the brand (like
 `EXCLUDED`) or accept it as permanently unmeasurable via this pipeline.
 
+## Multi-handle brands
+
+`handle_ig` in `config.py` is always a list, even for the common case of
+one handle — a brand can legitimately run more than one Instagram account
+(different operators in different regions, say), and a single-handle brand
+is just a one-element list, not a special case. `pull_instagram.py` pulls
+every handle, tags each fetched post with which handle it came from, then
+runs `mark_cross_handle_duplicates()`: if two of a brand's own handles post
+the same creative (exact match on normalized caption, within 48 hours of
+each other — deliberately strict, to keep a false match rare), the later
+one is flagged `is_duplicate` rather than dropped. A flagged post's real,
+separately-earned engagement still counts toward visibility in full (two
+different audiences really did see and react to it); `build_data.py`
+excludes it from every post-*count*-based stat instead (`aggregate_window`'s
+`n_posts`, `compute_format_mix`, `compute_vehicle_mix`) — one piece of
+content shouldn't inflate a "how many times did this brand post" or "what
+share of posts are X" figure just because two of its own accounts carried
+it. `handle_fb` is a plain string for a single-Facebook-page brand and a
+list for a multi-page one — `build_data.py`'s `_as_list()` normalizes
+either shape rather than assuming one.
+
+`yt_handle` is usually an `@handle`, resolved to a channel ID via
+`channels.list?forHandle=` at pull time — but a brand can instead be
+hand-verified only down to the raw channel ID (`config.py` comments each
+one this applies to). `pull_youtube.py`'s `_looks_like_channel_id()`
+detects the `UC` + 22-character shape and calls `channels.list?id=`
+directly for those, skipping the handle-resolution step entirely; both
+`resolve_channel_id()` and `verify_handles.py`'s lookup dispatch on it.
+
 ## Dormant brands
 
-A brand can genuinely stop posting (Bira 91's Instagram, verified by hand,
-has no activity since 2025). Left alone, that renders identically to "we
-measured this brand and it's near-invisible" — a materially different and
-much less charitable story than "this account isn't posting." `dormant_since`
-in `config.py` (free-text, not necessarily a full date — a bare year is a
-legitimate value pending a more exact one) flags this by hand per brand.
+A brand can genuinely stop posting on a platform. Left alone, that renders
+identically to "we measured this brand and it's near-invisible" — a
+materially different and much less charitable story than "this account
+isn't posting." `dormant_since` in `config.py` (free-text, not necessarily
+a full date — a bare year is a legitimate value pending a more exact one)
+flags this by hand per brand; no brand in the current tracked set is
+flagged, but the field and the render path stay in place for whenever one
+is.
 
 The dashboard only replaces a brand's bar/ring with a `DORMANT` badge when
 its *combined* share still rounds to nothing (`row.dormantFull`, computed
@@ -168,8 +225,9 @@ asymmetrically — YouTube's `commentThreads` is free within quota
 comments cost Apify credit (`IG_COMMENT_POSTS=8` × `IG_COMMENT_PER_POST=100`)
 and stop being fetched the moment month-to-date spend
 (`store/usage.json`, tracked by `usage.py`) reaches `APIFY_MONTHLY_CEILING_USD`
-— into `store/comments.json`, tagging both posts (surrogate vehicle) and
-comments (spam/polarity/theme/language); the platform composition of each
+— into `store/comments.json`, tagging both posts (vehicle — see
+`config.VEHICLES`/`LABELS` for what that means for the current category)
+and comments (spam/polarity/theme/language); the platform composition of each
 run's sample is surfaced in `meta.commentSample` →
 `build_data.py` reads the whole store, estimates paid/organic per post from
 a trailing-90-day median baseline, and emits `public/ci/data.json` in the
@@ -183,10 +241,10 @@ file to copy back over `public/ci/data.json`.
 ## What `untracked` means here
 
 The dashboard's "Other / Untracked" row represents the long tail of smaller
-and craft competitors this pipeline never scrapes. Real ingestion only
-covers the nine named brands, so `untracked` is not a measurement — it's a
-disclosed, fixed-share model: `config.UNTRACKED["share_assumption"]`
-(currently 0.074) is solved, per window, so that
+competitors this pipeline never scrapes. Real ingestion only covers the
+brands named in `config.BRANDS`, so `untracked` is not a measurement —
+it's a disclosed, fixed-share model: `config.UNTRACKED["share_assumption"]`
+is solved, per window, so that
 `untracked / (tracked_total + untracked) == share_assumption` holds exactly
 against that window's real tracked total. The whole modelled figure is
 carried on `ig.organic` (there's no per-platform breakdown for a bucket
@@ -194,6 +252,58 @@ nothing is actually scraped from); `untrackedShareAssumption` is surfaced in
 `meta` and printed in METHODOLOGY so the number is never mistaken for a
 measurement. An honest, disclosed model beats either a fabricated precise
 figure or a silent zero.
+
+## Category pivots (e.g. alcobev → QSR)
+
+The front end is built so a category/client pivot is a `config.py` edit, not
+a rewrite — three structural rules make that true:
+
+1. **Nothing in `index.html` references a client or brand by literal ID.**
+   `CLIENT_BRAND_ID` / `CLIENT_PORTFOLIO_ID` are resolved once on load by
+   scanning `BRANDS` / `PORTFOLIOS` for `isClient===true` (`resolveClientIds()`,
+   called right after `init()`'s fetch) and cached; every place that used to
+   hardcode a brand ID (`headToHeadBlock`'s client-suppression and its "vs"
+   comparison, the topbar client name, the Platform Intelligence headline,
+   the document title) reads those two instead. Insight copy selects
+   entities by rank/role (leader, client, biggest non-leader mover on a
+   given metric) exclusively — never a literal ID — so a different tracked
+   set changes which brand fills a sentence, never whether the sentence
+   breaks. Two other spots hardcoded a brand *count* the same way a literal
+   ID would (`8 TRACKED BRANDS`, `5` for groups in `denomNoteFor`) — both now
+   read `Object.keys(BRANDS).length` / `Object.keys(PORTFOLIOS).length`.
+2. **No category word is hardcoded in a render function.** Every
+   category-facing string (axis/section labels, the vehicle-classification
+   methodology heading and caveat, the print-footer tag, the untracked note)
+   reads from `meta.labels` (`build_data.py`'s `build_meta()` emits
+   `dict(config.LABELS)` verbatim — add the category's strings in
+   `config.py`, not here). Renamed the functions/classes that read as
+   beer-specific now that the concept is generic: `renderSurrogateBand` →
+   `renderVehicleBand`, `surrogateMixShiftBlock` → `vehicleMixShiftBlock`,
+   `.surrogate-band`/`#surrogateCard` → `.vehicle-band`/`#vehicleCard`,
+   `.sband-*` → `.vband-*`.
+3. **The taxonomy itself is data, not a JS constant.** `VEHICLES` and
+   `THEMES` used to be hardcoded `const` arrays in `index.html` carrying
+   the previous category's ids, labels, colors, and (for themes) the
+   negativity-weighting constant `deriveThemeMatrix()` uses to spread
+   aggregate sentiment across themes — a second, easy-to-miss hardcode
+   alongside `meta.labels` above, since the old ids (`soda`, `availability`,
+   …) don't read as beer-specific at a glance. Both are now `let`,
+   populated in `init()` from `meta.vehicles`/`meta.themes`
+   (`build_data.py`'s `build_meta()` assembles them from
+   `config.VEHICLES`/`THEMES` + `VEHICLE_LABELS`/`VEHICLE_COLOR_VARS`/
+   `THEME_LABELS`/`THEME_LIFT`/`THEME_OUTLIER_CAPTIONS`). A pivot edits
+   those config dicts (plus the matching `--v-*` CSS vars in `index.html`'s
+   `:root` — colors are the one piece of this still hand-paired, see the
+   comment above that block) and never touches a render function. The
+   `classify.py` prompts that describe what each vehicle/theme value means
+   to the LLM are a fourth place a pivot must edit by hand — schema-driven
+   (`config.VEHICLES`/`THEMES`), but the prose description of each value
+   is necessarily hand-written per category.
+
+**Acceptance test for rule 1** (run this after any pivot): rename every
+brand ID in `data.json` to `brand_a`…`brand_g`, set `isClient` on one, and
+confirm every view renders with no console errors and head-to-head is
+intact for non-client brands and suppressed for the client.
 
 ## Front-end edits, for anyone auditing "no render function changed"
 
@@ -227,7 +337,7 @@ Every edit inside `public/ci/index.html` falls into one of three buckets:
    member's null bucket from that bucket's weight instead of letting
    `null * weight` silently coerce to a measured zero.
 3. **Everything else** — every render function (the radial chart, ranked
-   bars, surrogate band, all of Platform Intelligence and Brand/Group
+   bars, vehicle band, all of Platform Intelligence and Brand/Group
    Detail, the methodology panel's layout) is byte-for-byte what it was in
    the placeholder build. They already only ever read the row/entity shapes
    `computeRows()` / `entityForDetail()` hand them — once those two (plus

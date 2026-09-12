@@ -7,9 +7,16 @@ credit. Every check below is chosen to be free or near-free and to make no
 store write: a bad key should fail loudly here, not three minutes into a
 `daily.yml` run after `pull_youtube.py` has already written rows.
 
-Exits non-zero if any key is missing or a call with it fails, so this is
-meant to run as the first step of the real-run workflow, gating everything
-after it.
+The Gemini check goes one step further than reachability: it calls
+ListModels and confirms `config.GEMINI_MODEL` is actually in the returned
+list. Gemini API keys authenticate fine against a retired model name (the
+key itself isn't what's wrong), so a model that's been shut down — as
+gemini-1.5-* now are, returning 404 on every call — would otherwise sail
+through a bare reachability check and only fail a minute into classify.py.
+
+Exits non-zero if any key is missing, unreachable, or (Gemini specifically)
+authenticates against a model that no longer exists, so this is meant to
+run as the first step of the real-run workflow, gating everything after it.
 """
 
 from __future__ import annotations
@@ -18,6 +25,8 @@ import os
 import sys
 
 import requests
+
+from . import config
 
 YOUTUBE_CHECK_URL = "https://www.googleapis.com/youtube/v3/channels"
 # Google Developers' own channel — a fixed, always-public ID. part=id only,
@@ -63,9 +72,15 @@ def check_gemini(api_key: str | None) -> tuple[bool, str]:
         return False, "GEMINI_API_KEY not set"
     try:
         resp = requests.get(GEMINI_CHECK_URL, params={"key": api_key}, timeout=15)
-        if resp.ok:
-            return True, "reachable"
-        return False, f"HTTP {resp.status_code}: {resp.text[:200]}"
+        if not resp.ok:
+            return False, f"HTTP {resp.status_code}: {resp.text[:200]}"
+        models = resp.json().get("models", [])
+        available = {m["name"].rsplit("/", 1)[-1] for m in models if "name" in m}
+        if config.GEMINI_MODEL in available:
+            return True, f"reachable, {config.GEMINI_MODEL} available"
+        return False, (f"{config.GEMINI_MODEL} not in ListModels — this key cannot call it (a dead or "
+                        f"mistyped model name auths fine and only fails a minute into classify.py). "
+                        f"Available: {sorted(available)}")
     except requests.RequestException as exc:
         return False, f"request failed: {exc}"
 

@@ -1,180 +1,289 @@
 {
   "meta": {
-    "updated": "03 SEP 15:10 IST",
-    "updatedISO": "2026-09-03T09:40:17Z",
+    "updated": "12 SEP 10:57 IST",
+    "updatedISO": "2026-09-12T05:27:26Z",
     "spamRateBase": 0.61,
     "handles": {
-      "kingfisher": {
+      "kfc": {
         "ig": [
-          "@kingfisherworld"
+          "@kfcindia_official"
         ],
-        "yt": "@KingfisherWorld"
+        "yt": "UCg5ukNutGtg1KqvWwuc56xw",
+        "fb": [
+          "KFC-India-61563476804822"
+        ]
       },
-      "budweiser": {
+      "pizzahut": {
         "ig": [
-          "@budweiserindia"
+          "@pizzahut_india"
         ],
-        "yt": "@BudweiserIndia"
+        "yt": "UCOBjFMnb_0rfwV0plAYXsfQ",
+        "fb": [
+          "pizzahutindia"
+        ]
       },
-      "tuborg": {
+      "tacobell": {
         "ig": [
-          "@tuborgindia"
+          "@tacobellindia"
         ],
-        "yt": "@TuborgIndia"
+        "yt": "UCOjKPr9SdoKhZHZ7CDdg_jg",
+        "fb": [
+          "tacobellindia"
+        ]
       },
-      "bira91": {
+      "mcdonalds_in": {
         "ig": [
-          "@bira91"
+          "@mcdonalds_india",
+          "@mcdonaldsinindia"
         ],
-        "yt": "@Bira91"
+        "yt": "UCaj66rhgdjzNmIQ6rtcFxzw",
+        "fb": [
+          "McDonaldsIndia",
+          "McDonaldsinIndia"
+        ]
       },
-      "corona": {
+      "burgerking": {
         "ig": [
-          "@coronaindia"
+          "@burgerkingindia"
         ],
-        "yt": "@CoronaIndia"
+        "yt": null,
+        "fb": [
+          "burgerkingindia"
+        ]
       },
-      "carlsberg": {
+      "dominos": {
         "ig": [
-          "@carlsbergindia"
+          "@dominos_india"
         ],
-        "yt": "@CarlsbergIndia"
+        "yt": "@DominosPizzaIndia",
+        "fb": [
+          "dominospizzaindia"
+        ]
       },
-      "haywards5000": {
+      "subway": {
         "ig": [
-          "@haywards5000"
+          "@subway_india"
         ],
-        "yt": "@Haywards5000"
-      },
-      "simba": {
-        "ig": [
-          "@simbabeer"
-        ],
-        "yt": "@SimbaBeer"
+        "yt": "@SubwayIndiaSocial",
+        "fb": [
+          "SubwayIndia"
+        ]
       }
     },
     "trendsQueries": {
-      "kingfisher": "Kingfisher beer",
-      "budweiser": "Budweiser India",
-      "tuborg": "Tuborg India",
-      "bira91": "Bira 91 beer",
-      "corona": "Corona beer India",
-      "carlsberg": "Carlsberg India",
-      "haywards5000": "Haywards 5000 beer",
-      "simba": "Simba beer India"
+      "kfc": "KFC India + KFC near me + KFC menu + KFC offer + KFC coupon",
+      "pizzahut": "Pizza Hut India + Pizza Hut near me + Pizza Hut menu + Pizza Hut offer",
+      "tacobell": "Taco Bell India + Taco Bell near me + Taco Bell menu + Taco Bell offer",
+      "mcdonalds_in": "McDonalds India + McDonalds near me + McDonalds menu + McDonalds offer",
+      "burgerking": "Burger King India + Burger King near me + Burger King menu + BK offer",
+      "dominos": "Dominos India + Dominos near me + Dominos menu + Dominos offer",
+      "subway": "Subway India + Subway near me + Subway menu + Subway offer"
     },
     "anomalyThreshold": 1.8,
+    "untrackedShareAssumption": 0.112,
+    "commentSample": {
+      "n": 0,
+      "spamRate": 0.61,
+      "ytShare": 0.0,
+      "igShare": 0.0
+    },
+    "excluded": {},
     "logoSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 1.5 22 7v10l-10 5.5L2 17V7L12 1.5Z\" stroke=\"url(#lg)\" stroke-width=\"1.3\"/><circle cx=\"12\" cy=\"12\" r=\"3.1\" fill=\"var(--cyan)\"/><defs><linearGradient id=\"lg\" x1=\"2\" y1=\"1.5\" x2=\"22\" y2=\"22.5\"><stop stop-color=\"var(--violet)\"/><stop offset=\"1\" stop-color=\"var(--cyan)\"/></linearGradient></defs></svg>",
+    "labels": {
+      "vehicleAxis": "OFFER TYPE",
+      "vehicleSplitLabel": "OFFER MIX",
+      "vehicleShiftLabel": "OFFER MIX — SHIFT ACROSS WINDOW",
+      "vehicleMethodology": "OFFER TYPES",
+      "vehicleCaveat": "CONTENT CLASSIFIED BY OFFER TYPE — LAUNCH, VALUE, LTO, BRAND, DELIVERY, CSR.",
+      "printTag": "OFFER-CLASSIFIED",
+      "untrackedNote": "UNTRACKED HAS NO OFFER CLASSIFICATION"
+    },
+    "vehicles": [
+      {
+        "id": "new_launch",
+        "label": "NEW LAUNCH",
+        "color": "var(--v-new_launch)"
+      },
+      {
+        "id": "value_offer",
+        "label": "VALUE OFFER",
+        "color": "var(--v-value_offer)"
+      },
+      {
+        "id": "lto",
+        "label": "LIMITED TIME",
+        "color": "var(--v-lto)"
+      },
+      {
+        "id": "brand",
+        "label": "BRAND",
+        "color": "var(--v-brand)"
+      },
+      {
+        "id": "delivery",
+        "label": "DELIVERY",
+        "color": "var(--v-delivery)"
+      },
+      {
+        "id": "csr",
+        "label": "CSR",
+        "color": "var(--v-csr)"
+      },
+      {
+        "id": "unclassified",
+        "label": "UNCLASSIFIED",
+        "color": "var(--v-unclassified)"
+      }
+    ],
+    "themes": [
+      {
+        "id": "taste",
+        "label": "TASTE",
+        "lift": 0.7,
+        "outlierCaption": "complaints about a recipe or formulation change drew an unusual negative wave"
+      },
+      {
+        "id": "price",
+        "label": "PRICE",
+        "lift": 1.1,
+        "outlierCaption": "pricing backlash after a menu price revision reported out of {region}"
+      },
+      {
+        "id": "service",
+        "label": "SERVICE",
+        "lift": 1.6,
+        "outlierCaption": "service-speed and order-accuracy complaints spiked out of {region}"
+      },
+      {
+        "id": "delivery",
+        "label": "DELIVERY",
+        "lift": 1.4,
+        "outlierCaption": "delivery-partner complaints (late, cold, wrong order) spiked out of {region}"
+      },
+      {
+        "id": "hygiene",
+        "label": "HYGIENE",
+        "lift": 2.0,
+        "outlierCaption": "a hygiene or cleanliness complaint went semi-viral out of {region}"
+      },
+      {
+        "id": "other",
+        "label": "OTHER",
+        "lift": 1.0,
+        "outlierCaption": "a repost/meme thread drew an unusual negative comment wave"
+      }
+    ],
     "metaAdNote": "Meta's Ad Library API returns only political and social-issue ads outside the EU and UK, and does not expose spend for commercial advertisers anywhere. No measured spend figure is obtainable for this category. All expense values are modelled from public impression proxies and published CPM benchmarks.",
     "viewProxyCaveat": "VIEW-BASED PROXY · SHORT-FORM LOOPING CONTENT INFLATES COUNTS · NOT REACH",
-    "surrogateCaveat": "INDIAN ALCOBEV — MEASURED CONTENT IS PREDOMINANTLY SURROGATE. SEE SURROGATE SPLIT.",
-    "searchCaveat": "SEARCH INTEREST · RELATIVE INDEX 0–100 · NOT COMPARABLE TO SOV SCALE"
+    "searchCaveat": "SEARCH INTEREST · RELATIVE INDEX 0–100 · NOT COMPARABLE TO SOV SCALE",
+    "soeTwoLayerNote": "SOE is modelled from a modelled input: paid/organic split is itself an estimate (views vs. a trailing-90-day median baseline), then converted to spend via CPM and format-mix assumptions. Two layers of estimation stack here — flagged, not hidden.",
+    "demandBlindSpotNote": "Swiggy and Zomato in-app search never touches Google, and for QSR that is plausibly the majority of purchase intent. This pipeline has no visibility into it at all — a larger gap here than it was for alcobev, where on-premise and retail discovery weren't dominated by a couple of apps this way.",
+    "searchBlendedIntentNote": "Each brand's Trends query blends three intents — brand name, location/menu (\"near me\", \"menu\"), and offer (\"offer\", \"coupon\") — to stay above Google's reporting floor. That means the series measures total demand but cannot separate rising brand interest from discount-hunting; a spike could be either.",
+    "mcdonaldsHandleNote": "McDonald's India runs two Instagram accounts — @mcdonalds_india (Westlife Foodworld, West & South) and @mcdonaldsinindia (CPRL, North & East) — operated by different franchisees but one brand to a consumer and one brand in search. Both are pulled and rolled into a single McDonald's profile; a post cross-published to both accounts is deduped on caption + timestamp proximity so it counts once, not twice, in every post-count-based stat, while its real engagement from both audiences still counts in full toward visibility. McDonald's is the only multi-handle brand in the tracked set."
   },
   "brands": {
-    "kingfisher": {
-      "name": "Kingfisher",
-      "parent": "unitedbreweries",
-      "color": "var(--c-kingfisher)",
+    "kfc": {
+      "name": "KFC",
+      "parent": "yum",
+      "color": "var(--c-kfc)",
       "isClient": true,
-      "handleIG": "@kingfisherworld",
-      "handleYT": "@KingfisherWorld"
+      "handleIG": "@kfcindia_official",
+      "handleYT": "UCg5ukNutGtg1KqvWwuc56xw",
+      "dormantSince": null
     },
-    "budweiser": {
-      "name": "Budweiser",
-      "parent": "abinbev",
-      "color": "var(--c-budweiser)",
+    "pizzahut": {
+      "name": "Pizza Hut",
+      "parent": "yum",
+      "color": "var(--c-pizzahut)",
       "isClient": false,
-      "handleIG": "@budweiserindia",
-      "handleYT": "@BudweiserIndia"
+      "handleIG": "@pizzahut_india",
+      "handleYT": "UCOBjFMnb_0rfwV0plAYXsfQ",
+      "dormantSince": null
     },
-    "tuborg": {
-      "name": "Tuborg",
-      "parent": "carlsbergindia",
-      "color": "var(--c-tuborg)",
+    "tacobell": {
+      "name": "Taco Bell",
+      "parent": "yum",
+      "color": "var(--c-tacobell)",
       "isClient": false,
-      "handleIG": "@tuborgindia",
-      "handleYT": "@TuborgIndia"
+      "handleIG": "@tacobellindia",
+      "handleYT": "UCOjKPr9SdoKhZHZ7CDdg_jg",
+      "dormantSince": null
     },
-    "bira91": {
-      "name": "Bira 91",
-      "parent": "b9",
-      "color": "var(--c-bira91)",
+    "mcdonalds_in": {
+      "name": "McDonald's",
+      "parent": "mcdonalds",
+      "color": "var(--c-mcdonalds)",
       "isClient": false,
-      "handleIG": "@bira91",
-      "handleYT": "@Bira91"
+      "handleIG": "@mcdonalds_india / @mcdonaldsinindia",
+      "handleYT": "UCaj66rhgdjzNmIQ6rtcFxzw",
+      "dormantSince": null
     },
-    "corona": {
-      "name": "Corona",
-      "parent": "abinbev",
-      "color": "var(--c-corona)",
+    "burgerking": {
+      "name": "Burger King",
+      "parent": "rbi",
+      "color": "var(--c-burgerking)",
       "isClient": false,
-      "handleIG": "@coronaindia",
-      "handleYT": "@CoronaIndia"
+      "handleIG": "@burgerkingindia",
+      "handleYT": null,
+      "dormantSince": null
     },
-    "carlsberg": {
-      "name": "Carlsberg",
-      "parent": "carlsbergindia",
-      "color": "var(--c-carlsberg)",
+    "dominos": {
+      "name": "Domino's",
+      "parent": "jubilant",
+      "color": "var(--c-dominos)",
       "isClient": false,
-      "handleIG": "@carlsbergindia",
-      "handleYT": "@CarlsbergIndia"
+      "handleIG": "@dominos_india",
+      "handleYT": "@DominosPizzaIndia",
+      "dormantSince": null
     },
-    "haywards5000": {
-      "name": "Haywards 5000",
-      "parent": "abinbev",
-      "color": "var(--c-haywards5000)",
+    "subway": {
+      "name": "Subway",
+      "parent": "subway_group",
+      "color": "var(--c-subway)",
       "isClient": false,
-      "handleIG": "@haywards5000",
-      "handleYT": "@Haywards5000"
-    },
-    "simba": {
-      "name": "Simba",
-      "parent": "simba",
-      "color": "var(--c-simba)",
-      "isClient": false,
-      "handleIG": "@simbabeer",
-      "handleYT": "@SimbaBeer"
+      "handleIG": "@subway_india",
+      "handleYT": "@SubwayIndiaSocial",
+      "dormantSince": null
     }
   },
   "portfolios": {
-    "unitedbreweries": {
-      "name": "United Breweries",
+    "yum": {
+      "name": "Yum! Brands",
       "members": [
-        "kingfisher"
+        "kfc",
+        "pizzahut",
+        "tacobell"
       ],
-      "color": "var(--c-kingfisher)",
+      "color": "var(--c-kfc)",
       "isClient": true
     },
-    "abinbev": {
-      "name": "AB InBev India",
+    "mcdonalds": {
+      "name": "McDonald's Corp",
       "members": [
-        "budweiser",
-        "corona",
-        "haywards5000"
+        "mcdonalds_in"
       ],
-      "color": "var(--c-budweiser)"
+      "color": "var(--c-mcdonalds)"
     },
-    "carlsbergindia": {
-      "name": "Carlsberg India",
+    "rbi": {
+      "name": "Restaurant Brands Intl",
       "members": [
-        "tuborg",
-        "carlsberg"
+        "burgerking"
       ],
-      "color": "var(--c-tuborg)"
+      "color": "var(--c-burgerking)"
     },
-    "b9": {
-      "name": "B9 Beverages",
+    "jubilant": {
+      "name": "Jubilant FoodWorks",
       "members": [
-        "bira91"
+        "dominos"
       ],
-      "color": "var(--c-bira91)"
+      "color": "var(--c-dominos)"
     },
-    "simba": {
-      "name": "Simba",
+    "subway_group": {
+      "name": "Subway",
       "members": [
-        "simba"
+        "subway"
       ],
-      "color": "var(--c-simba)"
+      "color": "var(--c-subway)"
     }
   },
   "untracked": {
@@ -182,14 +291,50 @@
     "name": "Other / Untracked",
     "color": "var(--c-untracked)",
     "windows": {
-      "7": {},
-      "30": {},
-      "90": {}
+      "7": {
+        "ig": {
+          "organic": 0,
+          "paid": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0
+        }
+      },
+      "30": {
+        "ig": {
+          "organic": 0,
+          "paid": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0
+        }
+      },
+      "90": {
+        "ig": {
+          "organic": 0,
+          "paid": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0
+        }
+      }
     },
-    "prev30": {}
+    "prev30": {
+      "ig": {
+        "organic": 0,
+        "paid": 0
+      },
+      "yt": {
+        "organic": 0,
+        "paid": 0
+      }
+    }
   },
   "profiles": {
-    "kingfisher": {
+    "kfc": {
       "windows": {
         "7": {
           "ig": {
@@ -250,19 +395,21 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -272,11 +419,11 @@
       },
       "negDeltaPP": 0.0,
       "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
         "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
         "other": 0.0
       },
       "engagement30": {
@@ -286,12 +433,12 @@
         "saves": null
       },
       "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -314,7 +461,7 @@
         "spamRate": 0.61
       }
     },
-    "budweiser": {
+    "pizzahut": {
       "windows": {
         "7": {
           "ig": {
@@ -375,19 +522,21 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -397,11 +546,11 @@
       },
       "negDeltaPP": 0.0,
       "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
         "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
         "other": 0.0
       },
       "engagement30": {
@@ -411,12 +560,12 @@
         "saves": null
       },
       "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -439,7 +588,7 @@
         "spamRate": 0.61
       }
     },
-    "tuborg": {
+    "tacobell": {
       "windows": {
         "7": {
           "ig": {
@@ -500,19 +649,21 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -522,11 +673,11 @@
       },
       "negDeltaPP": 0.0,
       "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
         "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
         "other": 0.0
       },
       "engagement30": {
@@ -536,12 +687,12 @@
         "saves": null
       },
       "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -564,7 +715,7 @@
         "spamRate": 0.61
       }
     },
-    "bira91": {
+    "mcdonalds_in": {
       "windows": {
         "7": {
           "ig": {
@@ -625,19 +776,21 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -647,11 +800,11 @@
       },
       "negDeltaPP": 0.0,
       "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
         "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
         "other": 0.0
       },
       "engagement30": {
@@ -661,12 +814,12 @@
         "saves": null
       },
       "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -689,7 +842,7 @@
         "spamRate": 0.61
       }
     },
-    "corona": {
+    "burgerking": {
       "windows": {
         "7": {
           "ig": {
@@ -750,19 +903,21 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -772,11 +927,11 @@
       },
       "negDeltaPP": 0.0,
       "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
         "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
         "other": 0.0
       },
       "engagement30": {
@@ -786,12 +941,12 @@
         "saves": null
       },
       "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -814,7 +969,7 @@
         "spamRate": 0.61
       }
     },
-    "carlsberg": {
+    "dominos": {
       "windows": {
         "7": {
           "ig": {
@@ -875,19 +1030,21 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -897,11 +1054,11 @@
       },
       "negDeltaPP": 0.0,
       "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
         "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
         "other": 0.0
       },
       "engagement30": {
@@ -911,12 +1068,12 @@
         "saves": null
       },
       "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -939,7 +1096,7 @@
         "spamRate": 0.61
       }
     },
-    "haywards5000": {
+    "subway": {
       "windows": {
         "7": {
           "ig": {
@@ -1000,19 +1157,21 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.0,
+        "delivery": 0.0,
+        "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -1022,11 +1181,11 @@
       },
       "negDeltaPP": 0.0,
       "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
         "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
         "other": 0.0
       },
       "engagement30": {
@@ -1036,137 +1195,12 @@
         "saves": null
       },
       "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
-      ],
-      "seriesIG": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "seriesYT": [
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0,
-        0.0
-      ],
-      "commentSample": {
-        "n": 0,
-        "spamRate": 0.61
-      }
-    },
-    "simba": {
-      "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
-      },
-      "prev30": {
-        "ig": {
-          "organic": 0,
-          "paid": 0,
-          "followers": null,
-          "posts": 0
-        },
-        "yt": {
-          "organic": 0,
-          "paid": 0,
-          "followers": null,
-          "posts": 0
-        }
-      },
-      "formatMix": "mixed",
-      "vehicleMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
-        "unclassified": 0.0
-      },
-      "vehiclePrevMix": {
-        "soda": 0.0,
-        "nonalc": 0.0,
-        "music": 0.0,
-        "merch": 0.0,
-        "direct": 0.0,
-        "unclassified": 0.0
-      },
-      "sentiment": {
-        "pos": 0.0,
-        "neu": 0.0,
-        "neg": 0.0
-      },
-      "negDeltaPP": 0.0,
-      "themeShare": {
-        "availability": 0.0,
-        "price": 0.0,
-        "taste": 0.0,
-        "events": 0.0,
-        "nostalgia": 0.0,
-        "other": 0.0
-      },
-      "engagement30": {
-        "likes": 0,
-        "comments": 0,
-        "shares": null,
-        "saves": null
-      },
-      "search": [
-        0,
-        0,
-        0,
-        0,
-        0,
-        0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,

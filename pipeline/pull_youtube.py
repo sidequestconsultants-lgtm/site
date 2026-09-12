@@ -51,15 +51,30 @@ def _get(path: str, api_key: str, **params) -> dict:
     return resp.json()
 
 
+def _looks_like_channel_id(value: str) -> bool:
+    """A real channel ID (not a handle) is "UC" + 22 characters, always 24
+    total — config.py flags any brand where the only thing ever resolved by
+    hand was the ID itself, never a stable @handle (several QSR brands are
+    like this). Fall through to forHandle= resolution for anything else."""
+    return len(value) == 24 and value.startswith("UC")
+
+
 def resolve_channel_id(handle: str, api_key: str) -> str | None:
-    """Resolve a channel ID from config's `yt_handle` via channels.list?forHandle=.
-    Costs one quota unit per brand per run — negligible against the 10,000/day
-    budget, and simpler than pinning a channel ID that could silently go stale
-    if a channel's own upload cadence or branding changes. Handles here do NOT
-    follow the Instagram naming pattern (Kingfisher is @kingofgoodtimes,
-    Budweiser's channel is "Budweiser Experiences") — never derive one, only
-    ever use what's hand-verified in config.py."""
-    data = _get("channels", api_key, part="id", forHandle=handle.lstrip("@"))
+    """Resolve a channel ID from config's `yt_handle`. Most brands store an
+    @handle here and this costs one quota unit per brand per run via
+    channels.list?forHandle= — negligible against the 10,000/day budget, and
+    simpler than pinning an ID that could silently go stale if a channel's
+    own upload cadence or branding changes. A brand whose config value is
+    already a raw channel ID (config.py comments each one) skips straight
+    to channels.list?id=, since there's no handle to resolve from. A
+    YouTube handle does NOT reliably follow the Instagram naming pattern —
+    config.py has hit both a same-name channel and a channel branded
+    nothing like the Instagram handle — never derive one, only ever use
+    what's hand-verified in config.py."""
+    if _looks_like_channel_id(handle):
+        data = _get("channels", api_key, part="id", id=handle)
+    else:
+        data = _get("channels", api_key, part="id", forHandle=handle.lstrip("@"))
     items = data.get("items") or []
     return items[0]["id"] if items else None
 

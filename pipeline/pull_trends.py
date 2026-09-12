@@ -6,18 +6,20 @@ the series barely moves day to day, so a daily pull would just burn through
 rate limit for no signal.
 
 Google Trends returns values 0-100 *relative to the other terms in the same
-request*, and caps a request at 5 terms — 8 brands don't fit in one call.
-So every batch carries a shared anchor brand (the client, Kingfisher) plus
-up to 4 others; the anchor's series from the first batch becomes the
-reference scale, and every later batch is rescaled by
-(reference anchor mean / this batch's anchor mean) before its brands are
-recorded. Without the anchor, batch 2's "100" and batch 1's "100" mean
-different things and the eight series aren't comparable at all.
+request*, and caps a request at 5 terms — a tracked set bigger than that
+doesn't fit in one call. So every batch carries a shared anchor brand
+(config.TRENDS_ANCHOR — the client, by convention) plus up to 4 others;
+the anchor's series from the first batch becomes the reference scale, and
+every later batch is rescaled by (reference anchor mean / this batch's
+anchor mean) before its brands are recorded. Without the anchor, batch 2's
+"100" and batch 1's "100" mean different things and the tracked set's
+series aren't comparable at all.
 
 Each brand's exact query string lives in config.py (`trends_query`) and is
-surfaced verbatim in meta.trendsQueries — "Kingfisher" vs "Kingfisher beer"
-return genuinely different series (the bare name is contaminated by the
-airline and the bird), so the query actually used has to be visible.
+surfaced verbatim in meta.trendsQueries — a bare brand name can be
+contaminated by an unrelated same-name thing (config.py's own comments
+note this per brand where it applies), so the query actually used has to
+be visible rather than assumed from the brand name alone.
 """
 
 from __future__ import annotations

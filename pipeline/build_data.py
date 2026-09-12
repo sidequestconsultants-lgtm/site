@@ -2,10 +2,10 @@
 build_data.py — Phase 4a/4c/4d.
 
 Reads the store, emits public/ci/data.json in exactly the shape the
-dashboard's `init()` expects (see Phase 4e / brand/kingfisher-competitive-
-intelligence.html). Also writes a dated copy to store/snapshots/ — that
-folder is the rollback mechanism in a no-database stack: a bad run's
-snapshot just doesn't get copied over data.json (see RULE 7).
+dashboard's `init()` expects (see Phase 4e). Also writes a dated copy to
+store/snapshots/ — that folder is the rollback mechanism in a no-database
+stack: a bad run's snapshot just doesn't get copied over data.json (see
+RULE 7).
 
 Paid/organic split is a statistical estimate, not a classification: a post's
 views against the trailing-90-day median for its own brand/platform/type.
@@ -85,7 +85,13 @@ def aggregate_window(posts: list[dict], start: datetime, end: datetime,
         posted = parse_dt(p.get("posted_at"))
         if not in_window(posted, start, end):
             continue
-        n_posts += 1
+        # A cross-handle duplicate (same creative, two of a brand's own
+        # accounts — pull_instagram.py's McDonald's case) is real, separate
+        # engagement from two real audiences, so its views still count
+        # toward visibility in full; it just isn't a second piece of
+        # content, so it doesn't add a second post to the volume count.
+        if not p.get("is_duplicate"):
+            n_posts += 1
         if p.get("views") is None:
             continue  # static: counts toward volume, not visibility (RULE 3)
         paid_est, organic_est = estimate_paid_organic(p["views"], baselines.get(p["post_type"]))
@@ -95,6 +101,9 @@ def aggregate_window(posts: list[dict], start: datetime, end: datetime,
 
 
 def compute_format_mix(posts_90d: list[dict]) -> str:
+    # Cross-handle duplicates excluded — this is a distribution over unique
+    # content, not over raw post rows (see aggregate_window).
+    posts_90d = [p for p in posts_90d if not p.get("is_duplicate")]
     video = sum(1 for p in posts_90d if p["post_type"] in VISIBILITY_TYPES)
     static = sum(1 for p in posts_90d if p["post_type"] in STATIC_TYPES)
     total = video + static
@@ -112,6 +121,8 @@ def compute_vehicle_mix(posts: list[dict], start: datetime, end: datetime) -> di
     counts: Counter = Counter()
     total = 0
     for p in posts:
+        if p.get("is_duplicate"):
+            continue  # same creative as another of the brand's own posts — not a second data point
         if not in_window(parse_dt(p.get("posted_at")), start, end):
             continue
         counts[p.get("vehicle") or "unclassified"] += 1
@@ -285,10 +296,19 @@ def build_profile(brand_id: str, brand: dict, posts: dict, channel_stats: dict,
     }
 
 
+def _as_list(val) -> list:
+    """handle_fb is a plain string for every brand except McDonald's (two
+    franchise operators, two pages) — normalize either shape rather than
+    assuming one."""
+    if val is None:
+        return []
+    return list(val) if isinstance(val, list) else [val]
+
+
 def build_meta(now: datetime, comments_store: dict) -> dict:
     handles = {
-        bid: {"ig": [f"@{b['handle_ig']}"] if b.get("handle_ig") else [],
-              "yt": b.get("yt_handle"), "fb": b.get("handle_fb")}
+        bid: {"ig": [f"@{h}" for h in b.get("handle_ig") or []],
+              "yt": b.get("yt_handle"), "fb": _as_list(b.get("handle_fb"))}
         for bid, b in config.BRANDS.items()
     }
     trends_queries = {bid: b["trends_query"] for bid, b in config.BRANDS.items()}
@@ -306,6 +326,23 @@ def build_meta(now: datetime, comments_store: dict) -> dict:
         "commentSample": compute_meta_comment_sample(comments_store, now),
         "excluded": dict(config.EXCLUDED),
         "logoSvg": config.LOGO_SVG,
+        # Every category-facing string a render function needs lives here,
+        # never hardcoded in index.html — a category pivot (alcobev -> QSR,
+        # or whatever's next) is a config.LABELS edit, not a find-and-replace
+        # across render functions.
+        "labels": dict(config.LABELS),
+        # Same for the taxonomy itself — id, display label, color, and (for
+        # themes) the negativity-weighting constant all come from config,
+        # never a hardcoded JS array.
+        "vehicles": [
+            {"id": v, "label": config.VEHICLE_LABELS[v], "color": _css_var(config.VEHICLE_COLOR_VARS[v])}
+            for v in config.VEHICLES
+        ],
+        "themes": [
+            {"id": t, "label": config.THEME_LABELS[t], "lift": config.THEME_LIFT[t],
+             "outlierCaption": config.THEME_OUTLIER_CAPTIONS[t]}
+            for t in config.THEMES
+        ],
         **config.META_STRINGS,
     }
 
@@ -358,7 +395,7 @@ def build() -> dict:
         bid: {
             "name": b["name"], "parent": b["parent"], "color": _css_var(b["color_var"]),
             "isClient": b.get("is_client", False),
-            "handleIG": f"@{b['handle_ig']}" if b.get("handle_ig") else None,
+            "handleIG": " / ".join(f"@{h}" for h in b.get("handle_ig") or []) or None,
             "handleYT": b.get("yt_handle"),
             "dormantSince": b.get("dormant_since"),
         }

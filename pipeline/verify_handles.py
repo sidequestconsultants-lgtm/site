@@ -24,11 +24,14 @@ import os
 import sys
 
 from . import config
-from .pull_youtube import _get
+from .pull_youtube import _get, _looks_like_channel_id
 
 
 def youtube_lookup(handle: str, api_key: str) -> dict:
-    data = _get("channels", api_key, part="snippet,statistics", forHandle=handle.lstrip("@"))
+    if _looks_like_channel_id(handle):
+        data = _get("channels", api_key, part="snippet,statistics", id=handle)
+    else:
+        data = _get("channels", api_key, part="snippet,statistics", forHandle=handle.lstrip("@"))
     items = data.get("items") or []
     if not items:
         return {"resolved": False}
@@ -53,15 +56,18 @@ def run() -> None:
     for brand_id, brand in config.BRANDS.items():
         print(f"\n[verify_handles] {brand_id} ({brand['name']}) — config.verified={brand.get('verified')}")
 
-        handle_ig = brand.get("handle_ig")
-        if handle_ig:
-            print(f"  ig  @{handle_ig:<30} https://www.instagram.com/{handle_ig}/  (open and confirm by hand)")
+        handles_ig = brand.get("handle_ig") or []
+        if handles_ig:
+            for handle_ig in handles_ig:
+                print(f"  ig  @{handle_ig:<30} https://www.instagram.com/{handle_ig}/  (open and confirm by hand)")
         else:
             print("  ig  (no handle_ig in config)")
 
         handle_fb = brand.get("handle_fb")
-        if handle_fb:
-            print(f"  fb  {handle_fb:<31} https://www.facebook.com/{handle_fb}  (open and confirm by hand)")
+        handles_fb = handle_fb if isinstance(handle_fb, list) else ([handle_fb] if handle_fb else [])
+        if handles_fb:
+            for fb in handles_fb:
+                print(f"  fb  {fb:<31} https://www.facebook.com/{fb}  (open and confirm by hand)")
         else:
             print("  fb  (no handle_fb in config)")
 
