@@ -419,7 +419,11 @@ def main() -> None:
         statuses.append(classify_posts())
     if not args.posts_only:
         statuses.append(classify_comments())
-    sys.exit(0 if all(s == "ok" for s in statuses) else 1)
+    # "warn" (some posts/comments classified, some batches failed, or the
+    # Apify ceiling skipped IG comments) is a partial success and must
+    # still exit 0 — only "error" (nothing classified at all) fails the
+    # workflow, so build_data still runs on whatever did get classified.
+    sys.exit(0 if all(s in ("ok", "warn") for s in statuses) else 1)
 
 
 if __name__ == "__main__":

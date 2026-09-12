@@ -166,6 +166,64 @@ warning, that's Instagram's age gate on that specific account, not a bug
 here — verify by hand and decide whether to exclude the brand (like
 `EXCLUDED`) or accept it as permanently unmeasurable via this pipeline.
 
+## Partial pulls, credit exhaustion, and coverage-gated windows
+
+A real run pulled 6 of 7 brands successfully, then the 7th hit an Apify
+quota 403 partway through a 90-day-per-brand backfill — enough in one run
+to exhaust a month's free credit — and the whole script exited non-zero,
+which (GitHub Actions stops the job at the first failing step by default)
+meant `build_data`/the commit step never ran and all 490 already-fetched
+rows were discarded along with the one brand that failed. Four fixes:
+
+1. **A partial pull commits what it got.** `pull_instagram.py` (and, for
+   the same reason, `pull_youtube.py` and `classify.py`) now tracks
+   per-brand success independently of the run's overall status.
+   `store.save_posts()` runs once, unconditionally, after the loop — a
+   later brand's failure never discards an earlier brand's real rows. The
+   run only becomes `"error"` (the one status that fails the workflow)
+   when **zero** attempted brands succeeded; any partial success is
+   `"warn"` and still exits 0 (`main()`: `sys.exit(0 if status in ("ok",
+   "warn") else 1)`). A quota 403 (`ApifyQuotaExceeded`) is caught
+   specifically and, once seen, skips every *remaining* brand for that run
+   instead of rediscovering the same exhausted credit one brand at a time.
+2. **One-time 30-day backfill, then incremental forever.**
+   `config.INITIAL_PULL_DAYS = 30` replaces the old 90-day first-pull
+   window in `compute_since()` — a 90-day backfill across every brand at
+   once is exactly what exhausted a month's credit in one run. Every run
+   after the first is purely incremental (since the newest stored post,
+   same as before); the store's real history keeps growing past 30 on its
+   own, nothing is ever re-pulled for a period already on file.
+   `config.BASELINE_DAYS` (90) is a **cap**, not an assumption — the
+   anomaly model uses whatever trailing history actually exists.
+   `build_data.py`'s `compute_baseline_days_actual()` records how many
+   days of real history actually back a brand's paid/organic split
+   (`profile.baselineDaysActual`), so that confidence is visible rather
+   than silently assumed to always rest on a full window.
+3. **Dashboard windows reflect actual coverage.** With 30 days of history,
+   the 90-day window isn't a small number, it's an unanswerable one —
+   `build_data.py`'s `compute_coverage()` finds the earliest post across
+   whichever platforms are actually tracked and emits `meta.coverageDays`
+   / `meta.trackingSince` (the binding constraint is whichever platform
+   has the *least* history, since a window blends both). Any of the three
+   range presets (7/30/90) longer than that is emitted as `null` — same
+   null-vs-zero convention as everywhere else in this pipeline — never a
+   computed-but-wrong number. `index.html` disables a range button whose
+   window is unavailable, relabels it `NEEDS <n> MORE DAYS`
+   (`isRangeAvailable()`/`daysNeededFor()`), clamps `STATE.range` on load
+   to the longest range that *is* available, and — if even the 7-day
+   window isn't covered yet (a brand-new deployment) — shows a plain
+   "NOT ENOUGH DATA YET" panel instead of attempting to render normal
+   charts from nothing.
+4. **An exhausted Instagram source doesn't block the pipeline.**
+   `.github/workflows/daily.yml`'s "Pull Instagram" and "Classify posts and
+   comments" steps run with `continue-on-error: true` — a fully exhausted
+   Apify credit (every brand quota-403s, `status="error"`) or a dead
+   Gemini key still lets `build_data`/`build_demo`/commit run and publish
+   whatever YouTube alone provided that day. "Pull YouTube" stays a hard
+   gate (RULE #7 — a bad day never overwrites yesterday's good data.json);
+   it's the one source with no external credit to exhaust, so its own
+   total failure is still treated as nothing worth building.
+
 ## Multi-handle brands
 
 `handle_ig` in `config.py` is always a list, even for the common case of

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "12 SEP 10:57 IST",
-    "updatedISO": "2026-09-12T05:27:26Z",
+    "updated": "12 SEP 14:32 IST",
+    "updatedISO": "2026-09-12T09:02:41Z",
     "spamRateBase": 0.61,
     "handles": {
       "kfc": {
@@ -80,6 +80,8 @@
       "subway": "Subway India + Subway near me + Subway menu + Subway offer"
     },
     "anomalyThreshold": 1.8,
+    "coverageDays": 0,
+    "trackingSince": null,
     "untrackedShareAssumption": 0.112,
     "commentSample": {
       "n": 0,
@@ -291,36 +293,9 @@
     "name": "Other / Untracked",
     "color": "var(--c-untracked)",
     "windows": {
-      "7": {
-        "ig": {
-          "organic": 0,
-          "paid": 0
-        },
-        "yt": {
-          "organic": 0,
-          "paid": 0
-        }
-      },
-      "30": {
-        "ig": {
-          "organic": 0,
-          "paid": 0
-        },
-        "yt": {
-          "organic": 0,
-          "paid": 0
-        }
-      },
-      "90": {
-        "ig": {
-          "organic": 0,
-          "paid": 0
-        },
-        "yt": {
-          "organic": 0,
-          "paid": 0
-        }
-      }
+      "7": null,
+      "30": null,
+      "90": null
     },
     "prev30": {
       "ig": {
@@ -336,48 +311,9 @@
   "profiles": {
     "kfc": {
       "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
+        "7": null,
+        "30": null,
+        "90": null
       },
       "prev30": {
         "ig": {
@@ -459,52 +395,14 @@
       "commentSample": {
         "n": 0,
         "spamRate": 0.61
-      }
+      },
+      "baselineDaysActual": 0
     },
     "pizzahut": {
       "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
+        "7": null,
+        "30": null,
+        "90": null
       },
       "prev30": {
         "ig": {
@@ -586,52 +484,14 @@
       "commentSample": {
         "n": 0,
         "spamRate": 0.61
-      }
+      },
+      "baselineDaysActual": 0
     },
     "tacobell": {
       "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
+        "7": null,
+        "30": null,
+        "90": null
       },
       "prev30": {
         "ig": {
@@ -713,52 +573,14 @@
       "commentSample": {
         "n": 0,
         "spamRate": 0.61
-      }
+      },
+      "baselineDaysActual": 0
     },
     "mcdonalds_in": {
       "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
+        "7": null,
+        "30": null,
+        "90": null
       },
       "prev30": {
         "ig": {
@@ -840,52 +662,14 @@
       "commentSample": {
         "n": 0,
         "spamRate": 0.61
-      }
+      },
+      "baselineDaysActual": 0
     },
     "burgerking": {
       "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
+        "7": null,
+        "30": null,
+        "90": null
       },
       "prev30": {
         "ig": {
@@ -967,52 +751,14 @@
       "commentSample": {
         "n": 0,
         "spamRate": 0.61
-      }
+      },
+      "baselineDaysActual": 0
     },
     "dominos": {
       "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
+        "7": null,
+        "30": null,
+        "90": null
       },
       "prev30": {
         "ig": {
@@ -1094,52 +840,14 @@
       "commentSample": {
         "n": 0,
         "spamRate": 0.61
-      }
+      },
+      "baselineDaysActual": 0
     },
     "subway": {
       "windows": {
-        "7": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "30": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        },
-        "90": {
-          "ig": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          },
-          "yt": {
-            "organic": 0,
-            "paid": 0,
-            "followers": null,
-            "posts": 0
-          }
-        }
+        "7": null,
+        "30": null,
+        "90": null
       },
       "prev30": {
         "ig": {
@@ -1221,7 +929,8 @@
       "commentSample": {
         "n": 0,
         "spamRate": 0.61
-      }
+      },
+      "baselineDaysActual": 0
     }
   }
 }
