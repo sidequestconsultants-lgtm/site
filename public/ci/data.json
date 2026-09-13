@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "13 SEP 12:03 IST",
-    "updatedISO": "2026-09-13T06:33:23Z",
+    "updated": "13 SEP 13:57 IST",
+    "updatedISO": "2026-09-13T08:27:12Z",
     "spamRateBase": 0.61,
     "handles": {
       "kfc": {
@@ -84,7 +84,7 @@
     "trackingSince": "2026-06-15",
     "untrackedShareAssumption": 0.112,
     "commentSample": {
-      "n": 130,
+      "n": 131,
       "spamRate": 0.015,
       "ytShare": 1.0,
       "igShare": 0.0
@@ -295,7 +295,7 @@
     "windows": {
       "7": {
         "ig": {
-          "organic": 3175,
+          "organic": 3208,
           "paid": 0
         },
         "yt": {
@@ -305,7 +305,7 @@
       },
       "30": {
         "ig": {
-          "organic": 5640304,
+          "organic": 5721230,
           "paid": 0
         },
         "yt": {
@@ -317,7 +317,7 @@
     },
     "prev30": {
       "ig": {
-        "organic": 7660770,
+        "organic": 7679739,
         "paid": 0
       },
       "yt": {
@@ -337,7 +337,7 @@
             "posts": 0
           },
           "yt": {
-            "organic": 25173,
+            "organic": 25438,
             "paid": 0,
             "followers": 247000,
             "posts": 7
@@ -351,8 +351,8 @@
             "posts": 0
           },
           "yt": {
-            "organic": 110014,
-            "paid": 47875,
+            "organic": 118775,
+            "paid": 39426,
             "followers": 247000,
             "posts": 25
           }
@@ -367,8 +367,8 @@
           "posts": 0
         },
         "yt": {
-          "organic": 142639,
-          "paid": 247698,
+          "organic": 155732,
+          "paid": 234668,
           "followers": 247000,
           "posts": 23
         }
@@ -407,7 +407,7 @@
         "other": 0.893
       },
       "engagement30": {
-        "likes": 1645,
+        "likes": 1654,
         "comments": 214,
         "shares": null,
         "saves": null
@@ -429,15 +429,15 @@
         0.0
       ],
       "seriesYT": [
-        0.792,
-        1.241,
-        1.639,
-        1.106,
+        0.791,
+        1.238,
+        1.636,
+        1.104,
         0.39,
-        0.832
+        0.841
       ],
       "commentSample": {
-        "n": 109,
+        "n": 110,
         "spamRate": 0.018
       },
       "baselineDaysActual": 89
@@ -466,7 +466,7 @@
             "posts": 0
           },
           "yt": {
-            "organic": 7317,
+            "organic": 7322,
             "paid": 0,
             "followers": 101000,
             "posts": 5
@@ -483,7 +483,7 @@
         },
         "yt": {
           "organic": 19089,
-          "paid": 50033757,
+          "paid": 50182446,
           "followers": 101000,
           "posts": 6
         }
@@ -544,9 +544,9 @@
         0.0
       ],
       "seriesYT": [
-        0.748,
+        0.749,
         0.0,
-        5.252,
+        5.251,
         0.0,
         0.0,
         0.0
@@ -582,7 +582,7 @@
           },
           "yt": {
             "organic": 427324,
-            "paid": 25938821,
+            "paid": 26016256,
             "followers": 8610,
             "posts": 2
           }
@@ -598,7 +598,7 @@
         },
         "yt": {
           "organic": 2139434,
-          "paid": 7435350,
+          "paid": 7435354,
           "followers": 8610,
           "posts": 10
         }
@@ -696,8 +696,8 @@
             "posts": 0
           },
           "yt": {
-            "organic": 7230,
-            "paid": 6304,
+            "organic": 7261,
+            "paid": 6292,
             "followers": 50200,
             "posts": 29
           }
@@ -712,8 +712,8 @@
           "posts": 0
         },
         "yt": {
-          "organic": 1480,
-          "paid": 8015,
+          "organic": 1492,
+          "paid": 8004,
           "followers": 50200,
           "posts": 4
         }
@@ -774,8 +774,8 @@
         0.0
       ],
       "seriesYT": [
-        3.614,
-        2.386,
+        3.613,
+        2.387,
         0.0,
         0.0,
         0.0,
@@ -926,8 +926,8 @@
             "posts": 0
           },
           "yt": {
-            "organic": 8115062,
-            "paid": 10059603,
+            "organic": 8115065,
+            "paid": 10623456,
             "followers": 225000,
             "posts": 1
           }
@@ -982,7 +982,7 @@
         "other": 0.0
       },
       "engagement30": {
-        "likes": 69,
+        "likes": 70,
         "comments": 6,
         "shares": null,
         "saves": null
@@ -1015,7 +1015,7 @@
         "n": 5,
         "spamRate": 0.0
       },
-      "baselineDaysActual": 75
+      "baselineDaysActual": 76
     },
     "subway": {
       "windows": {
@@ -1057,7 +1057,7 @@
           "posts": 0
         },
         "yt": {
-          "organic": 711497,
+          "organic": 713140,
           "paid": 0,
           "followers": 94800,
           "posts": 1
