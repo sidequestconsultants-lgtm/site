@@ -258,9 +258,11 @@ rows were discarded along with the one brand that failed. Four fixes:
 3. **Dashboard windows reflect actual coverage.** With 30 days of history,
    the 90-day window isn't a small number, it's an unanswerable one —
    `build_data.py`'s `compute_coverage()` finds the earliest post across
-   whichever platforms are actually tracked and emits `meta.coverageDays`
-   / `meta.trackingSince` (the binding constraint is whichever platform
-   has the *least* history, since a window blends both). Any of the three
+   every platform and brand combined and emits `meta.coverageDays` /
+   `meta.trackingSince` (see "Coverage must reflect whichever platform has
+   data, not whichever has least" below — an earlier version of this
+   pooled the *weakest* platform instead, which could blank the whole
+   dashboard behind one thin or empty source). Any of the three
    range presets (7/30/90) longer than that is emitted as `null` — same
    null-vs-zero convention as everywhere else in this pipeline — never a
    computed-but-wrong number. `index.html` disables a range button whose
@@ -279,6 +281,54 @@ rows were discarded along with the one brand that failed. Four fixes:
    gate (RULE #7 — a bad day never overwrites yesterday's good data.json);
    it's the one source with no external credit to exhaust, so its own
    total failure is still treated as nothing worth building.
+
+## Coverage must reflect whichever platform has data, not whichever has least
+
+A real production store had 172 real YouTube posts across 6 brands and zero
+Instagram posts (Instagram hadn't run yet), but the live dashboard showed
+"0 days of real history" and blanked itself behind the "NOT ENOUGH DATA
+YET" panel anyway. Two separate bugs, both in coverage:
+
+1. **`compute_coverage()` was computing the weakest platform, not the
+   deepest.** The original version grouped posts by platform, found each
+   platform's own earliest post, then took the *latest* of those earliest
+   dates (`max()`) as `tracking_since` — "a 90-day window blends both
+   platforms, so it's only as trustworthy as the shorter of the two." That
+   reasoning holds for a brand tracked on two platforms of comparable
+   depth, but it means a single platform with **zero or thin** data drags
+   the whole store's coverage down to near-zero, blanking every brand's
+   dashboard behind a source that has nothing to do with the platform a
+   viewer actually wants to look at. It rewards partial data with a worse
+   outcome than no data at all: if Instagram has never run, it's absent
+   from the `earliest_by_platform` dict and doesn't poison anything: but
+   the moment Instagram makes even one partial pull with a recent
+   `posted_at`, coverage *drops* from however many days YouTube alone
+   already had down to almost nothing, which reads as `trackingSince`
+   resetting itself for no reason a viewer can see. `compute_coverage()`
+   now pools every platform's posts into one span and takes the single
+   overall earliest `posted_at` — a platform with no data simply
+   contributes nothing to that span, instead of capping it. Coverage
+   still only ever grows (or holds steady) over time, and a platform
+   starting or resuming contributes only its own real history, never a
+   regression for everyone else's.
+2. **The front end's own guard was correct — it was gating on a computed
+   zero.** `isRangeAvailable()`/`renderInsufficientCoverage()` already key
+   off `meta.coverageDays` alone, so fixing (1) is the whole fix: once
+   coverage correctly reflects the deepest platform present instead of
+   the shallowest, a brand with real YouTube history and no Instagram
+   history renders normally, and the blanket "NOT ENOUGH DATA YET" panel
+   only appears when truly nothing anywhere clears even the 7-day floor.
+
+Separately, `index.html`'s `showLoading()`/`showDataError()` render the
+top bar (`renderTopbar()`) before `META` is populated from the fetched
+`data.json` (`META` starts as `{}`) — `${META.logoSvg}` and
+`${META.updated}` in a template literal render the literal string
+`"undefined"` when the field is absent, not blank. Guarded every META
+field interpolated in the top bar/sidebar/print footer
+(`META.logoSvg||''`, `META.updated||'—'`, `META.labels?.printTag||''`,
+and a `BRANDS[CLIENT_BRAND_ID]?.name` check before the client-name
+prefix) so the brief loading state — or any future build that's missing
+a field — never shows the word "undefined" to a viewer.
 
 ## Multi-handle brands
 

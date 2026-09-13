@@ -1561,7 +1561,7 @@ function renderSidebar(){
   const fbTip = registerTip('FACEBOOK · PENDING', ['SOURCE PENDING — PAGE DATA REQUIRES AUTHENTICATED ACCESS.','UNDER EVALUATION.']);
   const liTip = registerTip('LINKEDIN · LOCKED', ['Scheduled for connection in Q3.']);
   return `
-    <div class="side-brandmark">${META.logoSvg}<span>SIDEQUEST CI</span></div>
+    <div class="side-brandmark">${META.logoSvg||''}<span>SIDEQUEST CI</span></div>
     <div class="side-link ${STATE.page==='overview'?'active':''}" data-nav="overview">OVERVIEW</div>
     <div class="side-section">PLATFORMS</div>
     <div class="side-link ${STATE.page==='platform'&&STATE.platform==='instagram'?'active':''}" data-nav="platform:instagram">INSTAGRAM</div>
@@ -1586,10 +1586,10 @@ function renderTopbar(){
   }).join('');
   const stale = isStale();
   return `
-    <div class="tb-logo">${META.logoSvg}</div>
+    <div class="tb-logo">${META.logoSvg||''}</div>
     <span class="tb-title">COMPETITIVE INTELLIGENCE</span>
     <div class="tb-sep"></div>
-    <span class="tb-client">${CLIENT_BRAND_ID?esc(BRANDS[CLIENT_BRAND_ID].name.toUpperCase())+' · ':''}INDIA</span>
+    <span class="tb-client">${CLIENT_BRAND_ID&&BRANDS[CLIENT_BRAND_ID]?.name?esc(BRANDS[CLIENT_BRAND_ID].name.toUpperCase())+' · ':''}INDIA</span>
     <div class="tb-sep"></div>
     <div class="mode-tabs" id="lensTabs">
       <button data-lens="brand" class="${STATE.lens==='brand'?'active':''}">BRAND</button>
@@ -1605,7 +1605,7 @@ function renderTopbar(){
       <div class="tb-range-menu" id="rangeMenu">${rangeOptions}</div>
     </div>
     <span class="tb-vs">VS PREV PERIOD</span>
-    <span class="tb-fresh${stale?' stale':''}">UPDATED ${META.updated}${stale?'<span class="stale-chip">STALE</span>':''}</span>
+    <span class="tb-fresh${stale?' stale':''}">UPDATED ${META.updated||'—'}${stale?'<span class="stale-chip">STALE</span>':''}</span>
     <button class="sq-btn secondary sm" id="methodBtn" type="button">METHODOLOGY</button>
     <button class="sq-btn sm" id="exportBtn" type="button">EXPORT</button>
   `;
@@ -1629,7 +1629,7 @@ function syncHash(){
   try{ history.pushState(null,'',h); }catch(err){ try{ location.hash = h; }catch(err2){} }
 }
 function updatePrintFooter(){
-  $('#printFooter').innerHTML = `SOURCE — PUBLIC PLATFORM DATA · ${STATE.lens.toUpperCase()} LENS · ${RANGES[STATE.range].label} · UPDATED ${META.updated} · ESTIMATED VALUES MODELLED, NOT VERIFIED · ${META.labels.printTag}`;
+  $('#printFooter').innerHTML = `SOURCE — PUBLIC PLATFORM DATA · ${STATE.lens.toUpperCase()} LENS · ${RANGES[STATE.range].label} · UPDATED ${META.updated||'—'} · ESTIMATED VALUES MODELLED, NOT VERIFIED · ${META.labels?.printTag||''}`;
 }
 function renderInsufficientCoverage(){
   const needed = daysNeededFor('7');
