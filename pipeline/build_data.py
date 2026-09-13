@@ -12,7 +12,7 @@ views against the trailing-90-day median for its own brand/platform/type.
 Everything here is public-data arithmetic; nothing needs an LLM. That's
 Phase 5.
 
-`untracked` is computed from config.UNTRACKED["share_assumption"] (0.074) — a
+`untracked` is computed from config.UNTRACKED["share_assumption"] — a
 stated, MODELLED tail share, not a measurement. Each window's untracked value
 is solved so that untracked / (tracked_total + untracked) == share_assumption
 for that window's tracked total, so the assumption reads consistently at
@@ -48,9 +48,13 @@ def parse_dt(s: str | None) -> datetime | None:
 
 
 def median_baselines(posts: list[dict], now: datetime) -> dict[str, float]:
-    """Median views per post_type over the trailing 90 days — the baseline
-    that estimate_paid_organic() compares each post against."""
-    cutoff = now - timedelta(days=90)
+    """Median views per post_type over the trailing config.BASELINE_DAYS —
+    the baseline that estimate_paid_organic() compares each post against.
+    Needs no special-casing for a brand with less history than that: the
+    cutoff just doesn't exclude anything yet, and the median is computed
+    over whatever's actually on file (see compute_baseline_days_actual for
+    how much that actually is)."""
+    cutoff = now - timedelta(days=config.BASELINE_DAYS)
     by_type: dict[str, list[int]] = {}
     for p in posts:
         if p.get("views") is None:
@@ -60,6 +64,27 @@ def median_baselines(posts: list[dict], now: datetime) -> dict[str, float]:
             continue
         by_type.setdefault(p["post_type"], []).append(p["views"])
     return {t: statistics.median(v) for t, v in by_type.items()}
+
+
+def compute_baseline_days_actual(posts_by_platform: dict[str, list[dict]], now: datetime) -> int:
+    """How many days of real trailing history actually back this brand's
+    paid/organic baseline, capped at config.BASELINE_DAYS. The binding
+    constraint is whichever TRACKED platform (one this brand actually has
+    a handle for and has ever been pulled) has the least history — a
+    platform this brand doesn't track at all doesn't drag the number down.
+    Right after a brand's first-ever Instagram pull this is ~30
+    (config.INITIAL_PULL_DAYS), not 90; it grows on its own as the
+    incremental pulls accumulate. Exposed per brand (meta.profiles.*
+    .baselineDaysActual) so the anomaly split's confidence is visible
+    instead of silently assumed to always rest on a full window."""
+    ages = []
+    for posts in posts_by_platform.values():
+        dates = [d for d in (parse_dt(p.get("posted_at")) for p in posts) if d]
+        if dates:
+            ages.append((now - min(dates)).days)
+    if not ages:
+        return 0
+    return max(0, min(config.BASELINE_DAYS, min(ages)))
 
 
 def estimate_paid_organic(views: int, baseline: float | None) -> tuple[int, int]:
@@ -234,7 +259,8 @@ def compute_meta_comment_sample(comments_store: dict, now: datetime) -> dict:
 
 
 def build_profile(brand_id: str, brand: dict, posts: dict, channel_stats: dict,
-                   comments_store: dict, trends: dict, now: datetime, client_insights: dict) -> dict:
+                   comments_store: dict, trends: dict, now: datetime, client_insights: dict,
+                   coverage_days: int) -> dict:
     ig_posts = [p for p in posts.get(brand_id, []) if p.get("platform") == "ig"]
     yt_posts = [p for p in posts.get(brand_id, []) if p.get("platform") == "yt"]
 
@@ -242,9 +268,22 @@ def build_profile(brand_id: str, brand: dict, posts: dict, channel_stats: dict,
     yt_baselines = median_baselines(yt_posts, now)
     ig_followers = (channel_stats.get(brand_id, {}).get("ig") or {}).get("followers")
     yt_followers = (channel_stats.get(brand_id, {}).get("yt") or {}).get("followers")
+    baseline_days_actual = compute_baseline_days_actual({"ig": ig_posts, "yt": yt_posts}, now)
 
     windows = {}
     for label, days in (("7", 7), ("30", 30), ("90", 90)):
+        # A window longer than the store's real coverage isn't a small
+        # number, it's a wrong one — computing "90 days" from 30 days of
+        # actual history silently understates it rather than admitting the
+        # window can't be answered yet. Null, not zero (RULE — same
+        # null-vs-zero convention as shares/saves, static-post views,
+        # below-threshold Trends). The front end never lets a range this
+        # long even be selected while coverageDays is short (meta.
+        # coverageDays gates it), so this is a safety net, not the primary
+        # guard.
+        if days > coverage_days:
+            windows[label] = None
+            continue
         start = now - timedelta(days=days)
         windows[label] = {
             "ig": aggregate_window(ig_posts, start, now, ig_baselines, ig_followers),
@@ -293,6 +332,7 @@ def build_profile(brand_id: str, brand: dict, posts: dict, channel_stats: dict,
         "seriesIG": series_ig,
         "seriesYT": series_yt,
         "commentSample": comment_sample,
+        "baselineDaysActual": baseline_days_actual,
     }
 
 
@@ -305,7 +345,7 @@ def _as_list(val) -> list:
     return list(val) if isinstance(val, list) else [val]
 
 
-def build_meta(now: datetime, comments_store: dict) -> dict:
+def build_meta(now: datetime, comments_store: dict, coverage_days: int, tracking_since: str | None) -> dict:
     handles = {
         bid: {"ig": [f"@{h}" for h in b.get("handle_ig") or []],
               "yt": b.get("yt_handle"), "fb": _as_list(b.get("handle_fb"))}
@@ -322,6 +362,12 @@ def build_meta(now: datetime, comments_store: dict) -> dict:
         "handles": handles,
         "trendsQueries": trends_queries,
         "anomalyThreshold": config.ANOMALY_THRESHOLD,
+        # How much real trailing history the store has, whole-pipeline —
+        # gates which range presets (7/30/90) the front end lets you pick.
+        # Never assumed to be the full 90 until it demonstrably is; see
+        # compute_coverage().
+        "coverageDays": coverage_days,
+        "trackingSince": tracking_since,
         "untrackedShareAssumption": config.UNTRACKED["share_assumption"],
         "commentSample": compute_meta_comment_sample(comments_store, now),
         "excluded": dict(config.EXCLUDED),
@@ -351,27 +397,60 @@ def _css_var(name: str) -> str:
     return f"var({name})"
 
 
-def compute_untracked(profiles_out: dict) -> dict:
+def compute_coverage(posts: dict, now: datetime) -> tuple[int, str | None]:
+    """How many days of real (non-backfill-assumed) history the WHOLE
+    store has, capped at config.BASELINE_DAYS. The binding constraint is
+    whichever platform's earliest post is most recent — a 90-day window
+    blends both platforms, so it's only as trustworthy as the shorter of
+    the two. Grows on its own as pull_instagram.py's incremental pulls
+    accumulate; nothing here assumes a full 90 days until the store
+    demonstrably has it. Returns (coverage_days, tracking_since as
+    YYYY-MM-DD, or None if the store has no posts at all yet)."""
+    earliest_by_platform: dict[str, datetime] = {}
+    for records in posts.values():
+        for p in records:
+            platform = p.get("platform")
+            posted = parse_dt(p.get("posted_at"))
+            if not posted:
+                continue
+            if platform not in earliest_by_platform or posted < earliest_by_platform[platform]:
+                earliest_by_platform[platform] = posted
+    if not earliest_by_platform:
+        return 0, None
+    tracking_since = max(earliest_by_platform.values())
+    coverage_days = max(0, min(config.BASELINE_DAYS, (now - tracking_since).days))
+    return coverage_days, tracking_since.strftime("%Y-%m-%d")
+
+
+def compute_untracked(profiles_out: dict, coverage_days: int) -> dict:
     """Solve each window's untracked value so that
     untracked / (tracked_total + untracked) == share_assumption for that
     window's own tracked total — a stated, disclosed MODELLED figure, not a
     measurement (see module docstring). No per-platform breakdown exists for
     a bucket nothing is actually scraped from, so the whole modelled value
-    is carried on `ig.organic`; `yt` stays zero rather than an arbitrary split."""
+    is carried on `ig.organic`; `yt` stays zero rather than an arbitrary split.
+    A window null across every brand (uncovered — see build_profile) stays
+    null here too: a modelled share of an unanswerable number is itself
+    unanswerable, not zero."""
     share = config.UNTRACKED["share_assumption"]
 
     def tracked_total(getter):
-        return sum(
-            getter(p)["ig"]["organic"] + getter(p)["ig"]["paid"] +
-            getter(p)["yt"]["organic"] + getter(p)["yt"]["paid"]
-            for p in profiles_out.values()
-        )
+        total = 0
+        for p in profiles_out.values():
+            w = getter(p)
+            if w is None:
+                continue
+            total += w["ig"]["organic"] + w["ig"]["paid"] + w["yt"]["organic"] + w["yt"]["paid"]
+        return total
 
     def solve(total: float) -> int:
         return round(total * share / (1 - share)) if total else 0
 
     windows_out = {}
-    for label in ("7", "30", "90"):
+    for label, days in (("7", 7), ("30", 30), ("90", 90)):
+        if days > coverage_days:
+            windows_out[label] = None
+            continue
         val = solve(tracked_total(lambda p, l=label: p["windows"][l]))
         windows_out[label] = {"ig": {"organic": val, "paid": 0}, "yt": {"organic": 0, "paid": 0}}
     prev_val = solve(tracked_total(lambda p: p["prev30"]))
@@ -390,6 +469,7 @@ def build() -> dict:
     comments_store = store.load_comments()
     trends = store.load_json(config.TRENDS_PATH, {})
     client_insights_all = store.load_json(config.CLIENT_INSIGHTS_PATH, {})
+    coverage_days, tracking_since = compute_coverage(posts, now)
 
     brands_out = {
         bid: {
@@ -409,13 +489,13 @@ def build() -> dict:
 
     profiles_out = {
         bid: build_profile(bid, b, posts, channel_stats, comments_store, trends, now,
-                            client_insights_all.get(bid, {}))
+                            client_insights_all.get(bid, {}), coverage_days)
         for bid, b in config.BRANDS.items()
     }
-    untracked_out = compute_untracked(profiles_out)
+    untracked_out = compute_untracked(profiles_out, coverage_days)
 
     return {
-        "meta": build_meta(now, comments_store),
+        "meta": build_meta(now, comments_store, coverage_days, tracking_since),
         "brands": brands_out,
         "portfolios": portfolios_out,
         "untracked": untracked_out,
@@ -430,14 +510,23 @@ def validate(data: dict) -> list[str]:
     problems = []
     if not data.get("meta", {}).get("updated"):
         problems.append("meta.updated missing")
+    coverage_days = data.get("meta", {}).get("coverageDays", 0)
     for bid in config.BRANDS:
         prof = data.get("profiles", {}).get(bid)
         if not prof:
             problems.append(f"profiles.{bid} missing")
             continue
-        for w in ("7", "30", "90"):
-            win = prof.get("windows", {}).get(w)
-            if not win or "ig" not in win or "yt" not in win:
+        for w, days in (("7", 7), ("30", 30), ("90", 90)):
+            win = prof.get("windows", {}).get(w, "__missing__")
+            if win == "__missing__":
+                problems.append(f"profiles.{bid}.windows.{w} missing entirely")
+            elif win is None:
+                # Legitimately unavailable (coverage doesn't reach this
+                # window yet) — null, not a validation failure. Only a
+                # problem if coverage says it SHOULD have been computable.
+                if days <= coverage_days:
+                    problems.append(f"profiles.{bid}.windows.{w} is null despite coverageDays={coverage_days}")
+            elif "ig" not in win or "yt" not in win:
                 problems.append(f"profiles.{bid}.windows.{w} incomplete")
         if "prev30" not in prof:
             problems.append(f"profiles.{bid}.prev30 missing")

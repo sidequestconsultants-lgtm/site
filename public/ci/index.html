@@ -141,6 +141,8 @@ svg{display:block}
   letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
 .tb-range-menu button:hover{color:var(--ink);background:rgba(123,108,240,.08)}
 .tb-range-menu button.active{color:var(--cyan)}
+.tb-range-menu button:disabled{color:var(--dim);cursor:not-allowed;opacity:.55}
+.tb-range-menu button:disabled:hover{background:none;color:var(--dim)}
 .tb-vs{font:400 10px var(--f-mono);color:var(--dim);letter-spacing:.05em;white-space:nowrap}
 .tb-fresh{font:400 10px var(--f-mono);color:var(--dim);letter-spacing:.03em;white-space:nowrap}
 .tb-fresh.stale{color:var(--violet)}
@@ -458,10 +460,16 @@ const STALENESS_HOURS = 30; // Phase 4e-iv — daily pipeline, so one missed run
 let VEHICLES = [], THEMES = [];
 
 const RANGES = {
-  '7':  { label:'LAST 7 DAYS' },
-  '30': { label:'LAST 30 DAYS' },
-  '90': { label:'LAST 90 DAYS' }
+  '7':  { label:'LAST 7 DAYS', days:7 },
+  '30': { label:'LAST 30 DAYS', days:30 },
+  '90': { label:'LAST 90 DAYS', days:90 }
 };
+/* A range whose window the store can't actually compute yet (coverage
+   hasn't reached that many days — see meta.coverageDays / build_data.py's
+   compute_coverage) is disabled rather than silently computed from
+   partial data, which would be a wrong number, not a small one. */
+function isRangeAvailable(r){ return RANGES[r].days <= (META.coverageDays||0); }
+function daysNeededFor(r){ return Math.max(0, RANGES[r].days - (META.coverageDays||0)); }
 
 /* Phase 4e-i — populated by init()'s fetch, empty until then. */
 let BRANDS = {}, PROFILES = {}, PORTFOLIOS = {}, UNTRACKED = {}, META = {};
@@ -1571,7 +1579,11 @@ function isStale(){
   return (Date.now()-updated.getTime()) > STALENESS_HOURS*3600*1000;
 }
 function renderTopbar(){
-  const rangeOptions = Object.keys(RANGES).map(r=>`<button data-range="${r}" class="${STATE.range===r?'active':''}">${RANGES[r].label}</button>`).join('');
+  const rangeOptions = Object.keys(RANGES).map(r=>{
+    const available = isRangeAvailable(r);
+    const label = available ? RANGES[r].label : `NEEDS ${daysNeededFor(r)} MORE DAY${daysNeededFor(r)===1?'':'S'}`;
+    return `<button data-range="${r}" class="${STATE.range===r?'active':''}" ${available?'':'disabled'}>${label}</button>`;
+  }).join('');
   const stale = isStale();
   return `
     <div class="tb-logo">${META.logoSvg}</div>
@@ -1619,9 +1631,23 @@ function syncHash(){
 function updatePrintFooter(){
   $('#printFooter').innerHTML = `SOURCE — PUBLIC PLATFORM DATA · ${STATE.lens.toUpperCase()} LENS · ${RANGES[STATE.range].label} · UPDATED ${META.updated} · ESTIMATED VALUES MODELLED, NOT VERIFIED · ${META.labels.printTag}`;
 }
+function renderInsufficientCoverage(){
+  const needed = daysNeededFor('7');
+  return `<div class="data-error-panel">
+    <span class="eyebrow">COVERAGE</span>
+    <h2 class="h2">NOT ENOUGH DATA YET</h2>
+    <p>The store has ${esc(String(META.coverageDays||0))} day(s) of real history${META.trackingSince?' (tracking since '+esc(META.trackingSince)+')':''} — not enough to answer even the shortest (7-day) view honestly yet. This isn't a bug: a new brand or a fresh deployment starts here and fills in on its own as the daily pull runs. Check back in ${needed} more day${needed===1?'':'s'}.</p>
+  </div>`;
+}
 function render(){
   $('#sidebar').innerHTML = renderSidebar();
   $('#topbar').innerHTML = renderTopbar();
+  if(!isRangeAvailable('7')){
+    $('#view').innerHTML = renderInsufficientCoverage();
+    updatePrintFooter();
+    syncHash();
+    return;
+  }
   if(STATE.page==='platform') renderPlatform(STATE.platform);
   else if(STATE.page==='brand') renderBrandDetail(STATE.brandId);
   else if(STATE.page==='group') renderGroupDetail(STATE.groupId);
@@ -1680,13 +1706,13 @@ function updateOverviewInPlace(){
 function updateAfterControlChange(){
   $('#topbar').innerHTML = renderTopbar();
   $('#sidebar').innerHTML = renderSidebar();
-  if(STATE.page==='overview') updateOverviewInPlace();
+  if(STATE.page==='overview' && isRangeAvailable('7')) updateOverviewInPlace();
   else render();
   syncHash();
 }
 function setLens(lens){ if(STATE.lens===lens) return; STATE.lens=lens; updateAfterControlChange(); }
 function setMetric(metric){ if(STATE.metric===metric) return; STATE.metric=metric; updateAfterControlChange(); }
-function setRange(range){ if(STATE.range===range) return; STATE.range=range; updateAfterControlChange(); }
+function setRange(range){ if(STATE.range===range || !isRangeAvailable(range)) return; STATE.range=range; updateAfterControlChange(); }
 function toggleVehicle(id){ STATE.vehicleFilter = (STATE.vehicleFilter===id) ? null : id; updateAfterControlChange(); }
 function toggleExpander(id){
   const membersEl = document.getElementById('members-'+id);
@@ -1898,6 +1924,13 @@ async function init(){
     return showDataError(err);
   }
   Object.assign(STATE, parseHash());
+  if(!isRangeAvailable(STATE.range)){
+    // Default ('30') or a hash-provided range can be ahead of what the
+    // store actually covers yet (e.g. right after the very first pull) —
+    // fall back to the longest range that IS available rather than ask
+    // computeRows() to answer a window it can't.
+    STATE.range = ['90','30','7'].find(isRangeAvailable) || '7';
+  }
   render();
 }
 window.addEventListener('popstate', ()=>{

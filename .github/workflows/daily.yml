@@ -32,11 +32,25 @@ jobs:
       - name: Install pipeline dependencies
         run: pip install -r pipeline/requirements.txt
 
-      # Each step below exits non-zero on a `warn` or `error` pull_log status
-      # (including a zero-record pull) — see RULES #6 in the build prompt.
-      # GitHub Actions stops the job at the first failing step by default, so
-      # a failure here means build_data and the commit step below never run:
-      # a bad day never overwrites yesterday's good data.json (RULE #7).
+      # Each script below exits non-zero only when NOT ONE brand succeeded
+      # for that source ("error" — see each script's own status logic); a
+      # partial success (some brands ok, some failed or hit an operational
+      # limit like an Apify quota 403) is "warn" and exits 0, because
+      # GitHub Actions stops the job at the first failing step by default
+      # and a partial run's real, already-fetched rows must still reach
+      # build_data and get committed, not be discarded along with the one
+      # brand that failed.
+      #
+      # Pull YouTube stays a hard gate — it's the one source with no
+      # external credit to exhaust, so its own total failure (zero brands)
+      # is still treated as "nothing worth building today" and stops the
+      # job before build_data/commit run (a bad day never overwrites
+      # yesterday's good data.json, RULE #7). Pull Instagram and Classify
+      # get `continue-on-error: true`: a fully exhausted Apify credit or a
+      # dead Gemini key must not block the pipeline (build_data still runs
+      # and builds data.json from whatever YouTube alone provided) — their
+      # own scripts already log a `warn`/`error` pull_log row either way,
+      # so nothing here is silent even when the step is allowed to fail.
 
       - name: Pull YouTube
         env:
@@ -44,11 +58,15 @@ jobs:
         run: python -m pipeline.pull_youtube
 
       - name: Pull Instagram
+        id: pull_instagram
+        continue-on-error: true
         env:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python -m pipeline.pull_instagram
 
       - name: Classify posts and comments
+        id: classify
+        continue-on-error: true
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
@@ -72,3 +90,14 @@ jobs:
           fi
           git commit -m "ci: daily data refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
           git push
+
+      - name: Record run summary
+        if: always()
+        run: |
+          {
+            echo "### Pipeline run summary"
+            echo "- Pull Instagram: \`${{ steps.pull_instagram.outcome }}\`"
+            echo "- Classify: \`${{ steps.classify.outcome }}\`"
+            echo ""
+            echo "Per-run detail (row counts, per-brand status, any quota/error messages) is in \`store/pull_log.json\`, committed above."
+          } >> "$GITHUB_STEP_SUMMARY"

@@ -51,6 +51,20 @@ default because the actor call itself still returns HTTP 200:
      than 3 non-duplicate posts in the trailing 90 days, that's flagged as
      a `warn` with the raw response attached to pull_log — never passed
      through as a normal "low-volume brand" without a trace.
+
+A partial pull commits what it got. `run()` tracks per-brand success
+independently of the whole-run status: a brand's exception (including
+`ApifyQuotaExceeded` on a 403 — Apify's free credit exhausted mid-run) is
+recorded and the loop moves on to the next brand rather than aborting.
+`store.save_posts()` runs once, after the loop, unconditionally — so 6
+brands' worth of real rows are never thrown away because a 7th brand's
+credit ran out. The whole run only fails (`status="error"`, non-zero
+exit) when NOT ONE attempted brand succeeded; any partial success is
+`"warn"` and still exits 0, because a downstream CI step that stops the
+job on a non-zero exit must not also discard everything a partially
+successful run already fetched. A confirmed quota exhaustion also skips
+every *remaining* brand for this run (they'd all 403 identically) instead
+of rediscovering that fact brand by brand.
 """
 
 from __future__ import annotations
@@ -93,14 +107,18 @@ def parse_dt(s: str | None) -> datetime | None:
 
 def compute_since(brand_id: str, posts: dict) -> datetime:
     """Earlier of (newest stored IG post, 10-day refresh cutoff). First pull
-    for a brand with no history yet backfills 90 days, matching the
-    YouTube lookback so the two platforms start from a comparable window."""
+    for a brand with no history yet backfills config.INITIAL_PULL_DAYS
+    (30) — not 90: a 90-day backfill across every brand at once is exactly
+    what exhausted an entire month's Apify credit in one run. Every run
+    after this one is purely incremental (since the newest stored post),
+    so the store's real history keeps growing past 30 on its own; nothing
+    ever gets re-pulled for a period already on file."""
     now = datetime.now(timezone.utc)
     refresh_cutoff = now - timedelta(days=config.REFETCH_DAYS)
     existing = [p for p in posts.get(brand_id, []) if p.get("platform") == "ig"]
     dates = [d for d in (parse_dt(p.get("posted_at")) for p in existing) if d]
     if not dates:
-        return now - timedelta(days=90)
+        return now - timedelta(days=config.INITIAL_PULL_DAYS)
     return min(max(dates), refresh_cutoff)
 
 
@@ -210,6 +228,16 @@ def mark_cross_handle_duplicates(records: list[dict]) -> int:
     return flagged
 
 
+class ApifyQuotaExceeded(RuntimeError):
+    """Apify returned 403 — the account's free/paid credit is exhausted for
+    this billing period. Not retryable within this run: every remaining
+    brand would 403 too, so the caller should stop attempting further
+    brands rather than burn through each one individually to rediscover
+    the same fact (RULE — a quota error is expected operationally, not a
+    crash; the fix is to skip the rest of Instagram for this run, not to
+    keep hammering a dead credit pool)."""
+
+
 def call_apify(handle: str, since: datetime, token: str, actor: str = DEFAULT_ACTOR) -> list[dict]:
     run_input = {
         "directUrls": [f"https://www.instagram.com/{handle.lstrip('@')}/"],
@@ -223,6 +251,8 @@ def call_apify(handle: str, since: datetime, token: str, actor: str = DEFAULT_AC
         json=run_input,
         timeout=300,
     )
+    if resp.status_code == 403:
+        raise ApifyQuotaExceeded(f"Apify quota exhausted (403) for handle={handle}: {resp.text[:300]}")
     if not resp.ok:
         raise RuntimeError(f"Apify actor run failed: {resp.status_code} {resp.text[:300]}")
     items = resp.json()
@@ -270,6 +300,9 @@ def run(token: str | None = None) -> str:
     errors: list[str] = []
     warnings: list[str] = []
     skipped: list[str] = []
+    brands_attempted = 0
+    brands_succeeded = 0
+    quota_exhausted = False
     cutoff90 = datetime.now(timezone.utc) - timedelta(days=90)
 
     for brand_id, brand in config.BRANDS.items():
@@ -280,6 +313,14 @@ def run(token: str | None = None) -> str:
             skipped.append(brand_id)
             print(f"[pull_instagram] {brand_id}: no handle_ig in config, skipping")
             continue
+        if quota_exhausted:
+            # Every remaining brand would 403 too — don't rediscover that
+            # one brand at a time. Skip and log, not an error (RULE — a
+            # quota error is expected operationally, not a crash).
+            skipped.append(brand_id)
+            print(f"[pull_instagram] {brand_id}: skipping — Apify credit exhausted this run")
+            continue
+        brands_attempted += 1
         try:
             since = compute_since(brand_id, posts)
             brand_records: list[dict] = []
@@ -362,6 +403,12 @@ def run(token: str | None = None) -> str:
                           f"90 days and no follower count on file (scrape didn't carry one, and "
                           f"config.ig_followers_hint is unset) — can't run the volume guard to confirm "
                           f"this is genuine. Hand-fill ig_followers_hint in config.py once checked.")
+            brands_succeeded += 1
+        except ApifyQuotaExceeded as exc:
+            quota_exhausted = True
+            msg = f"{brand_id}: {exc}. Skipping remaining brands for this run — credit won't recover mid-run."
+            warnings.append(msg)
+            print(f"[pull_instagram] WARN {msg}", file=sys.stderr)
         except Exception as exc:  # noqa: BLE001 — one brand's failure must not sink the whole run
             errors.append(f"{brand_id}: {exc}")
             print(f"[pull_instagram] ERROR {brand_id}: {exc}", file=sys.stderr)
@@ -370,9 +417,14 @@ def run(token: str | None = None) -> str:
     store.save_channel_stats(channel_stats)
 
     finished_at = store.now_iso()
-    if errors and total_upserted == 0:
+    # A partial pull must commit what it got: only a brand-attempted run
+    # where NOT ONE brand actually succeeded fails the workflow. A quota
+    # 403 partway through, or one brand's transient error, is an expected
+    # operational outcome, not a crash — everything already fetched this
+    # run stays and gets committed.
+    if brands_attempted > 0 and brands_succeeded == 0:
         status = "error"
-    elif total_upserted == 0 or errors or warnings:
+    elif errors or warnings:
         status = "warn"
     else:
         status = "ok"
@@ -380,7 +432,7 @@ def run(token: str | None = None) -> str:
     error_text = "; ".join(errors + warnings) if (errors or warnings) else None
     store.append_pull_log("pull_instagram", started_at, finished_at, total_in, total_upserted, status, error_text)
     print(f"[pull_instagram] done: status={status} rows_in={total_in} rows_upserted={total_upserted} "
-          f"skipped={skipped} warnings={len(warnings)}")
+          f"brands_succeeded={brands_succeeded}/{brands_attempted} skipped={skipped} warnings={len(warnings)}")
     return status
 
 
@@ -392,7 +444,11 @@ def main() -> None:
         dry_run()
         sys.exit(0)
     status = run()
-    sys.exit(0 if status == "ok" else 1)
+    # "warn" is a partial success (some brands failed, at least one didn't)
+    # and must still exit 0 — the whole point of this fix is that the
+    # workflow's build/commit steps run on whatever got pulled. Only
+    # "error" (zero brands succeeded) fails the workflow.
+    sys.exit(0 if status in ("ok", "warn") else 1)
 
 
 if __name__ == "__main__":

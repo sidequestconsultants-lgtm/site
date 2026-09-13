@@ -209,7 +209,14 @@ EXCLUDED = {}
 # ── Windows and thresholds ────────────────────────────────────────────────────
 
 WINDOWS_DAYS = [7, 30, 90]
+# BASELINE_DAYS is a CAP, not a guarantee — the anomaly model and the
+# dashboard's own range presets use whatever trailing history actually
+# exists in the store, up to this many days. A brand with less history
+# than this (every brand, right after its first-ever pull) is not treated
+# as if it had a full window; see build_data.py's baseline_days_actual /
+# meta.coverageDays and pull_instagram.py's INITIAL_PULL_DAYS.
 BASELINE_DAYS = 90          # trailing window for the paid/organic anomaly baseline
+INITIAL_PULL_DAYS = 30      # one-time Instagram backfill on a brand's first-ever pull
 REFETCH_DAYS = 10           # only re-poll counts on posts newer than this
 SERIES_BUCKETS = 6          # points in seriesIG / seriesYT
 
