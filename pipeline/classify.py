@@ -41,6 +41,29 @@ for it, and both classify_posts() and classify_comments() stop calling
 Gemini for the rest of the run the moment they see one, rather than
 burning every remaining batch on a call that cannot recover.
 
+A 429 (quota) or 503 (overloaded) is the opposite: expected, transient
+free-tier conditions, not a crash. `gemini_json()` retries either with
+exponential backoff (config.GEMINI_RATE_LIMIT_MAX_ATTEMPTS, default 3)
+before raising `RateLimitError`; a batch that still fails after that is
+logged and skipped, never aborts the run the way `PermanentAPIError` does,
+because the NEXT batch — or the next scheduled run, since classification
+is idempotent by model_version — might succeed once the rate-limit window
+clears. `main()`'s exit code only fails the whole invocation when NEITHER
+classify_posts() nor classify_comments() processed anything at all; a
+total failure in one (e.g. posts exhausts the quota before finishing) does
+not discard the other's partial success, matching the same "commit what
+you got" rule applied to pull_instagram.py.
+
+A single Gemini classification invocation (both posts and comments) is
+bounded by config.CLASSIFY_MAX_MINUTES (15) rather than allowed to run
+indefinitely against a rate-limited API. Post classification drives the
+offer-mix chart — the product's differentiator — so it runs first and
+gets a reserved share of that budget (config.CLASSIFY_POSTS_TIME_SHARE);
+comments only get whatever time is left, capped at the same overall
+deadline either way. Hitting the deadline mid-batch stops cleanly and logs
+how many records are left unprocessed, rather than either running over or
+silently dropping them.
+
 Nothing here stores a comment author/username — see RULE in Phase 1.
 """
 
@@ -49,6 +72,7 @@ from __future__ import annotations
 import argparse
 import os
 import sys
+import time
 from datetime import datetime, timezone
 
 import requests
@@ -59,12 +83,28 @@ GEMINI_MODEL = config.GEMINI_MODEL
 GEMINI_API = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
 CURRENT_MODEL_VERSION = f"{GEMINI_MODEL}-classify-v1"
 POST_BATCH_SIZE = 20
+# Comments get a much larger batch than posts (100 vs 20) specifically to
+# cut the NUMBER of Gemini calls comment classification makes — fewer,
+# larger requests are less likely to trip a per-minute rate limit than
+# many small ones, and each comment is already truncated to 400 chars in
+# the prompt so this stays well inside the model's context window.
+COMMENT_BATCH_SIZE = 100
 
 
 class PermanentAPIError(RuntimeError):
     """A Gemini response that cannot succeed on retry — a 404 (model
     doesn't exist / was retired). Callers must stop calling Gemini for the
     rest of the run, not try the next batch against the same dead model."""
+
+
+class RateLimitError(RuntimeError):
+    """A Gemini 429 (quota exceeded) or 503 (overloaded) — transient and
+    expected on a free-tier key, already retried with backoff inside
+    gemini_json() before this is raised. The caller logs it as a `warn`
+    and moves on to the next batch; it never aborts the rest of a run the
+    way PermanentAPIError does, since the condition is expected to clear."""
+
+
 # Asymmetric comment sampling (Phase 2 of the go-live prompt): YouTube
 # commentThreads is free within quota, sample generously; Instagram costs
 # Apify credit shared with post ingestion, sample much thinner and gate it
@@ -106,19 +146,31 @@ def gemini_json(prompt: str, schema: dict, api_key: str) -> list:
             "temperature": 0.1,
         },
     }
-    resp = requests.post(GEMINI_API, params={"key": api_key}, json=body, timeout=120)
-    if resp.status_code == 404:
-        raise PermanentAPIError(f"Gemini API 404 — model {GEMINI_MODEL!r} not found or retired: "
-                                 f"{resp.text[:300]}")
-    if not resp.ok:
-        raise RuntimeError(f"Gemini API failed: {resp.status_code} {resp.text[:300]}")
-    data = resp.json()
-    try:
-        text = data["candidates"][0]["content"]["parts"][0]["text"]
-    except (KeyError, IndexError) as exc:
-        raise RuntimeError(f"unexpected Gemini response shape: {data}") from exc
-    import json
-    return json.loads(text)
+    last_rate_limit: RateLimitError | None = None
+    for attempt in range(config.GEMINI_RATE_LIMIT_MAX_ATTEMPTS):
+        resp = requests.post(GEMINI_API, params={"key": api_key}, json=body, timeout=120)
+        if resp.status_code == 404:
+            raise PermanentAPIError(f"Gemini API 404 — model {GEMINI_MODEL!r} not found or retired: "
+                                     f"{resp.text[:300]}")
+        if resp.status_code in (429, 503):
+            last_rate_limit = RateLimitError(f"Gemini API {resp.status_code}: {resp.text[:300]}")
+            if attempt < config.GEMINI_RATE_LIMIT_MAX_ATTEMPTS - 1:
+                backoff_s = config.GEMINI_RATE_LIMIT_BACKOFF_BASE_S * (2 ** attempt)
+                print(f"[classify] Gemini {resp.status_code}, retrying in {backoff_s}s "
+                      f"(attempt {attempt + 1}/{config.GEMINI_RATE_LIMIT_MAX_ATTEMPTS})", file=sys.stderr)
+                time.sleep(backoff_s)
+                continue
+            raise last_rate_limit
+        if not resp.ok:
+            raise RuntimeError(f"Gemini API failed: {resp.status_code} {resp.text[:300]}")
+        data = resp.json()
+        try:
+            text = data["candidates"][0]["content"]["parts"][0]["text"]
+        except (KeyError, IndexError) as exc:
+            raise RuntimeError(f"unexpected Gemini response shape: {data}") from exc
+        import json
+        return json.loads(text)
+    raise last_rate_limit  # unreachable in practice — the loop always returns or raises above
 
 
 # ═══════════════════════════════ POSTS ═══════════════════════════════
@@ -155,7 +207,7 @@ def classify_posts_batch(batch: list[dict], api_key: str) -> list[dict]:
     return results
 
 
-def classify_posts(api_key: str | None = None) -> str:
+def classify_posts(api_key: str | None = None, deadline: float | None = None) -> str:
     api_key = api_key or os.environ.get("GEMINI_API_KEY")
     started_at = store.now_iso()
     if not api_key:
@@ -172,7 +224,12 @@ def classify_posts(api_key: str | None = None) -> str:
     total_in = len(pending)
     total_done = 0
     errors: list[str] = []
+    stopped_for_time = False
+    i = 0
     for i in range(0, len(pending), POST_BATCH_SIZE):
+        if deadline is not None and time.monotonic() >= deadline:
+            stopped_for_time = True
+            break
         batch = pending[i:i + POST_BATCH_SIZE]
         try:
             results = classify_posts_batch(batch, api_key)
@@ -191,9 +248,22 @@ def classify_posts(api_key: str | None = None) -> str:
             errors.append(str(exc))
             print(f"[classify_posts] ABORT — {exc}", file=sys.stderr)
             break
+        except RateLimitError as exc:
+            # Expected on a free tier — log and try the NEXT batch (unlike
+            # PermanentAPIError, this condition can clear mid-run) rather
+            # than aborting; classification is idempotent by model_version,
+            # so anything still pending self-heals on the next scheduled run.
+            errors.append(str(exc))
+            print(f"[classify_posts] WARN rate-limited on batch at offset {i}, moving on: {exc}", file=sys.stderr)
         except Exception as exc:  # noqa: BLE001 — one bad batch must not sink the run
             errors.append(str(exc))
             print(f"[classify_posts] ERROR on batch {i}: {exc}", file=sys.stderr)
+
+    if stopped_for_time:
+        remaining = total_in - i
+        msg = f"stopped at CLASSIFY_MAX_MINUTES budget with {remaining} post(s) still pending"
+        errors.append(msg)
+        print(f"[classify_posts] WARN {msg}", file=sys.stderr)
 
     store.save_posts(posts)
     finished_at = store.now_iso()
@@ -300,7 +370,7 @@ def classify_comments_batch(batch: list[dict], api_key: str) -> list[dict]:
 
 
 def classify_comments(youtube_key: str | None = None, apify_token: str | None = None,
-                       gemini_key: str | None = None) -> str:
+                       gemini_key: str | None = None, deadline: float | None = None) -> str:
     """Priority rule (RULE 7): post ingestion always wins, comment fetching is
     what gets cut. YouTube comments are free within quota and sampled
     generously (config.YT_COMMENT_POSTS/PER_POST); Instagram comments cost
@@ -323,8 +393,15 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
     errors: list[str] = []
     ig_skipped_over_ceiling = False
     gemini_dead = False  # RULE 5 — once a 404 confirms the model is gone, stop calling it for every brand
+    brand_ids = list(config.BRANDS.keys())
 
-    for brand_id in config.BRANDS:
+    for brand_idx, brand_id in enumerate(brand_ids):
+        if deadline is not None and time.monotonic() >= deadline:
+            remaining_brands = brand_ids[brand_idx:]
+            msg = f"stopped at CLASSIFY_MAX_MINUTES budget with {len(remaining_brands)} brand(s) not yet processed: {remaining_brands}"
+            errors.append(msg)
+            print(f"[classify_comments] WARN {msg}", file=sys.stderr)
+            break
         bucket = comments.setdefault(brand_id, [])
         by_key = {c["external_id"]: c for c in bucket}
 
@@ -366,8 +443,14 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
             continue  # fetching still ran above; classification is the part that can't recover
 
         pending = [c for c in bucket if needs_classification(c)]
-        for i in range(0, len(pending), POST_BATCH_SIZE):
-            batch = pending[i:i + POST_BATCH_SIZE]
+        for i in range(0, len(pending), COMMENT_BATCH_SIZE):
+            if deadline is not None and time.monotonic() >= deadline:
+                remaining = len(pending) - i
+                msg = f"stopped at CLASSIFY_MAX_MINUTES budget with {remaining} comment(s) pending for {brand_id}"
+                errors.append(msg)
+                print(f"[classify_comments] WARN {msg}", file=sys.stderr)
+                break
+            batch = pending[i:i + COMMENT_BATCH_SIZE]
             try:
                 results = classify_comments_batch(batch, gemini_key)
                 for c, res in zip(batch, results):
@@ -385,6 +468,12 @@ def classify_comments(youtube_key: str | None = None, apify_token: str | None = 
                 print(f"[classify_comments] ABORT — {exc}", file=sys.stderr)
                 gemini_dead = True
                 break
+            except RateLimitError as exc:
+                # Expected on a free tier — log and try the next batch
+                # (unlike PermanentAPIError, this can clear mid-run).
+                errors.append(f"{brand_id} comment batch: {exc}")
+                print(f"[classify_comments] WARN rate-limited for {brand_id} at offset {i}, moving on: {exc}",
+                      file=sys.stderr)
             except Exception as exc:  # noqa: BLE001
                 errors.append(f"{brand_id} comment batch: {exc}")
                 print(f"[classify_comments] ERROR classifying batch for {brand_id}: {exc}", file=sys.stderr)
@@ -414,16 +503,29 @@ def main() -> None:
     parser.add_argument("--comments-only", action="store_true")
     args = parser.parse_args()
 
+    run_start = time.monotonic()
+    overall_deadline = run_start + config.CLASSIFY_MAX_MINUTES * 60
+    run_both = not args.comments_only and not args.posts_only
+    # Posts drive the offer-mix chart (the differentiator) and get a
+    # reserved share of the total budget when both run; comments only get
+    # whatever's left, never more than the shared overall deadline either
+    # way. Either flag alone gets the full budget — there's nothing to
+    # reserve a share FROM.
+    posts_deadline = (run_start + config.CLASSIFY_MAX_MINUTES * 60 * config.CLASSIFY_POSTS_TIME_SHARE
+                      if run_both else overall_deadline)
+
     statuses = []
     if not args.comments_only:
-        statuses.append(classify_posts())
+        statuses.append(classify_posts(deadline=posts_deadline))
     if not args.posts_only:
-        statuses.append(classify_comments())
-    # "warn" (some posts/comments classified, some batches failed, or the
-    # Apify ceiling skipped IG comments) is a partial success and must
-    # still exit 0 — only "error" (nothing classified at all) fails the
-    # workflow, so build_data still runs on whatever did get classified.
-    sys.exit(0 if all(s in ("ok", "warn") for s in statuses) else 1)
+        statuses.append(classify_comments(deadline=overall_deadline))
+    # A rate-limit incident in ONE job (e.g. posts exhausts the quota
+    # before finishing) must not discard the other's partial success —
+    # only fail this invocation when NEITHER job processed anything at
+    # all. "warn" (some posts/comments classified, some batches
+    # rate-limited or the Apify ceiling skipped IG comments) is a partial
+    # success and exits 0 either way, same as pull_instagram.py.
+    sys.exit(0 if any(s in ("ok", "warn") for s in statuses) else 1)
 
 
 if __name__ == "__main__":

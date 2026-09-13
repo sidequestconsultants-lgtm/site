@@ -132,6 +132,62 @@ one (classify_comments() also stops for every brand still to come, via a
 touch Gemini at all) instead of repeating the same doomed call across
 every remaining batch.
 
+## Gemini rate limits, and a run that discarded 120 classified comments
+
+A real run hit the free-tier Gemini quota mid-classification: `classify_posts`
+processed 0 of 167 pending posts (every batch 503'd, then 429'd), then
+`classify_comments` managed 120 of 337 before also hitting 429. The run
+still exited 1 — at the time, `main()` required *every* job to report
+`"ok"`/`"warn"`, and a job that classified nothing still reported `"error"`
+as an honest per-function diagnostic — so nothing committed, including the
+120 comments that did succeed. Four fixes:
+
+1. **A 429/503 is never a reason to exit non-zero.** These are expected,
+   transient conditions on a free-tier key, not a crash — `gemini_json()`
+   retries either one with exponential backoff
+   (`config.GEMINI_RATE_LIMIT_MAX_ATTEMPTS`, default 3;
+   `config.GEMINI_RATE_LIMIT_BACKOFF_BASE_S` doubling each attempt) before
+   raising `RateLimitError`, which is caught separately from
+   `PermanentAPIError` in both `classify_posts()` and `classify_comments()`:
+   logged as `warn`, the loop moves on to the *next* batch rather than
+   aborting, since classification is already idempotent by
+   `model_version` and self-heals across scheduled runs either way.
+   `main()`'s exit code changed from requiring every job to succeed
+   (`all(s in ("ok","warn") for s in statuses)`) to requiring only that
+   *one* did (`any(...)`) — the exact incident shape (posts `"error"`,
+   comments `"warn"`) now exits 0 and commits the 120 real rows, matching
+   the same "only fail on total, pipeline-wide failure" rule already
+   applied to `pull_instagram.py`/`pull_youtube.py`.
+2. **Cheapest model that's good enough.** `config.GEMINI_MODEL` is now
+   `"gemini-flash-lite-latest"` — caption/comment tagging is a simple
+   classification task, not one that needs a full Flash model, and the
+   lite variant's free-tier request quota is far higher, which is what
+   actually matters here. `preflight.py`'s existing `ListModels` check
+   validates whatever string is in `config.GEMINI_MODEL`, so this needed
+   no code change, only the config value.
+3. **Posts get a reserved share of the run's time budget.** Post
+   classification drives the offer-mix chart — this product's
+   differentiator — so `classify_posts()` runs before
+   `classify_comments()` (unchanged) and additionally gets a guaranteed
+   slice of wall-clock time via `config.CLASSIFY_POSTS_TIME_SHARE` (0.6):
+   when both jobs run in one invocation, posts get up to
+   `CLASSIFY_MAX_MINUTES * CLASSIFY_POSTS_TIME_SHARE` and comments get
+   whatever remains of the overall `CLASSIFY_MAX_MINUTES` deadline,
+   regardless of how long posts actually took. Either `--posts-only` or
+   `--comments-only` alone gets the full budget — there's nothing to
+   reserve a share from. Hitting the deadline mid-run stops cleanly
+   (checked per-batch in `classify_posts()`, per-brand and per-batch in
+   `classify_comments()`) and logs exactly how many posts/comments/brands
+   are left unprocessed, rather than running over or silently dropping
+   them; they pick up on the next scheduled run the same as any other
+   still-pending record.
+4. **Less load per run.** `config.YT_COMMENT_POSTS`/`PER_POST` cut from
+   25×200 to 10×60 — comment classification alone was making enough
+   Gemini calls to help exhaust the quota before posts got a fair share.
+   `COMMENT_BATCH_SIZE` (100, vs `POST_BATCH_SIZE`'s 20) batches more
+   comments per Gemini call, trading a slightly longer prompt for far
+   fewer requests, which is what a per-minute rate limit actually counts.
+
 ## Instagram accounts that come back thin — restricted profiles
 
 A real run on an earlier tracked set turned up several brands that each
