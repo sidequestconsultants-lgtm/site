@@ -398,28 +398,32 @@ def _css_var(name: str) -> str:
 
 
 def compute_coverage(posts: dict, now: datetime) -> tuple[int, str | None]:
-    """How many days of real (non-backfill-assumed) history the WHOLE
-    store has, capped at config.BASELINE_DAYS. The binding constraint is
-    whichever platform's earliest post is most recent — a 90-day window
-    blends both platforms, so it's only as trustworthy as the shorter of
-    the two. Grows on its own as pull_instagram.py's incremental pulls
-    accumulate; nothing here assumes a full 90 days until the store
-    demonstrably has it. Returns (coverage_days, tracking_since as
-    YYYY-MM-DD, or None if the store has no posts at all yet)."""
-    earliest_by_platform: dict[str, datetime] = {}
+    """How many days of real history the store has, capped at
+    config.BASELINE_DAYS — the earliest posted_at across every platform
+    and brand combined, not whichever single platform happens to be
+    thinnest. A platform with no data yet (Instagram mid quota-exhaustion,
+    a brand-new handle, whatever) simply contributes nothing to this span;
+    it must never drag a platform that DOES have real history down to
+    near-zero and blank the whole dashboard behind it — a brand should be
+    viewable off the platform(s) that have data even when another has
+    none. Once established this only ever moves earlier (more backfill
+    surfacing older posts) or stays the same as runs accumulate, never
+    later — so it can't suddenly regress just because a previously-empty
+    platform starts (or resumes) contributing a handful of recent posts.
+    Returns (coverage_days, tracking_since as YYYY-MM-DD, or None if the
+    store has no posts at all yet)."""
+    earliest: datetime | None = None
     for records in posts.values():
         for p in records:
-            platform = p.get("platform")
             posted = parse_dt(p.get("posted_at"))
             if not posted:
                 continue
-            if platform not in earliest_by_platform or posted < earliest_by_platform[platform]:
-                earliest_by_platform[platform] = posted
-    if not earliest_by_platform:
+            if earliest is None or posted < earliest:
+                earliest = posted
+    if earliest is None:
         return 0, None
-    tracking_since = max(earliest_by_platform.values())
-    coverage_days = max(0, min(config.BASELINE_DAYS, (now - tracking_since).days))
-    return coverage_days, tracking_since.strftime("%Y-%m-%d")
+    coverage_days = max(0, min(config.BASELINE_DAYS, (now - earliest).days))
+    return coverage_days, earliest.strftime("%Y-%m-%d")
 
 
 def compute_untracked(profiles_out: dict, coverage_days: int) -> dict:

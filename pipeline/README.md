@@ -132,6 +132,62 @@ one (classify_comments() also stops for every brand still to come, via a
 touch Gemini at all) instead of repeating the same doomed call across
 every remaining batch.
 
+## Gemini rate limits, and a run that discarded 120 classified comments
+
+A real run hit the free-tier Gemini quota mid-classification: `classify_posts`
+processed 0 of 167 pending posts (every batch 503'd, then 429'd), then
+`classify_comments` managed 120 of 337 before also hitting 429. The run
+still exited 1 — at the time, `main()` required *every* job to report
+`"ok"`/`"warn"`, and a job that classified nothing still reported `"error"`
+as an honest per-function diagnostic — so nothing committed, including the
+120 comments that did succeed. Four fixes:
+
+1. **A 429/503 is never a reason to exit non-zero.** These are expected,
+   transient conditions on a free-tier key, not a crash — `gemini_json()`
+   retries either one with exponential backoff
+   (`config.GEMINI_RATE_LIMIT_MAX_ATTEMPTS`, default 3;
+   `config.GEMINI_RATE_LIMIT_BACKOFF_BASE_S` doubling each attempt) before
+   raising `RateLimitError`, which is caught separately from
+   `PermanentAPIError` in both `classify_posts()` and `classify_comments()`:
+   logged as `warn`, the loop moves on to the *next* batch rather than
+   aborting, since classification is already idempotent by
+   `model_version` and self-heals across scheduled runs either way.
+   `main()`'s exit code changed from requiring every job to succeed
+   (`all(s in ("ok","warn") for s in statuses)`) to requiring only that
+   *one* did (`any(...)`) — the exact incident shape (posts `"error"`,
+   comments `"warn"`) now exits 0 and commits the 120 real rows, matching
+   the same "only fail on total, pipeline-wide failure" rule already
+   applied to `pull_instagram.py`/`pull_youtube.py`.
+2. **Cheapest model that's good enough.** `config.GEMINI_MODEL` is now
+   `"gemini-flash-lite-latest"` — caption/comment tagging is a simple
+   classification task, not one that needs a full Flash model, and the
+   lite variant's free-tier request quota is far higher, which is what
+   actually matters here. `preflight.py`'s existing `ListModels` check
+   validates whatever string is in `config.GEMINI_MODEL`, so this needed
+   no code change, only the config value.
+3. **Posts get a reserved share of the run's time budget.** Post
+   classification drives the offer-mix chart — this product's
+   differentiator — so `classify_posts()` runs before
+   `classify_comments()` (unchanged) and additionally gets a guaranteed
+   slice of wall-clock time via `config.CLASSIFY_POSTS_TIME_SHARE` (0.6):
+   when both jobs run in one invocation, posts get up to
+   `CLASSIFY_MAX_MINUTES * CLASSIFY_POSTS_TIME_SHARE` and comments get
+   whatever remains of the overall `CLASSIFY_MAX_MINUTES` deadline,
+   regardless of how long posts actually took. Either `--posts-only` or
+   `--comments-only` alone gets the full budget — there's nothing to
+   reserve a share from. Hitting the deadline mid-run stops cleanly
+   (checked per-batch in `classify_posts()`, per-brand and per-batch in
+   `classify_comments()`) and logs exactly how many posts/comments/brands
+   are left unprocessed, rather than running over or silently dropping
+   them; they pick up on the next scheduled run the same as any other
+   still-pending record.
+4. **Less load per run.** `config.YT_COMMENT_POSTS`/`PER_POST` cut from
+   25×200 to 10×60 — comment classification alone was making enough
+   Gemini calls to help exhaust the quota before posts got a fair share.
+   `COMMENT_BATCH_SIZE` (100, vs `POST_BATCH_SIZE`'s 20) batches more
+   comments per Gemini call, trading a slightly longer prompt for far
+   fewer requests, which is what a per-minute rate limit actually counts.
+
 ## Instagram accounts that come back thin — restricted profiles
 
 A real run on an earlier tracked set turned up several brands that each
@@ -202,9 +258,11 @@ rows were discarded along with the one brand that failed. Four fixes:
 3. **Dashboard windows reflect actual coverage.** With 30 days of history,
    the 90-day window isn't a small number, it's an unanswerable one —
    `build_data.py`'s `compute_coverage()` finds the earliest post across
-   whichever platforms are actually tracked and emits `meta.coverageDays`
-   / `meta.trackingSince` (the binding constraint is whichever platform
-   has the *least* history, since a window blends both). Any of the three
+   every platform and brand combined and emits `meta.coverageDays` /
+   `meta.trackingSince` (see "Coverage must reflect whichever platform has
+   data, not whichever has least" below — an earlier version of this
+   pooled the *weakest* platform instead, which could blank the whole
+   dashboard behind one thin or empty source). Any of the three
    range presets (7/30/90) longer than that is emitted as `null` — same
    null-vs-zero convention as everywhere else in this pipeline — never a
    computed-but-wrong number. `index.html` disables a range button whose
@@ -223,6 +281,54 @@ rows were discarded along with the one brand that failed. Four fixes:
    gate (RULE #7 — a bad day never overwrites yesterday's good data.json);
    it's the one source with no external credit to exhaust, so its own
    total failure is still treated as nothing worth building.
+
+## Coverage must reflect whichever platform has data, not whichever has least
+
+A real production store had 172 real YouTube posts across 6 brands and zero
+Instagram posts (Instagram hadn't run yet), but the live dashboard showed
+"0 days of real history" and blanked itself behind the "NOT ENOUGH DATA
+YET" panel anyway. Two separate bugs, both in coverage:
+
+1. **`compute_coverage()` was computing the weakest platform, not the
+   deepest.** The original version grouped posts by platform, found each
+   platform's own earliest post, then took the *latest* of those earliest
+   dates (`max()`) as `tracking_since` — "a 90-day window blends both
+   platforms, so it's only as trustworthy as the shorter of the two." That
+   reasoning holds for a brand tracked on two platforms of comparable
+   depth, but it means a single platform with **zero or thin** data drags
+   the whole store's coverage down to near-zero, blanking every brand's
+   dashboard behind a source that has nothing to do with the platform a
+   viewer actually wants to look at. It rewards partial data with a worse
+   outcome than no data at all: if Instagram has never run, it's absent
+   from the `earliest_by_platform` dict and doesn't poison anything: but
+   the moment Instagram makes even one partial pull with a recent
+   `posted_at`, coverage *drops* from however many days YouTube alone
+   already had down to almost nothing, which reads as `trackingSince`
+   resetting itself for no reason a viewer can see. `compute_coverage()`
+   now pools every platform's posts into one span and takes the single
+   overall earliest `posted_at` — a platform with no data simply
+   contributes nothing to that span, instead of capping it. Coverage
+   still only ever grows (or holds steady) over time, and a platform
+   starting or resuming contributes only its own real history, never a
+   regression for everyone else's.
+2. **The front end's own guard was correct — it was gating on a computed
+   zero.** `isRangeAvailable()`/`renderInsufficientCoverage()` already key
+   off `meta.coverageDays` alone, so fixing (1) is the whole fix: once
+   coverage correctly reflects the deepest platform present instead of
+   the shallowest, a brand with real YouTube history and no Instagram
+   history renders normally, and the blanket "NOT ENOUGH DATA YET" panel
+   only appears when truly nothing anywhere clears even the 7-day floor.
+
+Separately, `index.html`'s `showLoading()`/`showDataError()` render the
+top bar (`renderTopbar()`) before `META` is populated from the fetched
+`data.json` (`META` starts as `{}`) — `${META.logoSvg}` and
+`${META.updated}` in a template literal render the literal string
+`"undefined"` when the field is absent, not blank. Guarded every META
+field interpolated in the top bar/sidebar/print footer
+(`META.logoSvg||''`, `META.updated||'—'`, `META.labels?.printTag||''`,
+and a `BRANDS[CLIENT_BRAND_ID]?.name` check before the client-name
+prefix) so the brief loading state — or any future build that's missing
+a field — never shows the word "undefined" to a viewer.
 
 ## Multi-handle brands
 

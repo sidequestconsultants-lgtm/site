@@ -232,9 +232,16 @@ VEHICLE_CONFIDENCE_FLOOR = 0.7
 # ── Comment sampling ──────────────────────────────────────────────────────────
 # QSR comments run far higher volume than alcobev and are dominated by complaints
 # and order issues. Expect a LOWER spam rate and a much higher service-theme share.
+#
+# YT_COMMENT_POSTS/PER_POST cut from 25x200 to 10x60 — a real run's comment
+# classification alone made enough Gemini calls to help exhaust the free-tier
+# quota before post classification (the differentiator, see
+# CLASSIFY_POSTS_TIME_SHARE below) got a fair share of it. Fewer, smaller
+# comment batches cost less quota per run; the trailing engagement-ranked
+# sample still covers each brand's most-discussed posts, just fewer of them.
 
-YT_COMMENT_POSTS = 25
-YT_COMMENT_PER_POST = 200
+YT_COMMENT_POSTS = 10
+YT_COMMENT_PER_POST = 60
 IG_COMMENT_POSTS = 8
 IG_COMMENT_PER_POST = 100
 
@@ -248,7 +255,31 @@ USAGE_FILE = "store/usage.json"
 # ── Gemini ────────────────────────────────────────────────────────────────────
 # gemini-1.5-* are shut down and return 404. Keep the model name here, never in
 # classify.py, and have preflight.py validate it against ListModels.
-GEMINI_MODEL = "gemini-3.7-flash"
+#
+# gemini-flash-lite-latest, not a full Flash model — caption/comment tagging
+# is a simple classification task that doesn't need a premium model, and the
+# lite variant's free-tier request quota is far higher, which is what
+# actually matters here: a real run hit 429/503 (quota + overload) on the
+# full Flash model before finishing even post classification.
+GEMINI_MODEL = "gemini-flash-lite-latest"
+
+# One Gemini classification run (both posts and comments) stops cleanly
+# after this many minutes rather than running indefinitely against a
+# rate-limited API — logs how many records are left unclassified rather
+# than either hanging or burning the whole CI job timeout. Post
+# classification drives the offer-mix chart (the product's differentiator)
+# and comment classification is secondary, so posts get first claim on a
+# guaranteed share of this budget: comments only get the remainder, even if
+# posts finishes with time to spare comments still can't exceed the total.
+CLASSIFY_MAX_MINUTES = 15
+CLASSIFY_POSTS_TIME_SHARE = 0.6
+
+# A Gemini 429 (quota) or 503 (overloaded) is retried this many times with
+# exponential backoff before the caller gives up on that batch and moves on
+# — both are expected, transient conditions on a free-tier key, never a
+# reason to abort a whole run (see classify_posts()/classify_comments()).
+GEMINI_RATE_LIMIT_MAX_ATTEMPTS = 3
+GEMINI_RATE_LIMIT_BACKOFF_BASE_S = 2
 
 # ── Vehicles and themes ───────────────────────────────────────────────────────
 # "Vehicle" here means offer type, not surrogate-ad vehicle — the word stays
