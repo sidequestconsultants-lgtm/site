@@ -10,8 +10,8 @@
       "polarity": "pos",
       "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxwUjp2S4wY5kywbG14AaABAg",
@@ -21,10 +21,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "pos",
-      "theme": "other",
+      "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugzn7Ex0jOu88rx_8414AaABAg",
@@ -36,8 +36,8 @@
       "polarity": "pos",
       "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugzw8us9AOcqtCWKpYd4AaABAg",
@@ -46,11 +46,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
-      "theme": "other",
+      "polarity": "neu",
+      "theme": "service",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugw2yASJ9XEjaEvZFtV4AaABAg",
@@ -62,8 +62,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwzHAqxzf5kpfBV9AJ4AaABAg",
@@ -75,8 +75,8 @@
       "polarity": "neg",
       "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxXlaRbI9GFVZbEgph4AaABAg",
@@ -85,11 +85,11 @@
       "likes": 2,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwnKrY4vaD3Qi00ZYp4AaABAg",
@@ -99,10 +99,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "neu",
-      "theme": "other",
+      "theme": "service",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugzk5vWWQCIfEvHxohh4AaABAg",
@@ -114,8 +114,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwMyoTzQHTxfwpbY114AaABAg",
@@ -127,8 +127,8 @@
       "polarity": "neg",
       "theme": "hygiene",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxQOkK21TBvQO2JEUt4AaABAg",
@@ -140,8 +140,8 @@
       "polarity": "neg",
       "theme": "service",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwI_I22VfYch2UX4JN4AaABAg",
@@ -151,10 +151,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "pos",
-      "theme": "other",
+      "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyVG1MjeeZ-U0haE5N4AaABAg",
@@ -164,10 +164,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "neg",
-      "theme": "other",
+      "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyOFdiug5-gHSrIkI54AaABAg",
@@ -177,10 +177,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "neu",
-      "theme": "other",
+      "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzZp_1_VrnoEUqvsbF4AaABAg",
@@ -189,11 +189,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
+      "polarity": "neu",
       "theme": "service",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugy_r4z7RunauOTcnlJ4AaABAg",
@@ -203,10 +203,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "pos",
-      "theme": "other",
+      "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwmtYEa8IJnMRW3m4h4AaABAg",
@@ -216,10 +216,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "neg",
-      "theme": "other",
+      "theme": "taste",
       "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxoU7rlmOdwUuZ57YB4AaABAg",
@@ -229,10 +229,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "neu",
-      "theme": "other",
+      "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugy6xh2RIPbako6iVY54AaABAg",
@@ -241,11 +241,11 @@
       "likes": 2,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
-      "theme": "other",
+      "polarity": "neu",
+      "theme": "service",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwUZ4Sv1SCwMSH0-254AaABAg",
@@ -257,8 +257,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:32Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwTgG3OrHZSbh625id4AaABAg",
@@ -270,8 +270,8 @@
       "polarity": "neg",
       "theme": "service",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyLaKGAOTlb_E24yrt4AaABAg",
@@ -283,8 +283,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwH19ov74kJ7ARdAql4AaABAg",
@@ -293,11 +293,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyclL7j6kQhcOgpJ6d4AaABAg",
@@ -309,8 +309,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugz5IcgNzuQ72jLMSxd4AaABAg",
@@ -322,8 +322,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyjthbtXDoEF1chMfl4AaABAg",
@@ -332,11 +332,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neu",
+      "polarity": "pos",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzyxYyS-iYVdvLCEjJ4AaABAg",
@@ -348,8 +348,8 @@
       "polarity": "pos",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugz_p16g7LtZ0VPtvY54AaABAg",
@@ -358,11 +358,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugzr3dI2UNT2hb9khdZ4AaABAg",
@@ -371,11 +371,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyTfeCFaIqXObnssOh4AaABAg",
@@ -387,8 +387,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxJk0kWS15rlbMPrCl4AaABAg",
@@ -400,8 +400,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugw70D80k0z__8WXTUZ4AaABAg",
@@ -413,8 +413,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugx_1sOxhZW4ai7vYut4AaABAg",
@@ -424,10 +424,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "neg",
-      "theme": "taste",
+      "theme": "hygiene",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugzqr9kOha9oQWEmkWZ4AaABAg",
@@ -436,11 +436,11 @@
       "likes": 1,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwhzBzhHZg_iwOnZZ54AaABAg",
@@ -452,8 +452,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzfN9_BD3jAGgalUfJ4AaABAg",
@@ -465,8 +465,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugx3glJ0b7Y47SAZO_t4AaABAg",
@@ -478,8 +478,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxzjHWjsc42tdA5ik14AaABAg",
@@ -491,8 +491,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugx5MNNEm0dWGso8X714AaABAg",
@@ -501,11 +501,11 @@
       "likes": 1,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzSu6vyogfZsbd-Jht4AaABAg",
@@ -517,8 +517,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:50Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzIwm2Yqt_wn7Ojf-F4AaABAg",
@@ -526,11 +526,12 @@
       "posted_at": "2026-07-31T05:40:40Z",
       "likes": 15,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugyc3i7dYvzGKe3U3oN4AaABAg",
@@ -538,11 +539,12 @@
       "posted_at": "2026-08-24T07:54:46Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwKdz_OFL_dbeh7FGR4AaABAg",
@@ -550,11 +552,12 @@
       "posted_at": "2026-08-13T14:09:55Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwfLZC-hqR6P5O9kQR4AaABAg",
@@ -562,11 +565,12 @@
       "posted_at": "2026-08-12T17:58:51Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwEE1zO3yJMk9cQhK94AaABAg",
@@ -574,11 +578,12 @@
       "posted_at": "2026-08-12T14:36:15Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzTXsaRrUccRxMp5C14AaABAg",
@@ -586,11 +591,12 @@
       "posted_at": "2026-08-12T13:59:02Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzNchNkbgjO1dCT5nh4AaABAg",
@@ -598,11 +604,12 @@
       "posted_at": "2026-08-12T01:37:17Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwBNk3xOgiWNTDGbLB4AaABAg",
@@ -610,11 +617,12 @@
       "posted_at": "2026-08-11T16:51:22Z",
       "likes": 3,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwFVTG3GX_IqYtVAC54AaABAg",
@@ -622,11 +630,12 @@
       "posted_at": "2026-08-11T15:29:49Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugyrc88XUGoPjISCTa14AaABAg",
@@ -634,11 +643,12 @@
       "posted_at": "2026-08-11T15:15:08Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwPtGak9zE6TMYi5QJ4AaABAg",
@@ -646,11 +656,12 @@
       "posted_at": "2026-08-11T14:46:16Z",
       "likes": 5,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwCew4vJs7sa1-YonF4AaABAg",
@@ -658,11 +669,12 @@
       "posted_at": "2026-08-11T14:16:43Z",
       "likes": 10,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzN41FbV-k-diWMe9J4AaABAg",
@@ -670,11 +682,12 @@
       "posted_at": "2026-08-09T10:59:10Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxiZQt8XP2lYcBhnJl4AaABAg",
@@ -682,11 +695,12 @@
       "posted_at": "2026-07-19T14:13:51Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwATUM2pEOz8Fh7-at4AaABAg",
@@ -694,11 +708,12 @@
       "posted_at": "2026-07-04T19:35:31Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxBaPozGk1IU3Jevhx4AaABAg",
@@ -706,11 +721,12 @@
       "posted_at": "2026-07-02T04:45:28Z",
       "likes": 22,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzLzuIhav5I86gG5el4AaABAg",
@@ -718,11 +734,12 @@
       "posted_at": "2026-07-01T17:07:37Z",
       "likes": 18,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwN7yh5OoQBR54L5FN4AaABAg",
@@ -730,11 +747,12 @@
       "posted_at": "2026-07-01T08:59:46Z",
       "likes": 5,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwppuKd6pCKD888vIp4AaABAg",
@@ -742,11 +760,12 @@
       "posted_at": "2026-07-01T08:48:44Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgypsgZYXrwZLj5wm1t4AaABAg",
@@ -754,11 +773,12 @@
       "posted_at": "2026-09-06T10:10:13Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwgBoVIQCy153-I6HV4AaABAg",
@@ -767,11 +787,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzEwIjS_dL9mkPSgVl4AaABAg",
@@ -780,11 +800,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzZT1t7xQiqKe-HhB54AaABAg",
@@ -793,11 +813,11 @@
       "likes": 1,
       "platform": "yt",
       "spam": false,
-      "polarity": "neu",
+      "polarity": "neg",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzoOLDknjLRZL2spFN4AaABAg",
@@ -809,8 +829,8 @@
       "polarity": "neg",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugyey9F4wNNzDG-s9-l4AaABAg",
@@ -822,8 +842,8 @@
       "polarity": "neg",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyUTdy9TDLHmQBd4vN4AaABAg",
@@ -832,11 +852,11 @@
       "likes": 1,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "pos",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyNb1xo0FbmBf7jcWd4AaABAg",
@@ -845,11 +865,11 @@
       "likes": 2,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzgV8tJnsn7LXEWbeN4AaABAg",
@@ -857,12 +877,12 @@
       "posted_at": "2026-08-08T15:23:41Z",
       "likes": 2,
       "platform": "yt",
-      "spam": true,
+      "spam": false,
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzBxOkBkYdmR2QfQQ54AaABAg",
@@ -871,11 +891,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "pos",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugwa-p0QR7vbz7tFCv54AaABAg",
@@ -884,11 +904,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
+      "polarity": "neu",
       "theme": "other",
-      "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugz0VHCGO0BbBIHVN7p4AaABAg",
@@ -900,8 +920,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzSTF3VzTOXAfa_W2l4AaABAg",
@@ -909,12 +929,12 @@
       "posted_at": "2026-08-31T09:49:22Z",
       "likes": 0,
       "platform": "yt",
-      "spam": true,
+      "spam": false,
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzV9wtYPsUbKb80tKJ4AaABAg",
@@ -926,8 +946,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugy9WXt9q6xRNLpdWG14AaABAg",
@@ -939,8 +959,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugz2OVG8-Ujsgmt7RjJ4AaABAg",
@@ -949,11 +969,11 @@
       "likes": 3,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwFIY7JHiYtrWABkgR4AaABAg",
@@ -962,11 +982,11 @@
       "likes": 1,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugy0rgH2gnTReQWjPrx4AaABAg",
@@ -978,8 +998,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugz3W8iBiZ5im-b__pF4AaABAg",
@@ -990,9 +1010,9 @@
       "spam": false,
       "polarity": "neu",
       "theme": "other",
-      "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyQjGYIsNbXtidhjRt4AaABAg",
@@ -1001,11 +1021,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyiuzO6g9fCoP1uIUF4AaABAg",
@@ -1014,11 +1034,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
-      "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:31:58Z"
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwMq_6YLXLUrnyj_x94AaABAg",
@@ -1026,11 +1046,12 @@
       "posted_at": "2026-08-27T15:28:15Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzfIMFKgV4z8UB3jMh4AaABAg",
@@ -1038,11 +1059,12 @@
       "posted_at": "2026-08-27T15:12:28Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugx7yggbgcRzlTxtvox4AaABAg",
@@ -1050,11 +1072,12 @@
       "posted_at": "2026-08-27T13:57:44Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgycqiKi9hhSnOIlhOF4AaABAg",
@@ -1062,11 +1085,12 @@
       "posted_at": "2026-08-27T13:19:03Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzOEN12MK_7BzFCkcR4AaABAg",
@@ -1074,11 +1098,12 @@
       "posted_at": "2026-08-27T13:13:57Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwRNgyYh0WHSS2nwBh4AaABAg",
@@ -1086,11 +1111,12 @@
       "posted_at": "2026-08-27T13:08:07Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgznONMvUUa8vxOEfi94AaABAg",
@@ -1098,11 +1124,12 @@
       "posted_at": "2026-08-27T13:07:33Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzFrCfeyvL4RQP-ZLF4AaABAg",
@@ -1110,11 +1137,12 @@
       "posted_at": "2026-08-27T13:04:49Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgxvzkQxXy8j9_oKia94AaABAg",
@@ -1122,11 +1150,12 @@
       "posted_at": "2026-08-27T12:45:41Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgywBDA52oa_7YJf-XF4AaABAg",
@@ -1134,11 +1163,12 @@
       "posted_at": "2026-08-27T12:41:26Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugy76g_MVHPl_iEGw9J4AaABAg",
@@ -1146,11 +1176,12 @@
       "posted_at": "2026-08-27T12:37:14Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzU_d1kQ-OFeaobNBV4AaABAg",
@@ -1158,11 +1189,12 @@
       "posted_at": "2026-07-24T15:02:18Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwEjIgFuOlejiCyKq54AaABAg",
@@ -1170,11 +1202,12 @@
       "posted_at": "2026-07-24T13:19:14Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwuNBSujh0hO1aIPht4AaABAg",
@@ -1182,11 +1215,12 @@
       "posted_at": "2026-07-24T13:01:46Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzNt47IGNPtW8hWkGV4AaABAg",
@@ -1194,11 +1228,12 @@
       "posted_at": "2026-07-27T12:20:17Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwBF0feNR6nM7a6b7x4AaABAg",
@@ -1206,11 +1241,12 @@
       "posted_at": "2026-07-18T05:15:03Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgzJMYcYOc7LlfePa2p4AaABAg",
@@ -1218,11 +1254,12 @@
       "posted_at": "2026-07-15T18:39:05Z",
       "likes": 4,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgyE4H05sTNmz9IWW114AaABAg",
@@ -1230,11 +1267,12 @@
       "posted_at": "2026-07-15T12:41:59Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugx-vYMAxsm4HBlAAy54AaABAg",
@@ -1242,11 +1280,12 @@
       "posted_at": "2026-07-13T06:35:42Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "Ugyby9eQba5A1JDJnPl4AaABAg",
@@ -1254,11 +1293,12 @@
       "posted_at": "2026-07-08T15:30:45Z",
       "likes": 6,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:19Z"
     },
     {
       "external_id": "UgwgbSMsvWQB0PkFZzN4AaABAg",
@@ -2506,11 +2546,12 @@
       "posted_at": "2026-08-28T03:55:43Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwbnET73gcNSawH2vZ4AaABAg",
@@ -2518,11 +2559,12 @@
       "posted_at": "2026-08-24T21:20:46Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwMs6ei1Hw9fp_rmkl4AaABAg",
@@ -2530,11 +2572,12 @@
       "posted_at": "2026-08-10T07:59:57Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyO4JmyiyOZQUU1wyd4AaABAg",
@@ -2542,11 +2585,12 @@
       "posted_at": "2026-08-10T07:25:38Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugwazng13_-lr272BMl4AaABAg",
@@ -2554,11 +2598,12 @@
       "posted_at": "2026-08-08T17:34:42Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzoMXoxv095PeQXbil4AaABAg",
@@ -2566,11 +2611,12 @@
       "posted_at": "2026-08-07T19:36:27Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugx6aU6Gy3_jY5ldCmp4AaABAg",
@@ -2578,11 +2624,12 @@
       "posted_at": "2026-08-07T14:20:23Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugx3SpeN3b8MA0pQih54AaABAg",
@@ -2590,11 +2637,12 @@
       "posted_at": "2026-08-07T12:30:14Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugz5iwydlkMyETd2OFB4AaABAg",
@@ -2602,11 +2650,12 @@
       "posted_at": "2026-08-07T12:25:36Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwWiWjiiushZNZHIYt4AaABAg",
@@ -2614,11 +2663,12 @@
       "posted_at": "2026-08-07T11:46:37Z",
       "likes": 5,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwTwK7kXgs85MpmneJ4AaABAg",
@@ -2626,11 +2676,12 @@
       "posted_at": "2026-07-02T14:29:31Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwDJTxFV91Eyu4zwJB4AaABAg",
@@ -2638,11 +2689,12 @@
       "posted_at": "2026-06-23T07:57:32Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyHWaXZJFb97EMqsJ54AaABAg",
@@ -2650,11 +2702,12 @@
       "posted_at": "2026-06-20T19:15:01Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxIH-Bc47eFEODylq54AaABAg",
@@ -2662,11 +2715,12 @@
       "posted_at": "2026-06-19T18:23:28Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugxk4oi-eEuf29gxTv94AaABAg",
@@ -2674,11 +2728,12 @@
       "posted_at": "2026-06-17T10:01:21Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgymrAv8FFYdXXGc4ZR4AaABAg",
@@ -2686,11 +2741,12 @@
       "posted_at": "2026-06-16T15:41:51Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugxc42SfvlknZZwVGot4AaABAg",
@@ -2698,11 +2754,12 @@
       "posted_at": "2026-06-15T20:16:27Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugz_on86Sqn3EIOD8u54AaABAg",
@@ -2710,11 +2767,12 @@
       "posted_at": "2026-06-15T17:17:36Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgycELfjqOdWs3Qg4Id4AaABAg",
@@ -2722,11 +2780,12 @@
       "posted_at": "2026-06-15T12:16:34Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzFsWPh5DMefMfOjll4AaABAg",
@@ -2734,11 +2793,12 @@
       "posted_at": "2026-07-25T21:09:15Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugz3BTfUGHCOV7L_Db94AaABAg",
@@ -2746,12 +2806,12 @@
       "posted_at": "2026-07-25T21:08:40Z",
       "likes": 0,
       "platform": "yt",
-      "spam": false,
+      "spam": true,
       "polarity": "neu",
       "theme": "other",
       "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxgeeizE7ssNOpvSzR4AaABAg",
@@ -2760,11 +2820,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
-      "theme": "taste",
+      "polarity": "neg",
+      "theme": "other",
       "language": "hinglish",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzLd6cdYlgoZ8vTl_54AaABAg",
@@ -2776,8 +2836,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "hinglish",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyNqBesEmur2C-RYQZ4AaABAg",
@@ -2789,8 +2849,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugwxgc_bV3bjmAE9yqR4AaABAg",
@@ -2800,10 +2860,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "pos",
-      "theme": "other",
+      "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxaTKIUW_my6zARq4Z4AaABAg",
@@ -2815,8 +2875,8 @@
       "polarity": "pos",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyM9We1wal8jEsxHyN4AaABAg",
@@ -2828,8 +2888,8 @@
       "polarity": "neg",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwTwHuZhgYv3QEnbpV4AaABAg",
@@ -2841,8 +2901,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "hinglish",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyyEPWi9GtjtAJF6gx4AaABAg",
@@ -2854,8 +2914,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzbleMMQ3E3Mw_HIVJ4AaABAg",
@@ -2865,10 +2925,10 @@
       "platform": "yt",
       "spam": false,
       "polarity": "pos",
-      "theme": "other",
+      "theme": "delivery",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyCkYjsVGgc7tLFy4F4AaABAg",
@@ -2880,8 +2940,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "hinglish",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwMqXyPLBl9-YC0I4l4AaABAg",
@@ -2893,8 +2953,8 @@
       "polarity": "pos",
       "theme": "taste",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzIpceMTl5Gcmd1_-J4AaABAg",
@@ -2906,8 +2966,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzaHayQhoqaHqUahH94AaABAg",
@@ -2919,8 +2979,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugxu-sTtz63vycDOXS94AaABAg",
@@ -2932,8 +2992,8 @@
       "polarity": "pos",
       "theme": "other",
       "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzjERr9fme6mfAt3ZN4AaABAg",
@@ -2942,11 +3002,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
-      "theme": "other",
-      "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "polarity": "neu",
+      "theme": "service",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxcoXUg1aGNLGXlU6R4AaABAg",
@@ -2958,8 +3018,8 @@
       "polarity": "pos",
       "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwZPG1FHpfHtdg88dh4AaABAg",
@@ -2968,11 +3028,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "pos",
-      "theme": "taste",
+      "polarity": "neg",
+      "theme": "other",
       "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzRqR5RDthkDxs_szR4AaABAg",
@@ -2984,8 +3044,8 @@
       "polarity": "neu",
       "theme": "other",
       "language": "other",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgynM5jVrw9ae_Y_ZM94AaABAg",
@@ -2994,11 +3054,11 @@
       "likes": 0,
       "platform": "yt",
       "spam": false,
-      "polarity": "neg",
+      "polarity": "neu",
       "theme": "other",
-      "language": "en",
-      "model_version": "gemini-3.7-flash-classify-v1",
-      "classified_at": "2026-09-13T06:32:47Z"
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwqU7jmIDMG15spQft4AaABAg",
@@ -3006,11 +3066,12 @@
       "posted_at": "2026-08-20T18:44:57Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzrQ7N0xE1FbgAwgZx4AaABAg",
@@ -3018,11 +3079,12 @@
       "posted_at": "2026-08-20T18:21:11Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwhHrUSK1Km_zechy14AaABAg",
@@ -3030,11 +3092,12 @@
       "posted_at": "2026-08-20T16:22:11Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "hygiene",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzA5T0Zzjm7YVrI1AF4AaABAg",
@@ -3042,11 +3105,12 @@
       "posted_at": "2026-08-20T12:34:09Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwK_l0gkp-sMm03l5R4AaABAg",
@@ -3054,11 +3118,12 @@
       "posted_at": "2026-08-20T12:11:42Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzA4mvXX6g0aG357JZ4AaABAg",
@@ -3066,11 +3131,12 @@
       "posted_at": "2026-08-20T12:11:28Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugw3SlGfx37tkGI18QZ4AaABAg",
@@ -3078,11 +3144,12 @@
       "posted_at": "2026-07-18T18:02:51Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwnYvsV7eqPL0QfDgB4AaABAg",
@@ -3090,11 +3157,12 @@
       "posted_at": "2026-07-18T17:54:26Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwJOv0xO8MaQNR1eBN4AaABAg",
@@ -3102,11 +3170,12 @@
       "posted_at": "2026-07-11T10:50:40Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzADThUm00pCH8wgpx4AaABAg",
@@ -3114,11 +3183,12 @@
       "posted_at": "2026-07-11T10:47:22Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgztMrBTpdHIlutvhEZ4AaABAg",
@@ -3126,11 +3196,12 @@
       "posted_at": "2026-07-06T08:11:49Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugx4pQlX7XJUKBcg-hR4AaABAg",
@@ -3138,11 +3209,12 @@
       "posted_at": "2026-07-05T13:53:40Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugw0_7OTRaFSUXgcFE94AaABAg",
@@ -3150,11 +3222,12 @@
       "posted_at": "2026-07-04T15:56:17Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugz8cQHWc2XqDFQpO_R4AaABAg",
@@ -3162,11 +3235,12 @@
       "posted_at": "2026-07-04T12:34:44Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugzp3AHW86RUWpQoA5d4AaABAg",
@@ -3174,11 +3248,12 @@
       "posted_at": "2026-07-04T09:04:07Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyA6rhm__yncWpEhux4AaABAg",
@@ -3186,11 +3261,12 @@
       "posted_at": "2026-07-04T07:22:13Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzIwyM9YbjFpXL3P_R4AaABAg",
@@ -3198,11 +3274,12 @@
       "posted_at": "2026-09-06T13:59:37Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwK3K_53O3xdMKxYM54AaABAg",
@@ -3210,11 +3287,12 @@
       "posted_at": "2026-09-03T02:26:20Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxgmeRj7NfQ2d1Np7d4AaABAg",
@@ -3222,11 +3300,12 @@
       "posted_at": "2026-09-03T02:25:46Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyZZ2gFMqYtwnaHZFF4AaABAg",
@@ -3234,11 +3313,12 @@
       "posted_at": "2026-08-29T08:03:43Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyDpC9pcZ63K4XiVQh4AaABAg",
@@ -3246,11 +3326,12 @@
       "posted_at": "2026-08-26T08:35:26Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxAkiptcIC7wfxrdep4AaABAg",
@@ -3258,11 +3339,12 @@
       "posted_at": "2026-08-26T08:34:51Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxV0d29t4htUE7ZcsV4AaABAg",
@@ -3270,11 +3352,12 @@
       "posted_at": "2026-08-26T05:55:19Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzsdE-vHf-Io21_FSF4AaABAg",
@@ -3282,11 +3365,12 @@
       "posted_at": "2026-08-25T17:19:48Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwdPQWQucv7Bsj23lt4AaABAg",
@@ -3294,11 +3378,12 @@
       "posted_at": "2026-08-25T16:15:34Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugz-Ch5ot8j7mYKKC714AaABAg",
@@ -3306,11 +3391,12 @@
       "posted_at": "2026-08-25T14:10:37Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzlgpwaEL-QNm6AgZx4AaABAg",
@@ -3318,11 +3404,12 @@
       "posted_at": "2026-09-12T15:14:35Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "hygiene",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxVU3bRjY_GPafFW0J4AaABAg",
@@ -3330,11 +3417,12 @@
       "posted_at": "2026-09-11T01:15:45Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxKqcPZWUYa9M67HzF4AaABAg",
@@ -3342,11 +3430,12 @@
       "posted_at": "2026-09-10T16:35:56Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugwy3TsHNCzfJdJCTFB4AaABAg",
@@ -3354,11 +3443,12 @@
       "posted_at": "2026-09-10T12:51:50Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugz9F6oChRl5-oyEbTh4AaABAg",
@@ -3366,11 +3456,12 @@
       "posted_at": "2026-09-10T11:07:04Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxPi6BTmai4xiJiD0J4AaABAg",
@@ -3378,11 +3469,12 @@
       "posted_at": "2026-09-10T09:26:02Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "price",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyGeML5bh2qa7iCM-54AaABAg",
@@ -3390,11 +3482,12 @@
       "posted_at": "2026-09-09T19:40:11Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzfGeEepiouZkR-Jjp4AaABAg",
@@ -3402,11 +3495,12 @@
       "posted_at": "2026-09-09T17:19:47Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyfqVFqMV71JTVmvt54AaABAg",
@@ -3414,11 +3508,12 @@
       "posted_at": "2026-09-09T15:58:43Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzGCM5HcikNqIdlXHt4AaABAg",
@@ -3426,11 +3521,12 @@
       "posted_at": "2026-09-09T13:51:13Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "price",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxVrXfadsgoGcUvied4AaABAg",
@@ -3438,11 +3534,12 @@
       "posted_at": "2026-09-09T13:33:51Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugwbumk6ACWxcZLTut14AaABAg",
@@ -3450,11 +3547,12 @@
       "posted_at": "2026-07-17T09:05:22Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwFM6iJFOg8QJidPsl4AaABAg",
@@ -3462,11 +3560,12 @@
       "posted_at": "2026-07-14T15:32:48Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "price",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzZ8FQMbbKWRkYMtSh4AaABAg",
@@ -3474,11 +3573,12 @@
       "posted_at": "2026-07-08T07:05:48Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwMRy0RznmMcbIXtP94AaABAg",
@@ -3486,11 +3586,12 @@
       "posted_at": "2026-07-08T02:07:54Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugx0MVDuX9sNCbsKRI94AaABAg",
@@ -3498,11 +3599,12 @@
       "posted_at": "2026-07-07T20:54:38Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyJ0JSL_Iq1_wSQyLt4AaABAg",
@@ -3510,11 +3612,12 @@
       "posted_at": "2026-07-07T20:33:00Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugzxd1K6ePZ1GFSx8gN4AaABAg",
@@ -3522,11 +3625,12 @@
       "posted_at": "2026-07-07T20:21:04Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxwsVAEjhh-cypwEOZ4AaABAg",
@@ -3534,11 +3638,12 @@
       "posted_at": "2026-07-07T19:52:35Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgythgNbBW3J_7WzVwJ4AaABAg",
@@ -3546,11 +3651,12 @@
       "posted_at": "2026-07-07T17:46:54Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugzv9Q8Ic5wqDc9ixNZ4AaABAg",
@@ -3558,11 +3664,12 @@
       "posted_at": "2026-07-07T17:38:13Z",
       "likes": 3,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugwk3OGi-C1KbLOJ5A14AaABAg",
@@ -3570,11 +3677,12 @@
       "posted_at": "2026-07-07T16:38:11Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugz24CsOaU2GroI8_Zp4AaABAg",
@@ -3582,11 +3690,12 @@
       "posted_at": "2026-07-07T14:51:36Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyFba2MExEiZAjT6Sx4AaABAg",
@@ -3594,11 +3703,12 @@
       "posted_at": "2026-07-07T14:40:22Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyzJYfbqWnZ60BS1K94AaABAg",
@@ -3606,11 +3716,12 @@
       "posted_at": "2026-07-07T13:43:16Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzMQ9zb7UZv1-qBhOt4AaABAg",
@@ -3618,11 +3729,12 @@
       "posted_at": "2026-07-07T10:52:25Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgzEHjfig9c4Ss9ZRv54AaABAg",
@@ -3630,11 +3742,12 @@
       "posted_at": "2026-07-06T18:50:33Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "price",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxzySB_Pos78o0sXqJ4AaABAg",
@@ -3642,11 +3755,12 @@
       "posted_at": "2026-07-06T13:29:45Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgxjyzMqiTPwtUTQxhZ4AaABAg",
@@ -3654,11 +3768,12 @@
       "posted_at": "2026-08-04T03:06:11Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgymMREaFLxlUg39GdB4AaABAg",
@@ -3666,11 +3781,12 @@
       "posted_at": "2026-08-03T18:02:32Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugy6l5WCGImCi6Cdgl54AaABAg",
@@ -3678,11 +3794,12 @@
       "posted_at": "2026-07-29T11:43:17Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgyFcFijAm1DuPu-4At4AaABAg",
@@ -3690,11 +3807,12 @@
       "posted_at": "2026-07-12T09:09:04Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugw6Jd-kKc9knyY_Ukp4AaABAg",
@@ -3702,11 +3820,12 @@
       "posted_at": "2026-07-09T02:30:38Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "UgwrdGg3FVBGp6JPskJ4AaABAg",
@@ -3714,11 +3833,12 @@
       "posted_at": "2026-07-08T10:26:10Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:36Z"
     },
     {
       "external_id": "Ugzn7FH5MeRSL0HyiZV4AaABAg",
@@ -3726,11 +3846,12 @@
       "posted_at": "2026-07-08T07:04:44Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgzHPbMHJOfxji3TfdZ4AaABAg",
@@ -3738,11 +3859,12 @@
       "posted_at": "2026-07-08T01:38:07Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgztDsMF0ZpcQCCrSUR4AaABAg",
@@ -3750,11 +3872,12 @@
       "posted_at": "2026-07-07T22:47:41Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgwXOvH3rClrIq_Bd5Z4AaABAg",
@@ -3762,11 +3885,12 @@
       "posted_at": "2026-07-07T16:39:03Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgzWqp7PF4CrDYe-1ON4AaABAg",
@@ -3774,11 +3898,12 @@
       "posted_at": "2026-07-07T15:15:50Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgxiArYCnhWZyMYq8eV4AaABAg",
@@ -3786,11 +3911,12 @@
       "posted_at": "2026-07-07T14:34:31Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "Ugw1fdSzwZpKzWEIPU14AaABAg",
@@ -3798,11 +3924,12 @@
       "posted_at": "2026-07-07T14:08:29Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgwrUfmts_vgI4bdg_l4AaABAg",
@@ -3810,11 +3937,12 @@
       "posted_at": "2026-07-07T13:31:57Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgyCMCtoftPBvQg3AlR4AaABAg",
@@ -3822,11 +3950,12 @@
       "posted_at": "2026-07-07T12:29:16Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "Ugz2jy-59U9nZ78VPn94AaABAg",
@@ -3834,11 +3963,12 @@
       "posted_at": "2026-07-07T12:20:01Z",
       "likes": 3,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgxEV4ZmSmx1r_j7f-p4AaABAg",
@@ -3846,11 +3976,12 @@
       "posted_at": "2026-07-07T11:47:08Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgxBVM3yNjjhvwHBcr14AaABAg",
@@ -3858,11 +3989,12 @@
       "posted_at": "2026-08-19T10:34:43Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgzThz4fO9klTxfXO414AaABAg",
@@ -3870,11 +4002,12 @@
       "posted_at": "2026-07-02T14:21:31Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgwvcklbqRGVOcV6Yfl4AaABAg",
@@ -3882,11 +4015,12 @@
       "posted_at": "2026-06-25T04:02:35Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "Ugx8gSpJX29Ji_1d_Ot4AaABAg",
@@ -3894,11 +4028,12 @@
       "posted_at": "2026-06-24T16:23:57Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "Ugy5QdCpTjUv4Ocd02p4AaABAg",
@@ -3906,11 +4041,12 @@
       "posted_at": "2026-06-24T13:51:59Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgyuVr6G7gRq3J__gRd4AaABAg",
@@ -3918,11 +4054,12 @@
       "posted_at": "2026-06-24T12:33:28Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     },
     {
       "external_id": "UgxFRjIO-JYHTzmBK-J4AaABAg",
@@ -3930,11 +4067,12 @@
       "posted_at": "2026-06-24T12:10:14Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:38Z"
     }
   ],
   "pizzahut": [
@@ -3944,11 +4082,12 @@
       "posted_at": "2026-09-12T03:47:18Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "price",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "Ugy9zXM0D2e0FuyTGr14AaABAg",
@@ -3956,11 +4095,12 @@
       "posted_at": "2026-09-10T03:35:33Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "UgxNgBKJ-Z5U5iHQc154AaABAg",
@@ -3968,11 +4108,12 @@
       "posted_at": "2026-08-27T14:34:57Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "UgzwTnDd698gkqFcvet4AaABAg",
@@ -3980,11 +4121,12 @@
       "posted_at": "2026-08-22T18:20:14Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "Ugx-rHzh7u_4BPI4J9J4AaABAg",
@@ -3992,11 +4134,12 @@
       "posted_at": "2026-08-21T14:02:02Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "Ugy8duIW4Z826x-Zbnp4AaABAg",
@@ -4004,11 +4147,12 @@
       "posted_at": "2026-08-14T17:21:57Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "Ugxn2EXg5bqlaltmTiB4AaABAg",
@@ -4016,11 +4160,12 @@
       "posted_at": "2026-08-13T08:17:27Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "Ugw88NYnH9Gv1sJTgEt4AaABAg",
@@ -4028,11 +4173,12 @@
       "posted_at": "2026-08-12T17:59:25Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "UgymdcWLHBhknqDI9bJ4AaABAg",
@@ -4040,11 +4186,12 @@
       "posted_at": "2026-09-04T15:33:05Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "UgyNJdGzhb2jkT1hyD14AaABAg",
@@ -4052,11 +4199,12 @@
       "posted_at": "2026-08-30T05:29:00Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     },
     {
       "external_id": "UgzUAm85p0NKwHXkGcd4AaABAg",
@@ -4064,11 +4212,12 @@
       "posted_at": "2026-08-20T15:41:45Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:40Z"
     }
   ],
   "tacobell": [
@@ -4078,11 +4227,12 @@
       "posted_at": "2026-06-18T04:26:18Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:42Z"
     },
     {
       "external_id": "UgyBGZ-b7qvAPK5oRLp4AaABAg",
@@ -4090,11 +4240,12 @@
       "posted_at": "2026-07-10T07:19:58Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:42Z"
     },
     {
       "external_id": "Ugz97tmj4o-4_HzUL-p4AaABAg",
@@ -4102,11 +4253,12 @@
       "posted_at": "2026-08-10T16:02:32Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:42Z"
     }
   ],
   "mcdonalds_in": [
@@ -4116,11 +4268,12 @@
       "posted_at": "2026-09-03T15:24:39Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgxmzQhBHbxCV3YUvBF4AaABAg",
@@ -4128,11 +4281,12 @@
       "posted_at": "2026-07-30T03:51:18Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgxKGJpqx5KSQkh7Hvp4AaABAg",
@@ -4140,11 +4294,12 @@
       "posted_at": "2026-07-29T13:28:42Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgzvaSaIJjfdtW59kLx4AaABAg",
@@ -4152,11 +4307,12 @@
       "posted_at": "2026-07-29T12:36:57Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgzgLur657gLZHRGiUB4AaABAg",
@@ -4164,11 +4320,12 @@
       "posted_at": "2026-07-29T11:18:41Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugy-po95ACTXr552WMl4AaABAg",
@@ -4176,11 +4333,12 @@
       "posted_at": "2026-06-25T05:15:09Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgzcfiWPycOcQm4-mFl4AaABAg",
@@ -4188,11 +4346,12 @@
       "posted_at": "2026-06-22T16:22:26Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgyPnT-WzHwN_TRrFi54AaABAg",
@@ -4200,11 +4359,12 @@
       "posted_at": "2026-06-21T07:39:49Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugz0-quFG0OJABho7-94AaABAg",
@@ -4212,11 +4372,12 @@
       "posted_at": "2026-06-17T15:04:46Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgywBgZP3y6XiWDkrPV4AaABAg",
@@ -4224,11 +4385,12 @@
       "posted_at": "2026-07-27T06:06:32Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugybhl3M6zAyX27_8Qx4AaABAg",
@@ -4236,11 +4398,12 @@
       "posted_at": "2026-07-12T12:13:06Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgwOlOejXibgRHyIO1N4AaABAg",
@@ -4248,11 +4411,12 @@
       "posted_at": "2026-07-23T10:35:01Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgwwHGzXiy7nT4_RGal4AaABAg",
@@ -4260,11 +4424,12 @@
       "posted_at": "2026-07-23T10:34:44Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgyVKvTfX4g-tsTvkLR4AaABAg",
@@ -4272,11 +4437,12 @@
       "posted_at": "2026-08-17T18:16:44Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugy5zV-uNRT-aqIdfD94AaABAg",
@@ -4284,11 +4450,12 @@
       "posted_at": "2026-08-06T07:18:36Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugze8X2g8ndjMVAKiYx4AaABAg",
@@ -4296,11 +4463,12 @@
       "posted_at": "2026-08-06T07:22:10Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgzFaCYItcDp9KcNUa94AaABAg",
@@ -4308,11 +4476,12 @@
       "posted_at": "2026-08-07T05:32:42Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgyYF2Pl7GcCA0BE_mR4AaABAg",
@@ -4320,11 +4489,12 @@
       "posted_at": "2026-08-22T08:52:27Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugww0GVhPZX0ZpNsNPl4AaABAg",
@@ -4332,11 +4502,12 @@
       "posted_at": "2026-08-21T15:35:59Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "hygiene",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugya37bpC3Yf1ONMO2l4AaABAg",
@@ -4344,11 +4515,12 @@
       "posted_at": "2026-08-20T17:35:59Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugzt_AUfM2scYJpgqud4AaABAg",
@@ -4356,11 +4528,12 @@
       "posted_at": "2026-09-06T04:59:05Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "UgyYEmZiNrRsGNdZpCV4AaABAg",
@@ -4368,11 +4541,12 @@
       "posted_at": "2026-09-05T09:52:47Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     },
     {
       "external_id": "Ugx_iDVexGAjFO-rifF4AaABAg",
@@ -4380,11 +4554,12 @@
       "posted_at": "2026-07-11T19:12:41Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:47Z"
     }
   ],
   "burgerking": [],
@@ -4395,11 +4570,12 @@
       "posted_at": "2026-08-08T09:43:53Z",
       "likes": 2,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "Ugx_6FmB3XD-gdLi2614AaABAg",
@@ -4407,11 +4583,12 @@
       "posted_at": "2026-08-03T12:56:08Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "Ugwubk1Lu5GnIiGxej54AaABAg",
@@ -4419,11 +4596,12 @@
       "posted_at": "2026-06-29T21:39:12Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgzUwZPAYBVjI_bRYcR4AaABAg",
@@ -4431,11 +4609,12 @@
       "posted_at": "2026-06-29T21:36:22Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgymdyW24nawdvvOn5R4AaABAg",
@@ -4443,11 +4622,12 @@
       "posted_at": "2026-06-29T20:49:27Z",
       "likes": 4,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgwpZo3W4R7E2kM0jtJ4AaABAg",
@@ -4455,11 +4635,12 @@
       "posted_at": "2026-06-29T20:17:04Z",
       "likes": 1,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgyVniJ3N-bH_-_RmDp4AaABAg",
@@ -4467,11 +4648,12 @@
       "posted_at": "2026-06-29T14:08:28Z",
       "likes": 3,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgwyR68boj0_Ywqwns14AaABAg",
@@ -4479,11 +4661,12 @@
       "posted_at": "2026-06-29T11:53:58Z",
       "likes": 3,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgwH8qHQ02SbHdgSIGJ4AaABAg",
@@ -4491,11 +4674,12 @@
       "posted_at": "2026-06-29T11:08:00Z",
       "likes": 5,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgwRfoSUzKlMi02_ImR4AaABAg",
@@ -4503,11 +4687,12 @@
       "posted_at": "2026-06-29T07:44:05Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgwG_Y7oJudRtMJCi5x4AaABAg",
@@ -4515,11 +4700,12 @@
       "posted_at": "2026-09-09T15:46:03Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "hygiene",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "Ugwmdohcq1pOGggTlFJ4AaABAg",
@@ -4527,11 +4713,12 @@
       "posted_at": "2026-09-07T14:43:35Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgzkvN8LCc4YJSAPlTB4AaABAg",
@@ -4539,11 +4726,12 @@
       "posted_at": "2026-09-05T12:12:42Z",
       "likes": 3,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgwE-w8TzDCtHe9HK8t4AaABAg",
@@ -4551,11 +4739,12 @@
       "posted_at": "2026-09-04T10:49:44Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgzL_LBnWhzUck0de014AaABAg",
@@ -4563,11 +4752,12 @@
       "posted_at": "2026-09-07T14:45:11Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgzWyap1_UfjV_xhL2F4AaABAg",
@@ -4575,11 +4765,12 @@
       "posted_at": "2026-07-26T10:36:14Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgzApCBvY80Rwdx1F614AaABAg",
@@ -4587,11 +4778,12 @@
       "posted_at": "2026-07-24T06:53:59Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "Ugx4ZhRcweZMETd2uuh4AaABAg",
@@ -4599,11 +4791,12 @@
       "posted_at": "2026-07-22T12:33:30Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "delivery",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "Ugzv5_6zLYf4SaFAn9x4AaABAg",
@@ -4611,11 +4804,12 @@
       "posted_at": "2026-07-10T09:50:09Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "hygiene",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     },
     {
       "external_id": "UgxJInMEeXMQ9UapqVN4AaABAg",
@@ -4623,11 +4817,12 @@
       "posted_at": "2026-07-03T19:28:44Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:50Z"
     }
   ],
   "subway": [
@@ -4637,11 +4832,12 @@
       "posted_at": "2026-08-03T15:27:47Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:51Z"
     },
     {
       "external_id": "UgyZK8uNQzOyYcUlQZt4AaABAg",
@@ -4649,11 +4845,12 @@
       "posted_at": "2026-08-02T09:32:14Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:51Z"
     },
     {
       "external_id": "Ugzq8nQS9i1RMeSgCKJ4AaABAg",
@@ -4661,11 +4858,12 @@
       "posted_at": "2026-07-28T14:08:56Z",
       "likes": 0,
       "platform": "yt",
-      "spam": null,
-      "polarity": null,
-      "theme": null,
-      "language": null,
-      "model_version": null
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-13T10:45:51Z"
     }
   ]
 }
