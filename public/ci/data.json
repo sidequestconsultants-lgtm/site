@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "15 SEP 14:22 IST",
-    "updatedISO": "2026-09-15T08:52:45Z",
+    "updated": "15 SEP 14:58 IST",
+    "updatedISO": "2026-09-15T09:28:00Z",
     "spamRateBase": 0.61,
     "handles": {
       "kfc": {
@@ -82,6 +82,27 @@
     "anomalyThreshold": 1.8,
     "coverageDays": 90,
     "trackingSince": "2026-06-15",
+    "sources": {
+      "youtube": {
+        "status": "ok",
+        "detail": null,
+        "lastRun": "2026-09-15T09:27:53Z",
+        "rowsUpserted": 173
+      },
+      "instagram": {
+        "status": "quota_exhausted",
+        "detail": "kfc: Apify quota exhausted (403) for handle=kfcindia_official: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}. Skipping remaining brands for this run — credit won't recover mid-run.",
+        "lastRun": "2026-09-15T09:27:54Z",
+        "rowsUpserted": 0
+      },
+      "classification": {
+        "status": "ok",
+        "detail": null,
+        "lastRun": "2026-09-15T09:28:00Z",
+        "pendingPosts": 0,
+        "pendingComments": 0
+      }
+    },
     "untrackedShareAssumption": 0.112,
     "commentSample": {
       "n": 128,
@@ -295,7 +316,7 @@
     "windows": {
       "7": {
         "ig": {
-          "organic": 4124,
+          "organic": 4126,
           "paid": 0
         },
         "yt": {
@@ -305,7 +326,7 @@
       },
       "30": {
         "ig": {
-          "organic": 7074253,
+          "organic": 7093376,
           "paid": 0
         },
         "yt": {
@@ -315,7 +336,7 @@
       },
       "90": {
         "ig": {
-          "organic": 27864723,
+          "organic": 27887820,
           "paid": 0
         },
         "yt": {
@@ -326,7 +347,7 @@
     },
     "prev30": {
       "ig": {
-        "organic": 8047391,
+        "organic": 8051365,
         "paid": 0
       },
       "yt": {
@@ -346,7 +367,7 @@
             "posts": 0
           },
           "yt": {
-            "organic": 32699,
+            "organic": 32717,
             "paid": 0,
             "followers": 247000,
             "posts": 8
@@ -360,8 +381,8 @@
             "posts": 0
           },
           "yt": {
-            "organic": 118556,
-            "paid": 46333,
+            "organic": 118548,
+            "paid": 46351,
             "followers": 247000,
             "posts": 26
           }
@@ -374,8 +395,8 @@
             "posts": 0
           },
           "yt": {
-            "organic": 445930,
-            "paid": 458580,
+            "organic": 445923,
+            "paid": 458614,
             "followers": 247000,
             "posts": 75
           }
@@ -389,8 +410,8 @@
           "posts": 0
         },
         "yt": {
-          "organic": 153202,
-          "paid": 229754,
+          "organic": 153203,
+          "paid": 229770,
           "followers": 247000,
           "posts": 23
         }
@@ -419,7 +440,7 @@
         "neu": 0.644,
         "neg": 0.218
       },
-      "negDeltaPP": -3.5,
+      "negDeltaPP": -2.7,
       "themeShare": {
         "taste": 0.109,
         "price": 0.02,
@@ -452,11 +473,11 @@
       ],
       "seriesYT": [
         1.531,
-        1.133,
-        1.115,
+        1.132,
+        1.116,
         0.798,
         0.619,
-        0.804
+        0.805
       ],
       "commentSample": {
         "n": 108,
@@ -503,7 +524,7 @@
           },
           "yt": {
             "organic": 26959,
-            "paid": 52903679,
+            "paid": 52931505,
             "followers": 101000,
             "posts": 11
           }
@@ -518,7 +539,7 @@
         },
         "yt": {
           "organic": 19426,
-          "paid": 52903679,
+          "paid": 52931505,
           "followers": 101000,
           "posts": 6
         }
@@ -617,7 +638,7 @@
           },
           "yt": {
             "organic": 427396,
-            "paid": 27874391,
+            "paid": 27900612,
             "followers": 8620,
             "posts": 2
           }
@@ -631,7 +652,7 @@
           },
           "yt": {
             "organic": 6112803,
-            "paid": 37090421,
+            "paid": 37116641,
             "followers": 8620,
             "posts": 39
           }
@@ -646,7 +667,7 @@
         },
         "yt": {
           "organic": 2139726,
-          "paid": 7435071,
+          "paid": 7435070,
           "followers": 8620,
           "posts": 10
         }
@@ -745,7 +766,7 @@
           },
           "yt": {
             "organic": 7496,
-            "paid": 6417,
+            "paid": 6418,
             "followers": 50200,
             "posts": 29
           }
@@ -759,7 +780,7 @@
           },
           "yt": {
             "organic": 13632,
-            "paid": 87237141,
+            "paid": 87237142,
             "followers": 50200,
             "posts": 44
           }
@@ -1000,8 +1021,8 @@
             "posts": 0
           },
           "yt": {
-            "organic": 8115182,
-            "paid": 19485419,
+            "organic": 8115179,
+            "paid": 19610809,
             "followers": 225000,
             "posts": 1
           }
@@ -1014,8 +1035,8 @@
             "posts": 0
           },
           "yt": {
-            "organic": 16238973,
-            "paid": 19485419,
+            "organic": 16238971,
+            "paid": 19610809,
             "followers": 225000,
             "posts": 3
           }
@@ -1142,7 +1163,7 @@
             "posts": 0
           },
           "yt": {
-            "organic": 913909,
+            "organic": 917571,
             "paid": 0,
             "followers": 94800,
             "posts": 1
@@ -1157,7 +1178,7 @@
           "posts": 0
         },
         "yt": {
-          "organic": 913909,
+          "organic": 917571,
           "paid": 0,
           "followers": 94800,
           "posts": 1
