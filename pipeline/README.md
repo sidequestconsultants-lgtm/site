@@ -277,10 +277,10 @@ rows were discarded along with the one brand that failed. Four fixes:
    comments" steps run with `continue-on-error: true` — a fully exhausted
    Apify credit (every brand quota-403s, `status="error"`) or a dead
    Gemini key still lets `build_data`/`build_demo`/commit run and publish
-   whatever YouTube alone provided that day. "Pull YouTube" stays a hard
-   gate (RULE #7 — a bad day never overwrites yesterday's good data.json);
-   it's the one source with no external credit to exhaust, so its own
-   total failure is still treated as nothing worth building.
+   whatever YouTube alone provided that day. "Pull YouTube" stayed a hard
+   gate at this point (its own total failure still stopped the job) —
+   **this exception was itself the bug**; see "No pull or classify script
+   blocks the pipeline, ever" below for why it came out entirely.
 
 ## Coverage must reflect whichever platform has data, not whichever has least
 
@@ -329,6 +329,102 @@ field interpolated in the top bar/sidebar/print footer
 and a `BRANDS[CLIENT_BRAND_ID]?.name` check before the client-name
 prefix) so the brief loading state — or any future build that's missing
 a field — never shows the word "undefined" to a viewer.
+
+## No pull or classify script blocks the pipeline, ever
+
+Fifteen scheduled runs in a row failed to publish anything, every time for
+the same underlying reason: some normal, expected condition (a quota, a
+rate limit, a transient 5xx, once even this pipeline's own commit losing a
+race to push) killed a step, and GitHub Actions' default fail-fast behavior
+skipped every step after it — including `build_data`, `build_demo`, and the
+commit — discarding whatever real data the run had already fetched. Each
+earlier fix in this file (`continue-on-error` on Instagram/classify, the
+partial-pull fixes above) narrowed *which* conditions could do this; none
+of them closed off the possibility architecturally. This is the fix that
+does:
+
+1. **No pull or classify script may ever exit non-zero for an expected
+   condition.** Not a quota, not a rate limit, not a dead handle, not zero
+   rows — `pull_youtube.py`, `pull_instagram.py`, `classify.py`, and
+   `pull_trends.py` all record their outcome in `store/pull_log.json` (as
+   they already did) and then unconditionally `sys.exit(0)`. There is no
+   longer an `if status in (...) else 1` anywhere in this pipeline's
+   `main()` functions — every one of them tried that pattern with a
+   growing list of "acceptable" statuses across the earlier fixes above,
+   and every version of that list still had an `else 1` that could fire.
+   The fix is not a longer list; it's removing the branch. The only way
+   any of these four processes now exits non-zero is an unhandled crash —
+   a real bug in the script itself, not something its own status logic
+   decided — and even that no longer stops the pipeline (next point).
+   `pull_youtube.py` in particular used to be the one deliberate exception
+   ("the one source with no external credit to exhaust, so its own total
+   failure means nothing worth building") — a defensible-sounding rule
+   that turned out to be exactly the recurring failure: a YouTube quota
+   day or a transient API error discarded a store that already held real,
+   already-fetched data going nowhere. There is no remaining exception.
+2. **`build_data.py` and the commit step run unconditionally.**
+   `.github/workflows/daily.yml`/`weekly-trends.yml` give every pull/
+   classify step `continue-on-error: true` (defense in depth for the
+   unhandled-crash case above) and give `Build data.json`, `Rebuild
+   offline demo build`, and `Commit and push` `if: always()` — they run
+   even if every step before them failed outright. `build_data.py` reads
+   whatever `store/` actually has (today's partial data, or yesterday's if
+   nothing new landed) and its own `validate()` is the real structural
+   gate against publishing something malformed (still true, still there —
+   see `validate()`'s docstring); it was never gated on any *pull*
+   succeeding, only ever bolted to one by the workflow's step order.
+   YouTube-only, Instagram-only, unclassified-posts-only, or genuinely
+   nothing-new-at-all: `build_data` runs and publishes the best real
+   answer the store can give, every time.
+3. **Status is reported, not enforced.** `pipeline/run_summary.py` reads
+   the same `store/pull_log.json` every script above already appends to
+   and writes a `$GITHUB_STEP_SUMMARY`: each source's latest status, rows
+   written, and Apify spend against the monthly ceiling. Nothing here can
+   fail the job — a human reads it after the fact, the same way `meta.
+   sources` (next point) lets a dashboard viewer read it in the product.
+4. **Degradation is surfaced in the product, not absorbed silently.**
+   `build_data.py`'s `compute_sources()` turns each source's latest
+   `pull_log.json` row (plus how many posts/comments still lack the
+   current `model_version`) into `meta.sources.{youtube,instagram,
+   classification}`, each with a `status` — `ok`, `quota_exhausted`,
+   `no_handle` (no brand has a handle configured for that platform at
+   all), `never_run`, `degraded` (any other real error), or
+   `unclassified` (classification only, keyed off actual pending count,
+   not the last run's own status — Gemini being down means nothing if
+   there was nothing pending to classify). `index.html` renders this: a
+   small tag on the INSTAGRAM/YOUTUBE sidebar links (`sourceBadge()`,
+   hover for the detail via the existing tooltip registry) and a
+   `CLASSIFICATION PENDING` chip in the top bar (`classificationChip()`)
+   when there's real backlog. A down source is information for the
+   viewer, never a reason this pipeline published nothing.
+5. **The commit step itself is resilient to losing a race.** Two
+   workflows (`daily.yml`, `weekly-trends.yml`) both regenerate
+   `public/ci/data.json`/`dashboard-demo.html` and both append to
+   `store/pull_log.json` — a real run observed the "Commit and push" step
+   die on `! [rejected] ... (fetch first)` after building everything
+   correctly, discarding that commit the exact same way an upstream
+   script failure used to. `Commit and push` now retries: on a push
+   rejection it fetches and rebases onto the current tip and tries again
+   (up to 5 attempts, backing off between them). The two workflows'
+   generated files (`data.json`, the demo, same-day snapshots) and
+   `store/pull_log.json`'s own appends are realistically the only files
+   that can textually conflict (every raw-data file — posts, comments,
+   channel_stats, trends — is written by exactly one of the two
+   workflows); if a rebase genuinely conflicts rather than just needing a
+   replay, the script aborts it and fails loudly for a human rather than
+   guessing at a resolution — a real conflict there is rare enough (both
+   workflows normally run 30+ minutes apart) that this is a reasonable
+   place to stop being automatic.
+
+Verified with a mocked total-outage test: every external call (YouTube,
+Apify, Gemini, Google Trends) failing at once still exits 0 from all four
+scripts, `build_data.build()`/`validate()` succeed with no problems, every
+`meta.sources` entry reports degraded (including `classification` —
+seeded with one already-classified and one still-pending post/comment to
+prove old good data survives untouched while the pending ones correctly
+read `unclassified`), and `data.json` gets written. Run entirely against a
+temp store/public dir (every `config.*_PATH` monkeypatched) — never
+touches the real repository's `store/` or `public/ci/data.json`.
 
 ## Multi-handle brands
 

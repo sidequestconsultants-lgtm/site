@@ -443,12 +443,15 @@ def main() -> None:
     if args.dry_run:
         dry_run()
         sys.exit(0)
-    status = run()
-    # "warn" is a partial success (some brands failed, at least one didn't)
-    # and must still exit 0 — the whole point of this fix is that the
-    # workflow's build/commit steps run on whatever got pulled. Only
-    # "error" (zero brands succeeded) fails the workflow.
-    sys.exit(0 if status in ("ok", "warn") else 1)
+    run()
+    # No expected outcome — "ok", "warn", or "error" (zero brands
+    # succeeded, e.g. a dead token or total quota exhaustion) — ever exits
+    # non-zero. Every one of those is a normal, logged operational state
+    # (store.append_pull_log() above already recorded it), not a reason to
+    # kill the workflow and skip build_data/commit. The only way this
+    # process exits non-zero is an unhandled crash — a real bug, not
+    # something this function decides.
+    sys.exit(0)
 
 
 if __name__ == "__main__":

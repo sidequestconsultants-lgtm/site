@@ -118,6 +118,7 @@ svg{display:block}
 .side-link.disabled{color:var(--dim);cursor:default}
 .side-link.disabled:hover{color:var(--dim);background:none}
 .side-tag{font:700 9px var(--f-mono);letter-spacing:.08em;padding:2px 6px;border:1px solid var(--hairline);border-radius:2px;color:var(--dim)}
+.side-tag.degraded{color:var(--neg);border-color:var(--neg)}
 .side-brand-row{display:flex;align-items:center;gap:9px;padding:8px 22px;font:400 12px var(--f-mono);color:var(--muted);cursor:pointer;transition:color .2s}
 .side-brand-row:hover{color:var(--ink)}
 .side-swatch{width:8px;height:8px;border-radius:1px;flex:none}
@@ -147,6 +148,7 @@ svg{display:block}
 .tb-fresh{font:400 10px var(--f-mono);color:var(--dim);letter-spacing:.03em;white-space:nowrap}
 .tb-fresh.stale{color:var(--violet)}
 .stale-chip{display:inline-block;margin-left:7px;font:700 9px var(--f-mono);letter-spacing:.08em;color:#0A0A12;background:var(--violet);padding:2px 7px;border-radius:2px;vertical-align:1px}
+.source-chip{display:inline-block;margin-left:7px;font:700 9px var(--f-mono);letter-spacing:.08em;color:#0A0A12;background:var(--neg);padding:2px 7px;border-radius:2px;vertical-align:1px;cursor:default}
 
 /* ── loading / error states (Phase 4e-iii) ── */
 .skeleton{background:linear-gradient(90deg,var(--surface) 25%,var(--surface-2) 37%,var(--surface) 63%);background-size:400% 100%;animation:skeleton-shine 1.4s ease infinite;border-radius:4px}
@@ -528,6 +530,32 @@ function registerTip(title, lines){
   const id = 'tip'+(TIP_SEQ++);
   TIP_REGISTRY[id] = {title, lines};
   return id;
+}
+// meta.sources (build_data.py) carries per-source degradation — a down
+// source is information for the viewer, never silently absorbed into a
+// dashboard that just renders whatever's in the store with no comment on
+// why it's thin. SOURCE_STATUS_LABEL only needs entries for the statuses
+// worth a badge; 'ok' (and anything unrecognized) renders nothing.
+const SOURCE_STATUS_LABEL = { quota_exhausted:'QUOTA', no_handle:'NO HANDLE', never_run:'PENDING', degraded:'DEGRADED', unclassified:'PENDING' };
+function sourceInfo(key){
+  return (META.sources && META.sources[key]) || null;
+}
+function sourceBadge(key, title){
+  const info = sourceInfo(key);
+  if(!info || info.status==='ok') return '';
+  const label = SOURCE_STATUS_LABEL[info.status] || info.status.toUpperCase();
+  const lines = [info.detail || info.status.replace(/_/g,' ').toUpperCase()];
+  if(info.lastRun) lines.push('LAST ATTEMPT '+info.lastRun);
+  const tipId = registerTip(title+' · '+label, lines);
+  return ` <span class="side-tag degraded" data-tip-id="${tipId}">${label}</span>`;
+}
+function classificationChip(){
+  const info = sourceInfo('classification');
+  if(!info || info.status==='ok') return '';
+  const lines = [info.detail || 'CLASSIFICATION PENDING'];
+  if(info.lastRun) lines.push('LAST ATTEMPT '+info.lastRun);
+  const tipId = registerTip('CLASSIFICATION · PENDING', lines);
+  return `<span class="source-chip" data-tip-id="${tipId}">CLASSIFICATION PENDING</span>`;
 }
 
 function ease(t){ // cubic-bezier(.16,1,.3,1) approximation
@@ -1564,8 +1592,8 @@ function renderSidebar(){
     <div class="side-brandmark">${META.logoSvg||''}<span>SIDEQUEST CI</span></div>
     <div class="side-link ${STATE.page==='overview'?'active':''}" data-nav="overview">OVERVIEW</div>
     <div class="side-section">PLATFORMS</div>
-    <div class="side-link ${STATE.page==='platform'&&STATE.platform==='instagram'?'active':''}" data-nav="platform:instagram">INSTAGRAM</div>
-    <div class="side-link ${STATE.page==='platform'&&STATE.platform==='youtube'?'active':''}" data-nav="platform:youtube">YOUTUBE</div>
+    <div class="side-link ${STATE.page==='platform'&&STATE.platform==='instagram'?'active':''}" data-nav="platform:instagram">INSTAGRAM${sourceBadge('instagram','INSTAGRAM')}</div>
+    <div class="side-link ${STATE.page==='platform'&&STATE.platform==='youtube'?'active':''}" data-nav="platform:youtube">YOUTUBE${sourceBadge('youtube','YOUTUBE')}</div>
     <div class="side-link disabled" data-tip-id="${fbTip}">FACEBOOK <span class="side-tag">PENDING</span></div>
     <div class="side-link disabled" data-tip-id="${liTip}">LINKEDIN <span class="side-tag">Q3</span></div>
     <div class="side-section">BRANDS</div>
@@ -1606,6 +1634,7 @@ function renderTopbar(){
     </div>
     <span class="tb-vs">VS PREV PERIOD</span>
     <span class="tb-fresh${stale?' stale':''}">UPDATED ${META.updated||'—'}${stale?'<span class="stale-chip">STALE</span>':''}</span>
+    ${classificationChip()}
     <button class="sq-btn secondary sm" id="methodBtn" type="button">METHODOLOGY</button>
     <button class="sq-btn sm" id="exportBtn" type="button">EXPORT</button>
   `;

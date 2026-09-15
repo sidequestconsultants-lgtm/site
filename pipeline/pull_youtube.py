@@ -208,11 +208,13 @@ def run(api_key: str | None = None) -> tuple[str, dict]:
 
 
 def main() -> None:
-    status, _ = run()
-    # "warn" is a partial success (some brands failed, at least one didn't)
-    # and must still exit 0 so downstream steps run and commit what was
-    # fetched — only "error" (zero brands succeeded) fails the workflow.
-    sys.exit(0 if status in ("ok", "warn") else 1)
+    run()
+    # No expected outcome ever exits non-zero — see pull_instagram.py's
+    # main() for the full rationale. A missing API key or every brand
+    # failing (status "error") is a normal, already-logged operational
+    # state, not a reason to block build_data/commit from running on
+    # whatever the store already has.
+    sys.exit(0)
 
 
 if __name__ == "__main__":
