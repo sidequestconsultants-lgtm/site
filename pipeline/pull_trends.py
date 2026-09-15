@@ -155,8 +155,14 @@ def run(pytrends_factory=None) -> str:
 
 
 def main() -> None:
-    status = run()
-    sys.exit(0 if status == "ok" else 1)
+    run()
+    # No expected outcome ever exits non-zero — see pull_instagram.py's
+    # main() for the full rationale. Google's unofficial Trends endpoint
+    # rate-limiting every brand this run is a normal, already-logged
+    # operational state, not a reason to block build_data/commit from
+    # running on whatever trends data (or lack of it) the store already
+    # has.
+    sys.exit(0)
 
 
 if __name__ == "__main__":

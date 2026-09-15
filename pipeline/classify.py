@@ -81,7 +81,7 @@ from . import config, store, usage
 
 GEMINI_MODEL = config.GEMINI_MODEL
 GEMINI_API = f"https://generativelanguage.googleapis.com/v1beta/models/{GEMINI_MODEL}:generateContent"
-CURRENT_MODEL_VERSION = f"{GEMINI_MODEL}-classify-v1"
+CURRENT_MODEL_VERSION = config.CURRENT_MODEL_VERSION
 POST_BATCH_SIZE = 20
 # Comments get a much larger batch than posts (100 vs 20) specifically to
 # cut the NUMBER of Gemini calls comment classification makes — fewer,
@@ -514,18 +514,18 @@ def main() -> None:
     posts_deadline = (run_start + config.CLASSIFY_MAX_MINUTES * 60 * config.CLASSIFY_POSTS_TIME_SHARE
                       if run_both else overall_deadline)
 
-    statuses = []
     if not args.comments_only:
-        statuses.append(classify_posts(deadline=posts_deadline))
+        classify_posts(deadline=posts_deadline)
     if not args.posts_only:
-        statuses.append(classify_comments(deadline=overall_deadline))
-    # A rate-limit incident in ONE job (e.g. posts exhausts the quota
-    # before finishing) must not discard the other's partial success —
-    # only fail this invocation when NEITHER job processed anything at
-    # all. "warn" (some posts/comments classified, some batches
-    # rate-limited or the Apify ceiling skipped IG comments) is a partial
-    # success and exits 0 either way, same as pull_instagram.py.
-    sys.exit(0 if any(s in ("ok", "warn") for s in statuses) else 1)
+        classify_comments(deadline=overall_deadline)
+    # No expected outcome ever exits non-zero — see pull_instagram.py's
+    # main() for the full rationale. Both jobs hitting quota and
+    # classifying nothing is a normal, already-logged operational state:
+    # classification is idempotent by model_version, so anything still
+    # pending self-heals on the next scheduled run, and build_data must
+    # still run and commit whatever posts/comments DID get classified
+    # (or publish unclassified ones — see build_data.py's meta.sources).
+    sys.exit(0)
 
 
 if __name__ == "__main__":

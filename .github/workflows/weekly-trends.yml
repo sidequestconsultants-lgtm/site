@@ -31,16 +31,31 @@ jobs:
       - name: Install pipeline dependencies
         run: pip install -r pipeline/requirements.txt
 
+      # See daily.yml for the full rationale: pull_trends.py never exits
+      # non-zero for an expected condition (the unofficial Trends endpoint
+      # rate-limiting every brand this run included), and continue-on-error
+      # here is defense in depth for the one thing that still can — an
+      # unhandled crash. Either way, rebuild/commit run unconditionally on
+      # whatever store/trends.json already has.
       - name: Pull search trends
+        id: pull_trends
+        continue-on-error: true
         run: python -m pipeline.pull_trends
 
       - name: Rebuild data.json with fresh trends
+        if: always()
         run: python -m pipeline.build_data
 
       - name: Rebuild offline demo build
+        if: always()
         run: python -m pipeline.build_demo
 
+      # Unconditional, and resilient to losing a race against daily.yml —
+      # both fully regenerate public/ci/data.json/dashboard-demo.html and
+      # both append to store/pull_log.json. See daily.yml's own commit
+      # step for the full rationale.
       - name: Commit and push
+        if: always()
         run: |
           git config user.name "ci-pipeline-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -50,4 +65,25 @@ jobs:
             exit 0
           fi
           git commit -m "ci: weekly trends refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git push
+
+          attempt=0
+          max_attempts=5
+          until git push; do
+            attempt=$((attempt + 1))
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "::error::git push failed after $max_attempts attempts — see the rejection above."
+              exit 1
+            fi
+            echo "push rejected (attempt $attempt/$max_attempts) — another run landed first. Rebasing onto origin/$GITHUB_REF_NAME and retrying..."
+            sleep $((attempt * 3))
+            git fetch origin "$GITHUB_REF_NAME"
+            if ! git rebase "origin/$GITHUB_REF_NAME"; then
+              git rebase --abort
+              echo "::error::rebase onto origin/$GITHUB_REF_NAME conflicted — needs manual resolution."
+              exit 1
+            fi
+          done
+
+      - name: Record run summary
+        if: always()
+        run: python -m pipeline.run_summary >> "$GITHUB_STEP_SUMMARY"

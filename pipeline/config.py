@@ -263,6 +263,13 @@ USAGE_FILE = "store/usage.json"
 # full Flash model before finishing even post classification.
 GEMINI_MODEL = "gemini-flash-lite-latest"
 
+# Lives here (not recomputed independently in classify.py and build_data.py)
+# so a record's classification state means the same thing to the script
+# that writes it and the script that reports on it — build_data.py counts
+# posts/comments still short of this version to report meta.sources'
+# classification status without importing classify.py's runtime.
+CURRENT_MODEL_VERSION = f"{GEMINI_MODEL}-classify-v1"
+
 # One Gemini classification run (both posts and comments) stops cleanly
 # after this many minutes rather than running indefinitely against a
 # rate-limited API — logs how many records are left unclassified rather

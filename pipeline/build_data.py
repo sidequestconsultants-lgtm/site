@@ -28,7 +28,7 @@ import sys
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 
-from . import config, store
+from . import config, run_summary, store
 
 IST = timezone(timedelta(hours=5, minutes=30))
 SERIES_BUCKETS = 6
@@ -345,7 +345,8 @@ def _as_list(val) -> list:
     return list(val) if isinstance(val, list) else [val]
 
 
-def build_meta(now: datetime, comments_store: dict, coverage_days: int, tracking_since: str | None) -> dict:
+def build_meta(now: datetime, comments_store: dict, coverage_days: int, tracking_since: str | None,
+               sources: dict) -> dict:
     handles = {
         bid: {"ig": [f"@{h}" for h in b.get("handle_ig") or []],
               "yt": b.get("yt_handle"), "fb": _as_list(b.get("handle_fb"))}
@@ -368,6 +369,10 @@ def build_meta(now: datetime, comments_store: dict, coverage_days: int, tracking
         # compute_coverage().
         "coverageDays": coverage_days,
         "trackingSince": tracking_since,
+        # Per-source degradation, surfaced so a down source is information
+        # for a viewer, not a reason this pipeline published nothing — see
+        # compute_sources().
+        "sources": sources,
         "untrackedShareAssumption": config.UNTRACKED["share_assumption"],
         "commentSample": compute_meta_comment_sample(comments_store, now),
         "excluded": dict(config.EXCLUDED),
@@ -426,6 +431,69 @@ def compute_coverage(posts: dict, now: datetime) -> tuple[int, str | None]:
     return coverage_days, earliest.strftime("%Y-%m-%d")
 
 
+def _pull_status(entry: dict | None, no_handles: bool) -> dict:
+    """One platform's degradation status for meta.sources — 'a down
+    source is information for the viewer, not a reason to publish
+    nothing.' Every pull script already exits 0 and logs its real outcome
+    to pull_log.json regardless of what happened (see pull_youtube.py/
+    pull_instagram.py's own main()); this just reads the same row a human
+    would read in the Actions run summary (run_summary.py) and turns it
+    into a status a render function can key off without parsing error
+    text itself."""
+    if no_handles:
+        return {"status": "no_handle", "detail": "no brand has a handle configured for this platform",
+                "lastRun": None, "rowsUpserted": None}
+    if entry is None:
+        return {"status": "never_run", "detail": None, "lastRun": None, "rowsUpserted": None}
+    error = entry.get("error") or ""
+    if entry["status"] == "ok":
+        status = "ok"
+    elif "quota" in error.lower() or " 403" in error or "hard limit" in error.lower():
+        status = "quota_exhausted"
+    else:
+        status = "degraded"
+    return {"status": status, "detail": entry.get("error"), "lastRun": entry.get("finished_at"),
+            "rowsUpserted": entry.get("rows_upserted")}
+
+
+def compute_sources(pull_log: list, posts: dict, comments_store: dict) -> dict:
+    """meta.sources — youtube/instagram/classification, each with a status
+    (ok / quota_exhausted / no_handle / never_run / degraded, or
+    unclassified for classification) plus enough detail to explain it. A
+    fresh deploy or a total outage across every source still builds and
+    publishes data.json (RULE — see pipeline/README.md's "no pull or
+    classify script exits non-zero" section); this is how that
+    degradation reaches a viewer instead of just a CI log nobody but the
+    pipeline's own operator ever reads."""
+    latest = run_summary.latest_entries(pull_log)
+    yt_no_handles = all(not b.get("yt_handle") for b in config.BRANDS.values())
+    ig_no_handles = all(not b.get("handle_ig") for b in config.BRANDS.values())
+
+    pending_posts = sum(1 for records in posts.values() for r in records
+                         if r.get("model_version") != config.CURRENT_MODEL_VERSION)
+    pending_comments = sum(1 for records in comments_store.values() for c in records
+                            if c.get("model_version") != config.CURRENT_MODEL_VERSION)
+    classify_entries = [latest.get("classify_posts"), latest.get("classify_comments")]
+    classify_errors = [e.get("error") for e in classify_entries if e and e.get("error")]
+    last_classify_run = max((e["finished_at"] for e in classify_entries if e), default=None)
+    if pending_posts == 0 and pending_comments == 0:
+        classification = {"status": "ok", "detail": None, "lastRun": last_classify_run,
+                           "pendingPosts": 0, "pendingComments": 0}
+    else:
+        classification = {
+            "status": "unclassified",
+            "detail": f"{pending_posts} post(s), {pending_comments} comment(s) awaiting classification"
+                       + (" — " + "; ".join(classify_errors)[:200] if classify_errors else ""),
+            "lastRun": last_classify_run, "pendingPosts": pending_posts, "pendingComments": pending_comments,
+        }
+
+    return {
+        "youtube": _pull_status(latest.get("pull_youtube"), yt_no_handles),
+        "instagram": _pull_status(latest.get("pull_instagram"), ig_no_handles),
+        "classification": classification,
+    }
+
+
 def compute_untracked(profiles_out: dict, coverage_days: int) -> dict:
     """Solve each window's untracked value so that
     untracked / (tracked_total + untracked) == share_assumption for that
@@ -473,7 +541,9 @@ def build() -> dict:
     comments_store = store.load_comments()
     trends = store.load_json(config.TRENDS_PATH, {})
     client_insights_all = store.load_json(config.CLIENT_INSIGHTS_PATH, {})
+    pull_log = store.load_json(config.PULL_LOG_PATH, [])
     coverage_days, tracking_since = compute_coverage(posts, now)
+    sources = compute_sources(pull_log, posts, comments_store)
 
     brands_out = {
         bid: {
@@ -499,7 +569,7 @@ def build() -> dict:
     untracked_out = compute_untracked(profiles_out, coverage_days)
 
     return {
-        "meta": build_meta(now, comments_store, coverage_days, tracking_since),
+        "meta": build_meta(now, comments_store, coverage_days, tracking_since, sources),
         "brands": brands_out,
         "portfolios": portfolios_out,
         "untracked": untracked_out,

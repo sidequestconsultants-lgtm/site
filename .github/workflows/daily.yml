@@ -32,27 +32,30 @@ jobs:
       - name: Install pipeline dependencies
         run: pip install -r pipeline/requirements.txt
 
-      # Each script below exits non-zero only when NOT ONE brand succeeded
-      # for that source ("error" — see each script's own status logic); a
-      # partial success (some brands ok, some failed or hit an operational
-      # limit like an Apify quota 403) is "warn" and exits 0, because
-      # GitHub Actions stops the job at the first failing step by default
-      # and a partial run's real, already-fetched rows must still reach
-      # build_data and get committed, not be discarded along with the one
-      # brand that failed.
-      #
-      # Pull YouTube stays a hard gate — it's the one source with no
-      # external credit to exhaust, so its own total failure (zero brands)
-      # is still treated as "nothing worth building today" and stops the
-      # job before build_data/commit run (a bad day never overwrites
-      # yesterday's good data.json, RULE #7). Pull Instagram and Classify
-      # get `continue-on-error: true`: a fully exhausted Apify credit or a
-      # dead Gemini key must not block the pipeline (build_data still runs
-      # and builds data.json from whatever YouTube alone provided) — their
-      # own scripts already log a `warn`/`error` pull_log row either way,
-      # so nothing here is silent even when the step is allowed to fail.
+      # ARCHITECTURE, not per-step tuning: no pull or classify script here
+      # may ever exit non-zero for an expected condition (quota, rate
+      # limit, a dead handle, zero rows, a missing API key) — each one
+      # catches everything it can name, records the outcome in
+      # store/pull_log.json, and exits 0 regardless (see each script's own
+      # main()). `continue-on-error: true` below is defense in depth for
+      # the one thing that CAN still exit non-zero: an unhandled crash —
+      # a real bug, not a normal operating condition — and even then the
+      # job must not stop, because build_data/commit run unconditionally
+      # (`if: always()`) on whatever the store already has. Partial or
+      # even entirely absent new data published beats a complete pipeline
+      # run discarded; degradation is surfaced to the viewer via
+      # meta.sources (build_data.py) instead of silently blocking
+      # publication. There used to be an exception here for Pull YouTube
+      # ("the one source with no external credit to exhaust, so its own
+      # total failure blocks the build") — fifteen runs in a row proved
+      # that exception itself was the recurring failure: one bad YouTube
+      # API day (quota, a transient 5xx, a dead key) discarded a store
+      # that already had real, taken-nowhere data sitting in it. There is
+      # no remaining hard gate.
 
       - name: Pull YouTube
+        id: pull_youtube
+        continue-on-error: true
         env:
           YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
         run: python -m pipeline.pull_youtube
@@ -73,13 +76,31 @@ jobs:
           APIFY_TOKEN: ${{ secrets.APIFY_TOKEN }}
         run: python -m pipeline.classify
 
+      # Unconditional: runs even if every step above crashed outright.
+      # build_data.py reads whatever is in store/ — yesterday's data if
+      # nothing new landed, today's partial data if some of it did — and
+      # its own validate() is the real, structural gate against publishing
+      # something malformed (RULE 7); it is not gated on any pull having
+      # succeeded.
       - name: Build data.json
+        if: always()
         run: python -m pipeline.build_data
 
       - name: Rebuild offline demo build
+        if: always()
         run: python -m pipeline.build_demo
 
+      # Unconditional, and resilient to losing a race with another
+      # workflow run (this one re-triggered, or weekly-trends.yml) that
+      # pushed to main between this job's checkout and this step — both
+      # touch public/ci/data.json/dashboard-demo.html/store/pull_log.json.
+      # A bare `git push` here used to die on that rejection and throw
+      # away the commit it had just made, taken nowhere, exactly like an
+      # upstream script failure — this retries fetch+rebase onto whatever
+      # is now at HEAD and pushes again rather than giving up on the first
+      # collision.
       - name: Commit and push
+        if: always()
         run: |
           git config user.name "ci-pipeline-bot"
           git config user.email "actions@users.noreply.github.com"
@@ -89,15 +110,31 @@ jobs:
             exit 0
           fi
           git commit -m "ci: daily data refresh $(date -u +%Y-%m-%dT%H:%M:%SZ)"
-          git push
+
+          attempt=0
+          max_attempts=5
+          until git push; do
+            attempt=$((attempt + 1))
+            if [ "$attempt" -ge "$max_attempts" ]; then
+              echo "::error::git push failed after $max_attempts attempts — see the rejection above."
+              exit 1
+            fi
+            echo "push rejected (attempt $attempt/$max_attempts) — another run landed first. Rebasing onto origin/$GITHUB_REF_NAME and retrying..."
+            sleep $((attempt * 3))
+            git fetch origin "$GITHUB_REF_NAME"
+            if ! git rebase "origin/$GITHUB_REF_NAME"; then
+              # The two workflows only really collide on files each fully
+              # regenerates (data.json/demo/pull_log) or two same-day
+              # snapshots — a real textual conflict past that point isn't
+              # something a script should guess how to resolve. Leave the
+              # repo in a clean state and fail loudly for a human, rather
+              # than pushing a half-merged store.
+              git rebase --abort
+              echo "::error::rebase onto origin/$GITHUB_REF_NAME conflicted — needs manual resolution."
+              exit 1
+            fi
+          done
 
       - name: Record run summary
         if: always()
-        run: |
-          {
-            echo "### Pipeline run summary"
-            echo "- Pull Instagram: \`${{ steps.pull_instagram.outcome }}\`"
-            echo "- Classify: \`${{ steps.classify.outcome }}\`"
-            echo ""
-            echo "Per-run detail (row counts, per-brand status, any quota/error messages) is in \`store/pull_log.json\`, committed above."
-          } >> "$GITHUB_STEP_SUMMARY"
+        run: python -m pipeline.run_summary >> "$GITHUB_STEP_SUMMARY"
