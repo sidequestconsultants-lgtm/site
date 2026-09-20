@@ -4133,6 +4133,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-13T10:45:38Z"
+    },
+    {
+      "external_id": "Ugya9rWOxLhPrGxAHZx4AaABAg",
+      "text": "wha itna sara fake😂",
+      "posted_at": "2026-09-19T15:23:58Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-20T08:43:07Z"
     }
   ],
   "pizzahut": [
@@ -4317,6 +4330,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-19T08:11:02Z"
+    },
+    {
+      "external_id": "Ugz8IX2HjsW96p1Cku94AaABAg",
+      "text": "Nga",
+      "posted_at": "2026-09-19T16:46:27Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-20T08:43:08Z"
     }
   ],
   "tacobell": [
