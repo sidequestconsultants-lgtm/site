@@ -511,5 +511,14 @@
     "rows_upserted": 0,
     "status": "ok",
     "error": null
+  },
+  {
+    "fn": "pull_trends",
+    "started_at": "2026-09-21T09:27:26Z",
+    "finished_at": "2026-09-21T09:27:32Z",
+    "rows_in": 7,
+    "rows_upserted": 7,
+    "status": "ok",
+    "error": null
   }
 ]
