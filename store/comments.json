@@ -4146,6 +4146,19 @@
       "language": "hinglish",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-20T08:43:07Z"
+    },
+    {
+      "external_id": "UgzYC2N12FQg2wPffU14AaABAg",
+      "text": "Wow what an idea",
+      "posted_at": "2026-09-21T11:19:14Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-22T08:41:17Z"
     }
   ],
   "pizzahut": [
@@ -4948,6 +4961,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-13T10:45:50Z"
+    },
+    {
+      "external_id": "Ugz68eX0aui5WdW2S2V4AaABAg",
+      "text": "Pls bring back Domino's pasta, why did u guys discontinue it, you guys are so bad, Domino's is now worst, the bad, bring it back pls, see I don't mean you guys, no offend just in crying mood I am saying why did u guys discontinue it, pls bring it back pls!!",
+      "posted_at": "2026-09-22T05:25:46Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-22T08:41:22Z"
     }
   ],
   "subway": [
