@@ -4356,6 +4356,19 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-20T08:43:08Z"
+    },
+    {
+      "external_id": "Ugxgwy2qdfHnjqk_45t4AaABAg",
+      "text": "❤️",
+      "posted_at": "2026-09-22T11:36:28Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-23T08:43:12Z"
     }
   ],
   "tacobell": [
