@@ -4159,6 +4159,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-22T08:41:17Z"
+    },
+    {
+      "external_id": "UgzQbgjzOAz2J69I3aZ4AaABAg",
+      "text": "KFC MIGHT GENUINLEY BE ONTO SMTH",
+      "posted_at": "2026-09-24T20:30:23Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-25T08:57:56Z"
     }
   ],
   "pizzahut": [
