@@ -5000,6 +5000,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-22T08:41:22Z"
+    },
+    {
+      "external_id": "UgxsrnGJo5IrI4o8rC14AaABAg",
+      "text": "I ordered a pizza last time and it was slightly underbaked, so the crust didn’t taste quite right. I saw that you guys are launching some new recipes, so I’m looking forward to trying them! Just hope the pizzas are baked properly this time 💔🥀",
+      "posted_at": "2026-09-25T12:05:07Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-26T08:43:49Z"
     }
   ],
   "subway": [
