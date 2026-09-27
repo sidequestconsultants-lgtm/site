@@ -4172,6 +4172,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-25T08:57:56Z"
+    },
+    {
+      "external_id": "UgybdSxpjQOMfC1naVt4AaABAg",
+      "text": "How is this channel a offical kfc channel",
+      "posted_at": "2026-09-26T13:39:34Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-09-27T09:24:32Z"
     }
   ],
   "pizzahut": [
