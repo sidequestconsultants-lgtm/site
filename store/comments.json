@@ -4395,6 +4395,32 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-23T08:43:12Z"
+    },
+    {
+      "external_id": "Ugw9U2dPTZNOxw0OPUJ4AaABAg",
+      "text": "Don't Order From Pizza Hut app\nPizza Hut is completely fraud app \nI placed an order on the Pizza Hut app for delivery but the food was never delivered and the payment has not been refunded",
+      "posted_at": "2026-09-30T17:59:08Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "delivery",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-01T10:19:10Z"
+    },
+    {
+      "external_id": "UgzyAwa-QSKg77ATsMV4AaABAg",
+      "text": "where's my refund\n\nwhere's my refund\n\nwhere's my refund\nwhere's my refund\n\nwhere's my refund\n\nwhere's my refund\nwhere's my refund\n\nwhere's my refund\n\nwhere's my refund\nwhere's my refund\n\nwhere's my refund\n\nwhere's my refund",
+      "posted_at": "2026-09-30T17:58:56Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-01T10:19:10Z"
     }
   ],
   "tacobell": [
@@ -5052,6 +5078,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-26T08:43:49Z"
+    },
+    {
+      "external_id": "Ugx3yXSUKr4nlrALBpR4AaABAg",
+      "text": "Order from urban platter",
+      "posted_at": "2026-09-30T14:59:28Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-01T10:19:15Z"
     }
   ],
   "subway": [
