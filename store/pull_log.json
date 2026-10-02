@@ -889,5 +889,41 @@
     "rows_upserted": 3,
     "status": "ok",
     "error": null
+  },
+  {
+    "fn": "pull_youtube",
+    "started_at": "2026-10-02T09:56:12Z",
+    "finished_at": "2026-10-02T09:56:16Z",
+    "rows_in": 141,
+    "rows_upserted": 141,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "pull_instagram",
+    "started_at": "2026-10-02T09:56:16Z",
+    "finished_at": "2026-10-02T09:56:16Z",
+    "rows_in": 0,
+    "rows_upserted": 0,
+    "status": "error",
+    "error": "kfc: Apify quota exhausted (403) for handle=kfcindia_official: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}. Skipping remaining brands for this run — credit won't recover mid-run."
+  },
+  {
+    "fn": "classify_posts",
+    "started_at": "2026-10-02T09:56:16Z",
+    "finished_at": "2026-10-02T09:56:17Z",
+    "rows_in": 1,
+    "rows_upserted": 1,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_comments",
+    "started_at": "2026-10-02T09:56:17Z",
+    "finished_at": "2026-10-02T09:56:23Z",
+    "rows_in": 0,
+    "rows_upserted": 0,
+    "status": "ok",
+    "error": null
   }
 ]
