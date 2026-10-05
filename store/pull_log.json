@@ -1033,5 +1033,14 @@
     "rows_upserted": 9,
     "status": "ok",
     "error": null
+  },
+  {
+    "fn": "pull_trends",
+    "started_at": "2026-10-05T11:01:27Z",
+    "finished_at": "2026-10-05T11:01:33Z",
+    "rows_in": 7,
+    "rows_upserted": 0,
+    "status": "error",
+    "error": "batch ['kfc', 'pizzahut', 'tacobell', 'mcdonalds_in', 'burgerking']: The request failed: Google returned a response with code 429; batch ['kfc', 'dominos', 'subway']: The request failed: Google returned a response with code 429"
   }
 ]

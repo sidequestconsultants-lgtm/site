@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "05 OCT 16:11 IST",
-    "updatedISO": "2026-10-05T10:41:37Z",
+    "updated": "05 OCT 16:31 IST",
+    "updatedISO": "2026-10-05T11:01:33Z",
     "spamRateBase": 0.61,
     "handles": {
       "kfc": {
@@ -456,12 +456,12 @@
         "saves": null
       },
       "search": [
-        28.3,
-        31.2,
-        27.7,
-        22.9,
-        30.9,
-        22.6
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -584,12 +584,12 @@
         "saves": null
       },
       "search": [
-        6.4,
-        6.2,
-        8.3,
-        7.1,
-        11.9,
-        6.0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -712,12 +712,12 @@
         "saves": null
       },
       "search": [
-        1.9,
-        0.2,
-        1.1,
-        1.8,
-        2.1,
-        2.0
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -840,12 +840,12 @@
         "saves": null
       },
       "search": [
-        2.9,
-        1.6,
-        2.5,
-        2.4,
-        2.9,
-        2.8
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -968,12 +968,12 @@
         "saves": null
       },
       "search": [
-        8.1,
-        7.4,
-        7.8,
-        8.7,
-        8.9,
-        7.7
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -1096,12 +1096,12 @@
         "saves": null
       },
       "search": [
-        27.5,
-        23.1,
-        24.7,
-        26.6,
-        18.7,
-        17.9
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
@@ -1224,12 +1224,12 @@
         "saves": null
       },
       "search": [
-        8.3,
-        5.9,
-        7.1,
-        7.9,
-        9.1,
-        6.9
+        null,
+        null,
+        null,
+        null,
+        null,
+        null
       ],
       "seriesIG": [
         0.0,
