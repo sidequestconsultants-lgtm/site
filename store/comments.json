@@ -5693,6 +5693,110 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-04T09:57:46Z"
+    },
+    {
+      "external_id": "UgzD6hy-5XAaHmp_LNp4AaABAg",
+      "text": "Tf",
+      "posted_at": "2026-10-04T16:30:27Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
+    },
+    {
+      "external_id": "UgzZKSGEOpg60RELjxJ4AaABAg",
+      "text": "Ai slop",
+      "posted_at": "2026-10-04T14:50:51Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
+    },
+    {
+      "external_id": "Ugz98dcVv8LbARIXrPd4AaABAg",
+      "text": "Kfc India",
+      "posted_at": "2026-10-04T14:36:46Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
+    },
+    {
+      "external_id": "UgyXHm-Y2YvzlVgix114AaABAg",
+      "text": "How is this done by KFC india",
+      "posted_at": "2026-10-04T12:54:49Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
+    },
+    {
+      "external_id": "UgzwB7857U8k87kKVVJ4AaABAg",
+      "text": "Imagine Telling Someone KFC India Would Make An Ai Edit Mogging Ad🥀🥀",
+      "posted_at": "2026-10-04T12:20:54Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
+    },
+    {
+      "external_id": "Ugwk68E6b4OiMRZc7nF4AaABAg",
+      "text": "Colonel doing side quests 🥹💔",
+      "posted_at": "2026-10-04T12:04:31Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
+    },
+    {
+      "external_id": "Ugy3kKIWMZ86CzPnQp54AaABAg",
+      "text": "KFC farming chicken with aura",
+      "posted_at": "2026-10-04T11:59:43Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
+    },
+    {
+      "external_id": "UgyKp3-dDK9X1Dk-FeV4AaABAg",
+      "text": "Is this tuff in kfcs in india",
+      "posted_at": "2026-10-04T10:05:30Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:31Z"
     }
   ],
   "pizzahut": [
@@ -5983,6 +6087,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-13T10:45:42Z"
+    },
+    {
+      "external_id": "Ugw2VzvmkKyWMy7Uzul4AaABAg",
+      "text": "I wanna try it but I already ran out of money for this month :(\nCan I get one from your side? it will be fun trying it",
+      "posted_at": "2026-10-04T15:27:50Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-05T10:41:34Z"
     }
   ],
   "mcdonalds_in": [
