@@ -6427,6 +6427,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-09-28T10:00:28Z"
+    },
+    {
+      "external_id": "Ugw7XBape5MQ4t4Y7l14AaABAg",
+      "text": "Is MCD+ K-pop demon hunters come to India too",
+      "posted_at": "2026-10-06T09:03:53Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-06T10:34:39Z"
     }
   ],
   "burgerking": [],
@@ -6729,6 +6742,45 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-01T10:19:15Z"
+    },
+    {
+      "external_id": "UgwQ7nKrXmNI9KkPpVZ4AaABAg",
+      "text": "Store pr gya tha koi offer nhi hai aisa",
+      "posted_at": "2026-10-05T14:17:09Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "price",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-06T10:34:41Z"
+    },
+    {
+      "external_id": "UgzJkvsghn4UAvM8TQd4AaABAg",
+      "text": "from Visakhapatnam NAD",
+      "posted_at": "2026-10-05T11:12:29Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-06T10:34:41Z"
+    },
+    {
+      "external_id": "Ugz6oLRIF5iQr6Z5X4B4AaABAg",
+      "text": "I love Domminos",
+      "posted_at": "2026-10-05T11:12:10Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-06T10:34:41Z"
     }
   ],
   "subway": [

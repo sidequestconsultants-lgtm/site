@@ -1042,5 +1042,41 @@
     "rows_upserted": 0,
     "status": "error",
     "error": "batch ['kfc', 'pizzahut', 'tacobell', 'mcdonalds_in', 'burgerking']: The request failed: Google returned a response with code 429; batch ['kfc', 'dominos', 'subway']: The request failed: Google returned a response with code 429"
+  },
+  {
+    "fn": "pull_youtube",
+    "started_at": "2026-10-06T10:34:25Z",
+    "finished_at": "2026-10-06T10:34:30Z",
+    "rows_in": 134,
+    "rows_upserted": 134,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "pull_instagram",
+    "started_at": "2026-10-06T10:34:30Z",
+    "finished_at": "2026-10-06T10:34:30Z",
+    "rows_in": 0,
+    "rows_upserted": 0,
+    "status": "error",
+    "error": "kfc: Apify quota exhausted (403) for handle=kfcindia_official: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}. Skipping remaining brands for this run — credit won't recover mid-run."
+  },
+  {
+    "fn": "classify_posts",
+    "started_at": "2026-10-06T10:34:30Z",
+    "finished_at": "2026-10-06T10:34:32Z",
+    "rows_in": 3,
+    "rows_upserted": 3,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_comments",
+    "started_at": "2026-10-06T10:34:32Z",
+    "finished_at": "2026-10-06T10:34:41Z",
+    "rows_in": 4,
+    "rows_upserted": 4,
+    "status": "ok",
+    "error": null
   }
 ]
