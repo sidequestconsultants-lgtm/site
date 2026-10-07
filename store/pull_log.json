@@ -1078,5 +1078,41 @@
     "rows_upserted": 4,
     "status": "ok",
     "error": null
+  },
+  {
+    "fn": "pull_youtube",
+    "started_at": "2026-10-07T10:26:17Z",
+    "finished_at": "2026-10-07T10:26:20Z",
+    "rows_in": 134,
+    "rows_upserted": 134,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "pull_instagram",
+    "started_at": "2026-10-07T10:26:20Z",
+    "finished_at": "2026-10-07T10:29:36Z",
+    "rows_in": 210,
+    "rows_upserted": 210,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_posts",
+    "started_at": "2026-10-07T10:29:37Z",
+    "finished_at": "2026-10-07T10:30:09Z",
+    "rows_in": 211,
+    "rows_upserted": 200,
+    "status": "warn",
+    "error": "Gemini returned 10 results for a batch of 11"
+  },
+  {
+    "fn": "classify_comments",
+    "started_at": "2026-10-07T10:30:09Z",
+    "finished_at": "2026-10-07T10:42:27Z",
+    "rows_in": 657,
+    "rows_upserted": 657,
+    "status": "warn",
+    "error": "tacobell/ig:3983906865554281548: fetch failed: HTTPSConnectionPool(host='api.apify.com', port=443): Read timed out. (read timeout=180)"
   }
 ]

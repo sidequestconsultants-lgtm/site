@@ -1,0 +1,379 @@
+{
+  "2026-10": {
+    "units_usd": 2.601,
+    "calls": [
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:26:38Z",
+        "results": 26,
+        "estimated_usd": 0.078
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:27:15Z",
+        "results": 7,
+        "estimated_usd": 0.021
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:27:55Z",
+        "results": 56,
+        "estimated_usd": 0.168
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:28:13Z",
+        "results": 23,
+        "estimated_usd": 0.069
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:28:36Z",
+        "results": 48,
+        "estimated_usd": 0.144
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:29:04Z",
+        "results": 24,
+        "estimated_usd": 0.072
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:29:25Z",
+        "results": 18,
+        "estimated_usd": 0.054
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-07T10:29:36Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:30:21Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:30:30Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:30:45Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:30:55Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:31:02Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:31:17Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:31:23Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:31:30Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:31:51Z",
+        "results": 9,
+        "estimated_usd": 0.027
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:32:01Z",
+        "results": 13,
+        "estimated_usd": 0.039
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:32:11Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:32:18Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:32:25Z",
+        "results": 4,
+        "estimated_usd": 0.012
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:32:33Z",
+        "results": 9,
+        "estimated_usd": 0.027
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:32:42Z",
+        "results": 13,
+        "estimated_usd": 0.039
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:32:53Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:33:02Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:33:08Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:33:19Z",
+        "results": 12,
+        "estimated_usd": 0.036
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:33:26Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:33:41Z",
+        "results": 7,
+        "estimated_usd": 0.021
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:33:50Z",
+        "results": 5,
+        "estimated_usd": 0.015
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:08Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:13Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:17Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:24Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:35Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:42Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:48Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:37:54Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:38:23Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:38:27Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:38:36Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:38:45Z",
+        "results": 7,
+        "estimated_usd": 0.021
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:39:04Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:39:13Z",
+        "results": 6,
+        "estimated_usd": 0.018
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:39:30Z",
+        "results": 4,
+        "estimated_usd": 0.012
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:39:38Z",
+        "results": 7,
+        "estimated_usd": 0.021
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:39:50Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:39:57Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:40:01Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:40:10Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:40:16Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:40:24Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:40:29Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:40:35Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:41:03Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:41:12Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:41:18Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:41:36Z",
+        "results": 5,
+        "estimated_usd": 0.015
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:41:46Z",
+        "results": 3,
+        "estimated_usd": 0.009
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:42:03Z",
+        "results": 4,
+        "estimated_usd": 0.012
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:42:12Z",
+        "results": 6,
+        "estimated_usd": 0.018
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-07T10:42:21Z",
+        "results": 2,
+        "estimated_usd": 0.006
+      }
+    ]
+  }
+}
