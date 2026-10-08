@@ -1114,5 +1114,41 @@
     "rows_upserted": 657,
     "status": "warn",
     "error": "tacobell/ig:3983906865554281548: fetch failed: HTTPSConnectionPool(host='api.apify.com', port=443): Read timed out. (read timeout=180)"
+  },
+  {
+    "fn": "pull_youtube",
+    "started_at": "2026-10-08T10:46:33Z",
+    "finished_at": "2026-10-08T10:46:36Z",
+    "rows_in": 134,
+    "rows_upserted": 134,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "pull_instagram",
+    "started_at": "2026-10-08T10:46:36Z",
+    "finished_at": "2026-10-08T10:49:29Z",
+    "rows_in": 77,
+    "rows_upserted": 77,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_posts",
+    "started_at": "2026-10-08T10:49:30Z",
+    "finished_at": "2026-10-08T10:49:34Z",
+    "rows_in": 29,
+    "rows_upserted": 29,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_comments",
+    "started_at": "2026-10-08T10:49:34Z",
+    "finished_at": "2026-10-08T10:55:42Z",
+    "rows_in": 70,
+    "rows_upserted": 70,
+    "status": "warn",
+    "error": "Instagram comment fetching skipped — over $4.00/mo ceiling"
   }
 ]

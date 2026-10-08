@@ -1,6 +1,6 @@
 {
   "2026-10": {
-    "units_usd": 2.601,
+    "units_usd": 4.023,
     "calls": [
       {
         "fn": "pull_instagram",
@@ -373,6 +373,246 @@
         "at": "2026-10-07T10:42:21Z",
         "results": 2,
         "estimated_usd": 0.006
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:46:57Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:47:14Z",
+        "results": 4,
+        "estimated_usd": 0.012
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:47:33Z",
+        "results": 31,
+        "estimated_usd": 0.093
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:47:50Z",
+        "results": 7,
+        "estimated_usd": 0.021
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:48:01Z",
+        "results": 9,
+        "estimated_usd": 0.027
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:48:29Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:48:55Z",
+        "results": 5,
+        "estimated_usd": 0.015
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-08T10:49:29Z",
+        "results": 5,
+        "estimated_usd": 0.015
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:49:45Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:49:55Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:50:03Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:50:19Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:50:28Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:50:37Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:50:46Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:50:54Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:51:13Z",
+        "results": 9,
+        "estimated_usd": 0.027
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:51:24Z",
+        "results": 13,
+        "estimated_usd": 0.039
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:51:47Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:52:05Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:52:20Z",
+        "results": 4,
+        "estimated_usd": 0.012
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:52:38Z",
+        "results": 9,
+        "estimated_usd": 0.027
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:52:56Z",
+        "results": 13,
+        "estimated_usd": 0.039
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:53:05Z",
+        "results": 1,
+        "estimated_usd": 0.003
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:53:14Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:53:21Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:53:29Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:53:48Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:53:59Z",
+        "results": 12,
+        "estimated_usd": 0.036
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:54:07Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:54:15Z",
+        "results": 7,
+        "estimated_usd": 0.021
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:54:34Z",
+        "results": 5,
+        "estimated_usd": 0.015
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:54:45Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:54:50Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:55:07Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:55:14Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:55:19Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:55:26Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:55:32Z",
+        "results": 15,
+        "estimated_usd": 0.045
+      },
+      {
+        "fn": "classify_comments_ig",
+        "at": "2026-10-08T10:55:41Z",
+        "results": 15,
+        "estimated_usd": 0.045
       }
     ]
   }
