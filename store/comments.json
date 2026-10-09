@@ -7903,6 +7903,32 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-08T10:50:58Z"
+    },
+    {
+      "external_id": "Ugz4LUbF3g7GhlqZ3nJ4AaABAg",
+      "text": "Song name?",
+      "posted_at": "2026-10-09T09:16:15Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-09T10:49:06Z"
+    },
+    {
+      "external_id": "Ugxca3IKFMqeZ6q8VV54AaABAg",
+      "text": "Only in my country🥀",
+      "posted_at": "2026-10-09T05:21:08Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-09T10:49:06Z"
     }
   ],
   "pizzahut": [
@@ -15388,6 +15414,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-07T10:40:48Z"
+    },
+    {
+      "external_id": "UgzQbXJ8NFAFx89OpkB4AaABAg",
+      "text": "This offer is applicable on which days?",
+      "posted_at": "2026-10-08T13:02:56Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-09T10:49:12Z"
     }
   ],
   "subway": [
