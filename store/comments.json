@@ -15427,6 +15427,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-09T10:49:12Z"
+    },
+    {
+      "external_id": "UgwZs2SGoNHCpD_FlLp4AaABAg",
+      "text": "New logo keep here",
+      "posted_at": "2026-10-10T01:29:42Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-10T10:03:29Z"
     }
   ],
   "subway": [
