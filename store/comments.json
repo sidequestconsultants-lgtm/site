@@ -15440,6 +15440,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-10T10:03:29Z"
+    },
+    {
+      "external_id": "UgyGDpPxC6xV2KQdwyp4AaABAg",
+      "text": "I love dominos pizza so much",
+      "posted_at": "2026-10-10T13:12:56Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-11T10:14:37Z"
     }
   ],
   "subway": [
