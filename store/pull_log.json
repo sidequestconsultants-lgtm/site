@@ -1294,5 +1294,14 @@
     "rows_upserted": 0,
     "status": "warn",
     "error": "Instagram comment fetching skipped — over $4.00/mo ceiling"
+  },
+  {
+    "fn": "pull_trends",
+    "started_at": "2026-10-12T11:29:28Z",
+    "finished_at": "2026-10-12T11:29:34Z",
+    "rows_in": 7,
+    "rows_upserted": 3,
+    "status": "warn",
+    "error": "batch ['kfc', 'pizzahut', 'tacobell', 'mcdonalds_in', 'burgerking']: The request failed: Google returned a response with code 429"
   }
 ]

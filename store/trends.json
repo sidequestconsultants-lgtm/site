@@ -1,15 +1,15 @@
 {
   "kfc": {
     "series": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      33.3,
+      25.7,
+      24.1,
+      29.6,
+      20.9,
+      23.6
     ],
     "query": "KFC India + KFC near me + KFC menu + KFC offer + KFC coupon",
-    "fetched_at": "2026-10-05T11:01:33Z"
+    "fetched_at": "2026-10-12T11:29:34Z"
   },
   "pizzahut": {
     "series": [
@@ -21,7 +21,7 @@
       null
     ],
     "query": "Pizza Hut India + Pizza Hut near me + Pizza Hut menu + Pizza Hut offer",
-    "fetched_at": "2026-10-05T11:01:33Z"
+    "fetched_at": "2026-10-12T11:29:34Z"
   },
   "tacobell": {
     "series": [
@@ -33,7 +33,7 @@
       null
     ],
     "query": "Taco Bell India + Taco Bell near me + Taco Bell menu + Taco Bell offer",
-    "fetched_at": "2026-10-05T11:01:33Z"
+    "fetched_at": "2026-10-12T11:29:34Z"
   },
   "mcdonalds_in": {
     "series": [
@@ -45,7 +45,7 @@
       null
     ],
     "query": "McDonalds India + McDonalds near me + McDonalds menu + McDonalds offer",
-    "fetched_at": "2026-10-05T11:01:33Z"
+    "fetched_at": "2026-10-12T11:29:34Z"
   },
   "burgerking": {
     "series": [
@@ -57,30 +57,30 @@
       null
     ],
     "query": "Burger King India + Burger King near me + Burger King menu + BK offer",
-    "fetched_at": "2026-10-05T11:01:33Z"
+    "fetched_at": "2026-10-12T11:29:34Z"
   },
   "dominos": {
     "series": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      24.9,
+      23.9,
+      26.5,
+      19.2,
+      16.8,
+      18.9
     ],
     "query": "Dominos India + Dominos near me + Dominos menu + Dominos offer",
-    "fetched_at": "2026-10-05T11:01:33Z"
+    "fetched_at": "2026-10-12T11:29:34Z"
   },
   "subway": {
     "series": [
-      null,
-      null,
-      null,
-      null,
-      null,
-      null
+      6.5,
+      6.9,
+      8.0,
+      9.0,
+      6.7,
+      6.6
     ],
     "query": "Subway India + Subway near me + Subway menu + Subway offer",
-    "fetched_at": "2026-10-05T11:01:33Z"
+    "fetched_at": "2026-10-12T11:29:34Z"
   }
 }
