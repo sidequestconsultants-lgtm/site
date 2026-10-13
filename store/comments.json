@@ -12420,6 +12420,19 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-08T10:55:42Z"
+    },
+    {
+      "external_id": "Ugy8rDRmfJLcb-LS7Ih4AaABAg",
+      "text": "During navarathri we follow strict dietary constraints for rituals and no non veg is allowed (apart from few community in Bengal)so please don't use festival for promoting your products.",
+      "posted_at": "2026-10-12T15:52:03Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-13T10:52:38Z"
     }
   ],
   "burgerking": [
