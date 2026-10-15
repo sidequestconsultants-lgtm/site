@@ -1375,5 +1375,41 @@
     "rows_upserted": 46,
     "status": "warn",
     "error": "Instagram comment fetching skipped — over $4.00/mo ceiling"
+  },
+  {
+    "fn": "pull_youtube",
+    "started_at": "2026-10-15T08:27:56Z",
+    "finished_at": "2026-10-15T08:28:00Z",
+    "rows_in": 159,
+    "rows_upserted": 159,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "pull_instagram",
+    "started_at": "2026-10-15T08:28:00Z",
+    "finished_at": "2026-10-15T08:32:17Z",
+    "rows_in": 79,
+    "rows_upserted": 79,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_posts",
+    "started_at": "2026-10-15T08:32:17Z",
+    "finished_at": "2026-10-15T08:32:22Z",
+    "rows_in": 10,
+    "rows_upserted": 10,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_comments",
+    "started_at": "2026-10-15T08:32:22Z",
+    "finished_at": "2026-10-15T08:32:38Z",
+    "rows_in": 46,
+    "rows_upserted": 46,
+    "status": "warn",
+    "error": "Instagram comment fetching skipped — over $4.00/mo ceiling"
   }
 ]

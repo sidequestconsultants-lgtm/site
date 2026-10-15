@@ -1,6 +1,6 @@
 {
   "2026-10": {
-    "units_usd": 5.385,
+    "units_usd": 5.622,
     "calls": [
       {
         "fn": "pull_instagram",
@@ -899,6 +899,54 @@
       {
         "fn": "pull_instagram",
         "at": "2026-10-14T08:56:50Z",
+        "results": 2,
+        "estimated_usd": 0.006
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:28:20Z",
+        "results": 8,
+        "estimated_usd": 0.024
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:28:42Z",
+        "results": 3,
+        "estimated_usd": 0.009
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:29:06Z",
+        "results": 29,
+        "estimated_usd": 0.087
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:29:32Z",
+        "results": 11,
+        "estimated_usd": 0.033
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:30:27Z",
+        "results": 10,
+        "estimated_usd": 0.03
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:30:58Z",
+        "results": 9,
+        "estimated_usd": 0.027
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:32:07Z",
+        "results": 7,
+        "estimated_usd": 0.021
+      },
+      {
+        "fn": "pull_instagram",
+        "at": "2026-10-15T08:32:17Z",
         "results": 2,
         "estimated_usd": 0.006
       }
