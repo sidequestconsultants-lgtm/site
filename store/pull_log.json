@@ -1411,5 +1411,41 @@
     "rows_upserted": 46,
     "status": "warn",
     "error": "Instagram comment fetching skipped — over $4.00/mo ceiling"
+  },
+  {
+    "fn": "pull_youtube",
+    "started_at": "2026-10-16T08:20:43Z",
+    "finished_at": "2026-10-16T08:20:48Z",
+    "rows_in": 160,
+    "rows_upserted": 160,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "pull_instagram",
+    "started_at": "2026-10-16T08:20:48Z",
+    "finished_at": "2026-10-16T08:23:54Z",
+    "rows_in": 69,
+    "rows_upserted": 69,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_posts",
+    "started_at": "2026-10-16T08:23:54Z",
+    "finished_at": "2026-10-16T08:24:02Z",
+    "rows_in": 11,
+    "rows_upserted": 11,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_comments",
+    "started_at": "2026-10-16T08:24:02Z",
+    "finished_at": "2026-10-16T08:24:20Z",
+    "rows_in": 16,
+    "rows_upserted": 16,
+    "status": "warn",
+    "error": "dominos/yt:KU7m8Ufu2XM: fetch failed: YouTube commentThreads failed: 404 {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video identified by the \\u003ccode\\u003e\\u003ca href=\\\"/youtube/v3/docs/commentThreads/list#videoId\\\"\\u003evideoId\\u003c/a\\u003e\\u003c/code\\u003e pa; dominos/yt:3w_9Zm0ayWQ: fetch failed: YouTube commentThreads failed: 404 {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video identified by the \\u003ccode\\u003e\\u003ca href=\\\"/youtube/v3/docs/commentThreads/list#videoId\\\"\\u003evideoId\\u003c/a\\u003e\\u003c/code\\u003e pa; Instagram comment fetching skipped — over $4.00/mo ceiling"
   }
 ]
