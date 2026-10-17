@@ -9294,6 +9294,58 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-16T08:24:08Z"
+    },
+    {
+      "external_id": "UgxCKpQR7hXT4vGbMpp4AaABAg",
+      "text": "KFC???!!!",
+      "posted_at": "2026-10-16T16:35:07Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-17T07:56:11Z"
+    },
+    {
+      "external_id": "UgwQ_jnHQLChvJunCo14AaABAg",
+      "text": "when will people realize brands are not our friends and they're just doing this to be hip with the kids 🫩",
+      "posted_at": "2026-10-16T15:00:21Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-17T07:56:11Z"
+    },
+    {
+      "external_id": "Ugya9OGLEjmAnlhwZH94AaABAg",
+      "text": "kfc vs pigeons when",
+      "posted_at": "2026-10-16T13:11:14Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "hygiene",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-17T07:56:11Z"
+    },
+    {
+      "external_id": "UgxcRKXnyArnrJ5kptR4AaABAg",
+      "text": "What the FUCK is happening in india 😦",
+      "posted_at": "2026-10-16T09:29:41Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-17T07:56:11Z"
     }
   ],
   "pizzahut": [
@@ -13798,6 +13850,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-13T10:52:38Z"
+    },
+    {
+      "external_id": "UgxAX4zq_fuUt65gh9N4AaABAg",
+      "text": "👍👌👌",
+      "posted_at": "2026-10-17T02:17:17Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-17T07:56:17Z"
     }
   ],
   "burgerking": [
@@ -16870,6 +16935,32 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-16T08:24:20Z"
+    },
+    {
+      "external_id": "Ugx28cKaep1Y4Gocz-54AaABAg",
+      "text": "Is it available on margherita medium pizza.",
+      "posted_at": "2026-10-16T10:42:06Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-17T07:56:20Z"
+    },
+    {
+      "external_id": "UgzHqf3aDXMYcxpFNGd4AaABAg",
+      "text": "Medium Margherita pe available hai.",
+      "posted_at": "2026-10-16T18:44:13Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-17T07:56:20Z"
     }
   ],
   "subway": [
