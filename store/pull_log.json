@@ -1519,5 +1519,41 @@
     "rows_upserted": 34,
     "status": "warn",
     "error": "dominos/yt:KU7m8Ufu2XM: fetch failed: YouTube commentThreads failed: 404 {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video identified by the \\u003ccode\\u003e\\u003ca href=\\\"/youtube/v3/docs/commentThreads/list#videoId\\\"\\u003evideoId\\u003c/a\\u003e\\u003c/code\\u003e pa; dominos/yt:3w_9Zm0ayWQ: fetch failed: YouTube commentThreads failed: 404 {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video identified by the \\u003ccode\\u003e\\u003ca href=\\\"/youtube/v3/docs/commentThreads/list#videoId\\\"\\u003evideoId\\u003c/a\\u003e\\u003c/code\\u003e pa; Instagram comment fetching skipped — over $4.00/mo ceiling"
+  },
+  {
+    "fn": "pull_youtube",
+    "started_at": "2026-10-19T09:08:04Z",
+    "finished_at": "2026-10-19T09:08:08Z",
+    "rows_in": 159,
+    "rows_upserted": 159,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "pull_instagram",
+    "started_at": "2026-10-19T09:08:08Z",
+    "finished_at": "2026-10-19T09:08:08Z",
+    "rows_in": 0,
+    "rows_upserted": 0,
+    "status": "error",
+    "error": "kfc: Apify quota exhausted (403) for handle=kfcindia_official: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}. Skipping remaining brands for this run — credit won't recover mid-run."
+  },
+  {
+    "fn": "classify_posts",
+    "started_at": "2026-10-19T09:08:09Z",
+    "finished_at": "2026-10-19T09:08:09Z",
+    "rows_in": 0,
+    "rows_upserted": 0,
+    "status": "ok",
+    "error": null
+  },
+  {
+    "fn": "classify_comments",
+    "started_at": "2026-10-19T09:08:09Z",
+    "finished_at": "2026-10-19T09:08:17Z",
+    "rows_in": 3,
+    "rows_upserted": 3,
+    "status": "warn",
+    "error": "dominos/yt:KU7m8Ufu2XM: fetch failed: YouTube commentThreads failed: 404 {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video identified by the \\u003ccode\\u003e\\u003ca href=\\\"/youtube/v3/docs/commentThreads/list#videoId\\\"\\u003evideoId\\u003c/a\\u003e\\u003c/code\\u003e pa; dominos/yt:3w_9Zm0ayWQ: fetch failed: YouTube commentThreads failed: 404 {\n  \"error\": {\n    \"code\": 404,\n    \"message\": \"The video identified by the \\u003ccode\\u003e\\u003ca href=\\\"/youtube/v3/docs/commentThreads/list#videoId\\\"\\u003evideoId\\u003c/a\\u003e\\u003c/code\\u003e pa; Instagram comment fetching skipped — over $4.00/mo ceiling"
   }
 ]

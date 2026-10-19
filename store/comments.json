@@ -9775,6 +9775,45 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-18T08:11:31Z"
+    },
+    {
+      "external_id": "UgzFe0tRzaGRA3SHWQ14AaABAg",
+      "text": "Official kfc account btw 🥀",
+      "posted_at": "2026-10-18T13:20:04Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-19T09:08:12Z"
+    },
+    {
+      "external_id": "UgzGwyVB0Z_SOEgUohx4AaABAg",
+      "text": "Official account btw ✌️🥀",
+      "posted_at": "2026-10-18T16:48:58Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-19T09:08:12Z"
+    },
+    {
+      "external_id": "UgzKtGqOX_GlvpV3eFx4AaABAg",
+      "text": "kfc india loves jojos",
+      "posted_at": "2026-10-18T17:09:35Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-19T09:08:12Z"
     }
   ],
   "pizzahut": [
