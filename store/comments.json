@@ -9814,6 +9814,45 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-19T09:08:12Z"
+    },
+    {
+      "external_id": "Ugw1OS-D4sjk7YIDLBt4AaABAg",
+      "text": "India on to smth",
+      "posted_at": "2026-10-20T21:21:37Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-21T08:44:26Z"
+    },
+    {
+      "external_id": "Ugy3252Sa-A5Nns4hrR4AaABAg",
+      "text": "Kernal DIO",
+      "posted_at": "2026-10-20T17:29:49Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-21T08:44:26Z"
+    },
+    {
+      "external_id": "Ugxvn97p3To2Os_OBI54AaABAg",
+      "text": "Kfc's bizzare adventure",
+      "posted_at": "2026-10-20T15:43:03Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-21T08:44:26Z"
     }
   ],
   "pizzahut": [
@@ -17442,6 +17481,32 @@
       "language": "hinglish",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-17T07:56:20Z"
+    },
+    {
+      "external_id": "UgwmKdCyjNNkDqYmPRB4AaABAg",
+      "text": "I love dominos but how 76 million views whatbthe hack 😂",
+      "posted_at": "2026-10-20T21:14:57Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-21T08:44:33Z"
+    },
+    {
+      "external_id": "UgwldeUwWHqyYYbfOU94AaABAg",
+      "text": "Hey dominos I order 2 pizza and the delivery boy experience was very bad and i got papad with sauage pls refund and the shop was in kolkata in Naktala , Goria",
+      "posted_at": "2026-10-21T06:37:15Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "delivery",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-21T08:44:33Z"
     }
   ],
   "subway": [
