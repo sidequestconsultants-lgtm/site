@@ -10295,6 +10295,45 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-22T08:46:51Z"
+    },
+    {
+      "external_id": "Ugw_pglsg_aR3-7vSZJ4AaABAg",
+      "text": "Wthhhh ❤",
+      "posted_at": "2026-10-22T16:13:21Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-23T08:42:33Z"
+    },
+    {
+      "external_id": "UgxA0Sis1Pn-Q5vB92d4AaABAg",
+      "text": "JoJo's reference ❤",
+      "posted_at": "2026-10-22T16:12:55Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-23T08:42:33Z"
+    },
+    {
+      "external_id": "Ugz1XOo46jvaZ-NZSEV4AaABAg",
+      "text": "Ain't no way😭😭✌️✌️",
+      "posted_at": "2026-10-22T17:09:53Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-23T08:42:33Z"
     }
   ],
   "pizzahut": [
