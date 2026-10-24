@@ -10334,6 +10334,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-23T08:42:33Z"
+    },
+    {
+      "external_id": "UgwGX4A80HuzitP-bkp4AaABAg",
+      "text": "😂😂✌️🥀🥀",
+      "posted_at": "2026-10-23T17:16:51Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-24T08:17:25Z"
     }
   ],
   "pizzahut": [
