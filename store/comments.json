@@ -18326,6 +18326,19 @@
       "language": "hinglish",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-21T08:44:33Z"
+    },
+    {
+      "external_id": "UgyucFU2mt6jNK3kZKx4AaABAg",
+      "text": "Hi domino's, can I avail this offer, if I'm ordering it through app?",
+      "posted_at": "2026-10-26T15:22:48Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-27T09:12:06Z"
     }
   ],
   "subway": [

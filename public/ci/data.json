@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "26 OCT 15:01 IST",
-    "updatedISO": "2026-10-26T09:31:40Z",
+    "updated": "27 OCT 14:42 IST",
+    "updatedISO": "2026-10-27T09:12:06Z",
     "spamRateBase": 0.61,
     "handles": {
       "kfc": {
@@ -86,29 +86,29 @@
       "youtube": {
         "status": "ok",
         "detail": null,
-        "lastRun": "2026-10-26T09:11:12Z",
-        "rowsUpserted": 159
+        "lastRun": "2026-10-27T09:11:57Z",
+        "rowsUpserted": 158
       },
       "instagram": {
         "status": "quota_exhausted",
         "detail": "kfc: Apify quota exhausted (403) for handle=kfcindia_official: {\n  \"error\": {\n    \"type\": \"platform-feature-disabled\",\n    \"message\": \"Monthly usage hard limit exceeded\"\n  }\n}. Skipping remaining brands for this run — credit won't recover mid-run.",
-        "lastRun": "2026-10-26T09:11:12Z",
+        "lastRun": "2026-10-27T09:11:57Z",
         "rowsUpserted": 0
       },
       "classification": {
         "status": "ok",
         "detail": null,
-        "lastRun": "2026-10-26T09:11:19Z",
+        "lastRun": "2026-10-27T09:12:06Z",
         "pendingPosts": 0,
         "pendingComments": 0
       }
     },
     "untrackedShareAssumption": 0.112,
     "commentSample": {
-      "n": 779,
-      "spamRate": 0.23,
-      "ytShare": 0.465,
-      "igShare": 0.535
+      "n": 753,
+      "spamRate": 0.232,
+      "ytShare": 0.481,
+      "igShare": 0.519
     },
     "excluded": {},
     "logoSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 1.5 22 7v10l-10 5.5L2 17V7L12 1.5Z\" stroke=\"url(#lg)\" stroke-width=\"1.3\"/><circle cx=\"12\" cy=\"12\" r=\"3.1\" fill=\"var(--cyan)\"/><defs><linearGradient id=\"lg\" x1=\"2\" y1=\"1.5\" x2=\"22\" y2=\"22.5\"><stop stop-color=\"var(--violet)\"/><stop offset=\"1\" stop-color=\"var(--cyan)\"/></linearGradient></defs></svg>",
@@ -316,7 +316,7 @@
     "windows": {
       "7": {
         "ig": {
-          "organic": 6579,
+          "organic": 5809,
           "paid": 0
         },
         "yt": {
@@ -326,7 +326,7 @@
       },
       "30": {
         "ig": {
-          "organic": 16079877,
+          "organic": 17318928,
           "paid": 0
         },
         "yt": {
@@ -336,7 +336,7 @@
       },
       "90": {
         "ig": {
-          "organic": 38866302,
+          "organic": 39613802,
           "paid": 0
         },
         "yt": {
@@ -347,7 +347,7 @@
     },
     "prev30": {
       "ig": {
-        "organic": 10954959,
+        "organic": 10961308,
         "paid": 0
       },
       "yt": {
@@ -367,22 +367,22 @@
             "posts": 0
           },
           "yt": {
-            "organic": 34841,
-            "paid": 16300,
+            "organic": 28486,
+            "paid": 16478,
             "followers": 249000,
             "posts": 7
           }
         },
         "30": {
           "ig": {
-            "organic": 671550,
+            "organic": 644650,
             "paid": 1027215,
             "followers": null,
-            "posts": 16
+            "posts": 15
           },
           "yt": {
-            "organic": 200894,
-            "paid": 356230,
+            "organic": 199023,
+            "paid": 357081,
             "followers": 249000,
             "posts": 28
           }
@@ -395,8 +395,8 @@
             "posts": 33
           },
           "yt": {
-            "organic": 548180,
-            "paid": 626240,
+            "organic": 545547,
+            "paid": 527965,
             "followers": 249000,
             "posts": 83
           }
@@ -404,33 +404,33 @@
       },
       "prev30": {
         "ig": {
-          "organic": 843725,
+          "organic": 870625,
           "paid": 2471497,
           "followers": null,
-          "posts": 17
+          "posts": 18
         },
         "yt": {
-          "organic": 160754,
-          "paid": 32653,
+          "organic": 159899,
+          "paid": 23839,
           "followers": 249000,
           "posts": 28
         }
       },
       "formatMix": "video",
       "vehicleMix": {
-        "new_launch": 0.0227,
+        "new_launch": 0.0233,
         "value_offer": 0.0,
-        "lto": 0.0909,
-        "brand": 0.8864,
+        "lto": 0.093,
+        "brand": 0.8837,
         "delivery": 0.0,
         "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
         "new_launch": 0.0,
-        "value_offer": 0.0444,
-        "lto": 0.0444,
-        "brand": 0.9111,
+        "value_offer": 0.0435,
+        "lto": 0.0435,
+        "brand": 0.913,
         "delivery": 0.0,
         "csr": 0.0,
         "unclassified": 0.0
@@ -440,7 +440,7 @@
         "neu": 0.625,
         "neg": 0.191
       },
-      "negDeltaPP": -1.9,
+      "negDeltaPP": -4.8,
       "themeShare": {
         "taste": 0.159,
         "price": 0.016,
@@ -450,8 +450,8 @@
         "other": 0.736
       },
       "engagement30": {
-        "likes": 261748,
-        "comments": 6244,
+        "likes": 259700,
+        "comments": 6099,
         "shares": null,
         "saves": null
       },
@@ -464,26 +464,26 @@
         22.5
       ],
       "seriesIG": [
-        1.56,
-        0.341,
-        2.327,
-        1.772,
+        1.545,
+        1.24,
+        1.414,
+        1.801,
         0.0,
         0.0
       ],
       "seriesYT": [
-        0.526,
-        0.611,
-        0.41,
-        3.644,
-        0.624,
-        0.186
+        0.572,
+        0.603,
+        0.382,
+        3.657,
+        0.592,
+        0.194
       ],
       "commentSample": {
-        "n": 476,
-        "spamRate": 0.221
+        "n": 475,
+        "spamRate": 0.219
       },
-      "baselineDaysActual": 48
+      "baselineDaysActual": 49
     },
     "pizzahut": {
       "windows": {
@@ -495,7 +495,7 @@
             "posts": 0
           },
           "yt": {
-            "organic": 703,
+            "organic": 766,
             "paid": 0,
             "followers": 101000,
             "posts": 1
@@ -509,7 +509,7 @@
             "posts": 7
           },
           "yt": {
-            "organic": 703,
+            "organic": 766,
             "paid": 0,
             "followers": 101000,
             "posts": 1
@@ -523,8 +523,8 @@
             "posts": 11
           },
           "yt": {
-            "organic": 29753,
-            "paid": 53036840,
+            "organic": 29861,
+            "paid": 53036912,
             "followers": 101000,
             "posts": 12
           }
@@ -568,7 +568,7 @@
         "neu": 0.211,
         "neg": 0.526
       },
-      "negDeltaPP": -11.7,
+      "negDeltaPP": -14.1,
       "themeShare": {
         "taste": 0.263,
         "price": 0.211,
@@ -611,7 +611,7 @@
         "n": 46,
         "spamRate": 0.587
       },
-      "baselineDaysActual": 46
+      "baselineDaysActual": 47
     },
     "tacobell": {
       "windows": {
@@ -631,14 +631,14 @@
         },
         "30": {
           "ig": {
-            "organic": 97308,
-            "paid": 992140,
+            "organic": 93457,
+            "paid": 982007,
             "followers": null,
-            "posts": 61
+            "posts": 59
           },
           "yt": {
-            "organic": 4990358,
-            "paid": 40251818,
+            "organic": 4990362,
+            "paid": 43931511,
             "followers": 8640,
             "posts": 8
           }
@@ -651,8 +651,8 @@
             "posts": 95
           },
           "yt": {
-            "organic": 10067341,
-            "paid": 71604788,
+            "organic": 10067345,
+            "paid": 75284505,
             "followers": 8640,
             "posts": 13
           }
@@ -660,10 +660,10 @@
       },
       "prev30": {
         "ig": {
-          "organic": 14125,
-          "paid": 0,
+          "organic": 17976,
+          "paid": 10133,
           "followers": null,
-          "posts": 34
+          "posts": 36
         },
         "yt": {
           "organic": 0,
@@ -674,40 +674,40 @@
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "new_launch": 0.029,
-        "value_offer": 0.5652,
-        "lto": 0.1449,
-        "brand": 0.2609,
+        "new_launch": 0.0299,
+        "value_offer": 0.5821,
+        "lto": 0.1493,
+        "brand": 0.2388,
         "delivery": 0.0,
         "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "new_launch": 0.1176,
-        "value_offer": 0.2353,
+        "new_launch": 0.1111,
+        "value_offer": 0.2222,
         "lto": 0.0,
-        "brand": 0.6176,
-        "delivery": 0.0294,
+        "brand": 0.6389,
+        "delivery": 0.0278,
         "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
-        "pos": 0.5,
-        "neu": 0.303,
-        "neg": 0.197
+        "pos": 0.515,
+        "neu": 0.309,
+        "neg": 0.176
       },
-      "negDeltaPP": 9.7,
+      "negDeltaPP": -4.6,
       "themeShare": {
-        "taste": 0.303,
-        "price": 0.013,
-        "service": 0.053,
+        "taste": 0.25,
+        "price": 0.015,
+        "service": 0.059,
         "delivery": 0.0,
-        "hygiene": 0.013,
-        "other": 0.618
+        "hygiene": 0.015,
+        "other": 0.662
       },
       "engagement30": {
-        "likes": 27602,
-        "comments": 750,
+        "likes": 27304,
+        "comments": 736,
         "shares": null,
         "saves": null
       },
@@ -720,10 +720,10 @@
         1.7
       ],
       "seriesIG": [
-        0.077,
-        3.183,
-        2.138,
-        0.603,
+        0.016,
+        3.207,
+        2.764,
+        0.012,
         0.0,
         0.0
       ],
@@ -736,10 +736,10 @@
         0.0
       ],
       "commentSample": {
-        "n": 94,
-        "spamRate": 0.191
+        "n": 85,
+        "spamRate": 0.2
       },
-      "baselineDaysActual": 49
+      "baselineDaysActual": 50
     },
     "mcdonalds_in": {
       "windows": {
@@ -759,14 +759,14 @@
         },
         "30": {
           "ig": {
-            "organic": 286137,
+            "organic": 279493,
             "paid": 975948,
             "followers": null,
-            "posts": 41
+            "posts": 40
           },
           "yt": {
-            "organic": 6788,
-            "paid": 56093623,
+            "organic": 6904,
+            "paid": 60121827,
             "followers": 50300,
             "posts": 15
           }
@@ -779,8 +779,8 @@
             "posts": 93
           },
           "yt": {
-            "organic": 22040,
-            "paid": 56107620,
+            "organic": 22203,
+            "paid": 60135865,
             "followers": 50300,
             "posts": 47
           }
@@ -788,10 +788,10 @@
       },
       "prev30": {
         "ig": {
-          "organic": 385648,
+          "organic": 392292,
           "paid": 5128671,
           "followers": null,
-          "posts": 52
+          "posts": 53
         },
         "yt": {
           "organic": 0,
@@ -802,40 +802,40 @@
       },
       "formatMix": "video",
       "vehicleMix": {
-        "new_launch": 0.0893,
-        "value_offer": 0.125,
-        "lto": 0.5179,
-        "brand": 0.2143,
-        "delivery": 0.0179,
-        "csr": 0.0357,
+        "new_launch": 0.0909,
+        "value_offer": 0.1091,
+        "lto": 0.5273,
+        "brand": 0.2182,
+        "delivery": 0.0182,
+        "csr": 0.0364,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "new_launch": 0.1346,
-        "value_offer": 0.1731,
-        "lto": 0.2692,
-        "brand": 0.3462,
-        "delivery": 0.0385,
-        "csr": 0.0385,
+        "new_launch": 0.1321,
+        "value_offer": 0.1887,
+        "lto": 0.2642,
+        "brand": 0.3396,
+        "delivery": 0.0377,
+        "csr": 0.0377,
         "unclassified": 0.0
       },
       "sentiment": {
         "pos": 0.489,
-        "neu": 0.298,
-        "neg": 0.213
+        "neu": 0.289,
+        "neg": 0.222
       },
-      "negDeltaPP": 15.1,
+      "negDeltaPP": 16.1,
       "themeShare": {
-        "taste": 0.064,
-        "price": 0.043,
-        "service": 0.128,
+        "taste": 0.067,
+        "price": 0.044,
+        "service": 0.133,
         "delivery": 0.0,
-        "hygiene": 0.021,
-        "other": 0.745
+        "hygiene": 0.022,
+        "other": 0.733
       },
       "engagement30": {
-        "likes": 155416,
-        "comments": 1081,
+        "likes": 155226,
+        "comments": 1076,
         "shares": null,
         "saves": null
       },
@@ -848,26 +848,26 @@
         2.5
       ],
       "seriesIG": [
-        1.627,
-        0.159,
-        3.71,
-        0.504,
+        1.709,
+        0.104,
+        3.753,
+        0.434,
         0.0,
         0.0
       ],
       "seriesYT": [
         0.0,
         0.0,
-        4.17,
-        1.83,
+        4.13,
+        1.87,
         0.0,
         0.0
       ],
       "commentSample": {
-        "n": 58,
-        "spamRate": 0.19
+        "n": 56,
+        "spamRate": 0.196
       },
-      "baselineDaysActual": 48
+      "baselineDaysActual": 49
     },
     "burgerking": {
       "windows": {
@@ -890,7 +890,7 @@
             "organic": 1307707,
             "paid": 331832,
             "followers": null,
-            "posts": 15
+            "posts": 14
           },
           "yt": {
             "organic": 0,
@@ -919,7 +919,7 @@
           "organic": 1243354,
           "paid": 301985,
           "followers": null,
-          "posts": 15
+          "posts": 16
         },
         "yt": {
           "organic": 0,
@@ -931,18 +931,18 @@
       "formatMix": "mixed",
       "vehicleMix": {
         "new_launch": 0.0,
-        "value_offer": 0.3333,
-        "lto": 0.2,
-        "brand": 0.4,
+        "value_offer": 0.2857,
+        "lto": 0.2143,
+        "brand": 0.4286,
         "delivery": 0.0,
-        "csr": 0.0667,
+        "csr": 0.0714,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
         "new_launch": 0.0,
-        "value_offer": 0.2,
-        "lto": 0.2667,
-        "brand": 0.5333,
+        "value_offer": 0.25,
+        "lto": 0.25,
+        "brand": 0.5,
         "delivery": 0.0,
         "csr": 0.0,
         "unclassified": 0.0
@@ -962,8 +962,8 @@
         "other": 0.0
       },
       "engagement30": {
-        "likes": 71006,
-        "comments": 258,
+        "likes": 69921,
+        "comments": 247,
         "shares": null,
         "saves": null
       },
@@ -977,8 +977,8 @@
       ],
       "seriesIG": [
         1.069,
-        2.264,
-        2.646,
+        3.905,
+        1.005,
         0.021,
         0.0,
         0.0
@@ -992,7 +992,7 @@
         0.0
       ],
       "commentSample": {
-        "n": 3,
+        "n": 1,
         "spamRate": 1.0
       },
       "baselineDaysActual": 90
@@ -1015,14 +1015,14 @@
         },
         "30": {
           "ig": {
-            "organic": 89332,
+            "organic": 77064,
             "paid": 144735,
             "followers": null,
-            "posts": 12
+            "posts": 10
           },
           "yt": {
-            "organic": 19654728,
-            "paid": 0,
+            "organic": 15663829,
+            "paid": 6167529,
             "followers": 226000,
             "posts": 4
           }
@@ -1035,8 +1035,8 @@
             "posts": 24
           },
           "yt": {
-            "organic": 26889220,
-            "paid": 68962055,
+            "organic": 22898321,
+            "paid": 75129789,
             "followers": 226000,
             "posts": 5
           }
@@ -1044,54 +1044,54 @@
       },
       "prev30": {
         "ig": {
-          "organic": 58355,
+          "organic": 70623,
           "paid": 0,
           "followers": null,
-          "posts": 12
+          "posts": 14
         },
         "yt": {
           "organic": 7234492,
-          "paid": 68962055,
+          "paid": 68962260,
           "followers": 226000,
           "posts": 1
         }
       },
       "formatMix": "mixed",
       "vehicleMix": {
-        "new_launch": 0.0625,
-        "value_offer": 0.25,
+        "new_launch": 0.0714,
+        "value_offer": 0.2857,
         "lto": 0.0,
-        "brand": 0.6875,
+        "brand": 0.6429,
         "delivery": 0.0,
         "csr": 0.0,
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "new_launch": 0.4615,
+        "new_launch": 0.4,
         "value_offer": 0.0,
         "lto": 0.0,
-        "brand": 0.5385,
+        "brand": 0.6,
         "delivery": 0.0,
         "csr": 0.0,
         "unclassified": 0.0
       },
       "sentiment": {
-        "pos": 0.107,
-        "neu": 0.196,
-        "neg": 0.696
+        "pos": 0.114,
+        "neu": 0.273,
+        "neg": 0.614
       },
-      "negDeltaPP": 4.6,
+      "negDeltaPP": -8.5,
       "themeShare": {
-        "taste": 0.179,
-        "price": 0.161,
-        "service": 0.214,
-        "delivery": 0.196,
+        "taste": 0.091,
+        "price": 0.205,
+        "service": 0.25,
+        "delivery": 0.159,
         "hygiene": 0.0,
-        "other": 0.25
+        "other": 0.295
       },
       "engagement30": {
-        "likes": 18260,
-        "comments": 386,
+        "likes": 17907,
+        "comments": 331,
         "shares": null,
         "saves": null
       },
@@ -1104,26 +1104,26 @@
         19.6
       ],
       "seriesIG": [
-        5.168,
-        0.385,
-        0.446,
+        5.122,
+        0.407,
+        0.471,
         0.0,
         0.0,
         0.0
       ],
       "seriesYT": [
         0.0,
-        2.572,
+        2.316,
         0.0,
-        3.428,
+        3.684,
         0.0,
         0.0
       ],
       "commentSample": {
-        "n": 71,
-        "spamRate": 0.211
+        "n": 59,
+        "spamRate": 0.254
       },
-      "baselineDaysActual": 47
+      "baselineDaysActual": 48
     },
     "subway": {
       "windows": {
@@ -1135,7 +1135,7 @@
             "posts": 0
           },
           "yt": {
-            "organic": 319,
+            "organic": 325,
             "paid": 0,
             "followers": 94800,
             "posts": 1
@@ -1149,7 +1149,7 @@
             "posts": 5
           },
           "yt": {
-            "organic": 319,
+            "organic": 325,
             "paid": 0,
             "followers": 94800,
             "posts": 1
@@ -1163,10 +1163,10 @@
             "posts": 8
           },
           "yt": {
-            "organic": 1929297,
-            "paid": 1928659,
+            "organic": 325,
+            "paid": 0,
             "followers": 94800,
-            "posts": 2
+            "posts": 1
           }
         }
       },
@@ -1251,7 +1251,7 @@
         "n": 31,
         "spamRate": 0.0
       },
-      "baselineDaysActual": 89
+      "baselineDaysActual": 90
     }
   }
 }
