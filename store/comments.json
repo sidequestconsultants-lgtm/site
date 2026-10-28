@@ -15202,6 +15202,45 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-17T07:56:17Z"
+    },
+    {
+      "external_id": "Ugx6uQnuKtUspFA7mMp4AaABAg",
+      "text": "Congratulations 🥰",
+      "posted_at": "2026-10-28T07:19:56Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-28T09:53:14Z"
+    },
+    {
+      "external_id": "UgwHHa4kxT828_VhdlN4AaABAg",
+      "text": "Congratulations 🎉",
+      "posted_at": "2026-10-28T06:43:34Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-28T09:53:14Z"
+    },
+    {
+      "external_id": "UgxWN6OC2viaGbx4YWR4AaABAg",
+      "text": "❤",
+      "posted_at": "2026-10-28T06:40:23Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-28T09:53:14Z"
     }
   ],
   "burgerking": [
