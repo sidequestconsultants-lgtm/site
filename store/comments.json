@@ -10672,6 +10672,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-25T08:35:28Z"
+    },
+    {
+      "external_id": "UgwY-Vuo2TJYYfKt0lJ4AaABAg",
+      "text": "Momos Are Fake In KFC.",
+      "posted_at": "2026-10-28T14:09:10Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-29T10:14:37Z"
     }
   ],
   "pizzahut": [
@@ -15241,6 +15254,45 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-28T09:53:14Z"
+    },
+    {
+      "external_id": "UgwHwbQ27SaA6dVShUh4AaABAg",
+      "text": "Congratulations 🎉",
+      "posted_at": "2026-10-28T14:09:04Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-29T10:14:45Z"
+    },
+    {
+      "external_id": "UgwFsn1Og4D_FSjFJPl4AaABAg",
+      "text": "Congratulations 🎉 nice place 😍",
+      "posted_at": "2026-10-28T12:06:01Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-29T10:14:45Z"
+    },
+    {
+      "external_id": "UgzWHf_PcQ31rQz2l7V4AaABAg",
+      "text": "Congratulations",
+      "posted_at": "2026-10-28T11:15:30Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-29T10:14:45Z"
     }
   ],
   "burgerking": [
