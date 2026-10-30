@@ -13211,6 +13211,19 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-08T10:54:36Z"
+    },
+    {
+      "external_id": "Ugzv9ei07wOjaVxmmUN4AaABAg",
+      "text": "Lol, give me discount for reaching this far. Im still a taco-virgin.",
+      "posted_at": "2026-10-29T10:42:09Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-30T10:16:09Z"
     }
   ],
   "mcdonalds_in": [
@@ -18430,6 +18443,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-27T09:12:06Z"
+    },
+    {
+      "external_id": "Ugx6NdEJQBTJ4uNLDwt4AaABAg",
+      "text": "Dominos bring pasta pizza back",
+      "posted_at": "2026-10-30T07:50:36Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-10-30T10:16:13Z"
     }
   ],
   "subway": [
