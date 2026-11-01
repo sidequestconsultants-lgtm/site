@@ -10685,6 +10685,32 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-29T10:14:37Z"
+    },
+    {
+      "external_id": "UgzhMMMJc-5DRebibCR4AaABAg",
+      "text": "Colonel Sanders is Kfc Founder",
+      "posted_at": "2026-11-01T03:05:02Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-01T10:40:18Z"
+    },
+    {
+      "external_id": "UgzRtGr-utUSeJrfQsp4AaABAg",
+      "text": "KFC I Love You",
+      "posted_at": "2026-10-31T12:30:39Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-01T10:40:18Z"
     }
   ],
   "pizzahut": [
