@@ -11818,6 +11818,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-18T08:11:33Z"
+    },
+    {
+      "external_id": "UgzJt0224BFMgevPO914AaABAg",
+      "text": "❤️bxzdp,Z,rr5",
+      "posted_at": "2026-11-01T14:36:18Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-02T11:29:01Z"
     }
   ],
   "tacobell": [
@@ -18482,6 +18495,32 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-10-30T10:16:13Z"
+    },
+    {
+      "external_id": "Ugyp_j41LPcmXUusgpR4AaABAg",
+      "text": "I am here at 23 hrs it's embarassing could I get it for free too",
+      "posted_at": "2026-11-02T08:01:26Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-02T11:29:14Z"
+    },
+    {
+      "external_id": "UgxHChmEDEwzrObNIzV4AaABAg",
+      "text": "Can I try one for free?",
+      "posted_at": "2026-11-01T11:38:48Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-02T11:29:14Z"
     }
   ],
   "subway": [
