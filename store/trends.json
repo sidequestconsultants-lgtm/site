@@ -1,86 +1,86 @@
 {
   "kfc": {
     "series": [
-      28.1,
-      23.3,
       24.6,
-      28.1,
-      25.1,
-      22.5
+      20.0,
+      29.2,
+      18.6,
+      19.9,
+      30.1
     ],
     "query": "KFC India + KFC near me + KFC menu + KFC offer + KFC coupon",
-    "fetched_at": "2026-10-26T09:31:40Z"
+    "fetched_at": "2026-11-02T11:52:55Z"
   },
   "pizzahut": {
     "series": [
-      6.5,
-      9.3,
-      12.5,
-      4.4,
-      7.8,
-      5.1
+      8.3,
+      6.2,
+      11.1,
+      5.9,
+      4.7,
+      6.7
     ],
     "query": "Pizza Hut India + Pizza Hut near me + Pizza Hut menu + Pizza Hut offer",
-    "fetched_at": "2026-10-26T09:31:40Z"
+    "fetched_at": "2026-11-02T11:52:55Z"
   },
   "tacobell": {
     "series": [
-      0.7,
-      1.6,
-      1.5,
       1.1,
-      1.5,
-      1.7
+      1.4,
+      1.9,
+      0.8,
+      0.3,
+      1.4
     ],
     "query": "Taco Bell India + Taco Bell near me + Taco Bell menu + Taco Bell offer",
-    "fetched_at": "2026-10-26T09:31:40Z"
+    "fetched_at": "2026-11-02T11:52:55Z"
   },
   "mcdonalds_in": {
     "series": [
-      2.5,
-      2.5,
-      3.1,
-      1.9,
-      1.7,
-      2.5
+      2.4,
+      2.8,
+      2.9,
+      1.8,
+      1.6,
+      2.4
     ],
     "query": "McDonalds India + McDonalds near me + McDonalds menu + McDonalds offer",
-    "fetched_at": "2026-10-26T09:31:40Z"
+    "fetched_at": "2026-11-02T11:52:55Z"
   },
   "burgerking": {
     "series": [
-      8.6,
-      8.4,
-      9.0,
-      7.3,
       7.9,
-      7.1
+      7.4,
+      8.6,
+      6.6,
+      6.6,
+      6.9
     ],
     "query": "Burger King India + Burger King near me + Burger King menu + BK offer",
-    "fetched_at": "2026-10-26T09:31:40Z"
+    "fetched_at": "2026-11-02T11:52:55Z"
   },
   "dominos": {
     "series": [
-      25.6,
-      26.7,
-      19.8,
-      16.6,
-      21.3,
-      19.6
+      28.3,
+      17.9,
+      17.0,
+      16.3,
+      17.5,
+      18.1
     ],
     "query": "Dominos India + Dominos near me + Dominos menu + Dominos offer",
-    "fetched_at": "2026-10-26T09:31:40Z"
+    "fetched_at": "2026-11-02T11:52:55Z"
   },
   "subway": {
     "series": [
-      7.7,
-      7.9,
-      8.5,
-      7.0,
-      6.8,
-      6.4
+      7.3,
+      7.1,
+      8.4,
+      5.1,
+      6.1,
+      5.9
     ],
     "query": "Subway India + Subway near me + Subway menu + Subway offer",
-    "fetched_at": "2026-10-26T09:31:40Z"
+    "fetched_at": "2026-11-02T11:52:55Z"
   }
 }
