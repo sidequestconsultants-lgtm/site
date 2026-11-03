@@ -10711,6 +10711,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-01T10:40:18Z"
+    },
+    {
+      "external_id": "UgzCKlXCz1b3-2DN5XR4AaABAg",
+      "text": "Why is kfc ind is the only youtuber who uses brainrot like look at the kfc us no brain rot",
+      "posted_at": "2026-11-02T17:04:18Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-03T11:07:08Z"
     }
   ],
   "pizzahut": [
@@ -18521,6 +18534,32 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-02T11:29:14Z"
+    },
+    {
+      "external_id": "UgxGGEWSmdA1RPBLK3B4AaABAg",
+      "text": "Till which date",
+      "posted_at": "2026-11-02T13:53:43Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-03T11:07:17Z"
+    },
+    {
+      "external_id": "UgyzxFP9QrReMUhfOqJ4AaABAg",
+      "text": "Avoid the Noid",
+      "posted_at": "2026-11-02T18:56:17Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-03T11:07:17Z"
     }
   ],
   "subway": [
