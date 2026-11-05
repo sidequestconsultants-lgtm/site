@@ -10724,6 +10724,32 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-03T11:07:08Z"
+    },
+    {
+      "external_id": "Ugx1jlMuuMHivDp2Wmx4AaABAg",
+      "text": "Son🥀✌️🫩",
+      "posted_at": "2026-11-05T01:45:35Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-05T11:15:46Z"
+    },
+    {
+      "external_id": "UgxY5I2e5F63meF4lK94AaABAg",
+      "text": "KFC ADMIN BE LIKE",
+      "posted_at": "2026-11-04T15:15:26Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "hinglish",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-05T11:15:46Z"
     }
   ],
   "pizzahut": [
