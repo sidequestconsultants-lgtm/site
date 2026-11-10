@@ -13012,6 +13012,19 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-08T10:40:43Z"
+    },
+    {
+      "external_id": "UgwtFEzvKC3kC7iHFWN4AaABAg",
+      "text": "Caldruki? \n\nMf is this the official KFC india channel? 🫩🥀✌🏽\n\nDidn’t they use to advertise their products or shi? \n\n(Put me in the screenshot chain)",
+      "posted_at": "2026-11-10T08:35:32Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-10T11:29:28Z"
     }
   ],
   "pizzahut": [
@@ -14782,6 +14795,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-07T10:36:11Z"
+    },
+    {
+      "external_id": "UgwzQmYFNIyLLND6PKV4AaABAg",
+      "text": "AI??",
+      "posted_at": "2026-11-09T21:16:43Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-10T11:29:38Z"
     }
   ],
   "tacobell": [
@@ -17319,6 +17345,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-08T10:43:49Z"
+    },
+    {
+      "external_id": "UgwfQEH05QvVCcQN2Pp4AaABAg",
+      "text": "No seriously, am I the only comment y'all got in 2 weeks ?",
+      "posted_at": "2026-10-29T10:40:53Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-10T11:29:50Z"
     }
   ],
   "mcdonalds_in": [
