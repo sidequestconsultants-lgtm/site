@@ -13025,6 +13025,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-10T11:29:28Z"
+    },
+    {
+      "external_id": "UgzYSqFeJ70ZHmuJv4J4AaABAg",
+      "text": "Atleast this is fine",
+      "posted_at": "2026-11-13T06:56:39Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-13T11:21:08Z"
     }
   ],
   "pizzahut": [

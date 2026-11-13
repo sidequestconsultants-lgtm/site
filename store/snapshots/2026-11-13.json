@@ -1,0 +1,1257 @@
+{
+  "meta": {
+    "updated": "13 NOV 16:51 IST",
+    "updatedISO": "2026-11-13T11:21:14Z",
+    "spamRateBase": 0.61,
+    "handles": {
+      "kfc": {
+        "ig": [
+          "@kfcindia_official"
+        ],
+        "yt": "UCg5ukNutGtg1KqvWwuc56xw",
+        "fb": [
+          "KFC-India-61563476804822"
+        ]
+      },
+      "pizzahut": {
+        "ig": [
+          "@pizzahut_india"
+        ],
+        "yt": "UCOBjFMnb_0rfwV0plAYXsfQ",
+        "fb": [
+          "pizzahutindia"
+        ]
+      },
+      "tacobell": {
+        "ig": [
+          "@tacobellindia"
+        ],
+        "yt": "UCOjKPr9SdoKhZHZ7CDdg_jg",
+        "fb": [
+          "tacobellindia"
+        ]
+      },
+      "mcdonalds_in": {
+        "ig": [
+          "@mcdonalds_india",
+          "@mcdonaldsinindia"
+        ],
+        "yt": "UCaj66rhgdjzNmIQ6rtcFxzw",
+        "fb": [
+          "McDonaldsIndia",
+          "McDonaldsinIndia"
+        ]
+      },
+      "burgerking": {
+        "ig": [
+          "@burgerkingindia"
+        ],
+        "yt": null,
+        "fb": [
+          "burgerkingindia"
+        ]
+      },
+      "dominos": {
+        "ig": [
+          "@dominos_india"
+        ],
+        "yt": "@DominosPizzaIndia",
+        "fb": [
+          "dominospizzaindia"
+        ]
+      },
+      "subway": {
+        "ig": [
+          "@subway_india"
+        ],
+        "yt": "@SubwayIndiaSocial",
+        "fb": [
+          "SubwayIndia"
+        ]
+      }
+    },
+    "trendsQueries": {
+      "kfc": "KFC India + KFC near me + KFC menu + KFC offer + KFC coupon",
+      "pizzahut": "Pizza Hut India + Pizza Hut near me + Pizza Hut menu + Pizza Hut offer",
+      "tacobell": "Taco Bell India + Taco Bell near me + Taco Bell menu + Taco Bell offer",
+      "mcdonalds_in": "McDonalds India + McDonalds near me + McDonalds menu + McDonalds offer",
+      "burgerking": "Burger King India + Burger King near me + Burger King menu + BK offer",
+      "dominos": "Dominos India + Dominos near me + Dominos menu + Dominos offer",
+      "subway": "Subway India + Subway near me + Subway menu + Subway offer"
+    },
+    "anomalyThreshold": 1.8,
+    "coverageDays": 90,
+    "trackingSince": "2026-05-25",
+    "sources": {
+      "youtube": {
+        "status": "ok",
+        "detail": null,
+        "lastRun": "2026-11-13T11:17:47Z",
+        "rowsUpserted": 144
+      },
+      "instagram": {
+        "status": "ok",
+        "detail": null,
+        "lastRun": "2026-11-13T11:21:01Z",
+        "rowsUpserted": 92
+      },
+      "classification": {
+        "status": "ok",
+        "detail": null,
+        "lastRun": "2026-11-13T11:21:14Z",
+        "pendingPosts": 0,
+        "pendingComments": 0
+      }
+    },
+    "untrackedShareAssumption": 0.112,
+    "commentSample": {
+      "n": 591,
+      "spamRate": 0.225,
+      "ytShare": 0.327,
+      "igShare": 0.673
+    },
+    "excluded": {},
+    "logoSvg": "<svg viewBox=\"0 0 24 24\" fill=\"none\" xmlns=\"http://www.w3.org/2000/svg\"><path d=\"M12 1.5 22 7v10l-10 5.5L2 17V7L12 1.5Z\" stroke=\"url(#lg)\" stroke-width=\"1.3\"/><circle cx=\"12\" cy=\"12\" r=\"3.1\" fill=\"var(--cyan)\"/><defs><linearGradient id=\"lg\" x1=\"2\" y1=\"1.5\" x2=\"22\" y2=\"22.5\"><stop stop-color=\"var(--violet)\"/><stop offset=\"1\" stop-color=\"var(--cyan)\"/></linearGradient></defs></svg>",
+    "labels": {
+      "vehicleAxis": "OFFER TYPE",
+      "vehicleSplitLabel": "OFFER MIX",
+      "vehicleShiftLabel": "OFFER MIX — SHIFT ACROSS WINDOW",
+      "vehicleMethodology": "OFFER TYPES",
+      "vehicleCaveat": "CONTENT CLASSIFIED BY OFFER TYPE — LAUNCH, VALUE, LTO, BRAND, DELIVERY, CSR.",
+      "printTag": "OFFER-CLASSIFIED",
+      "untrackedNote": "UNTRACKED HAS NO OFFER CLASSIFICATION"
+    },
+    "vehicles": [
+      {
+        "id": "new_launch",
+        "label": "NEW LAUNCH",
+        "color": "var(--v-new_launch)"
+      },
+      {
+        "id": "value_offer",
+        "label": "VALUE OFFER",
+        "color": "var(--v-value_offer)"
+      },
+      {
+        "id": "lto",
+        "label": "LIMITED TIME",
+        "color": "var(--v-lto)"
+      },
+      {
+        "id": "brand",
+        "label": "BRAND",
+        "color": "var(--v-brand)"
+      },
+      {
+        "id": "delivery",
+        "label": "DELIVERY",
+        "color": "var(--v-delivery)"
+      },
+      {
+        "id": "csr",
+        "label": "CSR",
+        "color": "var(--v-csr)"
+      },
+      {
+        "id": "unclassified",
+        "label": "UNCLASSIFIED",
+        "color": "var(--v-unclassified)"
+      }
+    ],
+    "themes": [
+      {
+        "id": "taste",
+        "label": "TASTE",
+        "lift": 0.7,
+        "outlierCaption": "complaints about a recipe or formulation change drew an unusual negative wave"
+      },
+      {
+        "id": "price",
+        "label": "PRICE",
+        "lift": 1.1,
+        "outlierCaption": "pricing backlash after a menu price revision reported out of {region}"
+      },
+      {
+        "id": "service",
+        "label": "SERVICE",
+        "lift": 1.6,
+        "outlierCaption": "service-speed and order-accuracy complaints spiked out of {region}"
+      },
+      {
+        "id": "delivery",
+        "label": "DELIVERY",
+        "lift": 1.4,
+        "outlierCaption": "delivery-partner complaints (late, cold, wrong order) spiked out of {region}"
+      },
+      {
+        "id": "hygiene",
+        "label": "HYGIENE",
+        "lift": 2.0,
+        "outlierCaption": "a hygiene or cleanliness complaint went semi-viral out of {region}"
+      },
+      {
+        "id": "other",
+        "label": "OTHER",
+        "lift": 1.0,
+        "outlierCaption": "a repost/meme thread drew an unusual negative comment wave"
+      }
+    ],
+    "metaAdNote": "Meta's Ad Library API returns only political and social-issue ads outside the EU and UK, and does not expose spend for commercial advertisers anywhere. No measured spend figure is obtainable for this category. All expense values are modelled from public impression proxies and published CPM benchmarks.",
+    "viewProxyCaveat": "VIEW-BASED PROXY · SHORT-FORM LOOPING CONTENT INFLATES COUNTS · NOT REACH",
+    "searchCaveat": "SEARCH INTEREST · RELATIVE INDEX 0–100 · NOT COMPARABLE TO SOV SCALE",
+    "soeTwoLayerNote": "SOE is modelled from a modelled input: paid/organic split is itself an estimate (views vs. a trailing-90-day median baseline), then converted to spend via CPM and format-mix assumptions. Two layers of estimation stack here — flagged, not hidden.",
+    "demandBlindSpotNote": "Swiggy and Zomato in-app search never touches Google, and for QSR that is plausibly the majority of purchase intent. This pipeline has no visibility into it at all — a larger gap here than it was for alcobev, where on-premise and retail discovery weren't dominated by a couple of apps this way.",
+    "searchBlendedIntentNote": "Each brand's Trends query blends three intents — brand name, location/menu (\"near me\", \"menu\"), and offer (\"offer\", \"coupon\") — to stay above Google's reporting floor. That means the series measures total demand but cannot separate rising brand interest from discount-hunting; a spike could be either.",
+    "mcdonaldsHandleNote": "McDonald's India runs two Instagram accounts — @mcdonalds_india (Westlife Foodworld, West & South) and @mcdonaldsinindia (CPRL, North & East) — operated by different franchisees but one brand to a consumer and one brand in search. Both are pulled and rolled into a single McDonald's profile; a post cross-published to both accounts is deduped on caption + timestamp proximity so it counts once, not twice, in every post-count-based stat, while its real engagement from both audiences still counts in full toward visibility. McDonald's is the only multi-handle brand in the tracked set."
+  },
+  "brands": {
+    "kfc": {
+      "name": "KFC",
+      "parent": "yum",
+      "color": "var(--c-kfc)",
+      "isClient": true,
+      "handleIG": "@kfcindia_official",
+      "handleYT": "UCg5ukNutGtg1KqvWwuc56xw",
+      "dormantSince": null
+    },
+    "pizzahut": {
+      "name": "Pizza Hut",
+      "parent": "yum",
+      "color": "var(--c-pizzahut)",
+      "isClient": false,
+      "handleIG": "@pizzahut_india",
+      "handleYT": "UCOBjFMnb_0rfwV0plAYXsfQ",
+      "dormantSince": null
+    },
+    "tacobell": {
+      "name": "Taco Bell",
+      "parent": "yum",
+      "color": "var(--c-tacobell)",
+      "isClient": false,
+      "handleIG": "@tacobellindia",
+      "handleYT": "UCOjKPr9SdoKhZHZ7CDdg_jg",
+      "dormantSince": null
+    },
+    "mcdonalds_in": {
+      "name": "McDonald's",
+      "parent": "mcdonalds",
+      "color": "var(--c-mcdonalds)",
+      "isClient": false,
+      "handleIG": "@mcdonalds_india / @mcdonaldsinindia",
+      "handleYT": "UCaj66rhgdjzNmIQ6rtcFxzw",
+      "dormantSince": null
+    },
+    "burgerking": {
+      "name": "Burger King",
+      "parent": "rbi",
+      "color": "var(--c-burgerking)",
+      "isClient": false,
+      "handleIG": "@burgerkingindia",
+      "handleYT": null,
+      "dormantSince": null
+    },
+    "dominos": {
+      "name": "Domino's",
+      "parent": "jubilant",
+      "color": "var(--c-dominos)",
+      "isClient": false,
+      "handleIG": "@dominos_india",
+      "handleYT": "@DominosPizzaIndia",
+      "dormantSince": null
+    },
+    "subway": {
+      "name": "Subway",
+      "parent": "subway_group",
+      "color": "var(--c-subway)",
+      "isClient": false,
+      "handleIG": "@subway_india",
+      "handleYT": "@SubwayIndiaSocial",
+      "dormantSince": null
+    }
+  },
+  "portfolios": {
+    "yum": {
+      "name": "Yum! Brands",
+      "members": [
+        "kfc",
+        "pizzahut",
+        "tacobell"
+      ],
+      "color": "var(--c-kfc)",
+      "isClient": true
+    },
+    "mcdonalds": {
+      "name": "McDonald's Corp",
+      "members": [
+        "mcdonalds_in"
+      ],
+      "color": "var(--c-mcdonalds)"
+    },
+    "rbi": {
+      "name": "Restaurant Brands Intl",
+      "members": [
+        "burgerking"
+      ],
+      "color": "var(--c-burgerking)"
+    },
+    "jubilant": {
+      "name": "Jubilant FoodWorks",
+      "members": [
+        "dominos"
+      ],
+      "color": "var(--c-dominos)"
+    },
+    "subway_group": {
+      "name": "Subway",
+      "members": [
+        "subway"
+      ],
+      "color": "var(--c-subway)"
+    }
+  },
+  "untracked": {
+    "id": "untracked",
+    "name": "Other / Untracked",
+    "color": "var(--c-untracked)",
+    "windows": {
+      "7": {
+        "ig": {
+          "organic": 1644534,
+          "paid": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0
+        }
+      },
+      "30": {
+        "ig": {
+          "organic": 29679091,
+          "paid": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0
+        }
+      },
+      "90": {
+        "ig": {
+          "organic": 76089699,
+          "paid": 0
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0
+        }
+      }
+    },
+    "prev30": {
+      "ig": {
+        "organic": 31729887,
+        "paid": 0
+      },
+      "yt": {
+        "organic": 0,
+        "paid": 0
+      }
+    }
+  },
+  "profiles": {
+    "kfc": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 426557,
+            "paid": 83270,
+            "followers": null,
+            "posts": 6
+          },
+          "yt": {
+            "organic": 12567,
+            "paid": 0,
+            "followers": 249000,
+            "posts": 5
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 2244314,
+            "paid": 7967932,
+            "followers": null,
+            "posts": 25
+          },
+          "yt": {
+            "organic": 123939,
+            "paid": 73532,
+            "followers": 249000,
+            "posts": 23
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 4018315,
+            "paid": 10829094,
+            "followers": null,
+            "posts": 56
+          },
+          "yt": {
+            "organic": 471088,
+            "paid": 467324,
+            "followers": 249000,
+            "posts": 77
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 1207177,
+          "paid": 1896714,
+          "followers": null,
+          "posts": 24
+        },
+        "yt": {
+          "organic": 186305,
+          "paid": 341929,
+          "followers": 249000,
+          "posts": 29
+        }
+      },
+      "formatMix": "video",
+      "vehicleMix": {
+        "new_launch": 0.1042,
+        "value_offer": 0.0625,
+        "lto": 0.125,
+        "brand": 0.7083,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "new_launch": 0.0189,
+        "value_offer": 0.0,
+        "lto": 0.0189,
+        "brand": 0.9623,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.142,
+        "neu": 0.719,
+        "neg": 0.139
+      },
+      "negDeltaPP": -5.5,
+      "themeShare": {
+        "taste": 0.157,
+        "price": 0.007,
+        "service": 0.09,
+        "delivery": 0.007,
+        "hygiene": 0.007,
+        "other": 0.73
+      },
+      "engagement30": {
+        "likes": 428830,
+        "comments": 6192,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        22.1,
+        20.1,
+        24.5,
+        23.6,
+        20.9,
+        27.8
+      ],
+      "seriesIG": [
+        0.503,
+        0.649,
+        4.177,
+        0.218,
+        0.296,
+        0.157
+      ],
+      "seriesYT": [
+        2.225,
+        1.774,
+        0.352,
+        0.391,
+        1.015,
+        0.243
+      ],
+      "commentSample": {
+        "n": 312,
+        "spamRate": 0.144
+      },
+      "baselineDaysActual": 66
+    },
+    "pizzahut": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 25224,
+            "paid": 0,
+            "followers": null,
+            "posts": 6
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": 101000,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 143842,
+            "paid": 0,
+            "followers": null,
+            "posts": 17
+          },
+          "yt": {
+            "organic": 1393,
+            "paid": 0,
+            "followers": 101000,
+            "posts": 1
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 156092,
+            "paid": 0,
+            "followers": null,
+            "posts": 26
+          },
+          "yt": {
+            "organic": 9694,
+            "paid": 2736,
+            "followers": 101000,
+            "posts": 6
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 12250,
+          "paid": 0,
+          "followers": null,
+          "posts": 7
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": 101000,
+          "posts": 0
+        }
+      },
+      "formatMix": "video",
+      "vehicleMix": {
+        "new_launch": 0.5556,
+        "value_offer": 0.0556,
+        "lto": 0.2778,
+        "brand": 0.1111,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "new_launch": 0.2857,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.5714,
+        "delivery": 0.1429,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.276,
+        "neu": 0.207,
+        "neg": 0.517
+      },
+      "negDeltaPP": -5.9,
+      "themeShare": {
+        "taste": 0.414,
+        "price": 0.069,
+        "service": 0.069,
+        "delivery": 0.207,
+        "hygiene": 0.034,
+        "other": 0.207
+      },
+      "engagement30": {
+        "likes": 875,
+        "comments": 112,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        8.7,
+        10.6,
+        4.1,
+        6.4,
+        4.7,
+        6.4
+      ],
+      "seriesIG": [
+        0.719,
+        1.507,
+        1.763,
+        0.496,
+        0.463,
+        1.052
+      ],
+      "seriesYT": [
+        0.0,
+        6.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 52,
+        "spamRate": 0.442
+      },
+      "baselineDaysActual": 64
+    },
+    "tacobell": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 254802,
+            "paid": 5978940,
+            "followers": null,
+            "posts": 27
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": 8680,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 681741,
+            "paid": 15386999,
+            "followers": null,
+            "posts": 93
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": 8680,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 958639,
+            "paid": 16211566,
+            "followers": null,
+            "posts": 185
+          },
+          "yt": {
+            "organic": 112620686,
+            "paid": 31300868,
+            "followers": 8680,
+            "posts": 10
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 276898,
+          "paid": 824567,
+          "followers": null,
+          "posts": 81
+        },
+        "yt": {
+          "organic": 78772388,
+          "paid": 31300868,
+          "followers": 8680,
+          "posts": 8
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "new_launch": 0.1183,
+        "value_offer": 0.4624,
+        "lto": 0.086,
+        "brand": 0.3333,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "new_launch": 0.0562,
+        "value_offer": 0.4831,
+        "lto": 0.1124,
+        "brand": 0.3483,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.711,
+        "neu": 0.263,
+        "neg": 0.026
+      },
+      "negDeltaPP": -14.9,
+      "themeShare": {
+        "taste": 0.263,
+        "price": 0.053,
+        "service": 0.053,
+        "delivery": 0.0,
+        "hygiene": 0.0,
+        "other": 0.632
+      },
+      "engagement30": {
+        "likes": 14229,
+        "comments": 407,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        1.5,
+        1.1,
+        1.0,
+        0.6,
+        0.1,
+        1.2
+      ],
+      "seriesIG": [
+        0.089,
+        0.708,
+        0.748,
+        1.949,
+        0.368,
+        2.138
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 44,
+        "spamRate": 0.136
+      },
+      "baselineDaysActual": 67
+    },
+    "mcdonalds_in": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 375833,
+            "paid": 192637,
+            "followers": null,
+            "posts": 16
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": 50500,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 2037538,
+            "paid": 46936311,
+            "followers": null,
+            "posts": 70
+          },
+          "yt": {
+            "organic": 1890,
+            "paid": 22879432,
+            "followers": 50500,
+            "posts": 4
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 3182199,
+            "paid": 52540794,
+            "followers": null,
+            "posts": 157
+          },
+          "yt": {
+            "organic": 24577,
+            "paid": 145535857,
+            "followers": 50500,
+            "posts": 47
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 786127,
+          "paid": 2026658,
+          "followers": null,
+          "posts": 64
+        },
+        "yt": {
+          "organic": 8270,
+          "paid": 122648203,
+          "followers": 50500,
+          "posts": 14
+        }
+      },
+      "formatMix": "video",
+      "vehicleMix": {
+        "new_launch": 0.1622,
+        "value_offer": 0.2432,
+        "lto": 0.3243,
+        "brand": 0.2568,
+        "delivery": 0.0,
+        "csr": 0.0135,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "new_launch": 0.0641,
+        "value_offer": 0.1538,
+        "lto": 0.4487,
+        "brand": 0.2564,
+        "delivery": 0.0256,
+        "csr": 0.0513,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.643,
+        "neu": 0.286,
+        "neg": 0.071
+      },
+      "negDeltaPP": -6.8,
+      "themeShare": {
+        "taste": 0.0,
+        "price": 0.0,
+        "service": 0.024,
+        "delivery": 0.0,
+        "hygiene": 0.0,
+        "other": 0.976
+      },
+      "engagement30": {
+        "likes": 386063,
+        "comments": 1337,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        2.2,
+        3.1,
+        1.8,
+        2.0,
+        1.2,
+        2.1
+      ],
+      "seriesIG": [
+        4.314,
+        0.53,
+        0.857,
+        0.105,
+        0.17,
+        0.024
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        6.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 68,
+        "spamRate": 0.382
+      },
+      "baselineDaysActual": 66
+    },
+    "burgerking": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 448360,
+            "paid": 5222283,
+            "followers": null,
+            "posts": 3
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 3318671,
+            "paid": 108742362,
+            "followers": null,
+            "posts": 24
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 6500541,
+            "paid": 108742362,
+            "followers": null,
+            "posts": 52
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 0
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 2593098,
+          "paid": 0,
+          "followers": null,
+          "posts": 21
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": null,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "new_launch": 0.2083,
+        "value_offer": 0.125,
+        "lto": 0.2917,
+        "brand": 0.3333,
+        "delivery": 0.0,
+        "csr": 0.0417,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "new_launch": 0.0,
+        "value_offer": 0.2381,
+        "lto": 0.2381,
+        "brand": 0.4762,
+        "delivery": 0.0,
+        "csr": 0.0476,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.905,
+        "neu": 0.048,
+        "neg": 0.048
+      },
+      "negDeltaPP": 4.8,
+      "themeShare": {
+        "taste": 0.857,
+        "price": 0.0,
+        "service": 0.0,
+        "delivery": 0.0,
+        "hygiene": 0.0,
+        "other": 0.143
+      },
+      "engagement30": {
+        "likes": 390703,
+        "comments": 1131,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        7.8,
+        7.9,
+        6.3,
+        6.9,
+        7.4,
+        9.2
+      ],
+      "seriesIG": [
+        0.031,
+        0.003,
+        0.0,
+        5.127,
+        0.84,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 34,
+        "spamRate": 0.382
+      },
+      "baselineDaysActual": 90
+    },
+    "dominos": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 0,
+            "paid": 0,
+            "followers": null,
+            "posts": 2
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": 226000,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 326662,
+            "paid": 209286,
+            "followers": null,
+            "posts": 21
+          },
+          "yt": {
+            "organic": 17870072,
+            "paid": 6252267,
+            "followers": 226000,
+            "posts": 4
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 498805,
+            "paid": 329565,
+            "followers": null,
+            "posts": 44
+          },
+          "yt": {
+            "organic": 33531360,
+            "paid": 75218382,
+            "followers": 226000,
+            "posts": 7
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 134139,
+          "paid": 120279,
+          "followers": null,
+          "posts": 18
+        },
+        "yt": {
+          "organic": 8426796,
+          "paid": 0,
+          "followers": 226000,
+          "posts": 2
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "new_launch": 0.48,
+        "value_offer": 0.08,
+        "lto": 0.08,
+        "brand": 0.36,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "new_launch": 0.15,
+        "value_offer": 0.1,
+        "lto": 0.0,
+        "brand": 0.75,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.245,
+        "neu": 0.283,
+        "neg": 0.472
+      },
+      "negDeltaPP": -21.6,
+      "themeShare": {
+        "taste": 0.264,
+        "price": 0.094,
+        "service": 0.208,
+        "delivery": 0.057,
+        "hygiene": 0.0,
+        "other": 0.377
+      },
+      "engagement30": {
+        "likes": 56904,
+        "comments": 859,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        25.5,
+        17.6,
+        14.1,
+        18.8,
+        18.5,
+        18.9
+      ],
+      "seriesIG": [
+        0.0,
+        1.099,
+        0.733,
+        1.469,
+        2.7,
+        0.0
+      ],
+      "seriesYT": [
+        3.355,
+        0.0,
+        0.0,
+        2.645,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 68,
+        "spamRate": 0.221
+      },
+      "baselineDaysActual": 65
+    },
+    "subway": {
+      "windows": {
+        "7": {
+          "ig": {
+            "organic": 18334,
+            "paid": 0,
+            "followers": null,
+            "posts": 2
+          },
+          "yt": {
+            "organic": 0,
+            "paid": 0,
+            "followers": 94800,
+            "posts": 0
+          }
+        },
+        "30": {
+          "ig": {
+            "organic": 114220,
+            "paid": 0,
+            "followers": null,
+            "posts": 10
+          },
+          "yt": {
+            "organic": 388,
+            "paid": 0,
+            "followers": 94800,
+            "posts": 1
+          }
+        },
+        "90": {
+          "ig": {
+            "organic": 131685,
+            "paid": 0,
+            "followers": null,
+            "posts": 18
+          },
+          "yt": {
+            "organic": 388,
+            "paid": 0,
+            "followers": 94800,
+            "posts": 1
+          }
+        }
+      },
+      "prev30": {
+        "ig": {
+          "organic": 10011,
+          "paid": 0,
+          "followers": null,
+          "posts": 6
+        },
+        "yt": {
+          "organic": 0,
+          "paid": 0,
+          "followers": 94800,
+          "posts": 0
+        }
+      },
+      "formatMix": "mixed",
+      "vehicleMix": {
+        "new_launch": 0.0909,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 0.9091,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "vehiclePrevMix": {
+        "new_launch": 0.0,
+        "value_offer": 0.0,
+        "lto": 0.0,
+        "brand": 1.0,
+        "delivery": 0.0,
+        "csr": 0.0,
+        "unclassified": 0.0
+      },
+      "sentiment": {
+        "pos": 0.5,
+        "neu": 0.375,
+        "neg": 0.125
+      },
+      "negDeltaPP": -1.8,
+      "themeShare": {
+        "taste": 0.375,
+        "price": 0.0,
+        "service": 0.25,
+        "delivery": 0.0,
+        "hygiene": 0.125,
+        "other": 0.25
+      },
+      "engagement30": {
+        "likes": 1614,
+        "comments": 43,
+        "shares": null,
+        "saves": null
+      },
+      "search": [
+        7.3,
+        7.6,
+        6.2,
+        5.6,
+        6.3,
+        5.6
+      ],
+      "seriesIG": [
+        0.0,
+        0.0,
+        0.898,
+        2.643,
+        2.459,
+        0.0
+      ],
+      "seriesYT": [
+        0.0,
+        6.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0
+      ],
+      "commentSample": {
+        "n": 13,
+        "spamRate": 0.385
+      },
+      "baselineDaysActual": 90
+    }
+  }
+}
