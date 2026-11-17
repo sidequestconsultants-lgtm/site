@@ -25972,6 +25972,32 @@
       "language": "hinglish",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-07T10:44:58Z"
+    },
+    {
+      "external_id": "Ugz2PDZ4WoSUrwhrWQV4AaABAg",
+      "text": "*Pricing valid for Dine-in/Take Away only",
+      "posted_at": "2026-11-17T08:53:06Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-17T12:09:08Z"
+    },
+    {
+      "external_id": "UgwJmgA8wsSGJ5u13MF4AaABAg",
+      "text": "This video, including all visual elements and images, has been generated using Artificial Intelligence (AI). Any resemblance to any person, living or deceased, is purely coincidental, unintended, a function of algorithmic generation and for marketing purposes only. Actual product appearance may vary.",
+      "posted_at": "2026-11-17T08:52:02Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-17T12:09:08Z"
     }
   ]
 }
