@@ -15055,6 +15055,32 @@
       "language": "hinglish",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-21T11:29:26Z"
+    },
+    {
+      "external_id": "UgzCkPCEOb8V3NFnkVF4AaABAg",
+      "text": "My current ick is literally these type of ai videos.. like if you dont even have the ability to put in some effort on the videos or advertisements you are making for us consumers…then dont try to sell your products to us… rather than wasting a lot of water trying to make these stupid videos which doesn’t make any sense with AI tools… maybe put in some effort to sell your brand",
+      "posted_at": "2026-11-21T13:26:01Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-22T11:44:03Z"
+    },
+    {
+      "external_id": "UgwOrKgJbZwWGH889U94AaABAg",
+      "text": "Ai",
+      "posted_at": "2026-11-21T13:38:38Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-22T11:44:03Z"
     }
   ],
   "tacobell": [
