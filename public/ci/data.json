@@ -1,7 +1,7 @@
 {
   "meta": {
-    "updated": "23 NOV 18:49 IST",
-    "updatedISO": "2026-11-23T13:19:56Z",
+    "updated": "23 NOV 19:24 IST",
+    "updatedISO": "2026-11-23T13:54:02Z",
     "spamRateBase": 0.61,
     "handles": {
       "kfc": {
@@ -336,7 +336,7 @@
       },
       "90": {
         "ig": {
-          "organic": 78886104,
+          "organic": 78885009,
           "paid": 0
         },
         "yt": {
@@ -347,7 +347,7 @@
     },
     "prev30": {
       "ig": {
-        "organic": 38991223,
+        "organic": 38989139,
         "paid": 0
       },
       "yt": {
@@ -381,8 +381,8 @@
             "posts": 15
           },
           "yt": {
-            "organic": 86120,
-            "paid": 14084,
+            "organic": 86050,
+            "paid": 14154,
             "followers": 250000,
             "posts": 24
           }
@@ -395,10 +395,10 @@
             "posts": 57
           },
           "yt": {
-            "organic": 467890,
-            "paid": 439868,
+            "organic": 447887,
+            "paid": 451186,
             "followers": 250000,
-            "posts": 82
+            "posts": 81
           }
         }
       },
@@ -410,10 +410,10 @@
           "posts": 26
         },
         "yt": {
-          "organic": 222936,
-          "paid": 389144,
+          "organic": 202161,
+          "paid": 400181,
           "followers": 250000,
-          "posts": 31
+          "posts": 30
         }
       },
       "formatMix": "video",
@@ -427,10 +427,10 @@
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "new_launch": 0.0175,
-        "value_offer": 0.0175,
-        "lto": 0.1053,
-        "brand": 0.8596,
+        "new_launch": 0.0179,
+        "value_offer": 0.0179,
+        "lto": 0.1071,
+        "brand": 0.8571,
         "delivery": 0.0,
         "csr": 0.0,
         "unclassified": 0.0
@@ -456,12 +456,12 @@
         "saves": null
       },
       "search": [
-        21.2,
-        28.1,
-        19.3,
-        21.0,
-        32.7,
-        23.2
+        21.6,
+        24.2,
+        23.8,
+        23.3,
+        30.5,
+        22.6
       ],
       "seriesIG": [
         4.261,
@@ -584,12 +584,12 @@
         "saves": null
       },
       "search": [
-        6.2,
-        10.8,
-        5.9,
-        5.0,
-        7.5,
-        5.3
+        11.8,
+        3.9,
+        7.1,
+        5.3,
+        6.5,
+        5.6
       ],
       "seriesIG": [
         2.146,
@@ -712,12 +712,12 @@
         "saves": null
       },
       "search": [
-        0.9,
-        1.7,
-        0.9,
-        0.7,
-        0.3,
-        1.5
+        1.9,
+        1.4,
+        0.1,
+        0.6,
+        0.4,
+        1.6
       ],
       "seriesIG": [
         1.66,
@@ -788,10 +788,10 @@
       },
       "prev30": {
         "ig": {
-          "organic": 915409,
+          "organic": 908623,
           "paid": 39918475,
           "followers": null,
-          "posts": 59
+          "posts": 58
         },
         "yt": {
           "organic": 17972,
@@ -811,12 +811,12 @@
         "unclassified": 0.0
       },
       "vehiclePrevMix": {
-        "new_launch": 0.1233,
-        "value_offer": 0.1507,
-        "lto": 0.4658,
-        "brand": 0.2055,
-        "delivery": 0.0137,
-        "csr": 0.0411,
+        "new_launch": 0.125,
+        "value_offer": 0.1528,
+        "lto": 0.4583,
+        "brand": 0.2083,
+        "delivery": 0.0139,
+        "csr": 0.0417,
         "unclassified": 0.0
       },
       "sentiment": {
@@ -840,12 +840,12 @@
         "saves": null
       },
       "search": [
-        2.9,
-        2.8,
-        1.6,
-        1.5,
+        3.2,
+        2.0,
+        2.3,
         1.9,
-        2.4
+        2.3,
+        2.2
       ],
       "seriesIG": [
         4.418,
@@ -968,12 +968,12 @@
         "saves": null
       },
       "search": [
-        8.2,
-        8.3,
-        6.4,
-        7.2,
-        7.7,
-        11.6
+        8.7,
+        6.6,
+        7.1,
+        7.4,
+        9.7,
+        9.8
       ],
       "seriesIG": [
         0.255,
@@ -1096,17 +1096,17 @@
         "saves": null
       },
       "search": [
-        20.0,
-        17.7,
-        14.8,
-        18.8,
-        19.4,
-        23.8
+        19.7,
+        14.6,
+        19.6,
+        19.1,
+        19.3,
+        22.8
       ],
       "seriesIG": [
         0.0,
-        2.114,
-        3.886,
+        4.689,
+        1.311,
         0.0,
         0.0,
         0.0
@@ -1224,12 +1224,12 @@
         "saves": null
       },
       "search": [
-        7.3,
-        8.4,
-        5.4,
+        8.0,
+        6.8,
         5.9,
-        6.7,
-        6.0
+        5.9,
+        6.9,
+        6.5
       ],
       "seriesIG": [
         0.898,
