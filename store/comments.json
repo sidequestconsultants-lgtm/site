@@ -15081,6 +15081,58 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-22T11:44:03Z"
+    },
+    {
+      "external_id": "Ugy0CzPxIjsezXl6vah4AaABAg",
+      "text": "https://youtube.com/shorts/pt93Le1dl-I?si=EmSJGxNpO-qfZ6Qe",
+      "posted_at": "2026-11-23T05:55:43Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-23T13:19:51Z"
+    },
+    {
+      "external_id": "Ugy1UUI0E-GIbtJ9XpN4AaABAg",
+      "text": "https://youtube.com/shorts/pt93Le1dl-I?si=EmSJGxNpO-qfZ6Qe",
+      "posted_at": "2026-11-23T05:55:38Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-23T13:19:51Z"
+    },
+    {
+      "external_id": "UgxvJVvmVCoGZl_414B4AaABAg",
+      "text": "Ah pues entonces quien te puede salir",
+      "posted_at": "2026-11-22T12:33:25Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-23T13:19:51Z"
+    },
+    {
+      "external_id": "UgzfdTgKTFNExQkCgSZ4AaABAg",
+      "text": "❤❤❤",
+      "posted_at": "2026-11-22T18:28:47Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-23T13:19:51Z"
     }
   ],
   "tacobell": [
@@ -17631,6 +17683,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-10T11:29:50Z"
+    },
+    {
+      "external_id": "Ugy0BGSmFTwXZYbPpx14AaABAg",
+      "text": "🥠🥠🥠",
+      "posted_at": "2026-11-23T05:57:13Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-23T13:19:53Z"
     }
   ],
   "mcdonalds_in": [
