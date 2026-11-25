@@ -2,9 +2,9 @@
   "kfc": {
     "yt": {
       "followers": 250000,
-      "video_count": 1686,
+      "video_count": 1687,
       "channel_id": "UCg5ukNutGtg1KqvWwuc56xw",
-      "updated_at": "2026-11-24T14:00:37Z"
+      "updated_at": "2026-11-25T13:14:22Z"
     }
   },
   "pizzahut": {
@@ -12,7 +12,7 @@
       "followers": 101000,
       "video_count": 433,
       "channel_id": "UCOBjFMnb_0rfwV0plAYXsfQ",
-      "updated_at": "2026-11-24T14:00:39Z"
+      "updated_at": "2026-11-25T13:14:23Z"
     }
   },
   "tacobell": {
@@ -20,15 +20,15 @@
       "followers": 8680,
       "video_count": 235,
       "channel_id": "UCOjKPr9SdoKhZHZ7CDdg_jg",
-      "updated_at": "2026-11-24T14:00:39Z"
+      "updated_at": "2026-11-25T13:14:24Z"
     }
   },
   "mcdonalds_in": {
     "yt": {
       "followers": 50500,
-      "video_count": 872,
+      "video_count": 873,
       "channel_id": "UCaj66rhgdjzNmIQ6rtcFxzw",
-      "updated_at": "2026-11-24T14:00:40Z"
+      "updated_at": "2026-11-25T13:14:25Z"
     }
   },
   "dominos": {
@@ -36,7 +36,7 @@
       "followers": 226000,
       "video_count": 917,
       "channel_id": "UCUl-rHjymc7iLfpe_1dG9WA",
-      "updated_at": "2026-11-24T14:00:40Z"
+      "updated_at": "2026-11-25T13:14:25Z"
     }
   },
   "subway": {
@@ -44,7 +44,7 @@
       "followers": 94800,
       "video_count": 88,
       "channel_id": "UC0PAhuIa0l5UJu8OvpMt5oQ",
-      "updated_at": "2026-11-24T14:00:41Z"
+      "updated_at": "2026-11-25T13:14:26Z"
     }
   }
 }

@@ -13038,6 +13038,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-13T11:21:08Z"
+    },
+    {
+      "external_id": "Ugymin7BRgMuG2z9UdB4AaABAg",
+      "text": "This kfc is Runned by 4 year olds😂😂",
+      "posted_at": "2026-11-25T11:11:06Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-25T13:14:30Z"
     }
   ],
   "pizzahut": [
@@ -15146,6 +15159,32 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-24T14:01:35Z"
+    },
+    {
+      "external_id": "UgwgW3ri4R09WFADjUR4AaABAg",
+      "text": "Please order me",
+      "posted_at": "2026-11-24T20:36:46Z",
+      "likes": 1,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "taste",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-25T13:14:32Z"
+    },
+    {
+      "external_id": "UgxQasIBYekGuyzKsyB4AaABAg",
+      "text": "https://youtube.com/shorts/L5Z-XuPB6Z0?si=CxH9fGyFJp2ZA1be",
+      "posted_at": "2026-11-24T16:12:59Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-25T13:14:32Z"
     }
   ],
   "tacobell": [
@@ -20753,6 +20792,19 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-08T10:44:28Z"
+    },
+    {
+      "external_id": "UgylnS_2gWoHYE74uAB4AaABAg",
+      "text": "Chicken burger is quite expensive",
+      "posted_at": "2026-11-25T11:33:20Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neg",
+      "theme": "price",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-25T13:14:36Z"
     }
   ],
   "burgerking": [
