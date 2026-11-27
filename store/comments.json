@@ -20805,6 +20805,32 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-25T13:14:36Z"
+    },
+    {
+      "external_id": "UgycUDDq3qeJLYlPG8Z4AaABAg",
+      "text": "Long back 2006 to 2012",
+      "posted_at": "2026-11-24T12:22:48Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-27T12:51:03Z"
+    },
+    {
+      "external_id": "UgxDhs_arfQFf7tesGp4AaABAg",
+      "text": "Sir your company made many  more managers learn how to operate day to day food operations and learn more MDP🎉🎉🎉",
+      "posted_at": "2026-11-24T12:21:51Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "service",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-27T12:51:03Z"
     }
   ],
   "burgerking": [
