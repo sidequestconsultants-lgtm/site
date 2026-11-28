@@ -13051,6 +13051,19 @@
       "language": "en",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-25T13:14:30Z"
+    },
+    {
+      "external_id": "UgxA-7fRzw7CFPqRTot4AaABAg",
+      "text": "No this KFC give me a box bro i need bucket lol",
+      "posted_at": "2026-11-27T16:39:08Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-28T12:02:08Z"
     }
   ],
   "pizzahut": [
@@ -15185,6 +15198,32 @@
       "language": "other",
       "model_version": "gemini-flash-lite-latest-classify-v1",
       "classified_at": "2026-11-25T13:14:32Z"
+    },
+    {
+      "external_id": "UgwMmzWtndDmsNXbvrJ4AaABAg",
+      "text": "Iybdyryfotyt FF gu will kxxj do do it du it do us so JD do us all hd so so JD cc HV",
+      "posted_at": "2026-11-28T05:03:09Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": true,
+      "polarity": "neu",
+      "theme": "other",
+      "language": "other",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-28T12:02:10Z"
+    },
+    {
+      "external_id": "Ugw2s-jTmOwzh2OyNw54AaABAg",
+      "text": "Yes",
+      "posted_at": "2026-11-28T05:02:45Z",
+      "likes": 0,
+      "platform": "yt",
+      "spam": false,
+      "polarity": "pos",
+      "theme": "other",
+      "language": "en",
+      "model_version": "gemini-flash-lite-latest-classify-v1",
+      "classified_at": "2026-11-28T12:02:10Z"
     }
   ],
   "tacobell": [
